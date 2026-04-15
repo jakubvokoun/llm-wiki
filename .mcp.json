@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "markitdown": {
+      "command": "nix-shell",
+      "args": [
+        "shell.nix",
+        "--run",
+        "markitdown-mcp"
+      ]
+    }
+  }
+}

@@ -7,6 +7,8 @@ This is the configuration file for the LLM wiki. It tells Claude how the wiki is
 ```
 llm-wiki/
 ├── CLAUDE.md          ← this file (schema)
+├── .mcp.json          ← MCP server config (markitdown)
+├── shell.nix          ← nix shell providing markitdown-mcp
 ├── raw/               ← immutable source documents (you curate, LLM reads only)
 │   └── assets/        ← locally downloaded images referenced by sources
 └── wiki/              ← LLM-maintained markdown pages
@@ -35,19 +37,43 @@ Page types and their location in `wiki/`:
 
 Internal links use standard markdown: `[[page-name]]` (Obsidian style) or `[label](../concepts/page.md)` (standard relative).
 
+## MCP tools
+
+### markitdown
+
+The `markitdown` MCP server is available in this project (configured in `.mcp.json`, provided via `shell.nix` from nixpkgs unstable).
+
+Tool: **`convert_to_markdown(uri)`**
+
+Accepts `http:`, `https:`, `file:`, or `data:` URIs and returns the content as markdown. Use it to:
+- Fetch a web page and save the result to `raw/` before ingesting
+- Convert a local file (PDF, DOCX, etc.) to markdown on the fly
+
+Example flows:
+```
+# Fetch a URL into raw/
+convert_to_markdown("https://example.com/paper.html") → save to raw/paper.md → ingest
+
+# Convert a local file
+convert_to_markdown("file:///home/jakub/Downloads/report.pdf") → save to raw/report.md → ingest
+```
+
+The server runs over stdio. If it is not yet connected, restart Claude Code in this project directory so the MCP server is picked up.
+
 ## Operations
 
 ### Ingest
 
 When told to ingest a source:
 
-1. Read the source file from `raw/`
-2. Discuss key takeaways with the user
-3. Write a summary page in `wiki/sources/<slug>.md`
-4. Update or create entity pages in `wiki/entities/` for notable people, orgs, products
-5. Update or create concept pages in `wiki/concepts/` for key ideas
-6. Update `wiki/index.md` — add the new source and any new pages
-7. Append an entry to `wiki/log.md`:
+1. If the source is a URL or non-markdown file, use `convert_to_markdown(uri)` to fetch/convert it, then save the result to `raw/<slug>.md`
+2. Read the source file from `raw/`
+3. Discuss key takeaways with the user
+4. Write a summary page in `wiki/sources/<slug>.md`
+5. Update or create entity pages in `wiki/entities/` for notable people, orgs, products
+6. Update or create concept pages in `wiki/concepts/` for key ideas
+7. Update `wiki/index.md` — add the new source and any new pages
+8. Append an entry to `wiki/log.md`:
    ```
    ## [YYYY-MM-DD] ingest | <Source Title>
    Summary sentence. Pages created/updated: list.
@@ -122,6 +148,22 @@ Append-only. Entries prefixed with `## [YYYY-MM-DD] <type> | <title>` so they're
 grep "^## \[" wiki/log.md | tail -10   # last 10 events
 grep "ingest" wiki/log.md              # all ingests
 ```
+
+### Process queue
+
+When told to process the queue:
+
+1. Read `queue.md`, collect all unchecked URLs (`- [ ]`)
+2. For each URL:
+   1. `convert_to_markdown(url)` via the markitdown MCP tool
+   2. Save result to `raw/<slug>.md`
+   3. Run the full **Ingest** operation for that source
+   4. Mark the URL as done: `- [x] <url> <!-- ingested YYYY-MM-DD -->`
+3. Append a single entry to `wiki/log.md` covering all processed URLs:
+   ```
+   ## [YYYY-MM-DD] queue | N sources processed
+   URLs: list. Pages created/updated: list.
+   ```
 
 ## Tips
 
