@@ -3,5 +3,6 @@
 pkgs.mkShell {
   packages = [
     pkgs.markitdown-mcp
+    pkgs.prettier
   ];
 }
