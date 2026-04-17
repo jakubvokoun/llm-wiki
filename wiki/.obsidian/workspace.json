@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "929a494d04839a5c",
+    "type": "split",
+    "children": [
+      {
+        "id": "fda29750f69d5a5c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5be4c30168da9ad8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "log.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "log"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "59b48924e1a1a4a4",
+    "type": "split",
+    "children": [
+      {
+        "id": "72bb42e1feff508a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "67353455a800c696",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Průzkumník souborů"
+            }
+          },
+          {
+            "id": "e3ba3993de5bc1b7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:containers",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Hledat"
+            }
+          },
+          {
+            "id": "2e22f1720bb21ef6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Záložky"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "627d5638aa2a7070",
+    "type": "split",
+    "children": [
+      {
+        "id": "cb6c5d9fce8246b1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e7326a506064e72f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Zpětné odkazy pro index"
+            }
+          },
+          {
+            "id": "09c1ff645af41cf0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "index.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Odchozí odkazy z index"
+            }
+          },
+          {
+            "id": "2f59f1ab0f1f6a06",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Štítky"
+            }
+          },
+          {
+            "id": "a438823cb9709087",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "index.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Přehled index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Otevřít rychlé přepínání": false,
+      "graph:Otevřít graf": false,
+      "canvas:Vytvořit nový canvas": false,
+      "daily-notes:Otevřít dnešní poznámku": false,
+      "templates:Vložit šablonu": false,
+      "command-palette:Otevřít paletu příkazů": false,
+      "bases:Vytvořit novou základnu": false
+    }
+  },
+  "active": "5be4c30168da9ad8",
+  "lastOpenFiles": [
+    "entities/distrobox.md",
+    "log.md.tmp.4187924.1776410218797",
+    "entities/flatpak.md",
+    "concepts/rbac.md",
+    "entities/ostree.md",
+    "log.md.tmp.4174677.1776410162330",
+    "index.md.tmp.4174677.1776410148088",
+    "log.md",
+    "entities/ostree.md.tmp.4174677.1776410135286",
+    "entities/ostree.md.tmp.4174677.1776410126067",
+    "sources/ostree-bootloaders.md",
+    "sources/ostree-bootloaders.md.tmp.4174677.1776410107965",
+    "concepts/atomic-linux.md",
+    "index.md",
+    "log.md.tmp.4132401.1776409752504",
+    "index.md.tmp.4132401.1776409728839",
+    "concepts/atomic-linux.md.tmp.4132401.1776409712411",
+    "sources/ostree-related-projects.md",
+    "sources/ostree-related-projects.md.tmp.4132401.1776409693927",
+    "sources/ostree-ima.md",
+    "sources/ostree-composefs.md",
+    "sources/ostree-copying-deltas.md",
+    "sources/ostree-repository-management.md",
+    "entities/apparmor.md",
+    "sources/ostree-authenticated-repos.md",
+    "sources/ostree-buildsystem-and-repos.md",
+    "sources/ostree-formats.md",
+    "sources/ostree-var.md",
+    "sources/ostree-atomic-rollbacks.md",
+    "sources/ostree-atomic-upgrades.md",
+    "sources/ostree-deployment.md",
+    "sources/ostree-repo.md",
+    "sources/ostree-introduction.md",
+    "entities/fedora.md",
+    "sources/awesome-atomic.md"
+  ]
+}
