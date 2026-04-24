@@ -1,7 +1,12 @@
 ---
 title: "Observability"
-tags: [observability, monitoring, sre, devops, google]
-sources: [suse-observability-monitoring-strategies.md, sre-book-introduction.md]
+tags: [observability, monitoring, sre, devops, borgmon, prometheus, google]
+sources:
+  [
+    suse-observability-monitoring-strategies.md,
+    sre-book-introduction.md,
+    sre-book-practical-alerting.md,
+  ]
 updated: 2026-04-24
 ---
 
@@ -53,6 +58,27 @@ From the SRE book: software should interpret monitoring, not humans. Three valid
 | **Ticket** | Within days     | Human needed, system can wait                                 |
 | **Log**    | None (forensic) | Recorded for diagnosis; nobody reads unless prompted to do so |
 
+## White-Box vs Black-Box Monitoring
+
+From Google's Borgmon experience:
+
+| Type          | What it inspects                            | Catches                                | Misses                           |
+| ------------- | ------------------------------------------- | -------------------------------------- | -------------------------------- |
+| **White-box** | Internal state via exported metrics (varz)  | Component-level issues; queues; causes | DNS failures; pre-server crashes |
+| **Black-box** | External behavior (Prober: protocol checks) | User-visible failures                  | Internal component state         |
+
+Both are necessary. White-box provides granularity for root-cause analysis; black-box catches what users actually experience. Use both, pointed at frontend and backends independently, to localize failures.
+
+## Historical Context: Borgmon → Prometheus
+
+The modern time-series monitoring paradigm was pioneered by Google's **Borgmon** (2003), which shifted from check scripts to:
+
+- Mass metric collection via HTTP endpoints
+- Time-series storage with labeled dimensions
+- Rich algebraic rule evaluation for alerts and dashboards
+
+Prometheus (2012, open source) is the most direct descendant. See [Borgmon](borgmon.md).
+
 ## Related Pages
 
 - [Kubernetes Observability](../concepts/kubernetes-observability.md)
@@ -60,3 +86,5 @@ From the SRE book: software should interpret monitoring, not humans. Three valid
 - [Security Logging](../concepts/security-logging.md)
 - [DORA Metrics](../concepts/dora-metrics.md)
 - [SUSE](../entities/suse.md)
+- [Borgmon](../concepts/borgmon.md)
+- [Troubleshooting](../concepts/troubleshooting.md)

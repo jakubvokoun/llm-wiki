@@ -20,6 +20,18 @@ updated: 2026-04-24
 
 Open-source monitoring system and time series database, originally developed at SoundCloud and now a CNCF graduated project. De facto standard for metrics collection in Kubernetes environments.
 
+## Origin: Google Borgmon
+
+Prometheus was directly inspired by Google's internal **Borgmon** monitoring system (built 2003). Borgmon pioneered the paradigm that Prometheus inherited:
+
+- HTTP endpoint for metric export (Borgmon: `/varz`, Prometheus: `/metrics`)
+- Time-series labeled by key-value pairs
+- Algebraic rule language for deriving new time-series
+- Centralized rule evaluation for alerting
+- Separate Alertmanager for routing/deduplication
+
+See [Borgmon](../concepts/borgmon.md) for full comparison.
+
 ## Core Concepts
 
 **Pull-based scraping**: Prometheus scrapes HTTP `/metrics` endpoints from targets on a configured interval. Targets can also push via PushGateway (batch jobs).

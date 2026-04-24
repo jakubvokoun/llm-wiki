@@ -125,14 +125,14 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://sre.google/sre-book/monitoring-distributed-systems/ <!-- ingested 2026-04-24 -->
 - [x] https://sre.google/sre-book/automation-at-google/ <!-- ingested 2026-04-24 -->
 - [x] https://sre.google/sre-book/release-engineering/ <!-- ingested 2026-04-24 -->
-- [ ] https://sre.google/sre-book/simplicity/
-- [ ] https://sre.google/sre-book/part-III-practices/
-- [ ] https://sre.google/sre-book/practical-alerting/
-- [ ] https://sre.google/sre-book/effective-troubleshooting/
-- [ ] https://sre.google/sre-book/emergency-response/
-- [ ] https://sre.google/sre-book/managing-incidents/
-- [ ] https://sre.google/sre-book/postmortem-culture/
-- [ ] https://sre.google/sre-book/tracking-outages/
+- [x] https://sre.google/sre-book/simplicity/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/part-III-practices/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/practical-alerting/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/effective-troubleshooting/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/emergency-response/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/managing-incidents/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/postmortem-culture/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/tracking-outages/ <!-- ingested 2026-04-24 -->
 - [ ] https://sre.google/sre-book/testing-reliability/
 - [ ] https://sre.google/sre-book/software-engineering-in-sre/
 - [ ] https://sre.google/sre-book/load-balancing-frontend/
