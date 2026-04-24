@@ -100,31 +100,31 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://launchdarkly.com/blog/cicd-best-practices-devops/ <!-- ingested 2026-04-23 -->
 - [x] https://www.harness.io/blog/ci-cd-best-practices <!-- ingested 2026-04-23 -->
 - [x] https://dev.to/zenika/gitlab-ci-10-best-practices-to-avoid-widespread-anti-patterns-2mb5 <!-- ingested 2026-04-23 -->
-- [ ] https://www.wondermentapps.com/blog/ci-cd-pipeline-best-practices/
-- [ ] https://prometheus.io/docs/practices/naming/
-- [ ] https://prometheus.io/docs/practices/consoles/
-- [ ] https://prometheus.io/docs/practices/instrumentation/
-- [ ] https://prometheus.io/docs/practices/histograms/
-- [ ] https://prometheus.io/docs/practices/alerting/
-- [ ] https://prometheus.io/docs/practices/rules/
-- [ ] https://prometheus.io/docs/practices/pushing/
-- [ ] https://prometheus.io/docs/practices/remote_write/
-- [ ] https://prometheus.io/docs/practices/the_zen/
-- [ ] https://www.suse.com/c/observability-it-monitoring-an-introductory-guide-with-5-monitoring-strategies/
-- [ ] https://dev.to/cbartlett/web-application-monitoring-best-practice-2b4f
-- [ ] https://www.datadoghq.com/blog/monitoring-101-alerting/
-- [ ] https://group107.com/blog/infrastructure-monitoring-best-practices/
-- [ ] https://grafana.com/docs/grafana/latest/alerting/guides/best-practices/
-- [ ] https://victoriametrics.com/blog/alerting-best-practices/
-- [ ] https://victoriametrics.com/blog/alerting-recording-rules-alertmanager/
-- [ ] https://sre.google/sre-book/introduction/
-- [ ] https://sre.google/sre-book/part-II-principles/
-- [ ] https://sre.google/sre-book/embracing-risk/
-- [ ] https://sre.google/sre-book/service-level-objectives/
-- [ ] https://sre.google/sre-book/eliminating-toil/
-- [ ] https://sre.google/sre-book/monitoring-distributed-systems/
-- [ ] https://sre.google/sre-book/automation-at-google/
-- [ ] https://sre.google/sre-book/release-engineering/
+- [x] https://www.wondermentapps.com/blog/ci-cd-pipeline-best-practices/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/naming/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/consoles/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/instrumentation/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/histograms/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/alerting/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/rules/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/pushing/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/remote_write/ <!-- ingested 2026-04-24 -->
+- [x] https://prometheus.io/docs/practices/the_zen/ <!-- ingested 2026-04-24 -->
+- [x] https://www.suse.com/c/observability-it-monitoring-an-introductory-guide-with-5-monitoring-strategies/ <!-- ingested 2026-04-24 -->
+- [x] https://dev.to/cbartlett/web-application-monitoring-best-practice-2b4f <!-- ingested 2026-04-24 -->
+- [x] https://www.datadoghq.com/blog/monitoring-101-alerting/ <!-- ingested 2026-04-24 -->
+- [x] https://group107.com/blog/infrastructure-monitoring-best-practices/ <!-- ingested 2026-04-24 -->
+- [x] https://grafana.com/docs/grafana/latest/alerting/guides/best-practices/ <!-- ingested 2026-04-24 -->
+- [x] https://victoriametrics.com/blog/alerting-best-practices/ <!-- ingested 2026-04-24 -->
+- [x] https://victoriametrics.com/blog/alerting-recording-rules-alertmanager/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/introduction/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/part-II-principles/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/embracing-risk/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/service-level-objectives/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/eliminating-toil/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/monitoring-distributed-systems/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/automation-at-google/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/release-engineering/ <!-- ingested 2026-04-24 -->
 - [ ] https://sre.google/sre-book/simplicity/
 - [ ] https://sre.google/sre-book/part-III-practices/
 - [ ] https://sre.google/sre-book/practical-alerting/

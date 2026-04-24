@@ -31,15 +31,15 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 
 ## [2026-04-23]
 
-- **queue (5):** junitxml-testmoapp, nix-language-tutorial, nix-best-practices, awesome-nix, zarf-creating-package
-- **queue (5):** zarf-initializing-k8s-cluster, zarf-deploying-packages, zarf-retro-arcade, zarf-creating-k8s-cluster, zarf-package-signing
-- **queue (5):** zarf-publish-and-deploy, zarf-custom-init-packages, zarf-resource-adoption, zarf-package-create-differential, zarf-schema-v1alpha1-package
-- **queue (3):** zarf-airgap-demos, zarf-data-injections-migration, zarf-upgrading-zarf
-- **concepts:** junit-xml, nix-language, zarf-packages
-- **entities:** nix, zarf
+- **queue (28):** junitxml-testmoapp, nix-language-tutorial, nix-best-practices, awesome-nix, zarf-creating-package, zarf-initializing-k8s-cluster, zarf-deploying-packages, zarf-retro-arcade, zarf-creating-k8s-cluster, zarf-package-signing, zarf-publish-and-deploy, zarf-custom-init-packages, zarf-resource-adoption, zarf-package-create-differential, zarf-schema-v1alpha1-package, zarf-airgap-demos, zarf-data-injections-migration, zarf-upgrading-zarf, gitlab-ci-predefined-variables, gitlab-ci-components, gitlab-ci-components-examples, gitlab-ci-pipeline-security, gitlab-ci-debugging, 42coffeecups-ci-best-practices, wiz-cicd-security-best-practices, launchdarkly-cicd-best-practices, harness-cicd-best-practices, zenika-gitlab-ci-best-practices
+- **concepts:** junit-xml, nix-language, zarf-packages, gitlab-ci-variables, gitlab-ci-components, gitlab-ci-pipeline-security, continuous-integration, progressive-delivery, dora-metrics
+- **entities:** nix, zarf, gitlab
 - **updated:** zarf, zarf-packages (dataInjections deprecation, upgrade section, new source links)
-- **queue (5):** gitlab-ci-predefined-variables, gitlab-ci-components, gitlab-ci-components-examples, gitlab-ci-pipeline-security, gitlab-ci-debugging
-- **concepts:** gitlab-ci-variables, gitlab-ci-components, gitlab-ci-pipeline-security
-- **entities:** gitlab
-- **queue (5):** 42coffeecups-ci-best-practices, wiz-cicd-security-best-practices, launchdarkly-cicd-best-practices, harness-cicd-best-practices, zenika-gitlab-ci-best-practices
-- **concepts:** continuous-integration, progressive-delivery, dora-metrics
+
+## [2026-04-24]
+
+- **ingest (5):** suse-observability-monitoring-strategies, devto-web-app-monitoring-best-practices, datadog-monitoring-101-alerting, group107-infrastructure-monitoring-best-practices, grafana-alerting-best-practices
+- **queue (20):** wonderment-cicd-best-practices, prometheus-naming, prometheus-consoles, prometheus-instrumentation, prometheus-histograms, prometheus-alerting, prometheus-rules, prometheus-pushing, prometheus-remote-write, prometheus-the-zen, victoriametrics-alerting-best-practices, victoriametrics-alerting-recording-rules-alertmanager, sre-book-introduction, sre-book-part-ii-principles, sre-book-embracing-risk, sre-book-service-level-objectives, sre-book-eliminating-toil, sre-book-monitoring-distributed-systems, sre-book-automation-at-google, sre-book-release-engineering
+- **entities:** prometheus, suse, datadog, grafana, victoriametrics
+- **concepts:** prometheus-alerting, prometheus-recording-rules, prometheus-pushgateway, prometheus-remote-write, prometheus-zen, prometheus-instrumentation, prometheus-histograms, observability, application-performance-monitoring, alert-severity, distributed-tracing, runbooks, alertmanager, site-reliability-engineering, error-budgets, toil, service-level-objectives, four-golden-signals, automation-hierarchy, release-engineering
+- **updated:** prometheus (entity), prometheus-instrumentation (Pushgateway pitfalls), prometheus-alerting (for/keep_firing_for/lookbehind guidance), observability (Google SRE monitoring output types), runbooks (MTTR playbook stat), error-budgets (ISP noise floor, request success rate, quarterly mechanics, cost model), toil (6-attribute table, not-toil distinctions, engineering vs overhead table)
