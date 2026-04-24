@@ -28,3 +28,18 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **concepts:** atomic-linux
 - **entities:** ostree, fedora, flatpak, distrobox
 - **updated:** immutable-infrastructure, ostree, atomic-linux, ostree-formats
+
+## [2026-04-23]
+
+- **queue (5):** junitxml-testmoapp, nix-language-tutorial, nix-best-practices, awesome-nix, zarf-creating-package
+- **queue (5):** zarf-initializing-k8s-cluster, zarf-deploying-packages, zarf-retro-arcade, zarf-creating-k8s-cluster, zarf-package-signing
+- **queue (5):** zarf-publish-and-deploy, zarf-custom-init-packages, zarf-resource-adoption, zarf-package-create-differential, zarf-schema-v1alpha1-package
+- **queue (3):** zarf-airgap-demos, zarf-data-injections-migration, zarf-upgrading-zarf
+- **concepts:** junit-xml, nix-language, zarf-packages
+- **entities:** nix, zarf
+- **updated:** zarf, zarf-packages (dataInjections deprecation, upgrade section, new source links)
+- **queue (5):** gitlab-ci-predefined-variables, gitlab-ci-components, gitlab-ci-components-examples, gitlab-ci-pipeline-security, gitlab-ci-debugging
+- **concepts:** gitlab-ci-variables, gitlab-ci-components, gitlab-ci-pipeline-security
+- **entities:** gitlab
+- **queue (5):** 42coffeecups-ci-best-practices, wiz-cicd-security-best-practices, launchdarkly-cicd-best-practices, harness-cicd-best-practices, zenika-gitlab-ci-best-practices
+- **concepts:** continuous-integration, progressive-delivery, dora-metrics

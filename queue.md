@@ -72,3 +72,74 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://ostreedev.github.io/ostree/ima/ <!-- ingested 2026-04-17 -->
 - [x] https://ostreedev.github.io/ostree/related-projects/ <!-- ingested 2026-04-17 -->
 - [x] https://ostreedev.github.io/ostree/bootloaders/ <!-- ingested 2026-04-17 -->
+- [x] https://github.com/testmoapp/junitxml <!-- ingested 2026-04-23 -->
+- [x] https://nix.dev/tutorials/nix-language <!-- ingested 2026-04-23 -->
+- [x] https://nix.dev/guides/best-practices <!-- ingested 2026-04-23 -->
+- [x] https://github.com/nix-community/awesome-nix <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/0-creating-a-zarf-package/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/1-initializing-a-k8s-cluster/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/2-deploying-zarf-packages/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/3-deploy-a-retro-arcade/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/4-creating-a-k8s-cluster-with-zarf/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/5-package-signing-and-verification/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/6-publish-and-deploy/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/7-custom-init-packages/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/8-resource-adoption/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/tutorials/9-package-create-differential/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/schema/v1alpha1-package/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/best-practices/airgap-demos/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/best-practices/data-injections-migration/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.zarf.dev/best-practices/upgrading-zarf/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.gitlab.com/ci/variables/predefined_variables/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.gitlab.com/ci/components/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.gitlab.com/ci/components/examples/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.gitlab.com/ci/pipeline_security/ <!-- ingested 2026-04-23 -->
+- [x] https://docs.gitlab.com/ci/debugging/ <!-- ingested 2026-04-23 -->
+- [x] https://www.42coffeecups.com/blog/continuous-integration-best-practices <!-- ingested 2026-04-23 -->
+- [x] https://www.wiz.io/academy/application-security/ci-cd-security-best-practices <!-- ingested 2026-04-23 -->
+- [x] https://launchdarkly.com/blog/cicd-best-practices-devops/ <!-- ingested 2026-04-23 -->
+- [x] https://www.harness.io/blog/ci-cd-best-practices <!-- ingested 2026-04-23 -->
+- [x] https://dev.to/zenika/gitlab-ci-10-best-practices-to-avoid-widespread-anti-patterns-2mb5 <!-- ingested 2026-04-23 -->
+- [ ] https://www.wondermentapps.com/blog/ci-cd-pipeline-best-practices/
+- [ ] https://prometheus.io/docs/practices/naming/
+- [ ] https://prometheus.io/docs/practices/consoles/
+- [ ] https://prometheus.io/docs/practices/instrumentation/
+- [ ] https://prometheus.io/docs/practices/histograms/
+- [ ] https://prometheus.io/docs/practices/alerting/
+- [ ] https://prometheus.io/docs/practices/rules/
+- [ ] https://prometheus.io/docs/practices/pushing/
+- [ ] https://prometheus.io/docs/practices/remote_write/
+- [ ] https://prometheus.io/docs/practices/the_zen/
+- [ ] https://www.suse.com/c/observability-it-monitoring-an-introductory-guide-with-5-monitoring-strategies/
+- [ ] https://dev.to/cbartlett/web-application-monitoring-best-practice-2b4f
+- [ ] https://www.datadoghq.com/blog/monitoring-101-alerting/
+- [ ] https://group107.com/blog/infrastructure-monitoring-best-practices/
+- [ ] https://grafana.com/docs/grafana/latest/alerting/guides/best-practices/
+- [ ] https://victoriametrics.com/blog/alerting-best-practices/
+- [ ] https://victoriametrics.com/blog/alerting-recording-rules-alertmanager/
+- [ ] https://sre.google/sre-book/introduction/
+- [ ] https://sre.google/sre-book/part-II-principles/
+- [ ] https://sre.google/sre-book/embracing-risk/
+- [ ] https://sre.google/sre-book/service-level-objectives/
+- [ ] https://sre.google/sre-book/eliminating-toil/
+- [ ] https://sre.google/sre-book/monitoring-distributed-systems/
+- [ ] https://sre.google/sre-book/automation-at-google/
+- [ ] https://sre.google/sre-book/release-engineering/
+- [ ] https://sre.google/sre-book/simplicity/
+- [ ] https://sre.google/sre-book/part-III-practices/
+- [ ] https://sre.google/sre-book/practical-alerting/
+- [ ] https://sre.google/sre-book/effective-troubleshooting/
+- [ ] https://sre.google/sre-book/emergency-response/
+- [ ] https://sre.google/sre-book/managing-incidents/
+- [ ] https://sre.google/sre-book/postmortem-culture/
+- [ ] https://sre.google/sre-book/tracking-outages/
+- [ ] https://sre.google/sre-book/testing-reliability/
+- [ ] https://sre.google/sre-book/software-engineering-in-sre/
+- [ ] https://sre.google/sre-book/load-balancing-frontend/
+- [ ] https://sre.google/sre-book/load-balancing-datacenter/
+- [ ] https://sre.google/sre-book/handling-overload/
+- [ ] https://sre.google/sre-book/addressing-cascading-failures/
+- [ ] https://sre.google/sre-book/managing-critical-state/
+- [ ] https://sre.google/sre-book/data-processing-pipelines/
+- [ ] https://sre.google/sre-book/data-integrity/
+- [ ] https://sre.google/sre-book/reliable-product-launches/
