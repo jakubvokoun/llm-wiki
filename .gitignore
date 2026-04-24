@@ -1,7 +1,8 @@
 # Obsidian workspace state (machine-specific, not config)
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
-.obsidian/cache
+wiki/.obsidian/workspace.json
+wiki/.obsidian/workspace-mobile.json
+wiki/.obsidian/cache
+wiki/.obsidian/graph.json
 
 # Nix
 result
