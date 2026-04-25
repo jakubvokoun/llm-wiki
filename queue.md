@@ -133,13 +133,13 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://sre.google/sre-book/managing-incidents/ <!-- ingested 2026-04-24 -->
 - [x] https://sre.google/sre-book/postmortem-culture/ <!-- ingested 2026-04-24 -->
 - [x] https://sre.google/sre-book/tracking-outages/ <!-- ingested 2026-04-24 -->
-- [ ] https://sre.google/sre-book/testing-reliability/
-- [ ] https://sre.google/sre-book/software-engineering-in-sre/
-- [ ] https://sre.google/sre-book/load-balancing-frontend/
-- [ ] https://sre.google/sre-book/load-balancing-datacenter/
-- [ ] https://sre.google/sre-book/handling-overload/
-- [ ] https://sre.google/sre-book/addressing-cascading-failures/
-- [ ] https://sre.google/sre-book/managing-critical-state/
-- [ ] https://sre.google/sre-book/data-processing-pipelines/
-- [ ] https://sre.google/sre-book/data-integrity/
-- [ ] https://sre.google/sre-book/reliable-product-launches/
+- [x] https://sre.google/sre-book/testing-reliability/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/software-engineering-in-sre/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/load-balancing-frontend/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/load-balancing-datacenter/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/handling-overload/ <!-- ingested 2026-04-24 -->
+- [x] https://sre.google/sre-book/addressing-cascading-failures/ <!-- ingested 2026-04-25 -->
+- [x] https://sre.google/sre-book/managing-critical-state/ <!-- ingested 2026-04-25 -->
+- [x] https://sre.google/sre-book/data-processing-pipelines/ <!-- ingested 2026-04-25 -->
+- [x] https://sre.google/sre-book/data-integrity/ <!-- ingested 2026-04-25 -->
+- [x] https://sre.google/sre-book/reliable-product-launches/ <!-- ingested 2026-04-25 -->
