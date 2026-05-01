@@ -18,3 +18,10 @@ Cumulative totals from the first 10 days:
 
 - **queue (5):** sre-addressing-cascading-failures, sre-managing-critical-state, sre-data-processing-pipelines, sre-data-integrity, sre-reliable-product-launches
 - **concepts (5):** cascading-failures, distributed-consensus, data-pipelines, data-integrity, launch-coordination
+
+## [2026-05-01]
+
+- **queue (46):** hacktricks-linux-basics, hacktricks-privilege-escalation, hacktricks-linux-capabilities, hacktricks-container-security, hacktricks-container-runtimes, hacktricks-runtime-api-daemon-exposure, hacktricks-authorization-plugins, hacktricks-image-security-and-secrets, hacktricks-assessment-and-hardening, hacktricks-sensitive-host-mounts, hacktricks-privileged-containers, hacktricks-distroless, hacktricks-container-apparmor, hacktricks-container-capabilities, hacktricks-container-cgroups, hacktricks-masked-paths, hacktricks-no-new-privileges, hacktricks-read-only-paths, hacktricks-container-seccomp, hacktricks-container-selinux, hacktricks-namespaces-index, hacktricks-cgroup-namespace, hacktricks-ipc-namespace, hacktricks-pid-namespace, hacktricks-mount-namespace, hacktricks-network-namespace, hacktricks-time-namespace, hacktricks-user-namespace, hacktricks-uts-namespace, hacktricks-pam, hacktricks-bypass-bash-restrictions, hacktricks-bypass-fs-protections, hacktricks-privilege-escalation-checklist, hacktricks-euid-ruid-suid, hacktricks-escaping-limited-bash, hacktricks-ssh-forward-agent, hacktricks-nfs-no-root-squash, hacktricks-write-to-root, hacktricks-dbus-enumeration, hacktricks-containerd-ctr-privilege-escalation, hacktricks-runc-privilege-escalation, hacktricks-interesting-groups-linux-pe, hacktricks-wildcards-spare-tricks, hacktricks-socket-command-injection, hacktricks-electron-cef-chromium-debugger-abuse, hacktricks-ld-so-conf-example
+- **concepts:** linux-privilege-escalation, linux-namespaces, wildcard-injection, shared-library-hijacking
+- **entities:** hacktricks
+- **updated:** container-security, secrets-management

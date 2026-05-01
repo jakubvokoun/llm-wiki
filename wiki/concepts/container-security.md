@@ -1,8 +1,16 @@
 ---
 title: "Container Security"
 tags: [containers, security, hardening, docker, kubernetes, capabilities]
-sources: [owasp-docker-security.md, linux-capabilities-man7.md]
-updated: 2026-04-16
+sources:
+  [
+    owasp-docker-security.md,
+    linux-capabilities-man7.md,
+    hacktricks-runtime-api-daemon-exposure.md,
+    hacktricks-authorization-plugins.md,
+    hacktricks-sensitive-host-mounts.md,
+    hacktricks-assessment-and-hardening.md,
+  ]
+updated: 2026-05-01
 ---
 
 # Container Security
@@ -120,6 +128,74 @@ Three independent kernel enforcement layers — all should be active
 Docker applies `docker-default` seccomp and AppArmor profiles automatically.
 Override with `--security-opt seccomp=...` and `--security-opt apparmor=...`.
 
+## Runtime API and Daemon Exposure
+
+A container with correct seccomp, capabilities, and AppArmor can still be one API call from host
+compromise if a runtime socket is mounted inside it. The kernel isolation works correctly — the
+management plane is exposed.
+
+**Common high-value sockets:**
+
+```
+/var/run/docker.sock   /run/containerd/containerd.sock
+/var/run/crio/crio.sock  /run/podman/podman.sock
+/var/run/kubelet.sock  /run/buildkit/buildkitd.sock
+```
+
+Absence of a CLI client doesn't protect the socket — Docker speaks plain HTTP over the Unix socket
+and `curl` is sufficient:
+
+```bash
+curl --unix-socket /var/run/docker.sock http://localhost/_ping
+```
+
+Remote daemon exposure on `tcp://...:2375` (no TLS) is effectively a remote root interface.
+
+See [HackTricks — Runtime API and Daemon Exposure](../sources/hacktricks-runtime-api-daemon-exposure.md).
+
+## Authorization Plugins (Docker)
+
+Docker authz plugins narrow the default "all-or-nothing" daemon access model, but safety depends on
+complete API surface coverage. Common bypass classes:
+
+- `docker exec` grants privilege after unprivileged container creation
+- Raw API field shape mismatch (top-level `Binds` vs `HostConfig.Binds`)
+- Unfiltered capability attributes (`CapAdd: ["SYS_ADMIN"]`)
+- Plugin management operations not blocked → disable the plugin
+
+See [HackTricks — Runtime Authorization Plugins](../sources/hacktricks-authorization-plugins.md).
+
+## Sensitive Host Mounts
+
+Dangerous mounts beyond `/`:
+
+| Mount                           | Risk                                                         |
+| ------------------------------- | ------------------------------------------------------------ |
+| `/proc/sys/kernel/core_pattern` | Host code execution on crash                                 |
+| `/proc/sys/kernel/modprobe`     | Redirect kernel module-loader helper                         |
+| `/proc/sysrq-trigger`           | Host DoS (immediate reboot)                                  |
+| `/sys/kernel/uevent_helper`     | Host code execution on uevent                                |
+| `/sys/kernel/debug`             | Wide kernel debug surface                                    |
+| `/var`                          | Service-account tokens, container snapshots, runtime sockets |
+
+Mounted `/var` on a Kubernetes node often gives access to other pods' projected service-account
+tokens, which can escalate to cluster-wide compromise.
+
+See [HackTricks — Sensitive Host Mounts](../sources/hacktricks-sensitive-host-mounts.md).
+
+## Assessment Triage (Modern Context)
+
+Before applying older escape techniques, verify:
+
+1. **Rootful vs rootless / userns-remapped** — `cat /proc/self/uid_map`
+2. **cgroup v1 vs v2** — `stat -fc %T /sys/fs/cgroup` (`cgroup2fs` = v2, `release_agent` chains mostly irrelevant)
+3. **seccomp/AppArmor explicit or inherited** — `grep -E 'Seccomp|NoNewPrivs' /proc/self/status`
+4. **K8s PSS label enforcing or just warning** — `kubectl get ns $NS -o jsonpath='{.metadata.labels}'`
+
+Assessment tools: `linpeas`, `CDK`, `amicontained`, `deepce`, `Tracee`, `Inspektor Gadget`.
+
+See [HackTricks — Container Assessment and Hardening](../sources/hacktricks-assessment-and-hardening.md).
+
 ## Sources
 
 - [OWASP Docker Security Cheat Sheet](../sources/owasp-docker-security.md)
@@ -129,3 +205,7 @@ Override with `--security-opt seccomp=...` and `--security-opt apparmor=...`.
 - [Linux Capabilities](linux-capabilities.md) — capability sets, file caps, privilege escalation
 - [Docker AppArmor Profiles](../sources/docker-apparmor.md) — docker-default profile, custom profiles
 - [Docker Seccomp Profiles](../sources/docker-seccomp.md) — default syscall blocklist
+- [HackTricks — Runtime API and Daemon Exposure](../sources/hacktricks-runtime-api-daemon-exposure.md)
+- [HackTricks — Runtime Authorization Plugins](../sources/hacktricks-authorization-plugins.md)
+- [HackTricks — Sensitive Host Mounts](../sources/hacktricks-sensitive-host-mounts.md)
+- [HackTricks — Container Assessment and Hardening](../sources/hacktricks-assessment-and-hardening.md)

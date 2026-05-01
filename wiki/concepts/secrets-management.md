@@ -1,8 +1,13 @@
 ---
 title: "Secrets Management"
 tags: [secrets, security, credentials, vault]
-sources: [owasp-docker-security.md, owasp-iac-security.md]
-updated: 2026-04-15
+sources:
+  [
+    owasp-docker-security.md,
+    owasp-iac-security.md,
+    hacktricks-image-security-and-secrets.md,
+  ]
+updated: 2026-05-01
 ---
 
 # Secrets Management
@@ -75,8 +80,35 @@ For cryptographic keys specifically, see [Key Management](key-management.md). Ke
 - Plan for key escrow and compromise recovery (see NIST SP 800-57).
 - Never store signing keys in escrow — non-repudiation would be broken.
 
+## Build-Time Secrets (Container Images)
+
+Image layers are **durable**. A secret set via `ARG`/`ENV` or copied into a build context is
+permanently visible in layer history even if deleted in a later `RUN` step:
+
+```bash
+docker history --no-trunc <image>  # reveals build-time secrets in earlier layers
+```
+
+Use BuildKit ephemeral secret mounts so the secret never enters a committed layer:
+
+```bash
+export DOCKER_BUILDKIT=1
+docker build --secret id=my_key,src=path/to/my_secret_file .
+```
+
+Post-exploitation secret discovery in container images:
+
+```bash
+env | grep -iE 'secret|token|key|passwd|password'
+find / -maxdepth 4 \( -iname '*.env' -o -iname '*secret*' \) 2>/dev/null | head -n 100
+grep -RniE 'secret|token|apikey|password' /app /srv /usr/src 2>/dev/null | head -n 100
+```
+
+See [HackTricks — Image Security, Signing, and Secrets](../sources/hacktricks-image-security-and-secrets.md).
+
 ## Sources
 
 - [OWASP Docker Security Cheat Sheet](../sources/owasp-docker-security.md)
 - [OWASP IaC Security Cheat Sheet](../sources/owasp-iac-security.md)
 - [OWASP Key Management Cheat Sheet](../sources/owasp-key-management.md)
+- [HackTricks — Image Security, Signing, and Secrets](../sources/hacktricks-image-security-and-secrets.md)
