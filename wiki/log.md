@@ -25,3 +25,10 @@ Cumulative totals from the first 10 days:
 - **concepts:** linux-privilege-escalation, linux-namespaces, wildcard-injection, shared-library-hijacking
 - **entities:** hacktricks
 - **updated:** container-security, secrets-management
+
+## [2026-05-07]
+
+- **queue (20):** slsa-v1.2-about, slsa-v1.2-threats-overview, slsa-v1.2-use-cases, slsa-v1.2-principles, slsa-v1.2-tracks, slsa-v1.2-terminology, slsa-v1.2-build-track-basics, slsa-v1.2-build-requirements, slsa-v1.2-distributing-provenance, slsa-v1.2-verifying-artifacts, slsa-v1.2-assessing-build-platforms, slsa-v1.2-source-requirements, slsa-v1.2-verifying-source, slsa-v1.2-threats, slsa-v1.2-verified-properties, slsa-v1.2-attestation-model, slsa-v1.2-provenance, slsa-v1.2-build-provenance, slsa-v1.2-verification-summary, openssf-baseline-2026-02-19
+- **concepts:** slsa, slsa-build-track, slsa-source-track, slsa-provenance, verification-summary-attestation, software-attestation, openssf-baseline
+- **entities:** slsa, openssf, in-toto
+- **updated:** supply-chain-security

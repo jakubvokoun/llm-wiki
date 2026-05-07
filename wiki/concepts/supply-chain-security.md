@@ -1,6 +1,7 @@
 ---
 title: "Supply Chain Security"
-tags: [supply-chain, security, sbom, signing, provenance, mcp, npm, sca, cve]
+tags:
+  [supply-chain, security, sbom, signing, provenance, mcp, npm, sca, cve, slsa]
 sources:
   [
     owasp-docker-security.md,
@@ -8,8 +9,9 @@ sources:
     owasp-mcp-security.md,
     owasp-npm-security.md,
     owasp-vulnerable-dependency-management.md,
+    slsa-v1.2-about.md,
   ]
-updated: 2026-04-16
+updated: 2026-05-07
 ---
 
 # Supply Chain Security
@@ -36,8 +38,12 @@ Digitally sign artifacts so consumers can verify integrity and authenticity. Pre
 
 SLSA (Supply Chain Levels for Software Artifacts) provides a framework for documenting where artifacts came from and how they were built.
 
-- Levels 1-4 with increasing guarantees
-- Level 3+: build on dedicated infrastructure, signed provenance
+- **Build Track:** L1 (provenance exists) → L2 (authentic, signed) → L3 (unforgeable, isolated)
+- **Source Track:** L1–L4 with increasing source code management controls
+- Trust anchor: the build platform (`builder.id`); consumers verify signed provenance against expectations
+- Attestation format: in-toto statement with SLSA predicate, wrapped in DSSE envelope
+
+See: [SLSA](slsa.md), [SLSA Build Track](slsa-build-track.md), [SLSA Source Track](slsa-source-track.md), [SLSA Provenance](slsa-provenance.md)
 
 ### Trusted Registry
 
