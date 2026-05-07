@@ -1,0 +1,100 @@
+# Networking & Service Mesh
+
+UDS Core uses [Istio](https://istio.io/) as its service mesh to provide secure, observable communication between all workloads. The mesh is not optional infrastructure; it is the security boundary that makes zero-trust networking practical without requiring application teams to manage TLS certificates or write network policies by hand.
+
+## Why a service mesh?
+
+In a traditional Kubernetes deployment, network security relies on IP-based `NetworkPolicy` rules and perimeter controls. This approach breaks down at scale: services have dynamic IPs, policies are hard to audit, and there is no automatic encryption for east-west traffic.
+
+A service mesh solves this by inserting a proxy layer that handles TLS, identity, and traffic routing transparently. In UDS Core, Istio provides:
+
+* **Mutual TLS (mTLS) for all in-cluster traffic**: every connection between workloads is authenticated and encrypted, regardless of whether the application itself supports TLS. Workload identity is derived from Kubernetes service accounts via SPIFFE certificates.
+* **Authorization policies**: fine-grained rules that specify which workloads can talk to which other workloads, and on which ports. These default to *deny all* and are opened up only through explicit `Package` CR declarations.
+* **Ingress and egress control**: all traffic entering or leaving the cluster flows through Istio gateways, providing a consistent point for TLS termination, traffic inspection, and access control.
+
+## Ambient vs. sidecar mode
+
+Istio supports two data plane modes in UDS Core:
+
+|  | Ambient (default) | Sidecar |
+| --- | --- | --- |
+| Proxy location | Node-level ztunnel + optional waypoints | Per-pod Envoy sidecar |
+| Resource overhead | Lower (shared per node) | Higher (per pod) |
+| Upgrade disruption | No pod restarts needed | Pod restarts required |
+| L7 policy enforcement | Requires waypoint proxy per workload | Always available |
+
+**Ambient mode** is the default and is the direction Istio is investing in as the more sustainable, long-term data plane model. It reduces resource overhead, simplifies upgrades (the data plane can be updated without restarting application pods), and removes the operational complexity of managing per-pod sidecar injection.
+
+When Authservice is enabled for an application, the operator automatically provisions a waypoint proxy for L7 policy enforcement.
+
+**Sidecar mode** is available for deployments that require the more familiar per-pod isolation model or that have compatibility requirements. It can be enabled per namespace via the `Package` CR.
+
+## Ingress gateways
+
+UDS Core deploys two required gateways and one optional gateway:
+
+| Gateway | Required | Purpose |
+| --- | --- | --- |
+| **Tenant** | Yes | End-user application traffic; TLS termination for `*.yourdomain.com` |
+| **Admin** | Yes | Admin-facing interfaces (Grafana, Keycloak admin console, etc.); independently configurable security controls |
+| **Passthrough** | No | TLS passed through to the application for its own termination; must be enabled explicitly in your bundle |
+
+The Tenant and Admin gateways are deployed as separate Istio gateways with their own load balancers and TLS configurations. This split exists so each gateway can have its own networking and access controls: end-user traffic and platform-administration traffic typically have different audiences, threat models, and exposure requirements.
+
+The Admin Gateway should be reachable only from trusted networks by privileged users (not standard application end users). Expose the Tenant Gateway as your public ingress and restrict the Admin Gateway to private/internal networking, a VPN, a bastion, or a restricted subnet.
+
+## How application traffic flows
+
+When a team deploys a UDS Package, they declare their networking intent in a `Package` CR.
+
+### Ingress
+
+The `expose` block declares what the application wants to expose through an ingress gateway:
+
+```yaml
+spec:
+  network:
+    expose:
+      - service: my-app-service
+        selector:
+          app: my-app
+        host: my-app
+        gateway: tenant
+        port: 8080
+```
+
+The UDS Operator reads this declaration and generates the underlying Istio resources:
+
+* A `VirtualService` routing `my-app.yourdomain.com` to the service
+* An `AuthorizationPolicy` permitting ingress from the tenant gateway
+
+Application teams never write Istio YAML directly. The `Package` CR is the intent interface; the operator handles the mechanics.
+
+### Egress
+
+By default, workloads cannot reach the internet or external services. Egress must be explicitly allowed using the `allow` block:
+
+```yaml
+spec:
+  network:
+    allow:
+      - direction: Egress
+        remoteHost: api.example.com
+        port: 443
+```
+
+This explicit model is intentional: unknown outbound traffic is a common data exfiltration vector. Requiring teams to declare their egress dependencies makes the cluster's external dependencies auditable.
+
+## Authorization policy model
+
+Istio in UDS Core defaults to **deny all** ingress. Traffic is permitted only when an explicit `ALLOW` authorization policy exists. The UDS Operator generates these policies automatically based on `Package` CR `expose` and `allow` declarations.
+
+This means:
+
+* A service that is not declared in any `Package` CR receives no traffic from the mesh
+* Cross-service communication must be declared explicitly in the `Package` CR
+* Platform components (Prometheus scraping, log collection) have pre-configured allow policies
+
+## Trust and certificate management
+
+When using private PKI or self-signed certificates, UDS Core provides a trust bundle mechanism that propagates CA certificates to platform components (including Keycloak). This ensures that TLS-dependent flows (such as SSO and inter-service mTLS) do not break when operating in air-gapped environments with internally-issued certificates.

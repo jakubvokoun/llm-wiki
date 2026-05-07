@@ -1,0 +1,36 @@
+# Monitoring & Observability
+
+UDS Core ships a complete metrics-based monitoring stack built on [Prometheus](https://prometheus.io/), [Grafana](https://grafana.com/), [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/), and [Blackbox Exporter](https://github.com/prometheus/blackbox_exporter). From the moment UDS Core is deployed, platform components are automatically instrumented. Operators get visibility into cluster health without additional configuration.
+
+## Why a built-in monitoring stack?
+
+Platform observability is not optional in regulated environments. Agencies and compliance frameworks require demonstrated ability to detect and respond to anomalies. A monitoring stack that is assembled ad-hoc from separate tools introduces integration gaps, inconsistent dashboards, and alerting dead zones.
+
+By including monitoring as a platform layer, UDS Core provides:
+
+* **Consistent instrumentation**: every platform component ships with metrics endpoints that Prometheus scrapes automatically
+* **Pre-built dashboards**: Grafana includes dashboards for Istio, Keycloak, Loki, and other platform components out of the box
+* **Integrated alerting**: Alertmanager routes alerts from both Prometheus (metrics-based) and Loki (log-based) through the same notification pipeline
+
+## The observability stack
+
+| Component | Role |
+| --- | --- |
+| **Prometheus** | Scrapes metrics endpoints, stores time-series data, and evaluates alerting rules |
+| **Grafana** | Dashboards and log exploration across Prometheus and Loki; access gated by UDS Core groups |
+| **Alertmanager** | Routes fired alerts to a wide range of integrations with grouping, silencing, and deduplication |
+| **Blackbox Exporter** | Probes HTTPS endpoints for end-to-end availability monitoring independent of pod health |
+
+## Uptime monitoring
+
+UDS Core monitors the availability of its own services through three built-in mechanisms: Prometheus recording rules that track workload health (pod and deployment status), Blackbox Exporter endpoint probes that verify HTTPS reachability from outside the service mesh, and default probe alert rules that notify you when endpoints go down or certificates approach expiry. Together, these feed two built-in Grafana dashboards (**Core Uptime** and **Probe Uptime**) and the default Alertmanager pipeline, giving operators a comprehensive view of platform health.
+
+## How application teams add metrics
+
+Applications declare their monitoring needs in the `Package` CR's `monitor` block. The UDS Operator automatically creates the appropriate `ServiceMonitor`, `PodMonitor`, and `Probe` resources for Prometheus to scrape. UDS Core's built-in probe alert rules cover generic endpoint downtime and TLS certificate expiry. Additional application-specific alert needs are expressed as `PrometheusRule` CRDs deployed alongside the application, keeping alerting logic version-controlled with the application code.
+
+## Alert routing principles
+
+UDS Core follows the principle that alerts should be evaluated at the source, not in Grafana. Prometheus-based rules belong in `PrometheusRule` CRDs; Loki-based rules belong in Loki Ruler ConfigMaps. Grafana-managed alerts should be reserved for advanced correlation scenarios where multiple data sources need to be combined in a single rule evaluation.
+
+This keeps alerting configuration declarative, version-controllable, and consistent across environments. The same `PrometheusRule` works whether it is deployed to a local development cluster or a production environment.

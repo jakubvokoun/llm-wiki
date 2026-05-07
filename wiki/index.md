@@ -210,33 +210,55 @@
 | [SLSA v1.2 — Build Provenance Schema](sources/slsa-v1.2-build-provenance.md)                                                                        | Full JSON schema: buildDefinition, runDetails, builder.id, externalParameters, resolvedDependencies                                    | 2026-05-07 |
 | [SLSA v1.2 — Verification Summary Attestation](sources/slsa-v1.2-verification-summary.md)                                                           | VSA schema, 7-step verification, SlsaResult values; verifier compromise caveat                                                         | 2026-05-07 |
 | [OpenSSF OSPS Baseline v2026-02-19](sources/openssf-baseline-2026-02-19.md)                                                                         | 3-level tiered controls across 8 categories (AC/BR/DO/GV/LE/QA/SA/VM); maps to NIST SSDF, CIS, OWASP SAMM                              | 2026-05-07 |
+| [UDS Core — Concepts Overview](sources/uds-core-concepts-overview.md)                                                                               | What UDS Core is, functional layers, UDS Operator, Policy Engine via Pepr                                                              | 2026-05-07 |
+| [UDS Core — Core Features Overview](sources/uds-core-features-overview.md)                                                                          | Index of 7 feature areas: networking, identity, logging, monitoring, runtime security, backup, policy                                  | 2026-05-07 |
+| [UDS Core — Networking & Service Mesh](sources/uds-core-networking.md)                                                                              | Istio mTLS, ambient vs sidecar mode, tenant/admin gateways, Package CR expose/allow patterns, deny-all authz                           | 2026-05-07 |
+| [UDS Core — Identity & Authorization](sources/uds-core-identity-authorization.md)                                                                   | Keycloak + Authservice SSO model; native OIDC preferred; platform groups; 3 config layers                                              | 2026-05-07 |
+| [UDS Core — Monitoring & Observability](sources/uds-core-monitoring-observability.md)                                                               | Prometheus + Grafana + Alertmanager + Blackbox Exporter; uptime monitoring; alert routing principles                                   | 2026-05-07 |
+| [UDS Core — Logging](sources/uds-core-logging.md)                                                                                                   | Vector + Loki pipeline; log-based alerting via Loki Ruler; S3 storage; Vector SIEM forwarding                                          | 2026-05-07 |
+| [UDS Core — Runtime Security](sources/uds-core-runtime-security.md)                                                                                 | Falco eBPF runtime threat detection; default detections; Falcosidekick fan-out; defense-in-depth table                                 | 2026-05-07 |
+| [UDS Core — Policy & Compliance](sources/uds-core-policy-compliance.md)                                                                             | Pepr admission webhooks; mutation vs validation; 5 key policies; Exemption CR                                                          | 2026-05-07 |
+| [UDS Core — Platform Overview](sources/uds-core-platform-overview.md)                                                                               | Platform section index: layers, flavors, security, versioning                                                                          | 2026-05-07 |
+| [UDS Core — Platform Functional Layers](sources/uds-core-platform-functional-layers.md)                                                             | Layer table with dependencies, selection criteria, dependency ordering, pre-core infrastructure, UDS add-ons                           | 2026-05-07 |
+| [UDS Core — Platform Security](sources/uds-core-platform-security.md)                                                                               | Full defense-in-depth model: supply chain, airgap, identity, zero-trust networking, admission, runtime, observability, compliance      | 2026-05-07 |
+| [UDS Core — Configuration & Packaging Overview](sources/uds-core-configuration-packaging-overview.md)                                               | Delivery (Zarf) vs integration (UDS Operator) distinction; Package CR in Helm charts; pointers to sub-topics                           | 2026-05-07 |
+| [UDS Core — CRD Overviews](sources/uds-core-crd-overviews.md)                                                                                       | Three CRDs: Package (request form), Exemption (permission slip, uds-policy-exemptions ns), ClusterConfig (singleton)                   | 2026-05-07 |
+| [UDS Core — UDS Package Requirements](sources/uds-core-package-requirements.md)                                                                     | RFC-2119 requirements across 8 categories: operator integration, security, networking, IAM, testing, maintenance, versioning           | 2026-05-07 |
+| [UDS Core — Policy Engine Reference](sources/uds-core-policy-engine.md)                                                                             | 3 mutations + 18 validations including 4 Istio-specific policies; Big Bang Kyverno comparison tables                                   | 2026-05-07 |
+| [UDS Core — Security Policy](sources/uds-core-security-policy.md)                                                                                   | Patch support for latest 3 minor versions; vulnerability reporting email                                                               | 2026-05-07 |
 
 ## Entities
 
-| Page                                           | Type        | Summary                                                                                             |
-| ---------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------- |
-| [GitLab](entities/gitlab.md)                   | org/product | DevSecOps platform; CI/CD pipelines; Container Registry; CI/CD Catalog; Free/Premium/Ultimate tiers |
-| [AppArmor](entities/apparmor.md)               | product     | Linux MAC security module; path-based profiles; default on Ubuntu; Docker docker-default            |
-| [OSTree](entities/ostree.md)                   | product     | Content-addressed OS tree versioning; foundational layer for Fedora Atomic and others               |
-| [Fedora](entities/fedora.md)                   | product     | Fedora Atomic family: Silverblue, Kinoite, CoreOS; Universal Blue derivative images                 |
-| [Flatpak](entities/flatpak.md)                 | product     | Sandboxed Linux app packaging; canonical delivery for immutable/atomic desktop distros              |
-| [Distrobox](entities/distrobox.md)             | product     | Mutable container environments on immutable hosts; wraps Podman/Docker transparently                |
-| [OWASP](entities/owasp.md)                     | org         | Open source security foundation; Cheat Sheet Series, Top 10, Docker Top 10                          |
-| [Docker](entities/docker.md)                   | product     | Leading container runtime; daemon-based, many hardening options available                           |
-| [Podman](entities/podman.md)                   | product     | Rootless, daemonless Docker alternative by Red Hat with SELinux integration                         |
-| [Kubernetes](entities/kubernetes.md)           | product     | Container orchestration platform; RBAC, network policies, pod security, admission control           |
-| [Anthropic](entities/anthropic.md)             | org         | AI safety company; creator of Claude models and Model Context Protocol (MCP)                        |
-| [Nix](entities/nix.md)                         | product     | Purely functional package manager; Nixpkgs + NixOS; reproducible builds in /nix/store               |
-| [Zarf](entities/zarf.md)                       | product     | Airgap K8s packaging tool by Defense Unicorns; bundles images/charts/manifests into .tar.zst        |
-| [Prometheus](entities/prometheus.md)           | product     | Open-source monitoring + time series DB; pull-based scraping, PromQL, CNCF graduated project        |
-| [SUSE](entities/suse.md)                       | org/product | Enterprise Linux and cloud-native infra; SUSE Cloud Observability, Rancher                          |
-| [Datadog](entities/datadog.md)                 | org/product | Cloud monitoring + observability platform; APM, infrastructure, logs, synthetic monitoring          |
-| [Grafana](entities/grafana.md)                 | org/product | Open-source visualization+alerting platform; Loki, Tempo, Mimir, OnCall ecosystem                   |
-| [VictoriaMetrics](entities/victoriametrics.md) | product     | High-performance Prometheus-compatible TSDB; vmalert, vmagent, MetricsQL, keep_firing_for           |
-| [HackTricks](entities/hacktricks.md)           | org/product | Open-source cybersecurity wiki; Linux, container, web, AD attack and defense guides                 |
-| [SLSA](entities/slsa.md)                       | project     | Supply-chain Levels for Software Artifacts; Linux Foundation cross-industry collab; slsa.dev        |
-| [OpenSSF](entities/openssf.md)                 | org         | Open Source Security Foundation; OSPS Baseline, Scorecard, Sigstore, Alpha-Omega                    |
-| [in-toto](entities/in-toto.md)                 | project     | CNCF graduated attestation framework; in-toto Statement format used by SLSA provenance              |
+| Page                                             | Type        | Summary                                                                                                |
+| ------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------ |
+| [GitLab](entities/gitlab.md)                     | org/product | DevSecOps platform; CI/CD pipelines; Container Registry; CI/CD Catalog; Free/Premium/Ultimate tiers    |
+| [AppArmor](entities/apparmor.md)                 | product     | Linux MAC security module; path-based profiles; default on Ubuntu; Docker docker-default               |
+| [OSTree](entities/ostree.md)                     | product     | Content-addressed OS tree versioning; foundational layer for Fedora Atomic and others                  |
+| [Fedora](entities/fedora.md)                     | product     | Fedora Atomic family: Silverblue, Kinoite, CoreOS; Universal Blue derivative images                    |
+| [Flatpak](entities/flatpak.md)                   | product     | Sandboxed Linux app packaging; canonical delivery for immutable/atomic desktop distros                 |
+| [Distrobox](entities/distrobox.md)               | product     | Mutable container environments on immutable hosts; wraps Podman/Docker transparently                   |
+| [OWASP](entities/owasp.md)                       | org         | Open source security foundation; Cheat Sheet Series, Top 10, Docker Top 10                             |
+| [Docker](entities/docker.md)                     | product     | Leading container runtime; daemon-based, many hardening options available                              |
+| [Podman](entities/podman.md)                     | product     | Rootless, daemonless Docker alternative by Red Hat with SELinux integration                            |
+| [Kubernetes](entities/kubernetes.md)             | product     | Container orchestration platform; RBAC, network policies, pod security, admission control              |
+| [Anthropic](entities/anthropic.md)               | org         | AI safety company; creator of Claude models and Model Context Protocol (MCP)                           |
+| [Nix](entities/nix.md)                           | product     | Purely functional package manager; Nixpkgs + NixOS; reproducible builds in /nix/store                  |
+| [Zarf](entities/zarf.md)                         | product     | Airgap K8s packaging tool by Defense Unicorns; bundles images/charts/manifests into .tar.zst           |
+| [Prometheus](entities/prometheus.md)             | product     | Open-source monitoring + time series DB; pull-based scraping, PromQL, CNCF graduated project           |
+| [SUSE](entities/suse.md)                         | org/product | Enterprise Linux and cloud-native infra; SUSE Cloud Observability, Rancher                             |
+| [Datadog](entities/datadog.md)                   | org/product | Cloud monitoring + observability platform; APM, infrastructure, logs, synthetic monitoring             |
+| [Grafana](entities/grafana.md)                   | org/product | Open-source visualization+alerting platform; Loki, Tempo, Mimir, OnCall ecosystem                      |
+| [VictoriaMetrics](entities/victoriametrics.md)   | product     | High-performance Prometheus-compatible TSDB; vmalert, vmagent, MetricsQL, keep_firing_for              |
+| [HackTricks](entities/hacktricks.md)             | org/product | Open-source cybersecurity wiki; Linux, container, web, AD attack and defense guides                    |
+| [SLSA](entities/slsa.md)                         | project     | Supply-chain Levels for Software Artifacts; Linux Foundation cross-industry collab; slsa.dev           |
+| [OpenSSF](entities/openssf.md)                   | org         | Open Source Security Foundation; OSPS Baseline, Scorecard, Sigstore, Alpha-Omega                       |
+| [in-toto](entities/in-toto.md)                   | project     | CNCF graduated attestation framework; in-toto Statement format used by SLSA provenance                 |
+| [Defense Unicorns](entities/defense-unicorns.md) | org         | Defense-tech company; creators of Zarf, UDS Core, and Pepr                                             |
+| [UDS Core](entities/uds-core.md)                 | product     | Opinionated K8s platform baseline: Istio, Keycloak, Prometheus, Falco, Vector, Loki, Velero            |
+| [Pepr](entities/pepr.md)                         | product     | K8s admission controller framework by Defense Unicorns; UDS Core's policy engine                       |
+| [Istio](entities/istio.md)                       | product     | CNCF service mesh; mTLS, authorization policies, ambient/sidecar modes; core of UDS Core networking    |
+| [Keycloak](entities/keycloak.md)                 | product     | Open-source IAM by Red Hat; SSO, OIDC, SAML, LDAP federation; identity provider in UDS Core            |
+| [Falco](entities/falco.md)                       | product     | CNCF runtime security; eBPF syscall monitoring; Falcosidekick fan-out; UDS Core runtime security layer |
 
 ## Concepts
 
@@ -370,6 +392,8 @@
 | [Verification Summary Attestation](concepts/verification-summary-attestation.md)     | VSA: verifier evaluates provenance and issues summary; 7-step verification; use cases; verifier compromise caveat                  |
 | [Software Attestation](concepts/software-attestation.md)                             | in-toto attestation model: envelope/statement/predicate/bundle; DSSE; common predicate types                                       |
 | [OpenSSF Baseline](concepts/openssf-baseline.md)                                     | OSPS Baseline: 3 levels × 8 categories; L1 hygiene, L2 process, L3 policy; SLSA alignment                                          |
+| [UDS Operator](concepts/uds-operator.md)                                             | UDS Core control plane; reconciles Package/Exemption/ClusterConfig CRs into Istio, NetworkPolicy, Keycloak, Prometheus resources   |
+| [UDS Package CR](concepts/uds-package-cr.md)                                         | K8s custom resource declaring app's networking, SSO, monitoring needs; one per namespace; drives UDS Operator provisioning         |
 
 ## Analyses
 
