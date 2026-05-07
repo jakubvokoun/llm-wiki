@@ -15,15 +15,11 @@ updated: 2026-05-07
 
 # Pepr
 
-Pepr is a Kubernetes admission controller framework built by
-[Defense Unicorns](defense-unicorns.md). It runs as admission webhooks and enables
-policy enforcement via TypeScript modules.
+Pepr is a Kubernetes admission controller framework built by [Defense Unicorns](defense-unicorns.md). It runs as admission webhooks and enables policy enforcement via TypeScript modules.
 
 ## Role in UDS Core
 
-Pepr serves as the UDS Core Policy Engine. It runs alongside the UDS Operator and
-enforces a security baseline aligned with Kubernetes Pod Security Standards (restricted
-profile), plus Istio-specific controls.
+Pepr serves as the UDS Core Policy Engine. It runs alongside the UDS Operator and enforces a security baseline aligned with Kubernetes Pod Security Standards (restricted profile), plus Istio-specific controls.
 
 **Mutations** — automatically correct safe defaults before admission:
 
@@ -38,14 +34,11 @@ profile), plus Istio-specific controls.
 - No NodePort services
 - Drop all capabilities; only approved additions allowed
 - Restricted seccomp profile (`RuntimeDefault` or `Localhost`)
-- Istio-specific: blocks sidecar config overrides, traffic interception bypasses,
-  ambient mesh bypasses, and non-Istio pods running as UID/GID 1337
+- Istio-specific: blocks sidecar config overrides, traffic interception bypasses, ambient mesh bypasses, and non-Istio pods running as UID/GID 1337
 
 ## Exemption CR
 
-When a workload legitimately needs to bypass a policy, an `Exemption` CR is created
-in the `uds-policy-exemptions` namespace. The exempted resource is annotated with
-`uds-core.pepr.dev/uds-core-policies.<POLICY>: exempted`.
+When a workload legitimately needs to bypass a policy, an `Exemption` CR is created in the `uds-policy-exemptions` namespace. The exempted resource is annotated with `uds-core.pepr.dev/uds-core-policies.<POLICY>: exempted`.
 
 ## Related pages
 

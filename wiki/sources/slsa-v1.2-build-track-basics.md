@@ -11,11 +11,11 @@ The Build Track focuses on the process of transforming source code into deployab
 
 ## Levels overview
 
-| Level | Name                   | Key property                                            | Who benefits                                         |
-| ----- | ---------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
-| L1    | Provenance exists      | Artifact has provenance (possibly unsigned)             | Consumers who want basic traceability                |
-| L2    | Provenance authentic   | Provenance is signed by a trusted hosted build platform | Consumers who need to verify build platform identity |
-| L3    | Provenance unforgeable | Even the build itself cannot forge its own provenance   | High-security environments                           |
+| Level | Name | Key property | Who benefits |
+| --- | --- | --- | --- |
+| L1 | Provenance exists | Artifact has provenance (possibly unsigned) | Consumers who want basic traceability |
+| L2 | Provenance authentic | Provenance is signed by a trusted hosted build platform | Consumers who need to verify build platform identity |
+| L3 | Provenance unforgeable | Even the build itself cannot forge its own provenance | High-security environments |
 
 ## Level 0 (no SLSA)
 

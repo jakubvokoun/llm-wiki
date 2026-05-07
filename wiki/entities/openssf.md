@@ -23,15 +23,15 @@ Collaborate to improve the security posture of open source software by providing
 
 ## Key projects and working groups
 
-| Project                   | Description                                                    |
-| ------------------------- | -------------------------------------------------------------- |
-| **OSPS Baseline**         | Tiered security controls for open source projects (L1–L3)      |
-| **OpenSSF Scorecard**     | Automated security assessment for open source repositories     |
-| **SLSA** (co-contributor) | Supply-chain Levels for Software Artifacts                     |
-| **Sigstore**              | Signing and transparency infrastructure for artifacts          |
-| **SBOM Everywhere**       | Promoting SBOM adoption across the ecosystem                   |
-| **Alpha-Omega Project**   | Funding security improvements in critical open source projects |
-| **Memory Safety SIG**     | Promoting memory-safe languages                                |
+| Project | Description |
+| --- | --- |
+| **OSPS Baseline** | Tiered security controls for open source projects (L1–L3) |
+| **OpenSSF Scorecard** | Automated security assessment for open source repositories |
+| **SLSA** (co-contributor) | Supply-chain Levels for Software Artifacts |
+| **Sigstore** | Signing and transparency infrastructure for artifacts |
+| **SBOM Everywhere** | Promoting SBOM adoption across the ecosystem |
+| **Alpha-Omega Project** | Funding security improvements in critical open source projects |
+| **Memory Safety SIG** | Promoting memory-safe languages |
 
 ## OSPS Baseline
 

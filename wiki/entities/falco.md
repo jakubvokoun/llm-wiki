@@ -7,21 +7,17 @@ updated: 2026-05-07
 
 # Falco
 
-Falco is an open-source runtime security tool, a CNCF graduated project. It monitors
-system-level behavior inside containerized workloads using eBPF probes, detecting
-malicious activity that static configuration controls cannot catch.
+Falco is an open-source runtime security tool, a CNCF graduated project. It monitors system-level behavior inside containerized workloads using eBPF probes, detecting malicious activity that static configuration controls cannot catch.
 
 ## How it works
 
-Falco attaches eBPF probes to the Linux kernel to observe all syscalls made by
-processes on a node — including processes inside containers — without modifying the
-containers or requiring application changes.
+Falco attaches eBPF probes to the Linux kernel to observe all syscalls made by processes on a node — including processes inside containers — without modifying the containers or requiring application changes.
 
-| Component      | Role                                                            |
-| -------------- | --------------------------------------------------------------- |
-| eBPF probe     | Observes syscalls at the kernel level                           |
-| Falco engine   | Evaluates event stream against rules; generates alerts on match |
-| Falco Sidekick | Fan-out alert forwarder to Alertmanager, SIEM, Slack, etc.      |
+| Component | Role |
+| --- | --- |
+| eBPF probe | Observes syscalls at the kernel level |
+| Falco engine | Evaluates event stream against rules; generates alerts on match |
+| Falco Sidekick | Fan-out alert forwarder to Alertmanager, SIEM, Slack, etc. |
 
 ## Default detections
 
@@ -33,14 +29,11 @@ containers or requiring application changes.
 
 ## Alert routing
 
-Falco Sidekick fans out alerts to multiple destinations: Loki, Alertmanager, SIEM
-platforms (HTTP webhooks), Slack/Teams/Mattermost, Elasticsearch, and others.
+Falco Sidekick fans out alerts to multiple destinations: Loki, Alertmanager, SIEM platforms (HTTP webhooks), Slack/Teams/Mattermost, Elasticsearch, and others.
 
 ## Role in UDS Core
 
-Falco is the runtime security layer in [UDS Core](uds-core.md) (`core-runtime-security`
-layer). It represents the innermost defense layer: detecting malicious behavior inside
-containers that have already passed all other controls.
+Falco is the runtime security layer in [UDS Core](uds-core.md) (`core-runtime-security` layer). It represents the innermost defense layer: detecting malicious behavior inside containers that have already passed all other controls.
 
 ## Related pages
 

@@ -62,23 +62,23 @@ A single build runs as an independent process on a multi-tenant build platform. 
 
 ### buildDefinition (required)
 
-| Field                  | Required | Description                                                               |
-| ---------------------- | -------- | ------------------------------------------------------------------------- |
-| `buildType`            | L1       | URI identifying the build template. SHOULD resolve to human-readable spec |
-| `externalParameters`   | L1       | All external inputs. MUST be complete at L3                               |
-| `internalParameters`   | optional | Platform-controlled inputs (debugging, not verified by consumers)         |
-| `resolvedDependencies` | optional | Artifacts needed at build time (best-effort through L3)                   |
+| Field | Required | Description |
+| --- | --- | --- |
+| `buildType` | L1 | URI identifying the build template. SHOULD resolve to human-readable spec |
+| `externalParameters` | L1 | All external inputs. MUST be complete at L3 |
+| `internalParameters` | optional | Platform-controlled inputs (debugging, not verified by consumers) |
+| `resolvedDependencies` | optional | Artifacts needed at build time (best-effort through L3) |
 
 ### runDetails (required)
 
-| Field                   | Required | Description                                           |
-| ----------------------- | -------- | ----------------------------------------------------- |
-| `builder.id`            | L1       | URI identifying the build platform — the trust anchor |
-| `builder.version`       | optional | Component versions of build platform                  |
-| `metadata.invocationId` | optional | Unique identifier for this build                      |
-| `metadata.startedOn`    | optional | Build start timestamp                                 |
-| `metadata.finishedOn`   | optional | Build end timestamp                                   |
-| `byproducts`            | optional | Additional build artifacts (logs, test results)       |
+| Field | Required | Description |
+| --- | --- | --- |
+| `builder.id` | L1 | URI identifying the build platform — the trust anchor |
+| `builder.version` | optional | Component versions of build platform |
+| `metadata.invocationId` | optional | Unique identifier for this build |
+| `metadata.startedOn` | optional | Build start timestamp |
+| `metadata.finishedOn` | optional | Build end timestamp |
+| `byproducts` | optional | Additional build artifacts (logs, test results) |
 
 ## Parsing rules
 

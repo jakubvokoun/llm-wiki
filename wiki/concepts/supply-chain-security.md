@@ -110,12 +110,12 @@ See [NPM Security](npm-security.md) and [Dependency Confusion](dependency-confus
 
 When SCA tools detect a vulnerable dependency, four cases apply:
 
-| Case | Situation                      | Action                                                                                              |
-| ---- | ------------------------------ | --------------------------------------------------------------------------------------------------- |
-| 1    | Patch available                | Update + run tests; fix API breakage if needed                                                      |
-| 2    | Fix delayed (months)           | Apply workaround; wrap vulnerable calls with validation code; add WAF rules; document CVE in README |
-| 3    | Provider won't fix             | Fork + patch (OSS) or find alternative; add protective code; write exploit-prevention unit tests    |
-| 4    | Discovered externally (no CVE) | Notify provider; apply Case 2 or 3 based on response                                                |
+| Case | Situation | Action |
+| --- | --- | --- |
+| 1 | Patch available | Update + run tests; fix API breakage if needed |
+| 2 | Fix delayed (months) | Apply workaround; wrap vulnerable calls with validation code; add WAF rules; document CVE in README |
+| 3 | Provider won't fix | Fork + patch (OSS) or find alternative; add protective code; write exploit-prevention unit tests |
+| 4 | Discovered externally (no CVE) | Notify provider; apply Case 2 or 3 based on response |
 
 **Transitive dependencies**: act on the direct dependency, not the transitive one. Risk acceptance must go to CRO/CISO with CVSS score justification.
 

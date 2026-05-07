@@ -16,18 +16,16 @@ updated: 2026-05-07
 
 # UDS Core — Monitoring & Observability
 
-UDS Core ships a complete metrics-based monitoring stack. From the moment it is
-deployed, platform components are automatically instrumented — operators get
-visibility into cluster health without additional configuration.
+UDS Core ships a complete metrics-based monitoring stack. From the moment it is deployed, platform components are automatically instrumented — operators get visibility into cluster health without additional configuration.
 
 ## Observability stack
 
-| Component             | Role                                                                 |
-| --------------------- | -------------------------------------------------------------------- |
-| **Prometheus**        | Scrapes metrics endpoints, stores time-series, evaluates alert rules |
-| **Grafana**           | Dashboards and log exploration; access gated by UDS Core groups      |
-| **Alertmanager**      | Routes alerts with grouping, silencing, and deduplication            |
-| **Blackbox Exporter** | Probes HTTPS endpoints for availability independent of pod health    |
+| Component | Role |
+| --- | --- |
+| **Prometheus** | Scrapes metrics endpoints, stores time-series, evaluates alert rules |
+| **Grafana** | Dashboards and log exploration; access gated by UDS Core groups |
+| **Alertmanager** | Routes alerts with grouping, silencing, and deduplication |
+| **Blackbox Exporter** | Probes HTTPS endpoints for availability independent of pod health |
 
 ## Uptime monitoring
 
@@ -41,11 +39,9 @@ These feed two built-in dashboards: **Core Uptime** and **Probe Uptime**.
 
 ## How application teams add metrics
 
-Declare monitoring needs in the `Package` CR `monitor` block. The UDS Operator creates
-`ServiceMonitor`, `PodMonitor`, or `Probe` resources automatically.
+Declare monitoring needs in the `Package` CR `monitor` block. The UDS Operator creates `ServiceMonitor`, `PodMonitor`, or `Probe` resources automatically.
 
-Application-specific alerting is expressed as `PrometheusRule` CRDs deployed alongside
-the application, keeping alerting logic version-controlled with the application code.
+Application-specific alerting is expressed as `PrometheusRule` CRDs deployed alongside the application, keeping alerting logic version-controlled with the application code.
 
 ## Alert routing principles
 
@@ -53,8 +49,7 @@ the application, keeping alerting logic version-controlled with the application 
 - Loki-based rules → Loki Ruler ConfigMaps
 - Grafana-managed alerts → reserved for multi-source correlation scenarios
 
-Alerts should be evaluated at the source, not in Grafana. This keeps alerting
-declarative and consistent across environments.
+Alerts should be evaluated at the source, not in Grafana. This keeps alerting declarative and consistent across environments.
 
 ## Related pages
 

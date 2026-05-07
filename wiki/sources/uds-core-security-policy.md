@@ -9,14 +9,11 @@ updated: 2026-05-07
 
 ## Supported versions
 
-UDS Core provides patch support for the latest three minor versions (current plus two
-previous). See the versioning policy for details.
+UDS Core provides patch support for the latest three minor versions (current plus two previous). See the versioning policy for details.
 
 ## Reporting a vulnerability
 
-Email `security-notice [at] defenseunicorns.com` to report a vulnerability. If email
-is not suitable for disclosing details, contact them first to coordinate alternate
-communications.
+Email `security-notice [at] defenseunicorns.com` to report a vulnerability. If email is not suitable for disclosing details, contact them first to coordinate alternate communications.
 
 ## Related pages
 

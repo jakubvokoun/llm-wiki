@@ -13,13 +13,13 @@ How to evaluate whether a build platform satisfies SLSA Build Level requirements
 
 Understanding who you're defending against:
 
-| Adversary                      | Capabilities                                | Mitigated by                                              |
-| ------------------------------ | ------------------------------------------- | --------------------------------------------------------- |
-| **External attacker**          | No access to build infrastructure           | L1+ provenance reveals if source/builder unexpected       |
-| **Build tenant (contributor)** | Can run arbitrary code in build environment | L2+ (control plane generates provenance, not worker)      |
-| **Project maintainer**         | Can configure CI/CD settings, workflows     | L3 (complete externalParameters prevent hidden injection) |
-| **Build platform admin**       | Can access internal platform controls       | Verification: platform must have admin abuse controls     |
-| **Platform insider**           | Can modify platform infrastructure          | Verification: platform must have insider threat controls  |
+| Adversary | Capabilities | Mitigated by |
+| --- | --- | --- |
+| **External attacker** | No access to build infrastructure | L1+ provenance reveals if source/builder unexpected |
+| **Build tenant (contributor)** | Can run arbitrary code in build environment | L2+ (control plane generates provenance, not worker) |
+| **Project maintainer** | Can configure CI/CD settings, workflows | L3 (complete externalParameters prevent hidden injection) |
+| **Build platform admin** | Can access internal platform controls | Verification: platform must have admin abuse controls |
+| **Platform insider** | Can modify platform infrastructure | Verification: platform must have insider threat controls |
 
 ## Five platform components to assess
 

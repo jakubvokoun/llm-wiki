@@ -47,19 +47,19 @@ VSAs allow:
 
 ## Field reference
 
-| Field                | Required    | Description                                           |
-| -------------------- | ----------- | ----------------------------------------------------- |
-| `verifier.id`        | required    | URI identifying the verifier                          |
-| `verifier.version`   | optional    | Platform component versions                           |
-| `timeVerified`       | optional    | When verification occurred                            |
-| `resourceUri`        | required    | URI identifying the artifact being verified           |
-| `policy.uri`         | required    | Policy the artifact was verified against              |
-| `policy.digest`      | recommended | Hash of the policy document                           |
-| `inputAttestations`  | optional    | ALL attestations used — if non-empty must be complete |
-| `verificationResult` | required    | `"PASSED"` or `"FAILED"`                              |
-| `verifiedLevels`     | required    | Highest level per track. Max one per track            |
-| `dependencyLevels`   | optional    | Count of dependencies at each SLSA level              |
-| `slsaVersion`        | optional    | `"1.2"`                                               |
+| Field | Required | Description |
+| --- | --- | --- |
+| `verifier.id` | required | URI identifying the verifier |
+| `verifier.version` | optional | Platform component versions |
+| `timeVerified` | optional | When verification occurred |
+| `resourceUri` | required | URI identifying the artifact being verified |
+| `policy.uri` | required | Policy the artifact was verified against |
+| `policy.digest` | recommended | Hash of the policy document |
+| `inputAttestations` | optional | ALL attestations used — if non-empty must be complete |
+| `verificationResult` | required | `"PASSED"` or `"FAILED"` |
+| `verifiedLevels` | required | Highest level per track. Max one per track |
+| `dependencyLevels` | optional | Count of dependencies at each SLSA level |
+| `slsaVersion` | optional | `"1.2"` |
 
 ## How to verify a VSA
 

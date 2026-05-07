@@ -42,13 +42,13 @@ The trust anchor is the **Source Control System (SCS)** — the hosted platform 
 
 ## Key roles
 
-| Role         | Description                                                      |
-| ------------ | ---------------------------------------------------------------- |
-| VCS          | Tool for tracking changes (Git)                                  |
-| SCS          | Hosted platform providing VCS + access controls (GitHub, GitLab) |
-| Organization | Team/company owning the project                                  |
-| Contributor  | Person submitting changes                                        |
-| Reviewer     | Person approving changes (distinct from contributor at L4)       |
+| Role | Description |
+| --- | --- |
+| VCS | Tool for tracking changes (Git) |
+| SCS | Hosted platform providing VCS + access controls (GitHub, GitLab) |
+| Organization | Team/company owning the project |
+| Contributor | Person submitting changes |
+| Reviewer | Person approving changes (distinct from contributor at L4) |
 
 ## Consumer verification (3 steps)
 

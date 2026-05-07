@@ -12,10 +12,7 @@ updated: 2026-05-07
 
 # UDS Package CR
 
-The UDS `Package` custom resource is a Kubernetes object that lets application teams
-declare what they need from the [UDS Core](../entities/uds-core.md) platform. The
-[UDS Operator](uds-operator.md) reads it and provisions all necessary platform
-resources automatically.
+The UDS `Package` custom resource is a Kubernetes object that lets application teams declare what they need from the [UDS Core](../entities/uds-core.md) platform. The [UDS Operator](uds-operator.md) reads it and provisions all necessary platform resources automatically.
 
 ## Structure
 
@@ -29,16 +26,12 @@ A `Package` CR can declare:
 
 ## Constraints
 
-- Only **one** `Package` CR is allowed per namespace; this enforces workload isolation
-  and simplifies policy generation.
-- `Package` CRs are typically included in application Helm charts, so they land in
-  the cluster alongside the application during deployment.
+- Only **one** `Package` CR is allowed per namespace; this enforces workload isolation and simplifies policy generation.
+- `Package` CRs are typically included in application Helm charts, so they land in the cluster alongside the application during deployment.
 
 ## Network policies follow least privilege
 
-All `allow` entries must permit only strictly necessary traffic. The operator
-generates deny-all baseline NetworkPolicies and adds explicit allow rules only for
-what is declared in the CR.
+All `allow` entries must permit only strictly necessary traffic. The operator generates deny-all baseline NetworkPolicies and adds explicit allow rules only for what is declared in the CR.
 
 ## Related pages
 

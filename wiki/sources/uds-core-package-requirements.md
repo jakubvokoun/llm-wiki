@@ -8,9 +8,7 @@ updated: 2026-05-07
 
 # UDS Core — UDS Package Requirements
 
-UDS Packages must meet standards to ensure they are secure, maintainable, and
-compatible with UDS Core. Uses RFC-2119 terminology: **MUST** = mandatory,
-**SHOULD** = strong recommendation, **MAY** = optional.
+UDS Packages must meet standards to ensure they are secure, maintainable, and compatible with UDS Core. Uses RFC-2119 terminology: **MUST** = mandatory, **SHOULD** = strong recommendation, **MAY** = optional.
 
 Mandatory for Defense Unicorns engineers; strongly recommended for external maintainers.
 
@@ -24,11 +22,9 @@ Mandatory for Defense Unicorns engineers; strongly recommended for external main
 
 ## Security, policy, and hardening
 
-- **MUST** minimize scope and number of exemptions to only what is absolutely required;
-  if using `Exemption` CRs, **MUST** document rationale in `docs/justifications.md`
+- **MUST** minimize scope and number of exemptions to only what is absolutely required; if using `Exemption` CRs, **MUST** document rationale in `docs/justifications.md`
 - **MUST** declaratively implement any available application hardening guidelines by default
-- **SHOULD** consider security options during implementation for the most secure default
-  (e.g., SAML w/SCIM vs OIDC)
+- **SHOULD** consider security options during implementation for the most secure default (e.g., SAML w/SCIM vs OIDC)
 
 ## Packaging lifecycle and configuration
 
@@ -49,8 +45,7 @@ Mandatory for Defense Unicorns engineers; strongly recommended for external main
 
 ## Identity and access management
 
-- **MUST** use and create a Keycloak client through the `sso` key for any package
-  providing end-user login
+- **MUST** use and create a Keycloak client through the `sso` key for any package providing end-user login
 - **SHOULD** name the client `<App> Login` (e.g., `Mattermost Login`)
 - **SHOULD** use client id format `uds-<group>-<application>` (e.g., `uds-swf-mattermost`)
 - **MAY** end generated Keycloak client secrets with `sso` for easy discovery

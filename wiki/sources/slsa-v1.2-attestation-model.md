@@ -15,24 +15,24 @@ An attestation is **authenticated, machine-readable metadata** about one or more
 
 ## Components
 
-| Component     | Purpose                                                       |
-| ------------- | ------------------------------------------------------------- |
-| **Artifact**  | Immutable blob identified by content hash                     |
-| **Envelope**  | Authenticates the message (signature + content)               |
+| Component | Purpose |
+| --- | --- |
+| **Artifact** | Immutable blob identified by content hash |
+| **Envelope** | Authenticates the message (signature + content) |
 | **Statement** | Binds attestation to specific artifacts (subject + predicate) |
-| **Predicate** | Arbitrary metadata in a predicate-specific schema             |
-| **Bundle**    | Collection of attestations for an artifact                    |
+| **Predicate** | Arbitrary metadata in a predicate-specific schema |
+| **Bundle** | Collection of attestations for an artifact |
 
 The **subject** identifies which artifact(s) the predicate applies to. The **predicate type** URI identifies the schema and semantics of the metadata.
 
 ## Recommended suite
 
-| Layer     | Recommendation                                                     |
-| --------- | ------------------------------------------------------------------ |
-| Envelope  | DSSE (Dead Simple Signing Envelope) with ECDSA over NIST P-256+    |
-| Statement | in-toto attestation format                                         |
+| Layer | Recommendation |
+| --- | --- |
+| Envelope | DSSE (Dead Simple Signing Envelope) with ECDSA over NIST P-256+ |
+| Statement | in-toto attestation format |
 | Predicate | SLSA Provenance (`https://slsa.dev/provenance/v1`), SPDX, or other |
-| Bundle    | JSON Lines (one attestation per line)                              |
+| Bundle | JSON Lines (one attestation per line) |
 
 ## Format guidance by use case
 

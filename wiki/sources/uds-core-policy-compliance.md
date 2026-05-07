@@ -8,20 +8,16 @@ updated: 2026-05-07
 
 # UDS Core — Policy & Compliance
 
-UDS Core enforces secure and compliant workload behavior through
-[Pepr](../entities/pepr.md), running as Kubernetes admission webhooks. Every resource
-submitted to the cluster passes through Pepr before being persisted.
+UDS Core enforces secure and compliant workload behavior through [Pepr](../entities/pepr.md), running as Kubernetes admission webhooks. Every resource submitted to the cluster passes through Pepr before being persisted.
 
 ## How policies work
 
-| Policy type    | What it does                                     | Example                                                  |
-| -------------- | ------------------------------------------------ | -------------------------------------------------------- |
-| **Mutation**   | Automatically corrects setting to a safe default | Drop all capabilities, set `runAsNonRoot: true`          |
-| **Validation** | Blocks resource if it does not meet the policy   | Disallow privileged containers, reject NodePort services |
+| Policy type | What it does | Example |
+| --- | --- | --- |
+| **Mutation** | Automatically corrects setting to a safe default | Drop all capabilities, set `runAsNonRoot: true` |
+| **Validation** | Blocks resource if it does not meet the policy | Disallow privileged containers, reject NodePort services |
 
-Mutations run first and silently fix common misconfigurations. Validations run after
-mutations and reject resources that cannot be automatically corrected, returning a
-clear error.
+Mutations run first and silently fix common misconfigurations. Validations run after mutations and reject resources that cannot be automatically corrected, returning a clear error.
 
 ## Key policies enforced
 
@@ -33,8 +29,7 @@ clear error.
 
 ## Exemptions
 
-Some workloads legitimately need exemptions (e.g., privileged DaemonSets for
-node-level observability). The `Exemption` CR:
+Some workloads legitimately need exemptions (e.g., privileged DaemonSets for node-level observability). The `Exemption` CR:
 
 - Names exactly which policies to bypass and targets specific workloads by namespace and name
 - Is stored as a Kubernetes object (appears in audit logs, requires RBAC to create)

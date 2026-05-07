@@ -7,15 +7,11 @@ updated: 2026-05-07
 
 # UDS Core — CRD Overviews
 
-UDS Core provides three custom resource definitions (CRDs). Think of them as forms
-you fill out to tell the platform what you need; the operator reads them and does the
-work behind the scenes.
+UDS Core provides three custom resource definitions (CRDs). Think of them as forms you fill out to tell the platform what you need; the operator reads them and does the work behind the scenes.
 
 ## Package CR
 
-A `Package` CR is a **request form** for the platform. Instead of manually configuring
-Istio routes, NetworkPolicies, and Keycloak clients, an application team fills out one
-declaration and the operator provisions everything.
+A `Package` CR is a **request form** for the platform. Instead of manually configuring Istio routes, NetworkPolicies, and Keycloak clients, an application team fills out one declaration and the operator provisions everything.
 
 A Package can declare:
 
@@ -24,23 +20,17 @@ A Package can declare:
 - **Monitoring** — metrics endpoints for Prometheus to scrape
 - **Service mesh mode** — ambient or sidecar mode
 
-**Constraint:** Only one `Package` CR can exist per namespace. This enforces workload
-isolation and simplifies policy generation.
+**Constraint:** Only one `Package` CR can exist per namespace. This enforces workload isolation and simplifies policy generation.
 
 See [UDS Package CR concept](../concepts/uds-package-cr.md) for full details.
 
 ## Exemption CR
 
-An `Exemption` CR is a **permission slip**. It names exactly which policies to bypass
-and targets specific workloads by namespace and name. It also supports title and
-description fields so the reason is documented next to the exemption itself.
+An `Exemption` CR is a **permission slip**. It names exactly which policies to bypass and targets specific workloads by namespace and name. It also supports title and description fields so the reason is documented next to the exemption itself.
 
-Exemptions are restricted to the `uds-policy-exemptions` namespace by default.
-Centralizing them makes them easier to audit and control with RBAC. This can be relaxed
-via `ClusterConfig` if needed.
+Exemptions are restricted to the `uds-policy-exemptions` namespace by default. Centralizing them makes them easier to audit and control with RBAC. This can be relaxed via `ClusterConfig` if needed.
 
-When a resource is exempted, it is annotated as:
-`uds-core.pepr.dev/uds-core-policies.<POLICY>: exempted`
+When a resource is exempted, it is annotated as: `uds-core.pepr.dev/uds-core-policies.<POLICY>: exempted`
 
 ## ClusterConfig CR
 
@@ -52,8 +42,7 @@ When a resource is exempted, it is annotated as:
 - **Policy settings** — e.g., whether exemptions can exist outside the default namespace
 - **Cluster identity** — name and tags for identification and reporting
 
-Unlike `Package` and `Exemption`, application teams do not touch `ClusterConfig`.
-Platform operators manage it. `ClusterConfig` is a singleton — exactly one per cluster.
+Unlike `Package` and `Exemption`, application teams do not touch `ClusterConfig`. Platform operators manage it. `ClusterConfig` is a singleton — exactly one per cluster.
 
 ## Related pages
 

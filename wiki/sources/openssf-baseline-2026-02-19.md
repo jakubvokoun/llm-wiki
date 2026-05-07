@@ -13,11 +13,11 @@ The OSPS Baseline is a set of security controls that open source projects should
 
 Controls are organized by **maturity level** and **control category**:
 
-| Level       | Target                                                             |
-| ----------- | ------------------------------------------------------------------ |
-| **Level 1** | Any project with any number of maintainers or users                |
+| Level | Target |
+| --- | --- |
+| **Level 1** | Any project with any number of maintainers or users |
 | **Level 2** | Code projects with 2+ maintainers and a small consistent user base |
-| **Level 3** | Code projects with a large consistent user base                    |
+| **Level 3** | Code projects with a large consistent user base |
 
 ## Control categories (OSPS codes)
 
