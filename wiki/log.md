@@ -26,3 +26,4 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 
 - **queue (19):** prometheus-recording-rules, prometheus-alerting-rules, prometheus-alertmanager-config, prometheus-alertmanager-notifications, victoriametrics-metricsql, victoriametrics-vmalert, victoriametrics-vmalert-tool, victorialogs-vmalert, awesome-prometheus-alerts, sre-alerting-on-slos, vmanomaly-vmalert-guide, openscap-getting-started, openscap-security-compliance, openscap-vulnerability-assessment, openscap-choosing-policy, openscap-scap-security-guide, openscap-customization, openscap-base-tool, openscap-user-manual
 - **entities:** openscap
+- **updated:** awesome-prometheus-alerts (full alert names per service, 8 PromQL pattern examples, rules YAML saved to raw/assets/awesome-prometheus-alerts-rules.yml)

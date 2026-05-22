@@ -234,7 +234,7 @@
 | [VictoriaMetrics — vmalert](sources/victoriametrics-vmalert.md) | vmalert: alerting + recording rule engine; MetricsQL/LogsQL support; replay; chaining groups pattern; key flags | 2026-05-22 |
 | [VictoriaMetrics — vmalert-tool (Unit Testing)](sources/victoriametrics-vmalert-tool.md) | Unit testing without live instance: metricsql_expr_test, series value syntax, group_eval_order for chaining | 2026-05-22 |
 | [VictoriaLogs — Alerting with Logs (vmalert)](sources/victorialogs-vmalert.md) | LogsQL alerting/recording rules, time filter auto-append, multiple stats performance, row_any FAQ | 2026-05-22 |
-| [Awesome Prometheus Alerts](sources/awesome-prometheus-alerts.md) | 954 copy-pasteable alert rules across 112 exporters and 13 categories with per-service rule counts | 2026-05-22 |
+| [Awesome Prometheus Alerts](sources/awesome-prometheus-alerts.md) | 954 alert rules across 13 categories and 93 services; full alert names per service, rule YAML format, CamelCase naming conventions | 2026-05-22 |
 | [SRE Workbook — Alerting on SLOs](sources/sre-alerting-on-slos.md) | 6 SLO alerting strategies; burn rate concept; multiwindow multi-burn-rate gold standard with YAML examples | 2026-05-22 |
 | [VictoriaMetrics — Anomaly Detection Setup (vmanomaly + vmalert)](sources/vmanomaly-vmalert-guide.md) | vmanomaly + vmalert: ML anomaly detection; anomaly_score metric; Docker Compose reference architecture | 2026-05-22 |
 | [OpenSCAP — Getting Started](sources/openscap-getting-started.md) | First scan walkthrough: SCAP Workbench GUI and oscap CLI with profile selection and report generation | 2026-05-22 |
