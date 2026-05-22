@@ -1,0 +1,2167 @@
+# OpenSCAP User Manual
+
+![vertical-logo.png](./images/vertical-logo.png)
+
+Table of Contents
+
+**JavaScript must be enabled in your browser to display the table of contents.**
+
+## 1. Introduction
+
+This documentation provides information about OpenSCAP and its most common
+operations. With OpenSCAP, you can check security configuration settings of a
+system, and examine the system for signs of a compromise by using rules based on
+standards and specifications.
+
+OpenSCAP uses [SCAP](http://scap.nist.gov/) which is a line of specifications maintained by the
+[NIST](http://www.nist.gov/). SCAP was created to provide a standardized approach for
+maintaining system security. New specifications are governed by NIST’s SCAP
+[Release cycle](http://scap.nist.gov/timeline.html) in order to provide a
+consistent and repeatable revision workflow. OpenSCAP mainly processes the
+[XCCDF](http://scap.nist.gov/specifications/xccdf/) which is a standard way of expressing a checklist content and
+defines security checklists. It also combines with other specifications such as
+[CPE](https://cpe.mitre.org/), [CCE](https://cce.mitre.org/) and [OVAL](https://oval.mitre.org/) to create a SCAP-expressed checklist
+that can be processed by SCAP-validated products. For more information about the
+SCAP please refer to [SCAP Standards](http://open-scap.org/features/standards/).
+
+OpenSCAP supports SCAP [1.3](https://csrc.nist.gov/Projects/Security-Content-Automation-Protocol/SCAP-Releases/scap-1-3) and is backward compatible with SCAP
+[1.2](https://csrc.nist.gov/Projects/Security-Content-Automation-Protocol/SCAP-Releases/SCAP-1-2), SCAP [1.1](https://csrc.nist.gov/Projects/Security-Content-Automation-Protocol/SCAP-Releases/SCAP-1-1) and SCAP [1.0](https://csrc.nist.gov/Projects/Security-Content-Automation-Protocol/SCAP-Releases/SCAP-1-0). No special
+treatment is required to import and process earlier versions of the SCAP
+content.
+
+If you want to perform configuration or vulnerability scans of a local system
+then the following must be available:
+
+1. A tool (oscap or SCAP Workbench)
+2. SCAP content (SCAP source data stream, XCCDF, OVAL…)
+
+The oscap tool is a part of the [OpenSCAP](https://open-scap.org/) project. If you’re
+interested in a graphical alternative to this tool please visit
+[SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/) page.
+
+We will use the [SCAP Security Guide](http://open-scap.org/security-policies/scap-security-guide/) project to provide us the SCAP
+content. It provides security policies written in a form of SCAP documents
+covering many areas of security compliance, and it implements security guidances
+recommended by respected authorities, namely [PCI DSS](https://www.pcisecuritystandards.org/security_standards/), [STIG](http://iase.disa.mil/stigs/Pages/index.aspx),
+and [USGCB](http://usgcb.nist.gov/).
+
+You can also generate your own SCAP content if you have an understanding of at
+least XCCDF or OVAL. XCCDF content is also frequently published online under
+open source licenses, and you can customize this content to suit your needs
+instead. SCAP Workbench is a great tool to do the customization.
+
+## 2. Installing OpenSCAP
+
+You can either build OpenSCAP from [source code](https://github.com/OpenSCAP/openscap) or you can use an
+existing build for your Linux distribution.
+
+For instructions about building from source code, please refer to
+[OpenSCAP Developer Manual](https://github.com/OpenSCAP/openscap/blob/maint-1.3/docs/developer/developer.adoc).
+
+To install OpenSCAP on Red Hat Enterprise Linux 8 and newer, on CentOS 8 and
+newer or on Fedora use the following command:
+
+```
+# dnf install openscap-scanner
+```
+
+To install OpenSCAP on Red Hat Enterprise Linux 7 or CentOS 7 or older use the
+following command:
+
+```
+# yum install openscap-scanner
+```
+
+To install OpenSCAP on Debian or Ubuntu use the following command:
+
+```
+# apt install libopenscap8
+```
+
+After the installation is completed you can start using the oscap command line
+tool.
+
+To display the version of OpenSCAP, supported specifications, built-in CPE
+names, and supported OVAL objects, type the following command:
+
+```
+$ oscap --version
+```
+
+### 2.1. Getting SCAP content
+
+To perform any task with OpenSCAP you also need to have security policies in
+SCAP format. We call them **SCAP content**. There are many providers of SCAP
+content.
+
+In this document we will use SCAP content provided by **SCAP Security Guide**
+(SSG). Many Linux distributions ship it in the scap-security-guide package.
+
+To install scap-security-guide on Red Hat Enterprise Linux 8 and newer, on
+CentOS 8 and newer or on Fedora use the following command:
+
+```
+# yum install scap-security-guide
+```
+
+To install scap-security-guide on Red Hat Enterprise Linux 7 or CentOS 7 or
+older use the following command:
+
+```
+# yum install scap-security-guide
+```
+
+The SCAP content will be installed in the /usr/share/xml/scap/ssg/content/
+directory.
+
+On other platforms, you can download the upstream release from
+[GitHub](https://github.com/ComplianceAsCode/content/releases/).
+
+When the SCAP content is installed on your system, oscap can
+process the content by specifying the file path to the content.
+
+You can also use any other SCAP content with OpenSCAP.
+
+## 3. Displaying information about SCAP content
+
+Information about an SCAP file can be displayed using the oscap info command.
+
+### 3.1. Displaying information about SCAP source data streams
+
+The most common SCAP file type is an SCAP source data stream. In the following
+example, we will display information about SCAP source data stream
+/usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml from the
+scap-security-guide package.
+
+```
+$ oscap info /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+Document type: Source Data Stream
+Imported: 2021-01-12T04:50:11
+
+Stream: scap_org.open-scap_datastream_from_xccdf_ssg-rhel8-xccdf-1.2.xml
+Generated: (null)
+Version: 1.3
+Checklists:
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-xccdf-1.2.xml
+                Status: draft
+                Generated: 2021-01-12
+                Resolved: true
+                Profiles:
+                        Title: CIS Red Hat Enterprise Linux 8 Benchmark
+                                Id: xccdf_org.ssgproject.content_profile_cis
+                        Title: Unclassified Information in Non-federal Information Systems and Organizations (NIST 800-171)
+                                Id: xccdf_org.ssgproject.content_profile_cui
+                        Title: Australian Cyber Security Centre (ACSC) Essential Eight
+                                Id: xccdf_org.ssgproject.content_profile_e8
+                        Title: Health Insurance Portability and Accountability Act (HIPAA)
+                                Id: xccdf_org.ssgproject.content_profile_hipaa
+                        Title: PCI-DSS v3.2.1 Control Baseline for Red Hat Enterprise Linux 8
+                                Id: xccdf_org.ssgproject.content_profile_pci-dss
+                        Title: [DRAFT] DISA STIG for Red Hat Enterprise Linux 8
+                                Id: xccdf_org.ssgproject.content_profile_stig
+                        Title: Protection Profile for General Purpose Operating Systems
+                                Id: xccdf_org.ssgproject.content_profile_ospp
+                Referenced check files:
+                        ssg-rhel8-oval.xml
+                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+                        ssg-rhel8-ocil.xml
+                                system: http://scap.nist.gov/schema/ocil/2
+                        security-data-oval-com.redhat.rhsa-RHEL8.xml
+                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+Checks:
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-oval.xml
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-ocil.xml
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-oval.xml
+        Ref-Id: scap_org.open-scap_cref_security-data-oval-com.redhat.rhsa-RHEL8.xml
+Dictionaries:
+        Ref-Id: scap_org.open-scap_cref_ssg-rhel8-cpe-dictionary.xml
+```
+
+* **Document type** describes what format the file is in. Common types include
+  XCCDF, OVAL, source data stream and result data stream.
+* **Imported** is the date the file was imported for use with OpenSCAP. Since
+  OpenSCAP uses the local filesystem and has no proprietary database format
+  the imported date is the same as file modification date.
+* **Stream** is the data stream ID.
+* **Version** is the version of the SCAP standard.
+* **Checklists** lists available checklists incorporated in the data stream that
+  you can use for the --benchmark-id command line attribute with oscap xccdf
+  eval. Also each checklist has the detailed information printed.
+* **Status** is the XCCDF Benchmark status. Common values include "accepted",
+  "draft", "deprecated" and "incomplete". Please refer to the XCCDF specification
+  for details.
+* **Generated** date is the date the file was created or generated. This date is
+  shown for XCCDF files and Checklists and is sourced from the XCCDF **Status**
+  element.
+* **Profiles** lists available profiles, their titles and IDs that you can use for
+  the --profile command line attribute.
+* **Checks** and **Dictionaries** lists OVAL checks components and CPE
+  dictionaries components in the given data stream.
+
+To display more detailed information about a profile including the profile
+description, use the --profile option followed by the profile ID.
+
+```
+$ oscap info --profile xccdf_org.ssgproject.content_profile_ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+```
+
+### 3.2. Displaying information about SCAP result data streams
+
+The oscap info command is also helpful with other SCAP file types such as
+SCAP result data stream (ARF) files.
+
+OpenSCAP can display the evaluation start and end dates when given ARF file.
+
+In this example, we will display information about the ARF file arf.xml.
+
+```
+$ oscap info arf.xml
+Document type: Result Data Stream
+Imported: 2021-02-11T11:04:51
+
+Asset: asset0
+        ARF report: xccdf1
+                Report request: collection1
+                Result ID: xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_ospp
+                Source benchmark: /usr/share/xml/scap/ssg/content/ssg-fedora-ds.xml
+                Source profile: xccdf_org.ssgproject.content_profile_ospp
+                Evaluation started: 2021-02-11T11:03:06+01:00
+                Evaluation finished: 2021-02-11T11:04:51+01:00
+                Platform CPEs:
+                        cpe:/o:fedoraproject:fedora:25
+                        cpe:/o:fedoraproject:fedora:26
+                        cpe:/o:fedoraproject:fedora:27
+```
+
+## 4. Scanning
+
+The main goal of OpenSCAP is to perform configuration and vulnerability scans of
+a local system. OpenSCAP is able to evaluate SCAP source data streams, XCCDF
+benchmarks and OVAL definitions and generate the appropriate results.
+
+SCAP content can be provided either in a single file (as an SCAP source data
+stream), or as multiple separate XML files.
+
+### 4.1. Scanning using SCAP source data streams
+
+Commonly, all required input files are bundled together in an SCAP source data
+stream. Scanning using an SCAP source data stream can be performed by the
+oscap xccdf eval command, with some additional parameters available.
+The basic syntax of the oscap xccdf eval command is the following:
+
+```
+# oscap xccdf eval --profile PROFILE_ID --results-arf ARF_FILE --report REPORT_FILE SOURCE_DATA_STREAM_FILE
+```
+
+Where:
+
+* PROFILE\_ID is the ID of an XCCDF profile
+* ARF\_FILE is the file path where the results in SCAP results data stream
+  format (ARF) will be generated
+* REPORT\_FILE is the file path where a report in HTML format will be generated
+* SOURCE\_DATA\_STREAM\_FILE is the file path of the evaluated SCAP source data
+  stream
+
+For example, to evaluate the xccdf\_org.ssgproject.content\_profile\_ospp profile
+from the /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml SCAP source
+data stream run this command:
+
+```
+# oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results-arf results.xml --report report.html /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+```
+
+The progress and results will be shown in the terminal. Full results are
+generated in results.xml as an SCAP result data stream. Detailed results can
+be found in the HTML report report.html.
+
+```
+$ firefox report.html
+```
+
+|  |  |
+| --- | --- |
+| Tip | Instead of the complete profile ID you can provide only a suffix of the profile ID. For example, instead of --profile xccdf\_org.ssgproject.content\_profile\_ospp you can use just --profile ospp. |
+
+### 4.2. Selecting SCAP source data stream components
+
+To evaluate a specific XCCDF benchmark that is part of a specific SCAP source
+data stream, use the following command:
+
+```
+$ oscap xccdf eval --datastream-id DS_ID --xccdf-id CREF --results-arf ARF_FILE SOURCE_DATA_STREAM_FILE
+```
+
+Where:
+
+* DS\_ID is the ID of <ds:data-stream> element to be evaluated
+* XCCDF\_ID is ID of the <ds:component-ref> element pointing to the
+  desired XCCDF document
+* ARF\_FILE is a file containing the scan results in a form of an SCAP
+  result data stream
+* SOURCE\_DATA\_STREAM\_FILE is the SCAP source data stream file
+
+|  |  |
+| --- | --- |
+| Note | If you omit --datastream-id on the command line, the first data stream from the collection will be used. If you omit --xccdf-id, the first component from the checklists element will be used. If you omit both, the first data stream that has a component in the checklists element will be used - the first component in its checklists element will be used. |
+
+To evaluate a specific XCCDF benchmark that is part of an SCAP source data
+stream use the following options:
+
+```
+$ oscap xccdf eval --benchmark-id BENCHMARK_ID --results-arf ARF_XML SOURCE_DATA_STREAM_FILE
+```
+
+Where:
+
+* SOURCE\_DATA\_STREAM\_FILE is a file representing the SCAP source data stream
+* BENCHMARK\_ID is the value of the "id" attribute of <xccdf:Benchmark>
+  containing component
+* ARF\_FILE is a file containing the scan results in a form of an SCAP
+  result data stream
+
+### 4.3. Evaluating Standalone OVAL Definitions
+
+The SCAP document can have a form of a single OVAL file (an OVAL Definition
+file). The oscap tool processes the OVAL Definition file during evaluation of
+OVAL definitions. It collects system information, evaluates it and generates an
+OVAL Result file. The result of evaluation of each OVAL definition is printed to
+standard output stream. The following examples describe the most common
+scenarios involving an OVAL Definition file.
+
+To evaluate OVAL definitions within the given OVAL Definition file the
+oscap oval eval command can be used. Its basic form is the following:
+
+```
+$ oscap oval eval --results RESULTS_FILE OVAL_FILE
+```
+
+Where:
+
+* OVAL\_FILE is the OVAL Definition file
+* RESULTS\_FILE is the path where OVAL Results file will be stored
+
+It’s possible to select and evaluate one particular definition
+within the given OVAL Definition file using --id option:
+
+```
+$ oscap oval eval --id oval:rhel:def:1000 --results oval-results.xml oval.xml
+```
+
+Where the OVAL definition being evaluated has ID oval:rhel:def:1000,
+oval.xml is the OVAL Definition file and oval-results.xml is the
+OVAL Result file.
+
+To evaluate all definitions from the OVAL component that are part of a
+particular data stream component within a SCAP source data stream, run the
+following command:
+
+```
+$ oscap oval eval --datastream-id ds.xml --oval-id xccdf.xml --results oval-results.xml scap-ds.xml
+```
+
+Where ds.xml is the ID of a specific data stream, xccdf.xml is an XCCDF file
+specifying the OVAL component, oval-results.xml is the OVAL Result file, and
+scap-ds.xml is the SCAP source data stream collection.
+
+When the SCAP content is represented by multiple XML files, the OVAL
+Definition file can be distributed along with the XCCDF file. In such a
+situation, OVAL Definitions may depend on variables that are exported
+from the XCCDF file during the scan, and separate evaluation of the OVAL
+definition(s) would produce misleading results. Therefore, any external
+variables has to be exported to a special file that is used during the
+OVAL definitions evaluation. The following commands are examples of this
+scenario:
+
+```
+$ oscap xccdf export-oval-variables \
+--profile united_states_government_configuration_baseline \
+usgcb-rhel5desktop-xccdf.xml
+```
+
+```
+$ oscap oval eval \
+--variables usgcb-rhel5desktop-oval.xml-0.variables-0.xml \
+--results usgcb-results-oval.xml
+usgcb-rhel5desktop-oval.xml
+```
+
+Where **united\_states\_government\_configuration\_baseline** represents a
+profile in the XCCDF document, **usgcb-rhel5desktop-xccdf.xml** is a file
+specifying the XCCDF document, **usgcb-rhel5desktop-oval.xml** is the OVAL
+Definition file, **usgcb-rhel5desktop-oval.xml-0.variables-0.xml** is the
+file containing exported variables from the XCCDF file, and
+**usgcb-results-oval.xml** is the the OVAL Result file.
+
+An OVAL directives file can be used to control whether results should be "thin" or "full".
+This file can be loaded by OpenSCAP using **--directives <file>** option.
+
+Example of an OVAL directive file which enables thin results instead of
+full results:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<oval_directives
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5"
+  xmlns:oval-res="http://oval.mitre.org/XMLSchema/oval-results-5"
+  xmlns="http://oval.mitre.org/XMLSchema/oval-directives-5"
+  xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-results-5
+    oval-results-schema.xsd http://oval.mitre.org/XMLSchema/oval-common-5
+    oval-common-schema.xsd http://oval.mitre.org/XMLSchema/oval-directives-5
+    oval-directives-schema.xsd">
+  <generator>
+    <oval:product_name>OpenSCAP</oval:product_name>
+    <!-- make sure the OVAL version matches your input -->
+    <oval:schema_version>5.8</oval:schema_version>
+    <oval:timestamp>2017-02-04T00:00:00</oval:timestamp>
+  </generator>
+  <directives include_source_definitions="true">
+    <oval-res:definition_true reported="true" content="thin"/>
+    <oval-res:definition_false reported="true" content="thin"/>
+    <oval-res:definition_unknown reported="true" content="thin"/>
+    <oval-res:definition_error reported="true" content="thin"/>
+    <oval-res:definition_not_evaluated reported="true" content="thin"/>
+    <oval-res:definition_not_applicable reported="true" content="thin"/>
+  </directives>
+</oval_directives>
+```
+
+If your use-case requires thin OVAL results you most likely also want
+to omit system characteristics. You can use the --without-syschar
+option to that effect.
+
+Usage of OVAL directives file when scanning a plain OVAL file:
+
+```
+$ oscap oval eval --directives directives.xml --without-syschar --results oval-results.xml oval.xml
+```
+
+Usage of OVAL directives file when scanning OVAL component from a source data stream:
+
+```
+$ oscap oval eval --directives directives.xml --without-syschar --datastream-id ds.xml --oval-id oval.xml --results oval-results.xml scap-ds.xml
+```
+
+It is not always clear which OVAL file will be used when multiple files
+are distributed. In case you are evaluating an XCCDF file you can use:
+
+```
+$ oscap info ssg-rhel7-xccdf.xml
+Document type: XCCDF Checklist
+Checklist version: 1.1
+Imported: 2017-01-20T14:20:43
+Status: draft
+Generated: 2017-01-19
+Resolved: true
+Profiles:
+        standard
+        pci-dss
+        C2S
+        rht-ccp
+        common
+        stig-rhel7-workstation-upstream
+        stig-rhel7-server-gui-upstream
+        stig-rhel7-server-upstream
+        stig-rhevh-upstream
+        ospp-rhel7-server
+        nist-cl-il-al
+        cjis-rhel7-server
+        docker-host
+        nist-800-171-cui
+Referenced check files:
+        ssg-rhel7-oval.xml
+                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+        ssg-rhel7-ocil.xml
+                system: http://scap.nist.gov/schema/ocil/2
+        https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL7.xml.bz2
+                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+```
+
+In the output you can see all referenced check files. In this case we see
+that ssg-rhel7-oval.xml is referenced. To see contents of this file you
+can open it in a text editor.
+
+You can use oscap info with source data stream files as well. Source
+data stream will often reference OVAL files that are bundled in it.
+It is also possible to extract OVAL files from source data stream using
+oscap ds sds-split.
+
+```
+$ oscap ds sds-split ssg-rhel7-ds.xml extracted/
+$ ls -1 extracted/
+scap_org.open-scap_cref_output--ssg-rhel7-cpe-dictionary.xml
+scap_org.open-scap_cref_ssg-rhel7-xccdf-1.2.xml
+ssg-rhel7-cpe-oval.xml
+ssg-rhel7-ocil.xml
+ssg-rhel7-oval.xml
+```
+
+After splitting the source data stream you can inspect OVAL and XCCDF files
+individually using a text editor. Keep in mind that this is only an example and
+file names depend on contents of the source data stream you are splitting and
+that you can also inspect XCCDF and OVAL content directly in a source data
+stream or a result data stream.
+
+### 4.4. Evaluating XCCDF
+
+When evaluating an XCCDF benchmark, oscap usually processes an XCCDF
+file, an OVAL file and the CPE dictionary. It performs system
+analysis and produces XCCDF results based on this analysis. The results
+of the scan do not have to be saved in a separate file but can be
+attached to the XCCDF file. The evaluation result of each XCCDF rule
+within an XCCDF checklist is printed to standard output stream. The CVE
+and CCE identifiers associated with the rules are printed as well. The
+following is a sample output for a single XCCDF rule:
+
+```
+Title   Verify permissions on 'group' file
+Rule    usgcb-rhel5desktop-rule-2.2.3.1.j
+Ident   CCE-3967-7
+Result  pass
+```
+
+The meaning of results is defined by [XCCDF Specification](https://csrc.nist.gov/CSRC/media/Publications/nistir/7275/rev-4/final/documents/nistir-7275r4_updated-march-2012_clean.pdf).
+This table lists the possible results of a single rule:
+
+Table 1. XCCDF results
+
+|  |  |  |
+| --- | --- | --- |
+| Result | Description | Example Situation |
+| pass | The target system or system component satisfied all the conditions of the rule. |  |
+| fail | The target system or system component did not satisfy all the conditions of the rule. |  |
+| error | The checking engine could not complete the evaluation, therefore the status of the target’s compliance with the rule is not certain. | OpenSCAP was run with insufficient privileges and could not gather all of the necessary information. |
+| unknown | The testing tool encountered some problem and the result is unknown. | OpenSCAP was unable to interpret the output of the checking engine (the output has no meaning to OpenSCAP). |
+| notapplicable | The rule was not applicable to the target of the test. | The rule might have been specific to a different version of the target OS, or it might have been a test against a platform feature that was not installed. |
+| notchecked | The rule was not evaluated by the checking engine. This status is designed for rules that have no <xccdf:check> elements or that correspond to an unsupported checking system. It may also correspond to a status returned by a checking engine if the checking engine does not support the indicated check code. | The rule does not reference any OVAL check. |
+| notselected | The rule was not selected in the benchmark. OpenSCAP does not display rules that were not selected. | The rule exists in the benchmark, but is not a part of selected profile. |
+| informational | The rule was checked, but the output from the checking engine is simply information for auditors or administrators; it is not a compliance category. This status value is designed for rules whose main purpose is to extract information from the target rather than test the target. |  |
+| fixed | The rule had initially evaluated to "fail", but was then fixed by automated remediation and therefore it now evaluates as "pass". |  |
+
+The CPE dictionary is used to determine whether the content is
+applicable on the target platform or not. Any content that is not
+applicable will result in each relevant XCCDF rule being evaluated to
+"notapplicable".
+
+The following examples show the most common scenarios of XCCDF benchmark
+evaluation:
+
+* To evaluate a specific profile in an XCCDF file run this command:
+
+```
+$ oscap xccdf eval --profile Desktop --results xccdf-results.xml --cpe cpe-dictionary.xml scap-xccdf.xml
+```
+
+Where scap-xccdf.xml is the XCCDF document, Desktop is the selected
+profile from the XCCDF document, xccdf-results.xml is a file storing
+the scan results, and cpe-dictionary.xml is the CPE dictionary.
+
+* You can additionally add --rule option to the above command to evaluate
+  a specific rule:
+
+```
+$ oscap xccdf eval --profile Desktop --rule ensure_gpgcheck_globally_activated  --results xccdf-results.xml --cpe cpe-dictionary.xml scap-xccdf.xml
+```
+
+Where ensure\_gpgcheck\_globally\_activated is the only rule from the Desktop
+profile which will be evaluated.
+
+The --rule option can be used multiple times to evaluate multiple rules at once.
+
+* You can skip some rules by using the --skip-rule option.
+
+In the examples above we are generating XCCDF result files using the --results
+command-line argument. You can use --results-arf to generate an SCAP result
+data stream (also called ARF - Asset Reporting Format) XML instead.
+
+```
+$ oscap xccdf eval --benchmark-id benchmark_id --results-arf arf-results.xml scap-ds.xml
+```
+
+### 4.5. Generating results compatible with STIG Viewer
+
+DISA STIG Viewer is a graphical user interface (GUI) application that enables
+easy viewing of SCAP-formatted Security Technical Implementation Guides
+(STIGs). For more information on DISA STIG Viewer see the
+[SRG / STIG Tools](https://public.cyber.mil/stigs/srg-stig-tools/) website.
+
+OpenSCAP can generate results compatible with STIG Viewer even when evaluating
+SCAP content that uses different rule IDs than the official DISA STIG format,
+for example, content from the scap-security-guide package or third-party
+content.
+
+To produce results compatible with STIG Viewer, each rule in an SCAP source data
+stream must contain a reference to a STIG Rule ID, and the value of the href
+attribute must be either
+http://iase.disa.mil/stigs/Pages/stig-viewing-guidance.aspx or
+https://public.cyber.mil/stigs/srg-stig-tools/.
+
+For example:
+
+```
+<Rule id="rpm_verify_permissions">
+  ...
+  <reference href="https://public.cyber.mil/stigs/srg-stig-tools/">SV-86473r2_rule</reference>
+  ...
+</Rule>
+```
+
+In the following example, we use the
+/usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml file provided by the
+scap-security-guide RPM package. This data stream file meets both
+prerequisites for rules.
+
+1) Scan your system using the oscap command with the --stig-viewer option.
+
+```
+$ oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_stig --stig-viewer results-stig.xml /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+```
+
+2) Download a STIG file of your choice, for example, from the
+[STIGs Document Library](https://public.cyber.mil/stigs/downloads/), and extract
+it. The version of the STIG must conform to the version of the
+xccdf\_org.ssgproject.content\_profile\_stig profile.
+
+3) In STIG Viewer, click on File and then on Import STIG. Then, select the
+STIG in STIGs panel on the left side. Click on Checklists and then on
+Create Checklists - Check Marked STIG(s).
+
+4) Import the OpenSCAP scan results by clicking on Import and then on XCCDF
+Results File. Locate the results-stig.xml file obtained in step 1. STIG
+Viewer shows the results subsequently.
+
+|  |  |
+| --- | --- |
+| Note | The --stig-viewer option serves for evaluating an SCAP source data stream other than a STIG provided by DISA, for example, scap-security-guide content and loading the generated file in STIG Viewer into a checklist created from a STIG by DISA. When evaluating a STIG provided by DISA using oscap, use the --results option instead. Similarly, when creating checklists based on scap-security-guide content in STIG Viewer and evaluating scap-security-guide by oscap, use --results instead of --stig-viewer. |
+
+## 5. Remediating system
+
+OpenSCAP allows one to automatically remediate systems that have been found in a
+non-compliant state. For system remediation the rules in SCAP content need to
+have a remediation script attached. For example, the SCAP source data streams in
+the scap-security-guide package contain rules with remediation fix scripts.
+
+System remediation consists of the following steps:
+
+1. The oscap command performs a regular XCCDF evaluation.
+2. An assessment of the results is performed by evaluating the OVAL definitions.
+   Each rule that has failed is marked as a candidate for remediation.
+3. The oscap program searches for an appropriate <xccdf:fix> element,
+   resolves it, prepares the environment, and executes the fix script.
+4. Any output of the fix script is captured by oscap and stored within the
+   <xccdf:rule-result> element. The return value of the fix script is stored as
+   well.
+5. Whenever oscap executes a fix script, it immediately evaluates the OVAL
+   definition again (to verify that the fix script has been applied correctly).
+   During this second run, if the OVAL evaluation returns success, the result of
+   the rule is **fixed**, otherwise it is an **error**.
+6. Detailed results of the remediation are stored in an output XCCDF file. It
+   contains two <xccdf:TestResult> elements. The first <xccdf:TestResult>
+   element represents the scan prior to the remediation. The second
+   <xccdf:TestResult> is derived from the first one and contains remediation
+   results.
+
+There are three modes of operation of oscap with regard to remediation:
+online, offline, and review.
+
+### 5.1. Remediation during scanning
+
+The remediation scripts can be executed at the time of scanning. Evaluation and
+remediation are performed as a part of a single command.
+
+To enable remediation during scanning, use the oscap xccdf eval command with
+the --remediate command-line option.
+
+In this example we will execute remediation during evaluation of the OSPP profile:
+
+```
+# oscap xccdf eval --remediate --profile xccdf_org.ssgproject.content_profile_ospp --results-arf results.xml /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+```
+
+The output of this command consists of two sections. The first section shows the
+result of the scan prior to the remediation, and the second section shows the
+result of the scan after applying the remediation. The second part can contain
+only **fixed** and **error** results. The **fixed** result indicates that the scan performed
+after the remediation passed. The **error** result indicates that even after
+applying the remediation, the evaluation still does not pass.
+
+### 5.2. Remediation after scanning
+
+This feature allows you to postpone fix execution.
+
+In first step, the system is only evaluated, and the results are stored in the
+<xccdf:TestResult> element in an XCCDF results file.
+
+In the second step, oscap executes the fix scripts and verifies the result. It
+is safe to store the results into the input file, no data will be lost. During
+offline remediation, a new <xccdf:TestResult> element is created that is based
+on the input one and inherits all the data. The newly created
+<xccdf:TestResult> differs only in the <xccdf:rule-result> elements that
+have failed. For those, remediation is executed.
+
+For example:
+
+```
+# oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results results.xml /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+```
+
+```
+# oscap xccdf remediate --results remediation-results.xml results.xml
+```
+
+### 5.3. Reviewing remediations
+
+The review mode allows users to store remediation instructions to a file for
+further review. The remediation content is not executed during this operation.
+To generate remediation instructions in the form of a shell script, run:
+
+1. Run a scan and generate XCCDF results file using the --results option.
+
+   ```
+   # oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_ospp --results results.xml /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+   ```
+2. Obtain the results ID.
+
+   ```
+   $ oscap info results.xml
+   ```
+3. Generate the fix based on the scan results.
+
+   ```
+   # oscap xccdf generate fix --fix-type bash --output my-remediation-script.sh --result-id xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_ospp results.xml
+   ```
+
+## 6. Tailoring
+
+This section describes tailoring of content using a tailoring file.
+Tailoring allows you to change behavior of SCAP content without its direct modification.
+
+### 6.1. Creating Tailoring files
+
+Tailoring files can be easily created using [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/) which is a GUI application.
+
+On the command line, tailoring files can be created using the autotailor tool.
+This tool is a part of the openscap-utils package.
+
+The basic syntax is:
+
+```
+$ autotailor \
+--select RULE_ID --unselect RULE_ID --var-value VAR=VALUE \
+--output TAILORING_FILE --new_profile_id NEW_PROFILE_ID
+DS_FILENAME BASE_PROFILE_ID
+```
+
+Where:
+
+* --select RULE\_ID adds a rule with RULE\_ID. This argument can be
+  added multiple times if needed.
+* --unselect RULE\_ID adds a rule with RULE\_ID. This argument can be
+  added multiple times if needed.
+* --var-value VAR=VALUE specifies modification of the XCCDF value in the
+  form <varname>=<value>
+* TAILORING\_FILE is a path to the file that will be created
+* NEW\_PROFILE\_ID is the ID of the customized profile
+* DS\_FILENAME is the path to SCAP source data stream that is tailored
+* BASE\_PROFILE\_ID is the original profile that we want to customize
+
+The script creates a new file with a new profile with ID in a form BASE\_PROFILE\_ID\_customized.
+
+In the following example, we will create a customized profile with ID custom based on the OSPP profile from the SCAP Security Guide for Red Hat Enterprise Linux 8 (located in /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml which is provided by the scap-security-guide RPM package) which will remove the rule service\_usbguard\_enabled and save it as a XCCDF Tailoring file into /tmp/tailoring.xml.
+
+```
+$ autotailor --unselect service_usbguard_enabled --output /tmp/tailoring.xml \
+--new-profile-id custom /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml ospp
+```
+
+For more details about other options of the autotailor program please read the autotailor(8) man page or run autotailor --help.
+
+### 6.2. Using Tailoring files
+
+1. List profiles in the tailoring file
+
+   ```
+   $ oscap info ssg-rhel8-ds-tailoring.xml
+   Document type: XCCDF Tailoring
+   Imported: 2016-08-31T11:08:16
+   Benchmark Hint: /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+   Profiles:
+           xccdf_org.ssgproject.content_profile_C2S_customized
+   ```
+2. Run a scan. The command evaluates tailored data stream by
+   ssg-rhel8-ds-tailoring.xml tailoring file. XCCDF results can be found in
+   results.xml file.
+
+   ```
+   $ oscap xccdf eval \
+   --profile xccdf_org.ssgproject.content_profile_C2S_customized \
+   --tailoring-file ssg-rhel8-ds-tailoring.xml \
+   --results results.xml
+   /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+   ```
+
+|  |  |
+| --- | --- |
+| Warning | Use the ID of the customized profile (from the tailoring file), do not use the ID of the original profile. |
+
+Instead of external tailoring file, you can also use tailoring component
+integrated to data stream.
+
+```
+$ oscap info simple-ds.xml
+
+Document type: Source Data Stream
+Imported: 2016-02-02T14:06:14
+
+Stream: scap_org.open-scap_datastream_from_xccdf_simple-xccdf.xml
+Generated: (null)
+Version: 1.2
+Checklists:
+        Ref-Id: scap_org.open-scap_cref_simple-xccdf.xml
+                Status: incomplete
+                Resolved: false
+                Profiles:
+                        xccdf_org.open-scap_profile_override
+                Referenced check files:
+                        simple-oval.xml
+                                system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+        Ref-Id: scap_org.open-scap_cref_simple-tailoring.xml
+                Benchmark Hint: (null)
+                Profiles:
+                        xccdf_org.open-scap_profile_default
+                        xccdf_org.open-scap_profile_unselecting
+                        xccdf_org.open-scap_profile_override
+Checks:
+        Ref-Id: scap_org.open-scap_cref_simple-oval.xml
+No dictionaries.
+```
+
+To choose tailoring component scap\_org.open-scap\_cref\_simple-tailoring.xml,
+the command below can be used.
+
+```
+$ oscap xccdf eval \
+--tailoring-id scap_org.open-scap_cref_simple-tailoring.xml \
+--profile xccdf_org.open-scap_profile_default \
+--results results.xml simple-ds.xml
+```
+
+The command above evaluates content using tailoring component
+scap\_org.open-scap\_cref\_simple-tailoring.xml from source data stream. Scan
+results are stored in results.xml file.
+
+## 7. Scanning with Script Check Engine (SCE)
+
+The Script Check Engine (SCE) is an alternative check engine for XCCDF checklist
+evaluation. SCE allows you to call shell scripts out of the XCCDF document.
+This approach might be suitable for various use cases, mostly when OVAL checks
+are not required. More information about SCE usage is available on this page:
+[Using SCE](https://www.open-scap.org/features/other-standards/sce/).
+
+|  |  |
+| --- | --- |
+| Warning | SCE is not part of any SCAP specification. |
+
+## 8. Validating SCAP Content
+
+The oscap tool can be used to validate the security content
+against standard SCAP XML schemas. The validation results are printed to the
+standard error stream (stderr). The general syntax of the validation command
+is the following:
+
+```
+$ oscap module validate [module_options_and_arguments] FILE
+```
+
+where FILE is the full path to the file being validated. As a module you
+can use:
+
+* xccdf,
+* oval,
+* cpe or
+* cve.
+
+The only exception is the data stream module (ds), which uses the sds-validate
+operation instead of validate. So for example, it would be like:
+
+```
+$ oscap ds sds-validate scap-ds.xml
+```
+
+|  |  |
+| --- | --- |
+| Note | Note that all SCAP components within the given data stream are validated automatically and none of the components is specified separately. |
+
+There is an extra Schematron-based validation enabled when you validate OVAL or
+XCCDF specification. This validation method is slower but it provides deeper analysis.
+
+Run one of the following commands to validate an OVAL or XCCDF document without
+Schematron checks:
+
+```
+$ oscap xccdf validate --skip-schematron xccdf-file.xml
+```
+
+```
+$ oscap oval validate --skip-schematron oval-file.xml
+```
+
+The results of validation are printed to standard error stream (stderr).
+
+|  |  |
+| --- | --- |
+| Note | Please note that for the rest of oscap functionality, unless you specify --skip-validation (--skip-valid), validation will automatically occur before files are used. Therefore, you do not need to explicitly validate a data stream before use. Though it will not include the Schematron-based validation step. |
+
+### 8.1. Validating digital signature in SCAP source data stream
+
+When evaluating a digitally signed SCAP source data stream OpenSCAP validates
+the digital signature of the data stream. The signature validation is performed
+automatically while loading the file. Data streams with invalid signatures would
+be rejected and would not be evaluated. OpenSCAP uses
+[XML Security Library](https://www.aleksey.com/xmlsec/) with OpenSSL backend to
+validate the digital signature.
+
+The signature validation only checks that the datastream hasn’t been altered
+since its latest signature. OpenSCAP doesn’t address trustworthiness of
+certificates or public keys that are part of the KeyInfo signature element and
+that are used to verify the signature. You should verify those keys yourself to
+prevent evaluation of datastreams that have been modified and signed by bad
+actors.
+
+The signature validation can be skipped by adding the
+--skip-signature-validation option to the oscap xccdf eval command.
+
+Also, signature validation can be enforced (effectively rendering all unsigned
+data streams invalid) with the --enforce-signature option to the oscap xccdf eval command.
+
+## 9. Generating reports, guides and scripts
+
+Another useful features of oscap is the ability to generate documents in a
+human-readable HTML format. This feature is used to generate security guides and
+checklists, which serve as a source of information, as well as guidance for
+secure system configuration. The results of system scans can also be transformed
+to well-readable result reports. Moreover, remediation scripts and Ansible
+playbooks can be generated if the SCAP content contains these data.
+
+The general command syntax is the following:
+
+```
+oscap module generate sub-module [specific_module/sub-module_options_and_arguments] file
+```
+
+Where module is either xccdf or oval, sub-module is a type of
+the generated document, and file represents an XCCDF or OVAL file. A sub-module
+can be either report, guide, custom or fix. Please see
+man oscap for more details.
+
+### 9.1. Generating HTML guides
+
+To generate a HTML guide from an SCAP source data stream or an XCCDF file use the oscap xccdf generate guide command.
+
+Generating a guide with profile checklist (see an
+[example](https://static.open-scap.org/examples/guide-checklist.html)):
+
+```
+$ oscap xccdf generate guide --profile xccdf_org.ssgproject.content_profile_ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml > guide.html
+```
+
+### 9.2. Generating HTML reports
+
+To generate HTML scan reports after scan from the scan results in ARF or XCCDF
+format the oscap xccdf generate report command can be used.
+
+Generating the HTML report with information about checks (see an
+[example](https://static.open-scap.org/examples/report-xccdf-oval.html)):
+
+```
+$ oscap xccdf generate report arf.xml > report.html
+```
+
+|  |  |
+| --- | --- |
+| Tip | The HTML report can be generated also during scan by adding the --report option to the oscap xccdf eval command. |
+
+### 9.3. Generating bash scripts
+
+To generate a bash remediation script from an XCCDF profile, use the oscap
+xccdf generate fix command. OpenSCAP will extract remediation scripts for all
+rules in the given profile to a file.
+
+For example, to generate a bash remediation script for RHEL 8 OSPP profile, run:
+
+```
+$ oscap xccdf generate fix --profile ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml > fix.sh
+```
+
+The output contains fixes for all rules in the given profile including those
+rules that would pass. It’s because system isn’t scanned during this command. If
+you want to generate remediation only for the failed rules based on scan
+results, refer to [Reviewing remediations](#_reviewing_remediations).
+
+### 9.4. Generating Ansible Playbooks
+
+Similar to generating bash scripts, OpenSCAP is able to extract Ansible tasks
+associated with XCCDF rules and generate an Ansible Playbook that can be used to
+configure the operating system according to the given profile. To generate
+Anisble Playbook use the oscap xccdf generate fix command with --fix-type
+ansible option.
+
+For example, to generate Ansible Playbook from RHEL 8 OSPP profile, run:
+
+```
+$ oscap xccdf generate fix --profile ospp --fix-type ansible /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml > playbook.yml
+```
+
+The generated Ansible Playbook is generated from an OpenSCAP profile without
+preliminary evaluation. It attempts to fix every selected rule, even if the
+system is already compliant. The output contains fixes for all rules in the
+given profile including those rules that would pass. It’s because system isn’t
+scanned during this command. If you want to generate remediation only for the
+failed rules based on scan results, refer to [Reviewing remediations](#_reviewing_remediations).
+
+### 9.5. Generating Image Builder Blueprints
+
+OpenSCAP can also create a remediation in form of Image Builder (OSBuild) Blueprint. This remeditaion
+is intendeded to be used as a bootstrap for image creation and usually it will contain only essential
+elements of the configuration, elements that would be hard or impossible to change after the image
+is created, like partitioning or set of installed packages.
+
+It is recommended to combine this type of remediation with other types, executed on the running system.
+
+For example, to generate a blueprint remediation for RHEL 8 OSPP profile, run:
+
+```
+$ oscap xccdf generate fix --profile ospp --fix-type blueprint /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml > blueprint.toml
+```
+
+## 10. Details on SCAP conformance
+
+### 10.1. Check Engines
+
+Most XCCDF content uses the OVAL check engine. This is when OVAL
+Definitions are being evaluated in order to assess a system. Complete
+information of an evaluation is recorded in OVAL Results files, as
+defined by the OVAL specification. By examining these files it’s
+possible check what definitions were used for the evaluation and why the
+results are as they are. Please note these files are not generated
+unless --oval-results is used.
+
+Some content may use alternative check engines, for example the
+[SCE](https://www.open-scap.org/features/other-standards/sce/) check engine.
+
+Results of rules with a check that requires a check engine not supported
+by OpenSCAP will be reported as **notchecked**. Check contents are not
+read or interpreted in any way unless the check system is known and
+supported. Following is an evaluation output of an XCCDF with unknown
+check system:
+
+```
+$ oscap xccdf eval sds-datastream.xml
+
+Title   Check group file contents
+Rule    xccdf_org.example_rule_system_authcontent-group
+Result  notchecked
+
+Title   Check password file contents
+Rule    xccdf_org.example_rule_system_authcontent-passwd
+Result  notchecked
+
+Title   Check shadow file contents
+Rule    xccdf_org.example_rule_system_authcontent-shadow
+Result  notchecked
+
+...
+```
+
+|  |  |
+| --- | --- |
+| Note | The **notchecked** result is also reported for rules that have no check implemented. **notchecked** means that there was no check in that particular rule that could be evaluated. |
+
+### 10.2. CVE, CCE, CPE and other identifiers
+
+Each XCCDF Rule can have <xccdf:ident> elements inside. These elements
+allow the content creator to reference various external identifiers like
+CVE, CCE, CPE and others.
+
+When scanning, oscap outputs identifiers of scanned rules regardless of
+their results. For example:
+
+```
+Title   Ensure Repodata Signature Checking is Not Disabled For Any Repos
+Rule    rule-2.1.2.3.6.a
+Result  pass
+
+Title   Verify user who owns 'shadow' file
+Rule    rule-2.2.3.1.a
+Ident   CCE-3918-0
+Result  pass
+
+Title   Verify group who owns 'shadow' file
+Rule    rule-2.2.3.1.b
+Ident   CCE-3988-3
+Result  pass
+```
+
+All identifiers (if any) are printed to stdout for each rule. Since
+standard output doesn’t allow for compact identifier metadata to be
+displayed, only the identifiers themselves are displayed there.
+
+Identifiers are also part of the HTML report output. If the identifier
+is a CVE you can click it to display its metadata from the official NVD
+database (requires internet connection). OpenSCAP doesn’t provide
+metadata for other types of identifiers.
+
+Another place where these identifiers can be found are machine-readable SCAP
+result data stream (ARF) files. This file can be generated during the scan by
+adding --results-arf option.
+
+```
+$ oscap xccdf eval \
+--profile xccdf_org.ssgproject.content_profile_common \
+--fetch-remote-resources --results-arf results.xml \
+/usr/share/xml/scap/ssg/content/ssg-rhel6-ds.xml
+```
+
+Result data stream file results.xml contains these identifiers in <xccdf:rule-result>
+elements.
+
+```
+<rule-result
+  idref="xccdf_org.ssgproject.content_rule_partition_for_tmp"
+  time="2017-01-20T14:30:18" severity="low" weight="1.000000">
+  <result>pass</result>
+  <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-27173-4</ident>
+  <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+    <check-content-ref name="oval:ssg-partition_for_tmp:def:1" href="#oval0"/>
+  </check>
+</rule-result>
+```
+
+Since OpenSCAP 1.2.9 you can use the Group-By feature of HTML report
+to get an overview of results based on their identifiers and references.
+
+The HTML report can also be used to look-up Rules by their identifiers.
+You can type the identifier (e.g.: CCE-27173-4) in the search box in
+the HTML report and only rules with this identifier will be shown.
+This can be used for any type of XCCDF identifier or reference.
+You can also click on the rule title to show more details and see all
+its identifiers, including the identifier you looked for.
+This relies heavily on SCAP content quality, if the identifiers are
+not present in the source content they will not be available in the
+HTML report.
+
+If you want to map two identifiers — e.g.: map CCE identifier to
+NIST 800-53 identifier — you need to look-up the CCE ID in the
+HTML report through the search box using the first identifier. And then,
+by grouping by NIST SP 800-53 ID, you can see all NIST 800-53 IDs
+related to the searched CCE ID.
+
+### 10.3. Bundled CCE data
+
+OpenSCAP does not provide any static or product bundled CCE data. Thus
+it has no way of displaying the last generated, updated and officially
+published dates of static or product bundled CCE data because the dates
+are not defined.
+
+### 10.4. CPE applicability
+
+XCCDF rules in the content may target only specific platforms and hold
+no meaning on other platforms. Such an XCCDF rule contains an
+<xccdf:platform>` element in its body. This element references a CPE
+name or CPE2 platform (defined using <cpe2:platform-specification>)
+that could be defined in a CPE dictionary file or a CPE language file
+or it can also be embedded directly in the XCCDF document.
+
+An XCCDF rule can contain multiple <xccdf:platform> elements. It is
+deemed applicable if at least one of the listed platforms is applicable.
+If an XCCDF rule contains no <xccdf:platform> elements it is considered
+always applicable.
+
+If the CPE name or CPE2 platform is defined in an external file, use the
+--cpe option and oscap auto-detects format of the file. The following
+command is an example of the XCCDF content evaluation using CPE name
+from an external file:
+
+```
+$ oscap xccdf eval --results xccdf-results.xml --cpe external-cpe-file.xml xccdf-file.xml
+```
+
+Where xccdf-file.xml is the XCCDF document, xccdf-results.xml is a file
+containing the scan results, and external-cpe-file.xml is the CPE
+dictionary or a language file.
+
+If you are evaluating a source data stream, oscap automatically
+registers all CPEs contained within the data stream. No extra steps have
+to be taken. You can also register an additional external CPE file, as
+shown by the command below:
+
+```
+$ oscap xccdf eval --datastream-id ds.xml --xccdf-id xccdf.xml --results xccdf-results.xml --cpe additional-external-cpe.xml scap-ds.xml
+```
+
+Where scap-ds.xml is a file representing the SCAP data stream
+collection, ds.xml is the particular data stream, xccdf.xml is the
+XCCDF document, xccdf-results.xml is a file containing the scan
+results, and additional-external-cpe.xml is the additional CPE
+dictionary or language file.
+
+The oscap tool will use an OVAL file attached to the CPE dictionary to
+determine applicability of any CPE name in the dictionary.
+
+Apart from the instructions above, no extra steps have to be taken for
+content using <cpe:fact-ref> or <cpe2:fact-ref>. See the following
+sections for details on resolving.
+
+#### 10.4.1. xccdf:platform applicability resolution
+
+When a CPE name or language model platform is referenced via
+<xccdf:platform> elements, resolution happens in the following order:
+
+1. Look into embedded CPE2 language model if name is found and applicable deem
+   it applicable
+2. If not found or not applicable, look into external CPE2 language models
+   (order of registration)
+3. If not found or not applicable, look into embedded CPE dictionary
+4. If not found or not applicable, look into external CPE dictionaries (order of
+   registration)
+
+If the CPE name is not found in any of the sources, it is deemed not
+applicable. If it is found in any of the sources but not applicable, we
+look for it elsewhere.
+
+#### 10.4.2. cpe:fact-ref and cpe2:fact-ref resolution
+
+CPE name referenced from within fact-ref is resolved in the following
+order:
+
+1. Look into embedded CPE dictionary, if name is found and applicable
+   deem it applicable
+2. If not found or not applicable, look into external CPE dictionaries
+   (order of registration)
+
+#### 10.4.3. Built-in CPE Naming Dictionary
+
+Apart from the external CPE Dictionaries, oscap comes with an inbuilt
+CPE Dictionary. The built-in CPE Dictionary contains only a few products
+(sub-set of [Official CPE Dictionary](http://nvd.nist.gov/cpe.cfm)) and it
+is used as a fall-back option when there is no other CPE source found.
+
+The list of inbuilt CPE names can be found in the output of
+
+```
+$ oscap --version
+```
+
+The built-in CPE dictionary will be deprecated in OpenSCAP 1.4.0.
+
+### 10.5. Notes on the Concept of Multiple OVAL Values
+
+This section describes advanced concepts of OVAL Variables and their
+implementation in oscap. The SCAP specification allows for an OVAL
+variable to have multiple values during a single assessment run. There
+are two variable modes which can be combined:
+
+* Multival — A variable is assigned with multiple values at the same
+  time. As an example, consider a variable which refers to preferred
+  permission of a given file, that may take multiple values like: *600*,
+  *400*. The evaluation tries to match each (or all) and then outputs a
+  single OVAL Definition result.
+* Multiset — A variable is assigned with a different value (or
+  multival) for different evaluations. This is known as a
+  **variable\_instance**. As an example consider an OVAL definition which
+  checks that a package given by a variable is not installed. For the first
+  evaluation of the definition, the variable can be assigned with
+  *telnet-server* value, for second time the variable can be assigned with
+  *tftp-server* value. Therefore both evaluations may output different
+  results. Thus, the OVAL Results file may contain multiple results for
+  the same definition, these are distinguished by **variable\_instance**
+  attribute.
+
+These two concepts are a source of confusion for both the content
+authors and the result consumers. On one hand, the first concept is well
+supported by the standard and the OVAL Variable file format. It allows
+multiple **<value>** elements for each **<variable>** element. On the other
+hand, the second concept is not supported by an OVAL Variable schema
+which prevents fully automated evaluation of the multisets (unless you
+use XCCDF to bridge that gap).
+
+|  |  |
+| --- | --- |
+| Tip | oscap supports both variable modes as described below. |
+
+#### 10.5.1. Sources of Variable Values
+
+First we need to understand how a single value can be bound to a
+variable in the OVAL checking engine. There are three ways to do this:
+
+1) OVAL Variables File — The values of external variables can be
+defined in an external file. Such a file is called an OVAL Variable File
+and can be recognized by using the following command: oscap info
+file.xml. The OVAL Variables file can be passed to the evaluation by
+--variables argument such as:
+
+```
+$ oscap oval eval \
+--variables usgcb-rhel5desktop-oval.xml-0.variables-0.xml \
+--results usgcb-results-oval.xml \
+usgcb-rhel5desktop-oval.xml
+```
+
+2) XCCDF Bindings — The values of external variables can be given from
+an XCCDF file. In the XCCDF file within each <xccdf:check> element,
+there might be <xccdf:check-export> elements. These elements allow
+transition of <xccdf:value> elements to <oval:variables> elements. The
+following command allows users to export variable bindings from XCCDF to
+an OVAL Variables file:
+
+```
+$ oscap xccdf export-oval-variables --profile united_states_government_configuration_baseline usgcb-rhel5desktop-xccdf.xml
+```
+
+3) Values within an OVAL Definition File — Variables' values defined
+directly in the OVAL definitions file <constant\_variable> and
+<local\_variable> elements.
+
+#### 10.5.2. Evaluation of Multiple OVAL Values
+
+With oscap, there are two possible ways how two or more values can be
+specified for a variable used by one OVAL definition. The approach you choose
+depends on what mode you want to use, multival or multiset.
+
+The oscap handles multiple OVAL values seamlessly. Users don’t need to do
+anything differently than for a normal scan.
+The command below demonstrates evaluation of an SCAP source data stream, which
+may include multiset, multival, or both concepts combined, or none of them.
+
+```
+$ oscap xccdf eval --profile my_baseline --results-arf scap-arf.xml --cpe additional-external-cpe.xml scap-ds.xml
+```
+
+#### 10.5.3. Multival
+
+Multival can pass multiple values to a single OVAL definition
+evaluation. This can be accomplished by all three ways as described in
+previous section.
+
+1) OVAL Variables file — This option is straight forward. The file
+format (XSD schema) allows for multiple <value> elements within each
+<variable> element.
+
+```
+<variable id="oval:com.example.www:var:1" datatype="string" comment="Unknown">
+  <value>600</value>
+  <value>400</value>
+</variable>
+```
+
+2) XCCDF Bindings — Use multiple <xccdf:check-export> referring to the
+very same OVAL variable binding with multiple different XCCDF values.
+
+```
+<check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+  <check-export value-id="xccdf_com.example.www_value_1"
+    export-name="oval:com.example.www:var:1"/>
+  <check-export value-id="xccdf_com.example.www_value_2"
+    export-name="oval:com.example.www:var:1"/>
+  <check-content-ref href="my-test-oval.xml" name="oval:com.example.www:def:1"/>
+</check>
+```
+
+3) Values within OVAL Definitions file — This is similar to using a
+Variables file, there are multiple <value> elements allowed within
+<constant\_variable> or <local\_variable> elements.
+
+#### 10.5.4. Multiset
+
+Multiset allows for the very same OVAL definition to be evaluated
+multiple times using different values assigned to the variables for each
+evaluation. In OpenSCAP, this is only possible by option (2) XCCDF
+Bindings. The following XCCDF snippet evaluates twice the very same OVAL
+Definition, each time it binds a different value to the OVAL variable.
+
+```
+<Rule id="xccdf_moc.elpmaxe.www_rule_1" selected="true">
+  <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+    <check-export value-id="xccdf_moc.elpmaxe.www_value_1" export-name="oval:com.example.www:var:1"/>
+    <check-content-ref href="my-test-oval.xml" name="oval:com.example.www:def:1"/>
+  </check>
+</Rule>
+<Rule id="xccdf_moc.elpmaxe.www_rule_2" selected="true">
+  <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+    <check-export value-id="xccdf_moc.elpmaxe.www_value_2" export-name="oval:com.example.www:var:1"/>
+    <check-content-ref href="my-test-oval.xml" name="oval:com.example.www:def:1"/>
+  </check>
+</Rule>
+```
+
+After the evaluation, the OVAL results file will contain multiple
+result-definitions and multiple result-tests and multiple
+collected-objects. The elements of the same id will be differentiated by
+the value of the **variable\_instance** attribute. Each of the
+definitions/tests/object might have a different result of evaluation.
+The following snippet of OVAL results file illustrates output of a
+multiset evaluation.
+
+```
+<tests>
+  <test test_id="oval:com.example.www:tst:1" version="1"
+    check="at least one" result="true" variable_instance="1">
+    <tested_item item_id="1117551" result="true"/>
+    <tested_variable variable_id="oval:com.example.www:var:1">600</tested_variable>
+  </test>
+  <test test_id="oval:com.example.www:tst:1" version="1"
+    check="at least one" result="false" variable_instance="2">
+    <tested_item item_id="1117551" result="false"/>
+    <tested_variable variable_id="oval:com.example.www:var:1">400</tested_variable>
+  </test>
+</tests>
+```
+
+### 10.6. Evaluating XCCDF rules with multiple checks
+
+Normally, each XCCDF rule references to a single check with a specified name.
+However, if @name attribute of xccdf:check-content-ref of a given rule is omitted,
+multiple checks can be executed to evaluate the rule.
+This is common for security\_patches\_up\_to\_date check.
+By default, only a single result is produced for an XCCDF rule in such case, and the
+result is computed from all results of checks in the referenced location.
+In case user wants to see separate results for each check (one xccdf:check-result element
+in results document for each check evaluated), then multi-check attribute
+of xccdf:check element must be set to **true**.
+
+```
+<Rule
+  id="xccdf_org.nist-testsuite.content_rule_security_patches_up_to_date"
+  selected="false" weight="10.0">
+  <title xml:lang="en-US">Security Patches Up-To-Date</title>
+  <description xml:lang="en-US">All known security patches have been installed.</description>
+  <requires idref="xccdf_org.nist-testsuite.content_group_CM-6"/>
+  <requires idref="xccdf_org.nist-testsuite.content_group_SI-2"/>
+  <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5" multi-check="true">
+    <check-content-ref href="r1100-scap11-win_rhel-patches.xml"/>
+  </check>
+</Rule>
+```
+
+In XCCDF specification older than 1.2, the multi-check element is not defined,
+which means that only a single result is always produced.
+To produce separate results for each check from the content older than XCCDF version 1.2,
+you need to convert it first into XCCDF 1.2 using the following command:
+
+```
+$ xsltproc --stringparam reverse_DNS com.example.www /usr/share/openscap/xsl/xccdf_1.1_to_1.2.xsl xccdf.xml > xccdf-1.2.xml
+```
+
+And then patch the content using a text editor, adding multi-check as
+shown in the example Rule snippet above.
+
+To create a source data stream from the patched content, the following command can be used:
+
+```
+$ oscap ds sds-compose xccdf-1.2.xml source_ds.xml
+```
+
+If the original XCCDF file referenced a custom CPE dictionary, you also have to inject
+the CPE dictionary into the source data stream in order to create a valid source data stream.
+To add a CPE dictionary component into your data stream in place, use this command:
+
+```
+$ oscap ds sds-add cpe_dictionary.xml source_ds.xml
+```
+
+Now the source\_ds.xml data stream can be evaluated as usual.
+
+### 10.7. Identifying SWID tags
+
+OpenSCAP identifies SWID tags using OVAL inventory class definitions that are
+part of an SCAP source data stream or a standalone OVAL Definition file.
+
+It supports the following 3 methods of SWID tags detection:
+
+1. One or more cpe2-dict:check elements that reference an OVAL inventory
+   class definition that searches for the presence of a matching SWID tag.
+2. A cpe:check-fact-ref element that references an OVAL inventory class
+   definition that searches for the presence of a matching SWID tag.
+3. An OVAL definition that references another OVAL inventory class definition
+   using the oval-def:extend\_definition element where the extended definition
+   searches for the presence of a matching SWID tag.
+
+The oscap command handles the SWID tag detection transparently. The detection
+algorithm is using OVAL’s xmlfilecontent test. The OVAL inventory class definitions can be
+evaluated in a standard way, i.e. by using the oscap oval eval for a
+standalone OVAL Definition file or oscap xccdf eval for definitions that are
+part of an SCAP source data stream.
+
+For example, the following command can be used to evaluate an SCAP source data
+stream that contains OVAL inventory class definitions that search for the
+presence of a matching SWID tag (referenced XML files can be obtained from the
+[SCAP 1.3 validation test suite](https://csrc.nist.gov/CSRC/media/Projects/scap-validation-program/documents/SCAP1.3ValidationTestContent_1-3.0.0.0.zip)).
+
+```
+$ oscap xccdf eval --results-arf arf.xml --profile xccdf_gov.nist.validation_profile_r2850-rhel r2850-rhel-datastream.xml
+```
+
+As another example, the following command can be used to evaluate a standalone OVAL
+Definition file that contains OVAL inventory class definitions that search for
+the presence of a matching SWID tag:
+
+```
+$ oscap oval eval --results results.xml r2860-rhel-oval.xml
+```
+
+### 10.8. Notes on specifics of OVAL implementation
+
+#### 10.8.1. Excluding non-local filesystems using the recurse\_file\_system="local" attribute of a FileBehaviors entity
+
+The scanner loosely follows the OVAL’s idea behind this attribute to behave like
+the coreutils utility **df** (df -l). This is the list of filesystems, that are
+not considered local by the scanner:
+
+* proc, sysfs
+* afs
+* ceph
+* cifs
+* smb3, smbfs
+* sshfs
+* ncpfs, ncp
+* nfs, nfs4
+* gfs, gfs2
+* glusterfs
+* gpfs
+* pvfs2
+* ocfs2
+* lustre
+* davfs
+
+## 11. List of accepted environment variables
+
+* OSCAP\_CHECK\_ENGINE\_PLUGIN\_DIR - Defines path to a directory that contains plug-in libraries implementing additional check engines, eg. SCE.
+* OSCAP\_CONTAINER\_VARS - Additional environment variables read by environmentvariable58\_probe. The variables are separated by \n. It is used by oscap-podman and oscap-docker scripts during container scanning.
+* OSCAP\_EVALUATION\_TARGET - Change value of target facts urn:xccdf:fact:identifier and urn:xccdf:fact:asset:identifier:ein in XCCDF results. Used during offline scanning to pass the name of the target system.
+* OSCAP\_FULL\_VALIDATION - If set, XML schema validation will be performed in every step of SCAP content processing.
+* OSCAP\_OVAL\_COMMAND\_OPTIONS - Additional command line options for oscap oval module. The value of this environment variable is appended to the actual command line options of oscap command.
+* OSCAP\_PCRE\_EXEC\_RECURSION\_LIMIT - Set recursion limit of regular expression matching using pcre\_exec function.
+* OSCAP\_PROBE\_ROOT - Path to a directory which contains mounted filesystem to be evaluated. Used for offline scanning.
+* SEXP\_VALIDATE\_DISABLE - If set, oscap will not validate SEXP expressions during its execution.
+* SOURCE\_DATE\_EPOCH - Timestamp in seconds since epoch. This timestamp will be used instead of the current time to populate timestamp attributes in SCAP source data streams created by oscap ds sds-compose sub-module. This is used for reproducible builds of data streams.
+* OSCAP\_PROBE\_MEMORY\_USAGE\_RATIO - maximum memory usage ratio (used/total) for OpenSCAP probes, default: 0.1
+
+Also, OpenSCAP uses libcurl library which also can be configured using environment variables. See [the list of libcurl environment variables](https://curl.se/libcurl/c/libcurl-env.html).
+
+## 12. Using external or remote resources
+
+Some SCAP content references external resources. For example SCAP Security Guide
+uses external OVAL file to check that the system is up to date and has no known
+security vulnerabilities. However, other content can use external resources for
+other purposes.
+
+When you are evaluating SCAP content with external resources the oscap tool
+will warn you:
+
+```
+$ oscap xccdf eval \
+--profile xccdf_org.ssgproject.content_profile_common \
+/usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+
+WARNING: This content points out to the remote resources. Use `--fetch-remote-resources' option to download them.
+WARNING: Skipping https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL7.xml.bz2 file which is referenced from XCCDF content
+```
+
+By default the oscap tool will not blindly download and execute remote content.
+If you trust your local content and the remote content it references, you can use
+the --fetch-remote-resources option to automatically download it using the
+oscap tool.
+
+```
+$ oscap xccdf eval \
+--fetch-remote-resources \
+--profile xccdf_org.ssgproject.content_profile_common \
+/usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+Downloading: https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL7.xml.bz2 ... ok
+Title   Ensure /var/log Located On Separate Partition
+Rule    xccdf_org.ssgproject.content_rule_partition_for_var_log
+...
+```
+
+On systems that don’t have a direct internet access or if the user doesn’t want OpenSCAP to connect to the network it’s possible to download the remote content using other tools, save it to a directory and then pass it to OpenSCAP as a file.
+To do that, use --local-files instead of --fetch-remote-resources as argument of the oscap command.
+
+In place of the remote data stream component OpenSCAP will attempt to use a file whose file name is equal to name attribute of the uri element within the catalog element within the component-ref element representing a checklist in the data stream if such file exists.
+
+In the following example, the ssg-rhel8-ds.xml is an SCAP source datastream.
+It needs some checks from a remote component. The remote component’s component-ref ID is scap\_org.open-scap\_cref\_security-data-oval-com.redhat.rhsa-RHEL8.xml and the component-ref is pointing to https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL8.xml.
+The checks from the remote component are used in the only checklist in the data stream.
+The component-ref of the checklist component contains a catalog where one of the uri elements maps the remote component’s component-ref ID in the uri attribute to the actual name security-data-oval-com.redhat.rhsa-RHEL8.xml which is the value of the name attribute.
+Therefore, we can download the remote data from https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL8.xml and save it as security-data-oval-com.redhat.rhsa-RHEL8.xml to some directory.
+Then, we execute oscap with --local-files and provide a path to the directory where it’s located.
+It will pick the file and use it instead of the remote data and it won’t connect to the network.
+
+```
+$ mkdir ~/scap-files
+$ wget -O ~/scap-files/security-data-oval-com.redhat.rhsa-RHEL8.xml https://www.redhat.com/security/data/oval/com.redhat.rhsa-RHEL8.xml
+...
+$ oscap xccdf eval --local-files ~/scap-files --profile ospp ssg-rhel8-ds.xml
+```
+
+## 13. Practical Examples
+
+This section demonstrates practical usage of certain security content provided
+for Red Hat products.
+
+These practical examples show usage of industry standard checklists that
+were validated by NIST.
+
+### 13.1. Auditing System Settings with SCAP Security Guide
+
+The SSG project contains guidance for settings of Red Hat Enterprise Linux 7.
+
+1) Install the SSG
+
+```
+$ sudo yum install -y scap-security-guide
+```
+
+2) To inspect the security content use the oscap info module:
+
+```
+$ oscap info /usr/share/xml/scap/ssg/rhel7/ssg-rhel7-ds.xml
+```
+
+The output of this command contains available configuration profiles. To audit
+your system settings choose the
+xccdf\_org.ssgproject.content\_profile\_rht-ccp profile and run the
+evaluation command . For example, the The following command is used to assess
+the given system against a draft SCAP profile for Red Hat Certified Cloud
+Providers:
+
+```
+$ oscap xccdf eval \
+--profile xccdf_org.ssgproject.content_profile_rht-ccp \
+--results ssg-rhel7-xccdf-result.xml \
+--report ssg-rhel7-report.html \
+/usr/share/xml/scap/ssg/rhel7/ssg-rhel7-ds.xml
+```
+
+### 13.2. Auditing Security Vulnerabilities of Red Hat Products
+
+The Red Hat Security Response Team provides OVAL definitions for all
+vulnerabilities (identified by CVE name) that affect Red Hat Enterprise
+Linux 3, 4, 5, 6, 7 and 8. This enable users to perform a vulnerability scan
+and diagnose whether system is vulnerable or not. The data is provided in
+three ways — OVAL file, OVAL + XCCDF and an SCAP source data stream.
+
+#### 13.2.1. OVAL + XCCDF
+
+1) Download the content
+
+```
+$ wget https://www.redhat.com/security/data/metrics/com.redhat.rhsa-all.xccdf.xml
+$ wget https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml
+```
+
+2) Run the scan
+
+```
+$ oscap xccdf eval --results results.xml --report report.html com.redhat.rhsa-all.xccdf.xml
+```
+
+This is the sample output. It reports that Red Hat Security
+Advisory (RHSA-2013:0911) was issued but update was not applied so a
+system is affected by multiple CVEs (CVE-2013-1935, CVE-2013-1943,
+CVE-2013-2017)
+
+```
+Title   RHSA-2013:0911: kernel security, bug fix, and enhancement update (Important)
+Rule    oval-com.redhat.rhsa-def-20130911
+Ident   CVE-2013-1935
+Ident   CVE-2013-1943
+Ident   CVE-2013-2017
+Result  fail
+```
+
+Human readable report **report.html** is generated, as well as "machine"
+readable report **results.xml**. Both files hold information about
+vulnerability status of scanned system. They map RHSA to CVEs and report
+what security advisories are not applied to the scanned system. CVE identifiers
+are linked with National Vulnerability Databases where additional information
+like CVE description, CVSS score, CVSS vector, etc. are stored.
+
+#### 13.2.2. OVAL only
+
+1) Download the content
+
+```
+$ wget https://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml
+```
+
+2) Run the scan
+
+```
+$ oscap oval eval --results results.xml --report report.html com.redhat.rhsa-all.xml
+```
+
+This is the sample output. It reports that Red Hat Security
+Advisory (RHSA-2013:0911) was issued but update was not applied.
+Notice that the standard output is different from the XCCDF + OVAL output.
+
+```
+Definition oval:com.redhat.rhsa:def:20130911: true
+```
+
+As in case of XCCDF+OVAL, human readable report **report.html**, and "machine"
+readable report **results.xml** are generated. Look of **report.html** is different
+to the one generated when XCCDF checklist is used as a basis for the scan, the
+information in it again holds information about vulnerability status of scanned
+system, and mapping of RHSA to CVEs. CVE identifiers are linked with Red Hat
+database where additional information like CVE description, CVSS score, CVSS
+vector etc. are stored.
+
+#### 13.2.3. Source data stream
+
+The Source data stream use-case is very similar to OVAL+XCCDF. The only
+difference is that you don’t have to download two separate files.
+
+1) Download the content
+
+```
+$ wget https://www.redhat.com/security/data/metrics/ds/com.redhat.rhsa-all.ds.xml
+```
+
+2) Run the scan
+
+```
+$ oscap xccdf eval --results results.xml --report report.html com.redhat.rhsa-all.ds.xml
+```
+
+#### 13.2.4. More Specialized Files
+
+The files we used above cover multiple Red Hat products. If you only want to
+scan one product - for example a specific version of Red Hat Enterprise Linux -
+we advise to download a smaller specialized file covering just this one version.
+Using a smaller file will utilize less bandwidth and make the evaluation
+quicker.
+
+For example for Red Hat Enterprise Linux 7 the plain OVAL file is located at:
+
+```
+$ wget https://www.redhat.com/security/data/oval/Red_Hat_Enterprise_Linux_7.xml
+```
+
+You can get a list of all the plain OVAL files by visiting
+<https://www.redhat.com/security/data/oval/v2/>
+
+The list of available data stream files is available at
+<https://www.redhat.com/security/data/metrics/ds/v2/>
+
+#### 13.2.5. Disclaimer
+
+|  |  |
+| --- | --- |
+| Note | Note that these OVAL definitions are designed to only cover software and updates released by Red Hat. You need to provide additional definitions in order to detect the patch status of third-party software. |
+
+To find out more information about this project, see
+<https://www.redhat.com/security/data/metrics/>.
+
+### 13.3. How to Evaluate PCI-DSS on RHEL7
+
+This section describes how to evaluate the Payment Card Industry Data Security
+Standard (PCI-DSS) on Red Hat Enterprise Linux 7.
+
+1) Install SSG which provides the PCI-DSS SCAP content
+
+```
+$ sudo yum install -y scap-security-guide
+```
+
+2) Verify that the PCI-DSS profile is present
+
+```
+$ oscap info /usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+```
+
+3) Evaluate the PCI-DSS content
+
+```
+$ oscap xccdf eval \
+--results results.xml \
+--profile xccdf_org.ssgproject.content_profile_pci-dss \
+/usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+```
+
+4) Generate report readable in a web browser.
+
+```
+$ oscap xccdf generate report --output report.html results.xml
+```
+
+### 13.4. How to Evaluate DISA STIG
+
+This section describes how to evaluate the Defense Information Systems Agency
+(DISA) Security Technical Implementation Guide (STIG) on Red Hat Eneterprise
+Linux 7.
+
+1. Download the DISA STIG content.
+
+   ```
+   $ wget https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_RHEL_7_V3R2_STIG_SCAP_1-2_Benchmark.zip
+   ```
+2. Unpack the content.
+
+   ```
+   $ unzip U_RHEL_7_V3R2_STIG_SCAP_1-2_Benchmark.zip
+   ```
+3. Display a list of available profiles.
+
+   ```
+   $ oscap info U_RHEL_7_V3R2_STIG_SCAP_1-2_Benchmark.xml
+   ```
+4. Evaluate your favorite profile, for example **MAC-1\_Public**, and write
+   ARF results into the results.xml file.
+
+   ```
+   # oscap xccdf eval \
+   --profile xccdf_mil.disa.stig_profile_MAC-1_Public \
+   --results-arf results.xml \
+   --report report.html \
+   U_RHEL_7_V3R2_STIG_SCAP_1-2_Benchmark.xml
+   ```
+
+If you are interested in DISA STIG content for other systems please refer to
+[DoD Cyber Exchange](https://public.cyber.mil/stigs/downloads/).
+
+### 13.5. How to Evaluate United States Government Configuration Baseline (USGCB)
+
+|  |  |
+| --- | --- |
+| Note | NIST offers no official USGCB for RHEL6 as of September 2014 but you can acquire the content from the [SSG](https://github.com/OpenSCAP/scap-security-guide) project. |
+
+The USGCB content for represents Tier IV Checklist for Red Hat
+Enterprise Linux 5 (as defined by NIST Special Publication 800-70).
+
+|  |  |
+| --- | --- |
+| Warning | Proper evaluation of the USGCB document requires OpenSCAP version 0.9.1 or later. |
+
+After ensuring that version of OpenSCAP on your system is
+sufficient, perform the following tasks:
+
+1) Download the USGCB content.
+
+```
+$ wget http://usgcb.nist.gov/usgcb/content/scap/USGCB-rhel5desktop-1.2.5.0.zip
+```
+
+2) Unpack the USGCB content.
+
+```
+$ unzip USGCB-rhel5desktop-1.2.5.0.zip
+```
+
+3) Run evaluation of the USGCB content.
+
+```
+$ oscap xccdf eval \
+--profile united_states_government_configuration_baseline \
+--cpe usgcb-rhel5desktop-cpe-dictionary.xml \
+--oval-results \
+--fetch-remote-resources \
+--results results.xml \
+usgcb-rhel5desktop-xccdf.xml
+```
+
+4) Generate a scan report that is readable in a web browser.
+
+```
+$ oscap xccdf generate report --output report.html results.xml
+```
+
+Additional reports can be generated from detailed OVAL result files.
+Scanner outputs OVAL results files in the current directory, for each
+OVAL file on input there is one output. In case of USGCB, there is
+one OVAL file distributed along the XCCDF, another one which is
+downloaded from Red Hat Repository. The latter contains CVE information
+for each evaluated definition.
+
+```
+$ oscap oval generate report --output oval-report-1.html usgcb-rhel5desktop-oval.xml.result.xml
+$ oscap oval generate report --output oval-report-2.html http%3A%2F%2Fwww.redhat.com%2Fsecurity%2Fdata%2Foval%2Fcom.redhat.rhsa-all.xml.result.xml
+```
+
+If you’re interested in running evaluation of the USGCB on a remote machine using
+a GUI please see:
+[Evaluate
+Remote Machine for USGCB Compliance with SCAP Workbench](https://open-scap.org/resources/documentation/evaluate-remote-machine-for-usgcb-compliance-with-scap-workbench/) tutorial.
+
+### 13.6. How to Evaluate Third-Party Guidances
+
+The SCAP content repository hosted at [National Vulnerability Database](https://web.nvd.nist.gov/view/ncp/repository)
+(NVD) can be searched for publicly available guidances for a given
+product. For example, as per 2013/05/11 there are
+[two](http://web.nvd.nist.gov/view/ncp/repository?tier=3&product=Red+Hat+Enterprise+Linux+5)
+Tier III checklists for Red Hat Enterprise Linux 5. Analogously, the
+MITRE Corp. hosts [repository](http://oval.mitre.org/rep-data/) of OVAL
+content for various platforms, sorted by versions and classes.
+
+Likewise the USGCB, any downloaded guidance can be evaluated by
+OpenSCAP.
+
+* Examplary evaluation of DoD Consensus Security Configuration Checklist
+  for Red Hat Enterprise Linux 5 (2.0)
+
+```
+$ wget http://nvd.nist.gov/ncp/DoD-RHEL5-desktop.zip
+$ unzip DoD-RHEL5-desktop.zip
+$ oscap xccdf eval \
+--profile DOD_baseline_1.0.0.1 \
+--cpe dcb-rhel5_cpe-dictionary.xml \
+--results result.xml \
+--oval-results \
+dcb-rhel5_xccdf.xml
+```
+
+* Examplary evaluation of Red Hat 5 STIG Benchmark (Version 1, Release 12)
+
+```
+$ wget http://iasecontent.disa.mil/stigs/zip/July2015/U_RedHat_5_V1R12_STIG_SCAP_1-1_Benchmark.zip
+$ unzip U_RedHat_5_V1R12_STIG_SCAP_1-1_Benchmark.zip
+$ oscap xccdf eval \
+--profile MAC-2_Public \
+--cpe U_RedHat_5_V1R12_STIG_SCAP_1-1_Benchmark-cpe-dictionary.xml \
+--results result.xml \
+--oval-results \
+U_RedHat_5_V1R12_STIG_SCAP_1-1_Benchmark-xccdf.xml
+```
+
+Furthermore, any individual file from the archive can be inspected using
+the oscap info command line option. The oscap program does not have
+the concept of importing SCAP files, therefore it can process any SCAP
+files available on the filesystem. That is possible because the SCAP
+standard files are native file formats of the OpenSCAP.
+
+### 13.7. How to check that patches are up-to-date on Red Hat Enterprise Linux 6 or 7
+
+This section describes how to check that software patches are up-to-date using
+external OVAL content.
+
+1) Install the SSG
+
+```
+$ sudo yum install -y scap-security-guide
+```
+
+2a) Evaluate common profile for RHEL 6
+
+```
+$ oscap xccdf eval \
+--profile xccdf_org.ssgproject.content_profile_common \
+--fetch-remote-resources \
+--results-arf results.xml \
+/usr/share/xml/scap/ssg/content/ssg-rhel6-ds.xml
+```
+
+2b) Evaluate common profile for RHEL 7
+
+```
+$ oscap xccdf eval \
+--profile xccdf_org.ssgproject.content_profile_common \
+--fetch-remote-resources \
+--results-arf results.xml \
+/usr/share/xml/scap/ssg/content/ssg-rhel7-ds.xml
+```
+
+This command evaluates common profile for Red Hat Enterprise Linux 6 or 7. Part of
+the profile is a rule to check that patches are up-to-date. To evaluate the rule
+correctly, oscap tool needs to download an up-to-date OVAL file from Red Hat servers. This can be
+allowed using --fetch-remote-resources option. Result of this scan will be saved
+in results.xml using ARF format.
+
+## 14. Scanning remote and virtual machines or containers
+
+Apart from the oscap command, OpenSCAP provides also other utilities for
+special purposes. Those utilities use oscap under the hood, but they
+enable users to perform advanced tasks in a single command.
+This manual gives a quick overview of and shows basic usage of these tools.
+Each of the tools have its own manual page that gives more detailed information.
+
+To install these tools install the openscap-utils package.
+
+```
+# dnf install openscap-utils
+```
+
+### 14.1. Scanning remote machines
+
+The oscap-ssh command is a simple tool for scanning remote machines with
+OpenSCAP over network and collecting results.
+
+The tool uses SSH connection to copy the SCAP content to a remote machine, then
+it runs an evaluation of the target system and downloads the results back.
+The remote machine needs to have OpenSCAP installed.
+
+The tool can evaluate source data streams and OVAL files.
+Usage of the tool mimics usage and options of oscap tool.
+
+In the following example, we will scan a remote Fedora server located on IP address
+**192.168.1.13** that listens for SSH connections on port **22**.
+The server will be scanned for compliance with the **Common Profile for General-Purpose
+Fedora Systems** provided by SCAP Security Guide.
+HTML report is written out as **report.html** on the local machine.
+
+```
+$ oscap-ssh root@192.168.1.13 22 xccdf eval \
+--profile xccdf_org.ssgproject.content_profile_common \
+--report report.html \
+/usr/share/xml/scap/ssg/content/ssg-fedora-ds.xml
+```
+
+### 14.2. Scanning containers and container images using oscap-podman
+
+The oscap-podman tool can be used to scan Linux containers and container images.
+Usage of the tool mimics usage and options of oscap tool.
+
+|  |  |
+| --- | --- |
+| Note | oscap-podman is available only on Fedora and Red Hat Enterprise Linux 8 or newer. On other systems use oscap-docker instead. |
+
+1. Get the ID of a container or a container image, for example:
+
+   ```
+   # podman images
+   REPOSITORY                       TAG     IMAGE ID      CREATED       SIZE
+   registry.access.redhat.com/ubi8  latest  3269c37eae33  2 months ago  208 MB
+   ```
+2. Evaluate the SCAP content, for example:
+
+   ```
+   # oscap-podman 3269c37eae33 xccdf eval --report report.html --profile ospp /usr/share/xml/scap/ssg/content/ssg-rhel8-ds.xml
+   ```
+
+Note that the oscap-podman command requires root privileges.
+
+### 14.3. Scanning of Docker containers and images using oscap-docker
+
+The oscap-docker is used to scan Docker containers and images. It can
+assess vulnerabilities in the container or image and check their compliance
+with security policies. Usage of the tool mimics usage and options
+of oscap tool.
+
+|  |  |
+| --- | --- |
+| Note | oscap-docker isn’t available on Fedora and on Red Hat Enterprise Linux 8 or newer. On other systems use oscap-podman instead. |
+
+The oscap-docker tool uses a technique called offline scanning.
+That means that the filesystem of the container is mounted to a directory
+on the host. The mounted filesystem is read-only. OpenSCAP then assess
+the container from the host. Therefore no agent is installed
+in the container and container is not touched or changed in any way.
+
+In the first example, we will perform a vulnerability assessment
+of an Docker image of Red Hat Enterprise Linux 7 (named **rhel7**). The command
+will attach docker image, determine OS variant/version, download CVE stream
+applicable to the given image and finally it will evaluate the image
+for vulnerabilities. CVE stream is a list of vulnerabilities in SCAP format
+and is downloaded directly from Red Hat.
+HTML report is written out as **report.html** on the local machine.
+
+```
+$ oscap-docker image-cve rhel7 --report report.html
+```
+
+In the second example, we will check the same **rhel7** image for
+compliance with a security policy specified in an XCCDF checklist.
+
+```
+$ oscap-docker image rhel7 xccdf eval --report report.html xccdf.xml
+```
+
+To scan running containers, commands are very similar, just replace
+"image-cve" with "container-cve" and "image" with "container".
+
+### 14.4. Scanning of virtual machines using oscap-vm
+
+OpenSCAP provides a simple tool to evaluate virtual machines called oscap-vm.
+
+The tool can scan given virtual machine directly from the virtualisation host.
+Usage of the tool mimics usage and options of oscap tool.
+
+Similarly to oscap-docker, this utility also uses offline scanning,
+so it doesn’t install anything in the guest, doesn’t require OpenSCAP
+installed in the guest and it doesn’t create or change anything in the
+guest’s filesystem.
+
+### 14.5. Scanning arbitrary filesystems using oscap-chroot
+
+A very simple script oscap-chroot can be used to perform
+an offline scan of a filesystem that is mounted at arbitrary path.
+It can be used for scanning of custom objects that are not supported
+by oscap-docker or oscap-vm, like containers in other
+formats than Docker.
+Again, usage of the tool mimics usage and options of oscap tool.
+
+## 15. Scanning and remediating the system at boot time
+
+OpenSCAP can scan and remediate the system at boot time using systemd’s system-update.target.
+The oscap-remediate.service is expecting the /system-update symlink (universal trigger for all services in system-update’s requires list) which points to a file with base name oscap-remediate-offline.conf.sh.
+The file itself could be located anywhere, but it should be accessible at boot time. This configuration file is essentially a Bash script with a set of environment variables, loaded with source by the service.
+Upon the start the service will immediately remove the symlink to prevent invocation loop but it won’t touch the configuration file itself. A helper tool, oscap-remediate-offline, can be used to bootstrap the configuration and prime the /system-update symlink, but its flexibility is limited and in general it should only be used for debugging.
+
+|  |  |
+| --- | --- |
+| Warning | The oscap-remediate-offline tool should not be considered as a stable API for priming the service. The **only** API of the service is the configuration file and the /system-update symlink pointing to it. |
+
+Configuration variables:
+
+```
+# Mandatory -----------------------------
+
+# The path to the data stream file
+OSCAP_REMEDIATE_DS=/some/data_stream.xml
+
+# The ID of the profile to use
+OSCAP_REMEDIATE_PROFILE_ID=some_profile
+
+# Optional ------------------------------
+
+# Data stream, XCCDF or Benchmark IDs
+# Benchmark ID and DS + XCCDF IDs pair are mutually
+# exclusive. DS + XCCDF IDs will take precedence
+OSCAP_REMEDIATE_DATASTREAM_ID=some_ds_id
+OSCAP_REMEDIATE_XCCDF_ID=some_xccdf_id
+OSCAP_REMEDIATE_BENCHMARK_ID=some_bench_id
+
+# Tailoring file and tailoring component ID
+OSCAP_REMEDIATE_TAILORING=/some/tailoring.xml
+OSCAP_REMEDIATE_TAILORING_ID=tailoring_id
+
+# Where to write ARF result and HTML report
+# No defaults, they won't be generated if
+# they are not requested explicitly
+OSCAP_REMEDIATE_ARF_RESULT=/some/arf_res.xml
+OSCAP_REMEDIATE_HTML_REPORT=/some/report.html
+
+# Log file name and verbosity
+OSCAP_REMEDIATE_VERBOSE_LOG=/var/some_verbose.log
+# Optional even if OSCAP_REMEDIATE_VERBOSE_LOG is provided (default: INFO)
+OSCAP_REMEDIATE_VERBOSE_LEVEL=INFO
+```
+
+## 16. Frequently Asked Questions (FAQs)
+
+**Why do I get "notchecked" results when I use e.g. [STIG checklist](https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_Red_Hat_Enterprise_Linux_7_V2R3_STIG.zip)?**
+
+The downloaded guidance contains rule descriptions, but it doesn’t contain OVAL checks which could be used for evaluation by OpenSCAP. You can find guidances with implemented OVAL checks and also with remediations at [ComplianceAsCode](https://github.com/ComplianceAsCode/content) project, which contains wide range of profiles.
+
+**I try to apply a tailoring file, but OpenSCAP still evaluates rules that I have unselected. How can I enforce my changes of the profile?**
+
+Make sure that you provide the ID of the customized profile in --profile option instead of the ID of the original profile.
+If you created the tailoring file using SCAP Workbench, you were prompted to choose the ID of the customized profile. You can display the ID of the customized profile by running oscap info <your\_tailoring\_file>. By default, the ID of the customized profile ends with \_customized suffix.
+
+**My SCAP source data stream contains rule security\_patches\_up\_to\_date which needs to download some data from the internet to work.**
+**But I’m in an air gapped environment so it can’t download it.**
+**Can I download it separately and pass it to oscap?**
+
+Yes, it’s possible, you can download the file on other computer that is connected to the internet and then copy the file to the system where you run oscap.
+Instead of the --fetch-remote-resources option you will use the --local-files option.
+For more information, please refer to section [Using external or remote resources](#_using_external_or_remote_resources).
+
+---

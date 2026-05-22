@@ -21,3 +21,8 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **concepts:** slsa, slsa-build-track, slsa-source-track, slsa-provenance, verification-summary-attestation, software-attestation, openssf-baseline, uds-operator, uds-package-cr
 - **entities:** slsa, openssf, in-toto, defense-unicorns, uds-core, pepr, istio, keycloak, falco
 - **updated:** supply-chain-security
+
+## [2026-05-22]
+
+- **queue (19):** prometheus-recording-rules, prometheus-alerting-rules, prometheus-alertmanager-config, prometheus-alertmanager-notifications, victoriametrics-metricsql, victoriametrics-vmalert, victoriametrics-vmalert-tool, victorialogs-vmalert, awesome-prometheus-alerts, sre-alerting-on-slos, vmanomaly-vmalert-guide, openscap-getting-started, openscap-security-compliance, openscap-vulnerability-assessment, openscap-choosing-policy, openscap-scap-security-guide, openscap-customization, openscap-base-tool, openscap-user-manual
+- **entities:** openscap
