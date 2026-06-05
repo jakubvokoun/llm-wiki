@@ -27,3 +27,10 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **queue (19):** prometheus-recording-rules, prometheus-alerting-rules, prometheus-alertmanager-config, prometheus-alertmanager-notifications, victoriametrics-metricsql, victoriametrics-vmalert, victoriametrics-vmalert-tool, victorialogs-vmalert, awesome-prometheus-alerts, sre-alerting-on-slos, vmanomaly-vmalert-guide, openscap-getting-started, openscap-security-compliance, openscap-vulnerability-assessment, openscap-choosing-policy, openscap-scap-security-guide, openscap-customization, openscap-base-tool, openscap-user-manual
 - **entities:** openscap
 - **updated:** awesome-prometheus-alerts (full alert names per service, 8 PromQL pattern examples, rules YAML saved to raw/assets/awesome-prometheus-alerts-rules.yml)
+
+## [2026-06-05]
+
+- **queue (14):** kroah-linux-is-a-cna, kroah-linux-kernel-security-work, kroah-linux-cve-assignment-process, kroah-linux-cves-overview, kroah-tracking-kernel-commits, kroah-linux-kernel-version-numbers, eu-cra-overview, eu-cra-reporting, orcwg-cra, cra-vulnerability-management, first-psirt-services-framework, gcve-vulnerability-handling-disclosure, intel-psirt-vulnerability-handling, cisa-coordinated-vulnerability-disclosure
+- **concepts:** cve, cve-numbering-authority, cvss, psirt, vulnerability-handling, cyber-resilience-act, linux-kernel-release-model
+- **entities:** greg-kroah-hartman, enisa, cisa, first, gcve, orcwg, intel
+- **updated:** vulnerability-disclosure (CVD standards/coordinators, handling vs disclosure split, CRA overlay)

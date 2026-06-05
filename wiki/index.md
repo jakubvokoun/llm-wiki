@@ -245,6 +245,20 @@
 | [OpenSCAP — Customization](sources/openscap-customization.md) | Tailoring via SCAP Workbench: XCCDF tailoring file format, profile inheritance, deployment options | 2026-05-22 |
 | [OpenSCAP — Base Tool](sources/openscap-base-tool.md) | oscap CLI: NIST SCAP 1.2 certified; XCCDF/OVAL eval; DISA STIG/PCI-DSS examples; library foundation | 2026-05-22 |
 | [OpenSCAP — User Manual](sources/openscap-user-manual.md) | Complete reference: eval/remediate/oval/remote-scan/generate-fix/guide/tailoring subcommands with examples | 2026-05-22 |
+| [Linux is a CNA (kroah.com)](sources/kroah-linux-is-a-cna.md) | GKH announces kernel.org as a CVE Numbering Authority; self-determination motive; vulns.git; CRA tailwind | 2026-06-05 |
+| [Linux kernel security work (kroah.com)](sources/kroah-linux-kernel-security-work.md) | Reactive security team; no announcements; plain-text only; 7-day embargo cap; "a bug is a bug"; hardware embargo process | 2026-06-05 |
+| [Linux CVE assignment process (kroah.com)](sources/kroah-linux-cve-assignment-process.md) | What counts as a kernel vuln; WARN()/panic_on_warn; 3-member ≥2 vote; ~60 CVEs/week; refuses severity; ignore NVD CVSS | 2026-06-05 |
+| [Linux CVEs, more than you ever wanted to know (kroah.com)](sources/kroah-linux-cves-overview.md) | Series index; kernel #1 CVE issuer 2025; handling reports at scale | 2026-06-05 |
+| [Tracking kernel commits across branches (kroah.com)](sources/kroah-tracking-kernel-commits.md) | Backport breadcrumb formats; filesystem-as-database scripts; verhaal SQLite tool (0.01s lookups) for CVE tracking | 2026-06-05 |
+| [Linux kernel version numbers (kroah.com)](sources/kroah-linux-kernel-version-numbers.md) | Every release stable; major.minor.stable; longterm branches; why naive version comparison breaks CVE tracking | 2026-06-05 |
+| [Cyber Resilience Act — Overview (EU)](sources/eu-cra-overview.md) | EU 2024/2847; mandatory product security; CE marking; lifecycle vuln handling; timeline 2024/2026/2027 | 2026-06-05 |
+| [CRA Reporting Obligations (EU)](sources/eu-cra-reporting.md) | 24h/72h/14-day reporting; Single Reporting Platform; CSIRT + ENISA; delegated act on delayed dissemination | 2026-06-05 |
+| [The EU CRA — Getting Started (ORCWG)](sources/orcwg-cra.md) | Open-source-framed CRA guide; manufacturer/maintainer/steward; full supply-chain compliance; ORCWG deliverables | 2026-06-05 |
+| [Vulnerability Management Under the CRA](sources/cra-vulnerability-management.md) | 5 areas: rapid reporting, proactive mgmt, SBOM, coordinated disclosure, researcher protection/bug bounties | 2026-06-05 |
+| [FIRST PSIRT Services Framework v1.1](sources/first-psirt-services-framework.md) | Canonical PSIRT reference; distributed/centralized/hybrid models; 6 service areas; SDL integration | 2026-06-05 |
+| [GCVE-BCP-02 — Vulnerability Handling and Disclosure](sources/gcve-vulnerability-handling-disclosure.md) | End-to-end playbook: prepare→receive→triage→remediate→communicate→disclose→advisory; AI-output caution | 2026-06-05 |
+| [Intel PSIRT Vulnerability Handling Process](sources/intel-psirt-vulnerability-handling.md) | Identify/Mitigate/Disclose; CVSS base only; tiered NDA disclosure; monthly advisories; Intel as CNA | 2026-06-05 |
+| [CISA Coordinated Vulnerability Disclosure Program](sources/cisa-coordinated-vulnerability-disclosure.md) | VINCE intake; CVE Top-Level Root + CNA of Last Resort; 5-step process; KEV; 45-day unresponsive-vendor disclosure | 2026-06-05 |
 
 ## Entities
 
@@ -279,6 +293,13 @@
 | [Keycloak](entities/keycloak.md) | product | Open-source IAM by Red Hat; SSO, OIDC, SAML, LDAP federation; identity provider in UDS Core |
 | [Falco](entities/falco.md) | product | CNCF runtime security; eBPF syscall monitoring; Falcosidekick fan-out; UDS Core runtime security layer |
 | [OpenSCAP](entities/openscap.md) | org/product | NIST-certified open-source SCAP scanner; oscap/SCAP Workbench/SSG; compliance and vulnerability assessment |
+| [Greg Kroah-Hartman](entities/greg-kroah-hartman.md) | person | Linux stable-kernel maintainer; kernel.org CNA team; CVSS/NVD critic; CRA commentator |
+| [ENISA](entities/enisa.md) | org | EU Agency for Cybersecurity; operates the CRA Single Reporting Platform (Article 16) |
+| [CISA](entities/cisa.md) | org | US cyber agency; CVD program (VINCE); CVE Top-Level Root + CNA of Last Resort; KEV catalog |
+| [FIRST](entities/first.md) | org | Forum of Incident Response and Security Teams; PSIRT/CSIRT frameworks, CVSS, TLP |
+| [GCVE](entities/gcve.md) | project | Global CVE Allocation System (CIRCL); decentralized GNA model; BCP best-practice guides |
+| [ORCWG](entities/orcwg.md) | org | Open Regulatory Compliance Working Group; community CRA guidance for open source |
+| [Intel](entities/intel.md) | org/product | Example mature PSIRT and CNA; Identify/Mitigate/Disclose; monthly security advisories |
 
 ## Concepts
 
@@ -414,6 +435,13 @@
 | [OpenSSF Baseline](concepts/openssf-baseline.md) | OSPS Baseline: 3 levels × 8 categories; L1 hygiene, L2 process, L3 policy; SLSA alignment |
 | [UDS Operator](concepts/uds-operator.md) | UDS Core control plane; reconciles Package/Exemption/ClusterConfig CRs into Istio, NetworkPolicy, Keycloak, Prometheus resources |
 | [UDS Package CR](concepts/uds-package-cr.md) | K8s custom resource declaring app's networking, SSO, monitoring needs; one per namespace; drives UDS Operator provisioning |
+| [CVE](concepts/cve.md) | Common Vulnerabilities and Exposures; cve.org program; record quality (ranges not scalars); CPE/PURL caveats |
+| [CVE Numbering Authority](concepts/cve-numbering-authority.md) | CNA scope/governance; why projects become CNAs; vendor-PSIRT vs OSS-community models; CNA of Last Resort |
+| [CVSS](concepts/cvss.md) | Common Vulnerability Scoring System; 0–10 base bands; severity ≠ risk; the kernel's refusal to score |
+| [PSIRT](concepts/psirt.md) | Product Security Incident Response Team; vs CSIRT; distributed/centralized/hybrid; 6 FIRST service areas; SDL |
+| [Vulnerability Handling Process](concepts/vulnerability-handling.md) | Internal lifecycle: prepare→receive→triage→remediate→communicate→disclose; timelines; coordinators; AI caution |
+| [Cyber Resilience Act](concepts/cyber-resilience-act.md) | EU 2024/2847; PDEs; secure-by-design; SBOM; 24h/72h/14-day reporting; stewards/maintainers; supply chain |
+| [Linux Kernel Release Model](concepts/linux-kernel-release-model.md) | Every release stable; major.minor.stable; longterm branches; why version comparison breaks; backport tooling |
 
 ## Analyses
 

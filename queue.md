@@ -244,3 +244,17 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://www.open-scap.org/security-policies/customization/ <!-- ingested 2026-05-22 -->
 - [x] https://www.open-scap.org/tools/openscap-base/ <!-- ingested 2026-05-22 -->
 - [x] https://static.open-scap.org/openscap-1.3/oscap_user_manual.html <!-- ingested 2026-05-22 -->
+- [x] http://www.kroah.com/log/blog/2024/02/13/linux-is-a-cna/ <!-- ingested 2026-06-05 -->
+- [x] http://www.kroah.com/log/blog/2026/01/02/linux-kernel-security-work/ <!-- ingested 2026-06-05 -->
+- [x] http://www.kroah.com/log/blog/2026/02/16/linux-cve-assignment-process/ <!-- ingested 2026-06-05 -->
+- [x] http://www.kroah.com/log/blog/2025/12/08/linux-cves-more-than-you-ever-wanted-to-know/ <!-- ingested 2026-06-05 -->
+- [x] http://www.kroah.com/log/blog/2025/12/15/tracking-kernel-commits-across-branches/ <!-- ingested 2026-06-05 -->
+- [x] http://www.kroah.com/log/blog/2025/12/09/linux-kernel-version-numbers/ <!-- ingested 2026-06-05 -->
+- [x] https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act <!-- ingested 2026-06-05 -->
+- [x] https://digital-strategy.ec.europa.eu/en/policies/cra-reporting <!-- ingested 2026-06-05 -->
+- [x] https://orcwg.org/cra/ <!-- ingested 2026-06-05 -->
+- [x] https://www.centerforcybersecuritypolicy.org/insights-and-research/vulnerability-management-under-the-cyber-resilience-act <!-- ingested 2026-06-05 -->
+- [x] https://www.first.org/standards/frameworks/psirts/psirt_services_framework_v1.1 <!-- ingested 2026-06-05 -->
+- [x] https://gcve.eu/bcp/gcve-bcp-02/ <!-- ingested 2026-06-05 -->
+- [x] https://www.intel.com/content/www/us/en/security/security-practices/vulnerability-management/vulnerability-handling-process.html <!-- ingested 2026-06-05 -->
+- [x] https://www.cisa.gov/coordinated-vulnerability-disclosure-process <!-- ingested 2026-06-05 -->
