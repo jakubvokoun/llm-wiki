@@ -83,13 +83,13 @@ REST workflows (create → validate → approve → confirm) are vulnerable to s
 
 For APIs consumed by browsers:
 
-| Header                      | Value                    | Purpose                                 |
-| --------------------------- | ------------------------ | --------------------------------------- |
-| `Cache-Control`             | `no-store`               | Prevents caching of sensitive responses |
-| `Content-Security-Policy`   | `frame-ancestors 'none'` | Clickjacking prevention                 |
-| `Strict-Transport-Security` | (configured)             | Forces HTTPS                            |
-| `X-Content-Type-Options`    | `nosniff`                | MIME sniffing prevention                |
-| `X-Frame-Options`           | `DENY`                   | Legacy clickjacking (backwards compat)  |
+| Header | Value | Purpose |
+| --- | --- | --- |
+| `Cache-Control` | `no-store` | Prevents caching of sensitive responses |
+| `Content-Security-Policy` | `frame-ancestors 'none'` | Clickjacking prevention |
+| `Strict-Transport-Security` | (configured) | Forces HTTPS |
+| `X-Content-Type-Options` | `nosniff` | MIME sniffing prevention |
+| `X-Frame-Options` | `DENY` | Legacy clickjacking (backwards compat) |
 
 Note: most headers have no effect on non-browser clients (mobile apps, server-to-server, CLI tools).
 
@@ -167,3 +167,4 @@ REST APIs have a hidden attack surface:
 - [Zero Trust Architecture](zero-trust.md)
 - [OWASP REST Security Cheat Sheet](../sources/owasp-rest-security.md)
 - [OWASP REST Assessment Cheat Sheet](../sources/owasp-rest-assessment.md)
+- [OWASP gRPC Security Cheat Sheet](../sources/owasp-grpc-security.md) — mTLS, interceptor authz, message-size limits, reflection disable

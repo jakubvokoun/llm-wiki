@@ -72,3 +72,6 @@ CI/CD pipelines are high-value attack targets — they use privileged identities
 ## Sources
 
 - [OWASP CI/CD Security Cheat Sheet](../sources/owasp-cicd-security.md)
+- [CI/CD Pipeline Security Best Practices 2026 (Wiz)](../sources/wiz-cicd-security-best-practices.md)
+- [Top 10 CI/CD Pipeline Best Practices (Wonderment Apps)](../sources/wonderment-cicd-best-practices.md)
+- [GitLab CI Best Practices / Anti-Patterns (Zenika)](../sources/zenika-gitlab-ci-best-practices.md)

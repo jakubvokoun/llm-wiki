@@ -42,12 +42,12 @@ Common untrusted data sources:
 
 **Safe sinks:**
 
-| Sink                                         | Why safe                          |
-| -------------------------------------------- | --------------------------------- |
-| `element.textContent`                        | Text only, no parsing             |
-| `element.innerText`                          | Text only (except in `<script>`)  |
-| `element.setAttribute(safe_attr, val)`       | Safe for non-event, non-URL attrs |
-| `document.createElement()` + `appendChild()` | Structural DOM, no parsing        |
+| Sink | Why safe |
+| --- | --- |
+| `element.textContent` | Text only, no parsing |
+| `element.innerText` | Text only (except in `<script>`) |
+| `element.setAttribute(safe_attr, val)` | Safe for non-event, non-URL attrs |
+| `document.createElement()` + `appendChild()` | Structural DOM, no parsing |
 
 ## Encoding Rules by Subcontext
 
@@ -81,3 +81,4 @@ Context-appropriate encoding is required — one-size-fits-all does NOT work:
 - [Input Validation](input-validation.md)
 - [Content Security Policy](content-security-policy.md)
 - [OWASP DOM XSS Prevention source](../sources/owasp-dom-xss.md)
+- [OWASP XSS Filter Evasion source](../sources/owasp-xss-filter-evasion.md) — why filter-based XSS defense fails

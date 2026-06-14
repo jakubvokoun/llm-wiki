@@ -20,9 +20,7 @@ Guidelines for writing effective Prometheus alerting rules.
 
 ## Core principle
 
-Alert on **end-user pain** (high latency, error rates, availability), not on
-internal causes. Pages must be actionable — if there is nothing to do, there
-should be no page.
+Alert on **end-user pain** (high latency, error rates, availability), not on internal causes. Pages must be actionable — if there is nothing to do, there should be no page.
 
 ## Alert naming
 
@@ -39,9 +37,7 @@ Community convention: **CamelCase** names (e.g. `HighLatency`, `BatchJobFailed`)
 
 ## Metamonitoring
 
-Monitor the monitoring stack itself. Prefer symptom-based blackbox end-to-end
-tests (Pushgateway → Prometheus → Alertmanager → notification) over individual
-component healthchecks. Supplement with external blackbox monitoring.
+Monitor the monitoring stack itself. Prefer symptom-based blackbox end-to-end tests (Pushgateway → Prometheus → Alertmanager → notification) over individual component healthchecks. Supplement with external blackbox monitoring.
 
 ## Rule expression tips
 
@@ -83,6 +79,7 @@ Keeps an alert active for a specified duration after the expression clears. Prev
 
 - [Prometheus Alerting Source](../sources/prometheus-alerting.md)
 - [VictoriaMetrics Alerting Best Practices Source](../sources/victoriametrics-alerting-best-practices.md)
+- [Awesome Prometheus Alerts](../sources/awesome-prometheus-alerts.md) — 954 ready alert rules across 93 services
 - [Prometheus Instrumentation](prometheus-instrumentation.md)
 - [Prometheus Recording Rules](prometheus-recording-rules.md)
 - [Prometheus Zen](prometheus-zen.md)

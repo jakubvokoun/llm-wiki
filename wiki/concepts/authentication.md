@@ -58,11 +58,11 @@ Use constant-time processing paths to prevent timing-based enumeration.
 
 ## Automated Attack Protection
 
-| Attack              | Defense                                                              |
-| ------------------- | -------------------------------------------------------------------- |
-| Brute Force         | Account lockout (exponential backoff), CAPTCHA after N failures, MFA |
-| Credential Stuffing | MFA, breached password checks, behavioral anomaly detection          |
-| Password Spraying   | MFA, lockout per account (not IP)                                    |
+| Attack | Defense |
+| --- | --- |
+| Brute Force | Account lockout (exponential backoff), CAPTCHA after N failures, MFA |
+| Credential Stuffing | MFA, breached password checks, behavioral anomaly detection |
+| Password Spraying | MFA, lockout per account (not IP) |
 
 MFA stops ~99.9% of account compromise attacks (Microsoft).
 
@@ -70,12 +70,12 @@ MFA stops ~99.9% of account compromise attacks (Microsoft).
 
 ## Passwordless / Federated Protocols
 
-| Protocol                | Use Case                                                                              |
-| ----------------------- | ------------------------------------------------------------------------------------- |
-| OAuth 2.0/2.1           | Authorization delegation to APIs                                                      |
-| OIDC                    | Authentication/SSO (identity layer on OAuth); validate `iss`, `aud`, signature, `exp` |
-| SAML 2.0                | Enterprise SSO/federation; XML-based; preferred for intranet/enterprise               |
-| FIDO2/WebAuthn/Passkeys | Passwordless biometric; cloud-synced; phishing-resistant                              |
+| Protocol | Use Case |
+| --- | --- |
+| OAuth 2.0/2.1 | Authorization delegation to APIs |
+| OIDC | Authentication/SSO (identity layer on OAuth); validate `iss`, `aud`, signature, `exp` |
+| SAML 2.0 | Enterprise SSO/federation; XML-based; preferred for intranet/enterprise |
+| FIDO2/WebAuthn/Passkeys | Passwordless biometric; cloud-synced; phishing-resistant |
 
 ## Re-authentication
 
@@ -106,3 +106,4 @@ Adjust authentication strength based on context:
 - [Authorization](authorization.md)
 - [Zero Trust Architecture](zero-trust.md)
 - [OWASP Authentication Cheat Sheet](../sources/owasp-authentication.md)
+- [HackTricks — PAM](../sources/hacktricks-pam.md) — PAM backdoors (trojanized `pam_unix.so`, magic password, `pam_exec`) and credential harvesting

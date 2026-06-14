@@ -11,14 +11,14 @@ Continuous Integration (CI) is the practice of merging developer code into a sha
 
 ## Core Principles
 
-| Principle                  | Description                                                                            |
-| -------------------------- | -------------------------------------------------------------------------------------- |
-| **Frequent commits**       | Small batches integrated often; minimizes merge conflicts and narrows bug search space |
-| **Single source of truth** | One VCS holds all build assets: code, IaC, Dockerfiles, test scripts                   |
-| **Automated builds**       | Build is a single push-button operation; no manual steps                               |
-| **Self-testing builds**    | Every build runs the full test suite; non-zero exit = broken build                     |
-| **Fast feedback**          | Target: build + core tests complete in under 10 minutes                                |
-| **Environment parity**     | Test in production-like environments (IaC + Docker/K8s)                                |
+| Principle | Description |
+| --- | --- |
+| **Frequent commits** | Small batches integrated often; minimizes merge conflicts and narrows bug search space |
+| **Single source of truth** | One VCS holds all build assets: code, IaC, Dockerfiles, test scripts |
+| **Automated builds** | Build is a single push-button operation; no manual steps |
+| **Self-testing builds** | Every build runs the full test suite; non-zero exit = broken build |
+| **Fast feedback** | Target: build + core tests complete in under 10 minutes |
+| **Environment parity** | Test in production-like environments (IaC + Docker/K8s) |
 
 ## Test Pyramid
 
@@ -84,3 +84,4 @@ For service-oriented architectures, consumer-driven contract testing (Pact) vali
 - [GitOps](gitops.md) — Git-driven deployment automation
 - [Immutable Infrastructure](immutable-infrastructure.md) — environment parity via IaC
 - [Secrets Management](secrets-management.md) — credentials in pipelines
+- [JUnit XML](junit-xml.md) — de facto test-result format consumed by CI for reporting

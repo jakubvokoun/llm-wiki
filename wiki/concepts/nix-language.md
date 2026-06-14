@@ -81,4 +81,5 @@ stdenv.mkDerivation {
 - [Nix](../entities/nix.md)
 - [Nix Language Basics Tutorial](../sources/nix-language-tutorial.md)
 - [Nix Best Practices](../sources/nix-best-practices.md)
+- [Awesome Nix](../sources/awesome-nix.md) — curated ecosystem (deployment, dev tools, security)
 - [Atomic Linux](atomic-linux.md)

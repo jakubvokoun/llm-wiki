@@ -59,6 +59,9 @@ Versions follow `<upstream-app-version>-uds.<uds-sub-version>`, e.g., `0.1.0-uds
 ## Related pages
 
 - [UDS Core concepts overview](../sources/uds-core-concepts-overview.md)
+- [UDS Core features overview](../sources/uds-core-features-overview.md)
+- [UDS Core platform overview](../sources/uds-core-platform-overview.md)
+- [UDS Core security policy](../sources/uds-core-security-policy.md)
 - [UDS Package CR](../concepts/uds-package-cr.md)
 - [Pepr](pepr.md)
 - [Defense Unicorns](defense-unicorns.md)

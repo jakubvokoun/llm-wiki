@@ -118,5 +118,17 @@ When inside a container, additional vectors apply:
 - [Container Security](container-security.md)
 - [Seccomp](seccomp.md)
 - [AppArmor Profiles](apparmor-profiles.md)
+- [Shared Library Hijacking](shared-library-hijacking.md) — LD_PRELOAD / ld.so.conf / RPATH injection
+- [Wildcard Injection](wildcard-injection.md) — glob argument injection (tar, rsync, 7z, tcpdump)
 - [HackTricks Linux Basics](../sources/hacktricks-linux-basics.md)
 - [HackTricks Privilege Escalation](../sources/hacktricks-privilege-escalation.md)
+
+### Worked technique references (HackTricks)
+
+- [euid, ruid, suid](../sources/hacktricks-euid-ruid-suid.md) — SUID exploitation mechanics
+- [Interesting Groups (Linux PE)](../sources/hacktricks-interesting-groups-linux-pe.md) — docker/disk/shadow/staff group privesc
+- [NFS no_root_squash](../sources/hacktricks-nfs-no-root-squash.md) — remote SUID write
+- [SSH Agent Forwarding Exploitation](../sources/hacktricks-ssh-forward-agent.md) — stealing `SSH_AUTH_SOCK`
+- [Socket Command Injection](../sources/hacktricks-socket-command-injection.md) — UNIX socket → command execution
+- [Escaping from Jails](../sources/hacktricks-escaping-limited-bash.md) — chroot/restricted-shell escapes
+- [Node Inspector / CEF Debugger Abuse](../sources/hacktricks-electron-cef-chromium-debugger-abuse.md) — `--inspect`/`--remote-debugging-port` RCE

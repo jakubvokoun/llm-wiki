@@ -467,6 +467,9 @@
 | [Remote Build Caching](concepts/remote-build-caching.md) | Shared action-output cache (action cache + CAS); team/CI speedup; needs hermeticity; poisoning hazards |
 | [Build Graph & Query (Bazel)](concepts/build-graph.md) | Repo/workspace/package/target units; declared deps; action graph; bazel query (deps/rdeps/paths) |
 | [OCI Images](concepts/oci-images.md) | Open Container Initiative image spec; runtime-neutral; build with rules_oci; standard annotations |
+| [Server-Side Request Forgery (SSRF)](concepts/ssrf.md) | Server tricked into attacker-chosen requests; internal/metadata access; XXE vector; allowlist + IP re-validation |
+| [Clickjacking](concepts/clickjacking.md) | UI-redress via iframe overlay / malicious CSS; defense via CSP frame-ancestors, X-Frame-Options |
+| [Denial of Service (DoS)](concepts/denial-of-service.md) | Availability attacks via resource exhaustion; Billion Laughs, ReDoS, decompression bombs; limits + overload protection |
 
 ## Analyses
 

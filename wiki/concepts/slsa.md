@@ -82,5 +82,6 @@ Higher levels = stronger guarantees = higher implementation cost. Levels are des
 - [About SLSA](../sources/slsa-v1.2-about.md)
 - [SLSA Tracks](../sources/slsa-v1.2-tracks.md)
 - [Guiding Principles](../sources/slsa-v1.2-principles.md)
+- [Use Cases](../sources/slsa-v1.2-use-cases.md)
 - [Supply Chain Security](supply-chain-security.md) — broader context
 - Entity: [SLSA](../entities/slsa.md)
