@@ -258,3 +258,17 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://gcve.eu/bcp/gcve-bcp-02/ <!-- ingested 2026-06-05 -->
 - [x] https://www.intel.com/content/www/us/en/security/security-practices/vulnerability-management/vulnerability-handling-process.html <!-- ingested 2026-06-05 -->
 - [x] https://www.cisa.gov/coordinated-vulnerability-disclosure-process <!-- ingested 2026-06-05 -->
+- [x] https://github.com/GoogleContainerTools/distroless <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/about/intro <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/basics <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/concepts/build-ref <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/concepts/dependencies <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/rules/language <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/external/module <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/basics/hermeticity <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/remote/caching <!-- ingested 2026-06-14 -->
+- [x] https://bazel.build/query/guide <!-- ingested 2026-06-14 -->
+- [x] https://github.com/GoogleContainerTools/rules_distroless <!-- ingested 2026-06-14 -->
+- [x] https://github.com/bazel-contrib/rules_oci <!-- ingested 2026-06-14 -->
+- [x] https://github.com/wolfi-dev/os <!-- ingested 2026-06-14 -->
+- [x] https://edu.chainguard.dev/chainguard/chainguard-images/overview/ <!-- ingested 2026-06-14 -->

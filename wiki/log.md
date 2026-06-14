@@ -34,3 +34,10 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **concepts:** cve, cve-numbering-authority, cvss, psirt, vulnerability-handling, cyber-resilience-act, linux-kernel-release-model
 - **entities:** greg-kroah-hartman, enisa, cisa, first, gcve, orcwg, intel
 - **updated:** vulnerability-disclosure (CVD standards/coordinators, handling vs disclosure split, CRA overlay)
+
+## [2026-06-14]
+
+- **queue (14):** distroless, bazel-intro, bazel-build-system-basics, bazel-build-ref, bazel-dependencies, bazel-starlark-language, bazel-modules-bzlmod, bazel-hermeticity, bazel-remote-caching, bazel-query-guide, rules-distroless, rules-oci, wolfi, chainguard-images
+- **concepts:** distroless-images, starlark, bazel-modules, hermetic-builds, remote-build-caching, build-graph, oci-images
+- **entities:** bazel, distroless, chainguard, wolfi
+- **updated:** container-security (distroless-images backlink), supply-chain-security (hermetic-builds/reproducibility backlink)

@@ -259,6 +259,20 @@
 | [GCVE-BCP-02 — Vulnerability Handling and Disclosure](sources/gcve-vulnerability-handling-disclosure.md) | End-to-end playbook: prepare→receive→triage→remediate→communicate→disclose→advisory; AI-output caution | 2026-06-05 |
 | [Intel PSIRT Vulnerability Handling Process](sources/intel-psirt-vulnerability-handling.md) | Identify/Mitigate/Disclose; CVSS base only; tiered NDA disclosure; monthly advisories; Intel as CNA | 2026-06-05 |
 | [CISA Coordinated Vulnerability Disclosure Program](sources/cisa-coordinated-vulnerability-disclosure.md) | VINCE intake; CVE Top-Level Root + CNA of Last Resort; 5-step process; KEV; 45-day unresponsive-vendor disclosure | 2026-06-05 |
+| [Distroless README (GoogleContainerTools)](sources/distroless.md) | Minimal base images (app + runtime deps only); ~2 MiB static; multi-stage Docker; cosign keyless; debug/nonroot tags | 2026-06-14 |
+| [Intro to Bazel](sources/bazel-intro.md) | Bazel overview: high-level build language, caching, multi-platform, action graph, load/analyze/execute | 2026-06-14 |
+| [Bazel — Build System Basics](sources/bazel-build-system-basics.md) | Why build systems matter; task-based vs artifact-based; distributed builds; dependency management at scale | 2026-06-14 |
+| [Bazel — Repositories, Workspaces, Packages, Targets](sources/bazel-build-ref.md) | Core units: repo (MODULE.bazel root), workspace, package (BUILD dir), target (file/rule), labels | 2026-06-14 |
+| [Bazel — Dependencies](sources/bazel-dependencies.md) | Dependency graph; declare all actual direct deps; srcs/deps/data; undeclared-dep breakage | 2026-06-14 |
+| [Bazel — Starlark Language](sources/bazel-starlark-language.md) | Python-like build/extension language; immutable globals, no top-level control flow in BUILD; load/native | 2026-06-14 |
+| [Bazel — Bazel Modules (Bzlmod)](sources/bazel-modules-bzlmod.md) | MODULE.bazel; bazel_dep; overrides; Minimal Version Selection; Bazel Central Registry; module extensions | 2026-06-14 |
+| [Bazel — Hermeticity](sources/bazel-hermeticity.md) | Same input ⇒ same output via host isolation; tool isolation/source identity; non-hermetic pitfalls; sandboxing | 2026-06-14 |
+| [Bazel — Remote Caching](sources/bazel-remote-caching.md) | Action cache + CAS; HTTP/gRPC backends (bazel-remote/GCS/nginx); disk cache; cache-correctness pitfalls | 2026-06-14 |
+| [Bazel — Query Guide](sources/bazel-query-guide.md) | bazel query: deps/rdeps/somepath/allpaths/kind/attr; implicit-dep filtering; graph output to dot | 2026-06-14 |
+| [rules_distroless README](sources/rules-distroless.md) | Bazel rules replacing apt-get/passwd/useradd/update-ca-certificates; apt rule; dpkg_statusd; beta | 2026-06-14 |
+| [rules_oci README](sources/rules-oci.md) | Spec-only Bazel OCI rules; oci_image/index/pull/push/load; vs rules_docker/rules_img; cosign signing | 2026-06-14 |
+| [Wolfi README](sources/wolfi.md) | Container-native glibc (un)distro; built with melange; apk packages; not Alpine-compatible; Chainguard-sponsored | 2026-06-14 |
+| [Chainguard Containers Overview](sources/chainguard-images.md) | Distroless images on Wolfi; nightly rebuilds → near-zero CVE; cosign/SBOM/SLSA; multi-layer; OCI annotations | 2026-06-14 |
 
 ## Entities
 
@@ -300,6 +314,10 @@
 | [GCVE](entities/gcve.md) | project | Global CVE Allocation System (CIRCL); decentralized GNA model; BCP best-practice guides |
 | [ORCWG](entities/orcwg.md) | org | Open Regulatory Compliance Working Group; community CRA guidance for open source |
 | [Intel](entities/intel.md) | org/product | Example mature PSIRT and CNA; Identify/Mitigate/Disclose; monthly security advisories |
+| [Bazel](entities/bazel.md) | product | Google's artifact-based build/test tool; Starlark BUILD files; hermetic, cached, multi-language; builds distroless |
+| [Distroless](entities/distroless.md) | product | Google minimal base images: app + runtime deps only, no shell/pkg-mgr; Debian-based; cosign-signed |
+| [Chainguard](entities/chainguard.md) | org/product | Hardened minimal images on Wolfi; nightly rebuilds, near-zero CVE; apko/melange; cosign/SBOM/SLSA |
+| [Wolfi](entities/wolfi.md) | product | Container-native glibc (un)distribution; base for Chainguard images; apk packages; not Alpine-compatible |
 
 ## Concepts
 
@@ -442,6 +460,13 @@
 | [Vulnerability Handling Process](concepts/vulnerability-handling.md) | Internal lifecycle: prepare→receive→triage→remediate→communicate→disclose; timelines; coordinators; AI caution |
 | [Cyber Resilience Act](concepts/cyber-resilience-act.md) | EU 2024/2847; PDEs; secure-by-design; SBOM; 24h/72h/14-day reporting; stewards/maintainers; supply chain |
 | [Linux Kernel Release Model](concepts/linux-kernel-release-model.md) | Every release stable; major.minor.stable; longterm branches; why version comparison breaks; backport tooling |
+| [Distroless Images](concepts/distroless-images.md) | Image design pattern: app + runtime deps only; fewer CVEs; debug-variant tradeoff; Google vs Chainguard/Wolfi |
+| [Starlark](concepts/starlark.md) | Bazel's Python-like build language; immutable globals, restricted control flow; determinism enables caching |
+| [Bazel Modules (Bzlmod)](concepts/bazel-modules.md) | MODULE.bazel dependency mgmt; bazel_dep; Minimal Version Selection; overrides; Bazel Central Registry |
+| [Hermetic Builds](concepts/hermetic-builds.md) | Same input ⇒ same output via host isolation; enables caching/reproducibility; foundation for SLSA provenance |
+| [Remote Build Caching](concepts/remote-build-caching.md) | Shared action-output cache (action cache + CAS); team/CI speedup; needs hermeticity; poisoning hazards |
+| [Build Graph & Query (Bazel)](concepts/build-graph.md) | Repo/workspace/package/target units; declared deps; action graph; bazel query (deps/rdeps/paths) |
+| [OCI Images](concepts/oci-images.md) | Open Container Initiative image spec; runtime-neutral; build with rules_oci; standard annotations |
 
 ## Analyses
 

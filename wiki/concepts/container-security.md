@@ -56,7 +56,7 @@ Security practices for building, deploying, and running containerized workloads.
 | `debian-slim` | ~25 MB   | Yes     | When glibc compatibility required    |
 | `ubuntu`      | ~75 MB   | Yes     | Dev/debugging only                   |
 
-Distroless eliminates shell escape vectors. Scratch is the smallest possible attack surface.
+Distroless eliminates shell escape vectors. Scratch is the smallest possible attack surface. See [Distroless Images](distroless-images.md) for the design pattern and the Google [distroless](../entities/distroless.md) vs [Chainguard](../entities/chainguard.md)/[Wolfi](../entities/wolfi.md) comparison.
 
 ## Image Security
 
@@ -116,23 +116,19 @@ Additional practices when running Node.js in Docker — see [Node.js Security](n
 
 ## Kernel Security Layers
 
-Three independent kernel enforcement layers — all should be active
-([defense-in-depth](defense-in-depth.md)):
+Three independent kernel enforcement layers — all should be active ([defense-in-depth](defense-in-depth.md)):
 
-| Layer                                         | Mechanism                    | Granularity                    |
-| --------------------------------------------- | ---------------------------- | ------------------------------ |
-| [Linux Capabilities](linux-capabilities.md)   | Drop CAP\_\* units           | Coarse privilege units         |
-| [Seccomp](seccomp.md)                         | Syscall allowlisting via BPF | Per-syscall                    |
-| [AppArmor](../entities/apparmor.md) / SELinux | MAC path/label policy        | File/network/capability access |
+| Layer | Mechanism | Granularity |
+| --- | --- | --- |
+| [Linux Capabilities](linux-capabilities.md) | Drop CAP\_\* units | Coarse privilege units |
+| [Seccomp](seccomp.md) | Syscall allowlisting via BPF | Per-syscall |
+| [AppArmor](../entities/apparmor.md) / SELinux | MAC path/label policy | File/network/capability access |
 
-Docker applies `docker-default` seccomp and AppArmor profiles automatically.
-Override with `--security-opt seccomp=...` and `--security-opt apparmor=...`.
+Docker applies `docker-default` seccomp and AppArmor profiles automatically. Override with `--security-opt seccomp=...` and `--security-opt apparmor=...`.
 
 ## Runtime API and Daemon Exposure
 
-A container with correct seccomp, capabilities, and AppArmor can still be one API call from host
-compromise if a runtime socket is mounted inside it. The kernel isolation works correctly — the
-management plane is exposed.
+A container with correct seccomp, capabilities, and AppArmor can still be one API call from host compromise if a runtime socket is mounted inside it. The kernel isolation works correctly — the management plane is exposed.
 
 **Common high-value sockets:**
 
@@ -142,8 +138,7 @@ management plane is exposed.
 /var/run/kubelet.sock  /run/buildkit/buildkitd.sock
 ```
 
-Absence of a CLI client doesn't protect the socket — Docker speaks plain HTTP over the Unix socket
-and `curl` is sufficient:
+Absence of a CLI client doesn't protect the socket — Docker speaks plain HTTP over the Unix socket and `curl` is sufficient:
 
 ```bash
 curl --unix-socket /var/run/docker.sock http://localhost/_ping
@@ -155,8 +150,7 @@ See [HackTricks — Runtime API and Daemon Exposure](../sources/hacktricks-runti
 
 ## Authorization Plugins (Docker)
 
-Docker authz plugins narrow the default "all-or-nothing" daemon access model, but safety depends on
-complete API surface coverage. Common bypass classes:
+Docker authz plugins narrow the default "all-or-nothing" daemon access model, but safety depends on complete API surface coverage. Common bypass classes:
 
 - `docker exec` grants privilege after unprivileged container creation
 - Raw API field shape mismatch (top-level `Binds` vs `HostConfig.Binds`)
@@ -169,17 +163,16 @@ See [HackTricks — Runtime Authorization Plugins](../sources/hacktricks-authori
 
 Dangerous mounts beyond `/`:
 
-| Mount                           | Risk                                                         |
-| ------------------------------- | ------------------------------------------------------------ |
-| `/proc/sys/kernel/core_pattern` | Host code execution on crash                                 |
-| `/proc/sys/kernel/modprobe`     | Redirect kernel module-loader helper                         |
-| `/proc/sysrq-trigger`           | Host DoS (immediate reboot)                                  |
-| `/sys/kernel/uevent_helper`     | Host code execution on uevent                                |
-| `/sys/kernel/debug`             | Wide kernel debug surface                                    |
-| `/var`                          | Service-account tokens, container snapshots, runtime sockets |
+| Mount | Risk |
+| --- | --- |
+| `/proc/sys/kernel/core_pattern` | Host code execution on crash |
+| `/proc/sys/kernel/modprobe` | Redirect kernel module-loader helper |
+| `/proc/sysrq-trigger` | Host DoS (immediate reboot) |
+| `/sys/kernel/uevent_helper` | Host code execution on uevent |
+| `/sys/kernel/debug` | Wide kernel debug surface |
+| `/var` | Service-account tokens, container snapshots, runtime sockets |
 
-Mounted `/var` on a Kubernetes node often gives access to other pods' projected service-account
-tokens, which can escalate to cluster-wide compromise.
+Mounted `/var` on a Kubernetes node often gives access to other pods' projected service-account tokens, which can escalate to cluster-wide compromise.
 
 See [HackTricks — Sensitive Host Mounts](../sources/hacktricks-sensitive-host-mounts.md).
 

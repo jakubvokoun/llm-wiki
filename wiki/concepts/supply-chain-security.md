@@ -45,6 +45,8 @@ SLSA (Supply Chain Levels for Software Artifacts) provides a framework for docum
 
 See: [SLSA](slsa.md), [SLSA Build Track](slsa-build-track.md), [SLSA Source Track](slsa-source-track.md), [SLSA Provenance](slsa-provenance.md)
 
+L3's "unforgeable, isolated" requirement rests on [hermetic builds](hermetic-builds.md) — a build isolated from the host (e.g. [Bazel](../entities/bazel.md) sandboxing) is what makes provenance trustworthy and [reproducible](hermetic-builds.md). Minimal [distroless images](distroless-images.md) reduce the provenance burden to just the runtime deps.
+
 ### Trusted Registry
 
 Store signed images + SBOMs in a registry with:
