@@ -50,3 +50,4 @@ Originally developed internally at Google (under the name "Binary Authorization 
 - Concept: [SLSA Source Track](../concepts/slsa-source-track.md)
 - Entity: [OpenSSF](openssf.md)
 - Entity: [in-toto](in-toto.md)
+- Source: [SLSA v1.2 Terminology](../sources/slsa-v1.2-terminology.md)

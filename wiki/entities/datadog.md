@@ -28,3 +28,4 @@ Datadog's "Monitoring 101" series (2015) remains a widely referenced framework:
 - [Observability](../concepts/observability.md)
 - [Application Performance Monitoring](../concepts/application-performance-monitoring.md)
 - [Alert Severity Levels](../concepts/alert-severity.md)
+- [Datadog Monitoring 101: Alerting (source)](../sources/datadog-monitoring-101-alerting.md)

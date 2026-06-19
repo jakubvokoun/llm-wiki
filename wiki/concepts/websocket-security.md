@@ -11,13 +11,13 @@ WebSockets (RFC 6455) provide persistent bidirectional TCP connections upgraded 
 
 ## Key Threats
 
-| Threat          | Description                                                                             |
-| --------------- | --------------------------------------------------------------------------------------- |
-| CSWSH           | Cross-Site WebSocket Hijacking — malicious site opens WS, browser sends session cookies |
-| Injection       | WS messages carry XSS, SQLi, command injection payloads                                 |
-| Session drift   | WS connections outlive HTTP sessions; stale auth persists                               |
-| DoS             | Persistent connections = connection exhaustion and message flooding vectors             |
-| Monitoring gaps | HTTP logs only capture the upgrade request, miss all message traffic                    |
+| Threat | Description |
+| --- | --- |
+| CSWSH | Cross-Site WebSocket Hijacking — malicious site opens WS, browser sends session cookies |
+| Injection | WS messages carry XSS, SQLi, command injection payloads |
+| Session drift | WS connections outlive HTTP sessions; stale auth persists |
+| DoS | Persistent connections = connection exhaustion and message flooding vectors |
+| Monitoring gaps | HTTP logs only capture the upgrade request, miss all message traffic |
 
 ## Cross-Site WebSocket Hijacking (CSWSH)
 
@@ -80,3 +80,4 @@ Log at WS layer: connection events (user, IP, origin), per-message auth decision
 - [Authentication](authentication.md) — token/cookie patterns
 - [Input Validation](input-validation.md) — message validation
 - [Security Logging](security-logging.md) — WS logging gaps
+- Source: [OWASP WebSocket Security Cheat Sheet](../sources/owasp-websocket-security.md)

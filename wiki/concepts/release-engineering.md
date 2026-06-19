@@ -56,13 +56,13 @@ Automated audit trail of all changes in every release.
 Source → Build → Branch → Test → Package → Deploy
 ```
 
-| Stage   | What happens                                                                |
-| ------- | --------------------------------------------------------------------------- |
-| Build   | Declarative targets with explicit dependencies; build ID embedded in binary |
-| Branch  | Branch from mainline at specific revision; bug fixes cherry-picked in       |
-| Test    | Continuous tests on mainline + re-run on release branch                     |
-| Package | Hash-versioned, signed packages with environment labels (dev/canary/prod)   |
-| Deploy  | Simple: automated update; complex: progressive rollout over hours/days      |
+| Stage | What happens |
+| --- | --- |
+| Build | Declarative targets with explicit dependencies; build ID embedded in binary |
+| Branch | Branch from mainline at specific revision; bug fixes cherry-picked in |
+| Test | Continuous tests on mainline + re-run on release branch |
+| Package | Hash-versioned, signed packages with environment labels (dev/canary/prod) |
+| Deploy | Simple: automated update; complex: progressive rollout over hours/days |
 
 **Cherry picking:** Bug fixes committed to mainline then selectively applied to the release branch. The release branch may contain code that never existed on mainline — so tests must be re-run on the branch itself.
 
@@ -70,12 +70,12 @@ Source → Build → Branch → Test → Package → Deploy
 
 Configuration changes are a major source of instability. Key patterns:
 
-| Pattern                    | Best for                                         | Trade-off                                    |
-| -------------------------- | ------------------------------------------------ | -------------------------------------------- |
-| Mainline config            | Config decoupled from binary release             | Running config can drift from source         |
-| Config bundled with binary | Config changes each release or rarely            | Tight coupling; simpler single package       |
+| Pattern | Best for | Trade-off |
+| --- | --- | --- |
+| Mainline config | Config decoupled from binary release | Running config can drift from source |
+| Config bundled with binary | Config changes each release or rarely | Tight coupling; simpler single package |
 | Config as separate package | Hermetic snapshot; change config without rebuild | Two packages; use labels to keep them paired |
-| External store             | Dynamic config changes while service is running  | Runtime dependency; needs HA store           |
+| External store | Dynamic config changes while service is running | Runtime dependency; needs HA store |
 
 All approaches: store config in source control, enforce code review.
 
@@ -99,3 +99,4 @@ Release engineering is cheapest at the **beginning** of a project. Retrofitting 
 - [Supply Chain Security](supply-chain-security.md)
 - [Site Reliability Engineering](site-reliability-engineering.md)
 - [DORA Metrics](dora-metrics.md)
+- [Google SRE: Release Engineering (source)](../sources/sre-book-release-engineering.md)

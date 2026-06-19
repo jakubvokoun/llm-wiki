@@ -18,3 +18,4 @@ Enterprise Linux and cloud-native infrastructure company. Known for SUSE Linux E
 
 - [Observability](../concepts/observability.md)
 - [Kubernetes](../entities/kubernetes.md)
+- [SUSE Observability Monitoring Strategies (source)](../sources/suse-observability-monitoring-strategies.md)

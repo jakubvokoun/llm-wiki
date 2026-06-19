@@ -9,11 +9,11 @@ updated: 2026-04-24
 
 ## Definitions
 
-| Term | Full name               | Definition                                                                              |
-| ---- | ----------------------- | --------------------------------------------------------------------------------------- |
-| SLI  | Service Level Indicator | Quantitative measure of a service behavior (latency p99, error rate, availability %)    |
-| SLO  | Service Level Objective | Target value or range for an SLI; sets user expectations; no contractual consequence    |
-| SLA  | Service Level Agreement | Contract with users including explicit consequences (financial or otherwise) for misses |
+| Term | Full name | Definition |
+| --- | --- | --- |
+| SLI | Service Level Indicator | Quantitative measure of a service behavior (latency p99, error rate, availability %) |
+| SLO | Service Level Objective | Target value or range for an SLI; sets user expectations; no contractual consequence |
+| SLA | Service Level Agreement | Contract with users including explicit consequences (financial or otherwise) for misses |
 
 Quick test: _"what happens if the target is missed?"_ — no answer → SLO; explicit consequence → SLA.
 
@@ -79,3 +79,4 @@ Reusable defaults reduce per-SLI specification work:
 - [Prometheus Alerting](prometheus-alerting.md)
 - [Observability](observability.md)
 - [Runbooks](runbooks.md)
+- [Google SRE: Service Level Objectives (source)](../sources/sre-book-service-level-objectives.md)

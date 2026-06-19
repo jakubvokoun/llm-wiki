@@ -11,24 +11,24 @@ APM provides deep visibility into an application's runtime behavior — server p
 
 ## Web Application Monitoring Types
 
-| Type                           | Proactive/Reactive | Data Source                    |
-| ------------------------------ | ------------------ | ------------------------------ |
-| **APM**                        | Both               | Server-side instrumentation    |
-| **Uptime Monitoring**          | Reactive           | External probes                |
-| **Synthetic Monitoring**       | Proactive          | Scripted simulated user flows  |
-| **Real User Monitoring (RUM)** | Reactive           | Actual user session data       |
-| **Error Tracking & Logging**   | Reactive           | Application error events       |
-| **Infrastructure Monitoring**  | Both               | Host metrics (CPU/memory/disk) |
-| **Security Monitoring**        | Both               | Access logs, anomaly detection |
+| Type | Proactive/Reactive | Data Source |
+| --- | --- | --- |
+| **APM** | Both | Server-side instrumentation |
+| **Uptime Monitoring** | Reactive | External probes |
+| **Synthetic Monitoring** | Proactive | Scripted simulated user flows |
+| **Real User Monitoring (RUM)** | Reactive | Actual user session data |
+| **Error Tracking & Logging** | Reactive | Application error events |
+| **Infrastructure Monitoring** | Both | Host metrics (CPU/memory/disk) |
+| **Security Monitoring** | Both | Access logs, anomaly detection |
 
 ## Synthetic vs Real User Monitoring
 
-| Dimension     | Synthetic                              | RUM                                   |
-| ------------- | -------------------------------------- | ------------------------------------- |
-| Timing        | Before users hit the problem           | After users are affected              |
-| Coverage      | Controlled scenarios only              | Full real-world breadth               |
-| Data richness | Consistent, reproducible               | Highly variable                       |
-| Use case      | Pre-deploy validation, off-peak checks | UX optimization, bounce-rate analysis |
+| Dimension | Synthetic | RUM |
+| --- | --- | --- |
+| Timing | Before users hit the problem | After users are affected |
+| Coverage | Controlled scenarios only | Full real-world breadth |
+| Data richness | Consistent, reproducible | Highly variable |
+| Use case | Pre-deploy validation, off-peak checks | UX optimization, bounce-rate analysis |
 
 ## Key Metrics
 
@@ -54,3 +54,4 @@ Smart alerting is a core practice:
 - [Prometheus Instrumentation](../concepts/prometheus-instrumentation.md)
 - [Prometheus Alerting](../concepts/prometheus-alerting.md)
 - [Security Logging](../concepts/security-logging.md)
+- [Web App Monitoring Best Practices — dev.to (source)](../sources/devto-web-app-monitoring-best-practices.md)

@@ -11,13 +11,13 @@ The SRE automation hierarchy describes the maturity levels of operational automa
 
 ## The Five Levels
 
-| Level | Description                                    | Example                                        |
-| ----- | ---------------------------------------------- | ---------------------------------------------- |
-| 1     | No automation — manual human action            | SRE manually fails over database master        |
-| 2     | Externally maintained, system-specific         | SRE has failover script in home directory      |
-| 3     | Externally maintained, generic                 | Shared generic failover script for all DBs     |
-| 4     | Internally maintained, system-specific         | Database ships its own failover tooling        |
-| 5     | Autonomous — self-healing without intervention | Database detects problem and fails over itself |
+| Level | Description | Example |
+| --- | --- | --- |
+| 1 | No automation — manual human action | SRE manually fails over database master |
+| 2 | Externally maintained, system-specific | SRE has failover script in home directory |
+| 3 | Externally maintained, generic | Shared generic failover script for all DBs |
+| 4 | Internally maintained, system-specific | Database ships its own failover tooling |
+| 5 | Autonomous — self-healing without intervention | Database detects problem and fails over itself |
 
 Level 5 is the goal. Automation replaces toil; autonomy eliminates the need for automation.
 
@@ -33,13 +33,13 @@ The highest-leverage investment is at **design time**: build systems that don't 
 
 ## Values of Automation
 
-| Value          | Why it matters                                                                     |
-| -------------- | ---------------------------------------------------------------------------------- |
-| Consistency    | Humans performing a task 100× will not do it the same way each time; machines will |
-| Platform       | Centralizes bug fixes; exports metrics; extensible without adding headcount        |
-| Faster Repairs | Lower MTTR for common faults; earlier detection is cheaper to fix                  |
-| Faster Action  | Machines react faster; humans can't keep up past a certain scale                   |
-| Time Saving    | Decouples operator from operation; savings multiply across all users               |
+| Value | Why it matters |
+| --- | --- |
+| Consistency | Humans performing a task 100× will not do it the same way each time; machines will |
+| Platform | Centralizes bug fixes; exports metrics; extensible without adding headcount |
+| Faster Repairs | Lower MTTR for common faults; earlier detection is cheaper to fix |
+| Faster Action | Machines react faster; humans can't keep up past a certain scale |
+| Time Saving | Decouples operator from operation; savings multiply across all users |
 
 ## Design Principles for Automation
 
@@ -61,3 +61,4 @@ The highest-leverage investment is at **design time**: build systems that don't 
 - [Site Reliability Engineering](site-reliability-engineering.md)
 - [Progressive Delivery](progressive-delivery.md)
 - [CI/CD Security](cicd-security.md)
+- [Google SRE: Automation at Google (source)](../sources/sre-book-automation-at-google.md)

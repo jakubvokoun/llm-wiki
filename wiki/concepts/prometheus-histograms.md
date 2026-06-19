@@ -17,15 +17,15 @@ Use summaries only when accurate per-instance quantiles are required and cross-i
 
 ## Comparison
 
-| Property                   | Summary | Classic Histogram    | Native Histogram |
-| -------------------------- | ------- | -------------------- | ---------------- |
-| Quantile location          | Client  | Server (PromQL)      | Server (PromQL)  |
-| Cross-instance aggregation | No      | Yes                  | Yes              |
-| Bucket config required     | No      | Yes (pre-configured) | No (dynamic)     |
-| Ad-hoc percentiles         | No      | Yes                  | Yes              |
-| Ad-hoc time windows        | No      | Yes                  | Yes              |
-| Storage efficiency         | Medium  | Low (many series)    | High             |
-| Accuracy when values drift | High    | Low                  | High             |
+| Property | Summary | Classic Histogram | Native Histogram |
+| --- | --- | --- | --- |
+| Quantile location | Client | Server (PromQL) | Server (PromQL) |
+| Cross-instance aggregation | No | Yes | Yes |
+| Bucket config required | No | Yes (pre-configured) | No (dynamic) |
+| Ad-hoc percentiles | No | Yes | Yes |
+| Ad-hoc time windows | No | Yes | Yes |
+| Storage efficiency | Medium | Low (many series) | High |
+| Accuracy when values drift | High | Low | High |
 
 ## Why Summaries Cannot Be Aggregated
 
@@ -50,3 +50,4 @@ Classic Histogram → NHCB (server-side) → Native Histogram (client-side)
 - [Prometheus](../entities/prometheus.md)
 - [Prometheus Instrumentation](../concepts/prometheus-instrumentation.md)
 - [Kubernetes Observability](../concepts/kubernetes-observability.md)
+- [Prometheus: Histograms & Summaries (source)](../sources/prometheus-histograms.md)

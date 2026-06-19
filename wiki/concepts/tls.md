@@ -69,3 +69,4 @@ Pins expected public key in addition to standard chain validation. HPKP (browser
 - [HTTP Security Headers](http-security-headers.md)
 - [Service Mesh](service-mesh.md) — automatic mTLS between microservices
 - [Database Security](database-security.md) — TLS for DB connections
+- Source: [OWASP Transport Layer Security Cheat Sheet](../sources/owasp-tls-security.md)
