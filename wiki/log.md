@@ -42,3 +42,10 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **entities:** bazel, distroless, chainguard, wolfi
 - **updated:** container-security (distroless-images backlink), supply-chain-security (hermetic-builds/reproducibility backlink), linux-privilege-escalation, seccomp, mandatory-access-control, authentication, rest-api-security, xml-security, dom-xss, slsa, cicd-security, nix-language, prometheus-alerting, continuous-integration, cve, uds-core (orphan-source backlinks)
 - **lint:** Issues found: 35 (7 broken links → 3 missing concepts ssrf/clickjacking/denial-of-service; 28 orphan pages). Fixed: 35. Created the 3 concepts; wired all 28 orphans (4 concepts + openscap entity + 23 source pages) into related pages. Result: 0 broken links, 0 orphans, 100% index coverage across 456 pages.
+
+## [2026-06-19]
+
+- **queue (8):** cvss-v4-specification-document, cvss-v4-user-guide, cvss-v4-implementation-guide, cvss-v4-examples, cvss-v4-faq, appsec-guide-fuzzing, appsec-guide-oss-fuzz, oss-fuzz
+- **concepts:** fuzzing, sanitizers, epss, ssvc
+- **entities:** oss-fuzz, trail-of-bits
+- **updated:** cvss (major v4.0 rewrite: four metric groups, nomenclature, AT/UI, Vulnerable/Subsequent System, maturity model), first (CVSS v4.0 + EPSS)

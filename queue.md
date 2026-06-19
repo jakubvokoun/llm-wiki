@@ -272,3 +272,11 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://github.com/bazel-contrib/rules_oci <!-- ingested 2026-06-14 -->
 - [x] https://github.com/wolfi-dev/os <!-- ingested 2026-06-14 -->
 - [x] https://edu.chainguard.dev/chainguard/chainguard-images/overview/ <!-- ingested 2026-06-14 -->
+- [x] https://www.first.org/cvss/v4.0/specification-document <!-- ingested 2026-06-19 -->
+- [x] https://www.first.org/cvss/v4.0/user-guide <!-- ingested 2026-06-19 -->
+- [x] https://www.first.org/cvss/v4.0/implementation-guide <!-- ingested 2026-06-19 -->
+- [x] https://www.first.org/cvss/v4.0/examples <!-- ingested 2026-06-19 -->
+- [x] https://www.first.org/cvss/v4.0/faq <!-- ingested 2026-06-19 -->
+- [x] https://appsec.guide/docs/fuzzing/ <!-- ingested 2026-06-19 -->
+- [x] https://appsec.guide/docs/fuzzing/oss-fuzz/ <!-- ingested 2026-06-19 -->
+- [x] https://google.github.io/oss-fuzz/ <!-- ingested 2026-06-19 -->

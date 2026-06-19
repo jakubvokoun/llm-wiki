@@ -273,51 +273,61 @@
 | [rules_oci README](sources/rules-oci.md)                                                                                                            | Spec-only Bazel OCI rules; oci_image/index/pull/push/load; vs rules_docker/rules_img; cosign signing                                   | 2026-06-14 |
 | [Wolfi README](sources/wolfi.md)                                                                                                                    | Container-native glibc (un)distro; built with melange; apk packages; not Alpine-compatible; Chainguard-sponsored                       | 2026-06-14 |
 | [Chainguard Containers Overview](sources/chainguard-images.md)                                                                                      | Distroless images on Wolfi; nightly rebuilds → near-zero CVE; cosign/SBOM/SLSA; multi-layer; OCI annotations                           | 2026-06-14 |
+| [Fuzzing (Trail of Bits Testing Handbook)](sources/appsec-guide-fuzzing.md)                                                                         | Practical fuzzing intro: terminology, mutation-based evolutionary algorithm, harness/SUT/corpus anatomy, what to fuzz                  | 2026-06-19 |
+| [OSS-Fuzz (Trail of Bits Testing Handbook)](sources/appsec-guide-oss-fuzz.md)                                                                       | How-to for OSS-Fuzz: `infra/helper.py` CLI, irssi example, Docker image hierarchy, project integration, CIFuzz/ClusterFuzzLite         | 2026-06-19 |
+| [CVSS v4.0 Examples](sources/cvss-v4-examples.md)                                                                                                   | Worked CVSS v4.0 scorings of real CVEs by new metric and by vulnerability class (XSS, SQLi, RCE, SSRF, DoS…)                           | 2026-06-19 |
+| [CVSS v4.0 FAQ](sources/cvss-v4-faq.md)                                                                                                             | ~25 Q&As: AC vs AT, Vulnerable/Subsequent boundaries, threat/env application, EPSS/SSVC, AI/LLM, v3.1↔v4.0                             | 2026-06-19 |
+| [CVSS v4.0 Consumer Implementation Guide](sources/cvss-v4-implementation-guide.md)                                                                  | Consumer guide to enriching Base with Threat/Environmental; vector enrichment; the CVSS Maturity Model (levels 0–3, "+")               | 2026-06-19 |
+| [CVSS v4.0 Specification Document](sources/cvss-v4-specification-document.md)                                                                       | Normative FIRST spec: four metric groups, nomenclature, Base metrics, Vulnerable vs Subsequent System impacts                          | 2026-06-19 |
+| [CVSS v4.0 User Guide](sources/cvss-v4-user-guide.md)                                                                                               | How to score: v4.0 changes from v3.1, reasonable-worst-case assessment guidance, supplemental metrics, rubrics                         | 2026-06-19 |
+| [OSS-Fuzz (official documentation)](sources/oss-fuzz.md)                                                                                            | Google's free continuous-fuzzing service: origin (Heartbleed), engines, languages, trophies, doc map                                   | 2026-06-19 |
 
 ## Entities
 
-| Page                                                 | Type        | Summary                                                                                                            |
-| ---------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------ |
-| [GitLab](entities/gitlab.md)                         | org/product | DevSecOps platform; CI/CD pipelines; Container Registry; CI/CD Catalog; Free/Premium/Ultimate tiers                |
-| [AppArmor](entities/apparmor.md)                     | product     | Linux MAC security module; path-based profiles; default on Ubuntu; Docker docker-default                           |
-| [OSTree](entities/ostree.md)                         | product     | Content-addressed OS tree versioning; foundational layer for Fedora Atomic and others                              |
-| [Fedora](entities/fedora.md)                         | product     | Fedora Atomic family: Silverblue, Kinoite, CoreOS; Universal Blue derivative images                                |
-| [Flatpak](entities/flatpak.md)                       | product     | Sandboxed Linux app packaging; canonical delivery for immutable/atomic desktop distros                             |
-| [Distrobox](entities/distrobox.md)                   | product     | Mutable container environments on immutable hosts; wraps Podman/Docker transparently                               |
-| [OWASP](entities/owasp.md)                           | org         | Open source security foundation; Cheat Sheet Series, Top 10, Docker Top 10                                         |
-| [Docker](entities/docker.md)                         | product     | Leading container runtime; daemon-based, many hardening options available                                          |
-| [Podman](entities/podman.md)                         | product     | Rootless, daemonless Docker alternative by Red Hat with SELinux integration                                        |
-| [Kubernetes](entities/kubernetes.md)                 | product     | Container orchestration platform; RBAC, network policies, pod security, admission control                          |
-| [Anthropic](entities/anthropic.md)                   | org         | AI safety company; creator of Claude models and Model Context Protocol (MCP)                                       |
-| [Nix](entities/nix.md)                               | product     | Purely functional package manager; Nixpkgs + NixOS; reproducible builds in /nix/store                              |
-| [Zarf](entities/zarf.md)                             | product     | Airgap K8s packaging tool by Defense Unicorns; bundles images/charts/manifests into .tar.zst                       |
-| [Prometheus](entities/prometheus.md)                 | product     | Open-source monitoring + time series DB; pull-based scraping, PromQL, CNCF graduated project                       |
-| [SUSE](entities/suse.md)                             | org/product | Enterprise Linux and cloud-native infra; SUSE Cloud Observability, Rancher                                         |
-| [Datadog](entities/datadog.md)                       | org/product | Cloud monitoring + observability platform; APM, infrastructure, logs, synthetic monitoring                         |
-| [Grafana](entities/grafana.md)                       | org/product | Open-source visualization+alerting platform; Loki, Tempo, Mimir, OnCall ecosystem                                  |
-| [VictoriaMetrics](entities/victoriametrics.md)       | product     | High-performance Prometheus-compatible TSDB; vmalert, vmagent, MetricsQL, keep_firing_for                          |
-| [HackTricks](entities/hacktricks.md)                 | org/product | Open-source cybersecurity wiki; Linux, container, web, AD attack and defense guides                                |
-| [SLSA](entities/slsa.md)                             | project     | Supply-chain Levels for Software Artifacts; Linux Foundation cross-industry collab; slsa.dev                       |
-| [OpenSSF](entities/openssf.md)                       | org         | Open Source Security Foundation; OSPS Baseline, Scorecard, Sigstore, Alpha-Omega                                   |
-| [in-toto](entities/in-toto.md)                       | project     | CNCF graduated attestation framework; in-toto Statement format used by SLSA provenance                             |
-| [Defense Unicorns](entities/defense-unicorns.md)     | org         | Defense-tech company; creators of Zarf, UDS Core, and Pepr                                                         |
-| [UDS Core](entities/uds-core.md)                     | product     | Opinionated K8s platform baseline: Istio, Keycloak, Prometheus, Falco, Vector, Loki, Velero                        |
-| [Pepr](entities/pepr.md)                             | product     | K8s admission controller framework by Defense Unicorns; UDS Core's policy engine                                   |
-| [Istio](entities/istio.md)                           | product     | CNCF service mesh; mTLS, authorization policies, ambient/sidecar modes; core of UDS Core networking                |
-| [Keycloak](entities/keycloak.md)                     | product     | Open-source IAM by Red Hat; SSO, OIDC, SAML, LDAP federation; identity provider in UDS Core                        |
-| [Falco](entities/falco.md)                           | product     | CNCF runtime security; eBPF syscall monitoring; Falcosidekick fan-out; UDS Core runtime security layer             |
-| [OpenSCAP](entities/openscap.md)                     | org/product | NIST-certified open-source SCAP scanner; oscap/SCAP Workbench/SSG; compliance and vulnerability assessment         |
-| [Greg Kroah-Hartman](entities/greg-kroah-hartman.md) | person      | Linux stable-kernel maintainer; kernel.org CNA team; CVSS/NVD critic; CRA commentator                              |
-| [ENISA](entities/enisa.md)                           | org         | EU Agency for Cybersecurity; operates the CRA Single Reporting Platform (Article 16)                               |
-| [CISA](entities/cisa.md)                             | org         | US cyber agency; CVD program (VINCE); CVE Top-Level Root + CNA of Last Resort; KEV catalog                         |
-| [FIRST](entities/first.md)                           | org         | Forum of Incident Response and Security Teams; PSIRT/CSIRT frameworks, CVSS, TLP                                   |
-| [GCVE](entities/gcve.md)                             | project     | Global CVE Allocation System (CIRCL); decentralized GNA model; BCP best-practice guides                            |
-| [ORCWG](entities/orcwg.md)                           | org         | Open Regulatory Compliance Working Group; community CRA guidance for open source                                   |
-| [Intel](entities/intel.md)                           | org/product | Example mature PSIRT and CNA; Identify/Mitigate/Disclose; monthly security advisories                              |
-| [Bazel](entities/bazel.md)                           | product     | Google's artifact-based build/test tool; Starlark BUILD files; hermetic, cached, multi-language; builds distroless |
-| [Distroless](entities/distroless.md)                 | product     | Google minimal base images: app + runtime deps only, no shell/pkg-mgr; Debian-based; cosign-signed                 |
-| [Chainguard](entities/chainguard.md)                 | org/product | Hardened minimal images on Wolfi; nightly rebuilds, near-zero CVE; apko/melange; cosign/SBOM/SLSA                  |
-| [Wolfi](entities/wolfi.md)                           | product     | Container-native glibc (un)distribution; base for Chainguard images; apk packages; not Alpine-compatible           |
+| Page                                                 | Type        | Summary                                                                                                                    |
+| ---------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [GitLab](entities/gitlab.md)                         | org/product | DevSecOps platform; CI/CD pipelines; Container Registry; CI/CD Catalog; Free/Premium/Ultimate tiers                        |
+| [AppArmor](entities/apparmor.md)                     | product     | Linux MAC security module; path-based profiles; default on Ubuntu; Docker docker-default                                   |
+| [OSTree](entities/ostree.md)                         | product     | Content-addressed OS tree versioning; foundational layer for Fedora Atomic and others                                      |
+| [Fedora](entities/fedora.md)                         | product     | Fedora Atomic family: Silverblue, Kinoite, CoreOS; Universal Blue derivative images                                        |
+| [Flatpak](entities/flatpak.md)                       | product     | Sandboxed Linux app packaging; canonical delivery for immutable/atomic desktop distros                                     |
+| [Distrobox](entities/distrobox.md)                   | product     | Mutable container environments on immutable hosts; wraps Podman/Docker transparently                                       |
+| [OWASP](entities/owasp.md)                           | org         | Open source security foundation; Cheat Sheet Series, Top 10, Docker Top 10                                                 |
+| [Docker](entities/docker.md)                         | product     | Leading container runtime; daemon-based, many hardening options available                                                  |
+| [Podman](entities/podman.md)                         | product     | Rootless, daemonless Docker alternative by Red Hat with SELinux integration                                                |
+| [Kubernetes](entities/kubernetes.md)                 | product     | Container orchestration platform; RBAC, network policies, pod security, admission control                                  |
+| [Anthropic](entities/anthropic.md)                   | org         | AI safety company; creator of Claude models and Model Context Protocol (MCP)                                               |
+| [Nix](entities/nix.md)                               | product     | Purely functional package manager; Nixpkgs + NixOS; reproducible builds in /nix/store                                      |
+| [Zarf](entities/zarf.md)                             | product     | Airgap K8s packaging tool by Defense Unicorns; bundles images/charts/manifests into .tar.zst                               |
+| [Prometheus](entities/prometheus.md)                 | product     | Open-source monitoring + time series DB; pull-based scraping, PromQL, CNCF graduated project                               |
+| [SUSE](entities/suse.md)                             | org/product | Enterprise Linux and cloud-native infra; SUSE Cloud Observability, Rancher                                                 |
+| [Datadog](entities/datadog.md)                       | org/product | Cloud monitoring + observability platform; APM, infrastructure, logs, synthetic monitoring                                 |
+| [Grafana](entities/grafana.md)                       | org/product | Open-source visualization+alerting platform; Loki, Tempo, Mimir, OnCall ecosystem                                          |
+| [VictoriaMetrics](entities/victoriametrics.md)       | product     | High-performance Prometheus-compatible TSDB; vmalert, vmagent, MetricsQL, keep_firing_for                                  |
+| [HackTricks](entities/hacktricks.md)                 | org/product | Open-source cybersecurity wiki; Linux, container, web, AD attack and defense guides                                        |
+| [SLSA](entities/slsa.md)                             | project     | Supply-chain Levels for Software Artifacts; Linux Foundation cross-industry collab; slsa.dev                               |
+| [OpenSSF](entities/openssf.md)                       | org         | Open Source Security Foundation; OSPS Baseline, Scorecard, Sigstore, Alpha-Omega                                           |
+| [in-toto](entities/in-toto.md)                       | project     | CNCF graduated attestation framework; in-toto Statement format used by SLSA provenance                                     |
+| [Defense Unicorns](entities/defense-unicorns.md)     | org         | Defense-tech company; creators of Zarf, UDS Core, and Pepr                                                                 |
+| [UDS Core](entities/uds-core.md)                     | product     | Opinionated K8s platform baseline: Istio, Keycloak, Prometheus, Falco, Vector, Loki, Velero                                |
+| [Pepr](entities/pepr.md)                             | product     | K8s admission controller framework by Defense Unicorns; UDS Core's policy engine                                           |
+| [Istio](entities/istio.md)                           | product     | CNCF service mesh; mTLS, authorization policies, ambient/sidecar modes; core of UDS Core networking                        |
+| [Keycloak](entities/keycloak.md)                     | product     | Open-source IAM by Red Hat; SSO, OIDC, SAML, LDAP federation; identity provider in UDS Core                                |
+| [Falco](entities/falco.md)                           | product     | CNCF runtime security; eBPF syscall monitoring; Falcosidekick fan-out; UDS Core runtime security layer                     |
+| [OpenSCAP](entities/openscap.md)                     | org/product | NIST-certified open-source SCAP scanner; oscap/SCAP Workbench/SSG; compliance and vulnerability assessment                 |
+| [Greg Kroah-Hartman](entities/greg-kroah-hartman.md) | person      | Linux stable-kernel maintainer; kernel.org CNA team; CVSS/NVD critic; CRA commentator                                      |
+| [ENISA](entities/enisa.md)                           | org         | EU Agency for Cybersecurity; operates the CRA Single Reporting Platform (Article 16)                                       |
+| [CISA](entities/cisa.md)                             | org         | US cyber agency; CVD program (VINCE); CVE Top-Level Root + CNA of Last Resort; KEV catalog                                 |
+| [FIRST](entities/first.md)                           | org         | Forum of Incident Response and Security Teams; PSIRT/CSIRT frameworks, CVSS, TLP                                           |
+| [GCVE](entities/gcve.md)                             | project     | Global CVE Allocation System (CIRCL); decentralized GNA model; BCP best-practice guides                                    |
+| [ORCWG](entities/orcwg.md)                           | org         | Open Regulatory Compliance Working Group; community CRA guidance for open source                                           |
+| [Intel](entities/intel.md)                           | org/product | Example mature PSIRT and CNA; Identify/Mitigate/Disclose; monthly security advisories                                      |
+| [Bazel](entities/bazel.md)                           | product     | Google's artifact-based build/test tool; Starlark BUILD files; hermetic, cached, multi-language; builds distroless         |
+| [Distroless](entities/distroless.md)                 | product     | Google minimal base images: app + runtime deps only, no shell/pkg-mgr; Debian-based; cosign-signed                         |
+| [Chainguard](entities/chainguard.md)                 | org/product | Hardened minimal images on Wolfi; nightly rebuilds, near-zero CVE; apko/melange; cosign/SBOM/SLSA                          |
+| [Wolfi](entities/wolfi.md)                           | product     | Container-native glibc (un)distribution; base for Chainguard images; apk packages; not Alpine-compatible                   |
+| [OSS-Fuzz](entities/oss-fuzz.md)                     | product     | Google's free continuous-fuzzing service for OSS; libFuzzer/AFL++/Honggfuzz/Centipede; 10k+ vulns across ~1k projects      |
+| [Trail of Bits](entities/trail-of-bits.md)           | org         | Security research/consulting firm; publishes the Testing Handbook (appsec.guide) covering fuzzing, static analysis, crypto |
 
 ## Concepts
 
@@ -470,6 +480,10 @@
 | [Server-Side Request Forgery (SSRF)](concepts/ssrf.md)                               | Server tricked into attacker-chosen requests; internal/metadata access; XXE vector; allowlist + IP re-validation                   |
 | [Clickjacking](concepts/clickjacking.md)                                             | UI-redress via iframe overlay / malicious CSS; defense via CSP frame-ancestors, X-Frame-Options                                    |
 | [Denial of Service (DoS)](concepts/denial-of-service.md)                             | Availability attacks via resource exhaustion; Billion Laughs, ReDoS, decompression bombs; limits + overload protection             |
+| [EPSS (Exploit Prediction Scoring System)](concepts/epss.md)                         | FIRST framework estimating exploitation probability (0–1); complements, not replaces, CVSS severity                                |
+| [Fuzzing](concepts/fuzzing.md)                                                       | Dynamic testing with malformed inputs; mutation-based evolutionary algorithm; harness/corpus/SUT; continuous fuzzing               |
+| [Sanitizers (Code Sanitizers)](concepts/sanitizers.md)                               | Compiler instrumentation (ASan/UBSan/MSan/TSan/SanCov) that turns latent bugs into reliable crashes for fuzzers                    |
+| [SSVC (Stakeholder-Specific Vulnerability Categorization)](concepts/ssvc.md)         | Decision-tree methodology (CMU SEI/CISA) yielding an action (Track/Attend/Act); consumes CVSS/EPSS as inputs                       |
 
 ## Analyses
 
