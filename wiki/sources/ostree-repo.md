@@ -11,17 +11,11 @@ Deep-dive into OSTree's object model and repository internals.
 
 ## Key Takeaways
 
-1. **SHA256 content-addressed object store**, like git but with key differences: splits git's
-   "tree" into separate `dirtree` (filenames + checksums) and `dirmeta` (permissions +
-   xattrs) objects. Content objects include uid/gid/xattrs but **no timestamps**.
-2. **No timestamps by design.** Files downloaded at different times would hash differently if
-   timestamps were included. OSTree sets all timestamps to `0` so identical content always
-   deduplicates.
+1. **SHA256 content-addressed object store**, like git but with key differences: splits git's "tree" into separate `dirtree` (filenames + checksums) and `dirmeta` (permissions + xattrs) objects. Content objects include uid/gid/xattrs but **no timestamps**.
+2. **No timestamps by design.** Files downloaded at different times would hash differently if timestamps were included. OSTree sets all timestamps to `0` so identical content always deduplicates.
 3. **Five repository modes** for different use cases (see below).
-4. **Refs** are text files naming commits. Convention:
-   `exampleos/buildmain/x86_64-runtime`. Parent syntax: `ref^` (one back), `ref^^` (two).
-5. **Summary file** (`ostree summary -u`) maps refs→checksums and lists static deltas.
-   Can be GPG-signed. Required for Metalink compatibility and client branch enumeration.
+4. **Refs** are text files naming commits. Convention: `exampleos/buildmain/x86_64-runtime`. Parent syntax: `ref^` (one back), `ref^^` (two).
+5. **Summary file** (`ostree summary -u`) maps refs→checksums and lists static deltas. Can be GPG-signed. Required for Metalink compatibility and client branch enumeration.
 
 ## Object Types
 

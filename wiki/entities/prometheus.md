@@ -87,8 +87,7 @@ See [Borgmon](../concepts/borgmon.md) for full comparison.
 
 ## Philosophy
 
-The [Zen of Prometheus](../concepts/prometheus-zen.md) distills community best practices:
-instrument first, cardinality matters, rate then aggregate, symptom-based paging.
+The [Zen of Prometheus](../concepts/prometheus-zen.md) distills community best practices: instrument first, cardinality matters, rate then aggregate, symptom-based paging.
 
 ## Related Pages
 

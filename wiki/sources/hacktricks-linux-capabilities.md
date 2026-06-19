@@ -64,8 +64,7 @@ Every process spawned by that user inherits the configured capabilities.
 
 ## Docker Container Capabilities
 
-Default Docker container capabilities (subset of ~14):
-`chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap, net_bind_service, net_raw, sys_chroot, mknod, audit_write, setfcap`
+Default Docker container capabilities (subset of ~14): `chown, dac_override, fowner, fsetid, kill, setgid, setuid, setpcap, net_bind_service, net_raw, sys_chroot, mknod, audit_write, setfcap`
 
 ```bash
 docker run --rm -it r.j3ss.co/amicontained bash   # inspect container caps

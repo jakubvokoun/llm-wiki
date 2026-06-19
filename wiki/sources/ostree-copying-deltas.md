@@ -7,16 +7,13 @@ updated: 2026-04-17
 
 # OSTree Static Deltas for Offline Updates
 
-Source: `raw/ostree-copying-deltas.md` — OSTree documentation on copying static deltas for
-offline/air-gapped update scenarios.
+Source: `raw/ostree-copying-deltas.md` — OSTree documentation on copying static deltas for offline/air-gapped update scenarios.
 
 ## Key Takeaways
 
 1. OSTree can export a **self-contained static delta** to a single file (for USB, air-gap transfer).
-2. `--min-fallback-size=0` is required to make the delta fully self-contained — prevents the
-   delta from referencing loose objects that may not be present on the target.
-3. `static-delta apply-offline` imports the file into the local repo; the content is not yet
-   deployed — a separate `ostree admin deploy` or `rpm-ostree deploy` step is required.
+2. `--min-fallback-size=0` is required to make the delta fully self-contained — prevents the delta from referencing loose objects that may not be present on the target.
+3. `static-delta apply-offline` imports the file into the local repo; the content is not yet deployed — a separate `ostree admin deploy` or `rpm-ostree deploy` step is required.
 
 ## Commands
 

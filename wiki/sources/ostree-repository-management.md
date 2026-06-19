@@ -8,31 +8,19 @@ updated: 2026-04-17
 
 # OSTree Repository Management
 
-Source: `raw/ostree-repository-management.md` — OSTree official documentation on managing
-content across repositories in production pipelines.
+Source: `raw/ostree-repository-management.md` — OSTree official documentation on managing content across repositories in production pipelines.
 
 ## Key Takeaways
 
-1. **Dev/prod repository split** — separate internal high-frequency dev repo from public
-   low-frequency prod repo; standard pattern for OS content vendors.
-2. **Branch-based promotion pipeline** — use OSTree branches within dev to represent CI stages
-   (`buildmain` → `smoketested` → `stage-N-pass`); each stage is a new commit reusing the
-   same content objects from the prior stage.
-3. **Cross-repo promotion** — use `pull-local` with a checksum (not a branch name) so internal
-   stage branches never appear in the prod repo.
-4. **Hard links** — when two repos are on the same filesystem, `pull-local` uses hard links,
-   making promotion essentially free.
-5. **Version metadata** — attach `--add-metadata-string=version=X.Y.Z` to prod commits; shown
-   by `ostree admin status`.
-6. **Static delta + summary lifecycle** — generate deltas in prod after each release, then
-   always run `summary -u` (cannot be concurrent); supports deltas from N versions back.
-7. **Scratch deltas** — `--empty` flag bundles all objects into one delta for clients with no
-   prior OSTree history; trades server disk for fewer client HTTP requests.
-8. **Pruning** — `prune --refs-only --keep-younger-than="6 months ago"` for build/dev repos;
-   deleted commits leave tombstone markers.
-9. **Tools** — [ostree-releng-scripts](https://github.com/ostreedev/ostree-releng-scripts) for
-   scripted workflows; [Pulp OSTree plugin](https://docs.pulpproject.org/plugins/pulp_ostree/)
-   for enterprise repository management.
+1. **Dev/prod repository split** — separate internal high-frequency dev repo from public low-frequency prod repo; standard pattern for OS content vendors.
+2. **Branch-based promotion pipeline** — use OSTree branches within dev to represent CI stages (`buildmain` → `smoketested` → `stage-N-pass`); each stage is a new commit reusing the same content objects from the prior stage.
+3. **Cross-repo promotion** — use `pull-local` with a checksum (not a branch name) so internal stage branches never appear in the prod repo.
+4. **Hard links** — when two repos are on the same filesystem, `pull-local` uses hard links, making promotion essentially free.
+5. **Version metadata** — attach `--add-metadata-string=version=X.Y.Z` to prod commits; shown by `ostree admin status`.
+6. **Static delta + summary lifecycle** — generate deltas in prod after each release, then always run `summary -u` (cannot be concurrent); supports deltas from N versions back.
+7. **Scratch deltas** — `--empty` flag bundles all objects into one delta for clients with no prior OSTree history; trades server disk for fewer client HTTP requests.
+8. **Pruning** — `prune --refs-only --keep-younger-than="6 months ago"` for build/dev repos; deleted commits leave tombstone markers.
+9. **Tools** — [ostree-releng-scripts](https://github.com/ostreedev/ostree-releng-scripts) for scripted workflows; [Pulp OSTree plugin](https://docs.pulpproject.org/plugins/pulp_ostree/) for enterprise repository management.
 
 ## Command Reference
 

@@ -11,8 +11,7 @@ Source: [docs.zarf.dev](https://docs.zarf.dev/tutorials/6-publish-and-deploy/)
 
 ## Summary
 
-Extends the local package workflow to OCI-compliant registries: publish once, pull and deploy
-anywhere without manual file transfers.
+Extends the local package workflow to OCI-compliant registries: publish once, pull and deploy anywhere without manual file transfers.
 
 ## Core commands
 

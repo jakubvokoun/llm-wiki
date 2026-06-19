@@ -7,13 +7,11 @@ updated: 2026-04-23
 
 # Zarf Best Practice — Upgrading Zarf
 
-Keep the Zarf CLI binary and the in-cluster init package at the same version for reliable
-operation.
+Keep the Zarf CLI binary and the in-cluster init package at the same version for reliable operation.
 
 ## Upgrade the CLI Binary
 
-Follow the [CLI installation guide](https://docs.zarf.dev/getting-started/install) for the target
-platform.
+Follow the [CLI installation guide](https://docs.zarf.dev/getting-started/install) for the target platform.
 
 ## Upgrade the Init Package
 
@@ -38,8 +36,7 @@ zarf init --confirm
 zarf package deploy zarf-init-amd64-vX.X.X.tar.zst --confirm
 ```
 
-> `zarf package deploy` for init upgrades does **not** expose `--registry-url` /
-> `--git-url` options — use `zarf init` if you need those.
+> `zarf package deploy` for init upgrades does **not** expose `--registry-url` / `--git-url` options — use `zarf init` if you need those.
 
 ### 3. Validate
 
@@ -51,9 +48,7 @@ Confirm the registry, agent, and optional git server pods are healthy.
 
 ## Special Considerations
 
-- The `zarf-state` secret in the `zarf` namespace persists configuration from the original
-  `zarf init` (registry creds, git server URL, etc.). Flags like `--registry-pull-password`
-  are **ignored** on subsequent `zarf init` runs.
+- The `zarf-state` secret in the `zarf` namespace persists configuration from the original `zarf init` (registry creds, git server URL, etc.). Flags like `--registry-pull-password` are **ignored** on subsequent `zarf init` runs.
 - To update stored credentials after init: use `zarf tools update-creds`.
 
 ## See Also

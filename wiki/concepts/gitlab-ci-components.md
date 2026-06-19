@@ -7,8 +7,7 @@ updated: 2026-04-23
 
 # GitLab CI/CD Components
 
-Reusable units of GitLab CI/CD configuration, versioned and optionally published
-to the CI/CD Catalog. GA since GitLab 17.0.
+Reusable units of GitLab CI/CD configuration, versioned and optionally published to the CI/CD Catalog. GA since GitLab 17.0.
 
 ## How components work
 
@@ -26,8 +25,7 @@ include:
 
 ## Version resolution
 
-`~latest` and partial semver (`1`, `1.2`) only work for catalog-published components.
-Commit SHA → tag → branch → partial semver (priority order).
+`~latest` and partial semver (`1`, `1.2`) only work for catalog-published components. Commit SHA → tag → branch → partial semver (priority order).
 
 ## Why prefer inputs over variables
 
@@ -57,8 +55,7 @@ my-job:
 
 ### Component context for versioned images
 
-`spec:component: [version]` enables `$[[ component.version ]]` in templates —
-ensures the component and its Docker image are always the same version.
+`spec:component: [version]` enables `$[[ component.version ]]` in templates — ensures the component and its Docker image are always the same version.
 
 ### Dynamic job names
 
@@ -77,8 +74,7 @@ Prevents job name conflicts when consumers include a component multiple times.
 
 ## Security
 
-**Users**: pin to SHA, audit source code, use minimal `CI_JOB_TOKEN` scope, avoid passing
-artifacts to component jobs.
+**Users**: pin to SHA, audit source code, use minimal `CI_JOB_TOKEN` scope, avoid passing artifacts to component jobs.
 
 **Maintainers**: enforce 2FA, protected branches (no force push), sign commits, require MR approvals.
 

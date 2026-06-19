@@ -38,9 +38,7 @@ Containers are a natural implementation of immutable infrastructure — images a
 
 ## Relation to Atomic Linux
 
-[Atomic Linux](../concepts/atomic-linux.md) applies this same principle to the OS itself:
-the root filesystem is read-only, updates deploy a new OS tree, and rollback is always
-available. Technologies: [OSTree](../entities/ostree.md), NixOS, transactional-update.
+[Atomic Linux](../concepts/atomic-linux.md) applies this same principle to the OS itself: the root filesystem is read-only, updates deploy a new OS tree, and rollback is always available. Technologies: [OSTree](../entities/ostree.md), NixOS, transactional-update.
 
 ## Sources
 

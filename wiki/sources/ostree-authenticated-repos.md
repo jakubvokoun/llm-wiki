@@ -7,8 +7,7 @@ updated: 2026-04-17
 
 # OSTree Authenticated Remote Repositories
 
-OSTree speaks to a **generic webserver**, so any standard HTTP authentication mechanism works.
-There is no special OSTree server protocol.
+OSTree speaks to a **generic webserver**, so any standard HTTP authentication mechanism works. There is no special OSTree server protocol.
 
 ## Authentication methods
 
@@ -30,8 +29,7 @@ Supported but has management drawbacks (credential rotation, leakage in logs/URL
 
 ### Cookies
 
-Cookie-based authentication supported since [ostreedev/ostree#531](https://github.com/ostreedev/ostree/pull/531).
-Enables integration with **AWS CloudFront signed cookies** for private S3-backed repos.
+Cookie-based authentication supported since [ostreedev/ostree#531](https://github.com/ostreedev/ostree/pull/531). Enables integration with **AWS CloudFront signed cookies** for private S3-backed repos.
 
 ## Use cases
 

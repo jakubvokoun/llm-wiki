@@ -11,8 +11,7 @@ Source: [docs.zarf.dev](https://docs.zarf.dev/schema/v1alpha1-package/)
 
 ## Summary
 
-Complete field reference for `zarf.yaml`. The `ZarfPackage` root element requires at least one
-component; all other top-level fields are optional.
+Complete field reference for `zarf.yaml`. The `ZarfPackage` root element requires at least one component; all other top-level fields are optional.
 
 ## Top-level structure
 
@@ -134,9 +133,7 @@ actions:
 
 ## ZarfBuildData (auto-generated)
 
-Recorded by Zarf at package creation:
-`version`, `timestamp`, `architecture`, `user`, `terminal`, `differential`, `signed`,
-`versionRequirements`
+Recorded by Zarf at package creation: `version`, `timestamp`, `architecture`, `user`, `terminal`, `differential`, `signed`, `versionRequirements`
 
 ## Related
 

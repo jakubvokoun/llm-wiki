@@ -11,10 +11,7 @@ Source: [HackTricks](../entities/hacktricks.md)
 
 ## Key Takeaways
 
-`no_new_privs` (`PR_SET_NO_NEW_PRIVS`) prevents exec-time privilege gain: executing a setuid binary,
-setgid binary, or file with Linux capabilities does not grant extra privilege beyond what the process
-already holds. It blocks a specific class of **follow-up escalation** after code execution — not a
-substitute for namespaces, seccomp, or capability dropping.
+`no_new_privs` (`PR_SET_NO_NEW_PRIVS`) prevents exec-time privilege gain: executing a setuid binary, setgid binary, or file with Linux capabilities does not grant extra privilege beyond what the process already holds. It blocks a specific class of **follow-up escalation** after code execution — not a substitute for namespaces, seccomp, or capability dropping.
 
 Key properties:
 
@@ -46,8 +43,7 @@ grep NoNewPrivs /proc/self/status
 
 ## Seccomp Interaction
 
-Unprivileged tasks generally need `no_new_privs` set before they can install a seccomp filter.
-Seeing both `NoNewPrivs: 1` and `Seccomp: 2` together usually indicates deliberate hardening.
+Unprivileged tasks generally need `no_new_privs` set before they can install a seccomp filter. Seeing both `NoNewPrivs: 1` and `Seccomp: 2` together usually indicates deliberate hardening.
 
 ## Abuse (When Missing)
 
@@ -74,8 +70,7 @@ Interesting combinations to flag:
 
 ## In-Container Escalation via setuid
 
-`no_new_privs` primarily blocks **in-container** privilege escalation, not direct host escape.
-Converting low-privilege foothold to container-root is often the prerequisite for later host escape:
+`no_new_privs` primarily blocks **in-container** privilege escalation, not direct host escape. Converting low-privilege foothold to container-root is often the prerequisite for later host escape:
 
 ```bash
 grep NoNewPrivs /proc/self/status

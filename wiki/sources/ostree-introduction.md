@@ -7,26 +7,17 @@ updated: 2026-04-17
 
 # OSTree Introduction
 
-Official introduction to OSTree — an upgrade system for Linux-based operating systems that
-performs **atomic upgrades of complete filesystem trees**.
+Official introduction to OSTree — an upgrade system for Linux-based operating systems that performs **atomic upgrades of complete filesystem trees**.
 
 ## Key Takeaways
 
-1. **"Git for OS binaries."** Content-addressed object store with branches (refs) tracking
-   filesystem trees. Commit/checkout semantics, deduplication via hardlinks.
-2. **Not a package manager.** OSTree manages complete bootable trees, not individual
-   packages. Use rpm-ostree or similar for the package layer on top.
-3. **Two mutable directories survive upgrades:** `/etc` and `/var`. All other paths under
-   the deployed tree are read-only.
-4. **3-way merge for `/etc`.** On upgrade, OSTree diffs the old default `/etc`, new default
-   `/etc`, and your local `/etc`, and merges local changes into the new tree.
-5. **Parallel deployments.** Multiple OS versions can coexist at
-   `/ostree/deploy/$STATEROOT/$CHECKSUM`; disk cost is proportional only to new files
-   (hardlink deduplication).
-6. **Block-device agnostic.** Works on ext4, btrfs, XFS — any filesystem supporting
-   hardlinks. Optionally exploits btrfs features if available.
-7. **Can coexist with image-based deployments.** Complements rather than replaces
-   virtualization images (AMI, qcow2); best suited for bare-metal stateful systems.
+1. **"Git for OS binaries."** Content-addressed object store with branches (refs) tracking filesystem trees. Commit/checkout semantics, deduplication via hardlinks.
+2. **Not a package manager.** OSTree manages complete bootable trees, not individual packages. Use rpm-ostree or similar for the package layer on top.
+3. **Two mutable directories survive upgrades:** `/etc` and `/var`. All other paths under the deployed tree are read-only.
+4. **3-way merge for `/etc`.** On upgrade, OSTree diffs the old default `/etc`, new default `/etc`, and your local `/etc`, and merges local changes into the new tree.
+5. **Parallel deployments.** Multiple OS versions can coexist at `/ostree/deploy/$STATEROOT/$CHECKSUM`; disk cost is proportional only to new files (hardlink deduplication).
+6. **Block-device agnostic.** Works on ext4, btrfs, XFS — any filesystem supporting hardlinks. Optionally exploits btrfs features if available.
+7. **Can coexist with image-based deployments.** Complements rather than replaces virtualization images (AMI, qcow2); best suited for bare-metal stateful systems.
 
 ## Architecture
 

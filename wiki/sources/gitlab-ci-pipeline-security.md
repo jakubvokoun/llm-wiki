@@ -7,18 +7,15 @@ updated: 2026-04-23
 
 # GitLab CI Pipeline Security
 
-Covers secrets management, CI/CD variable security, and pipeline integrity practices
-from the official GitLab CI pipeline security documentation.
+Covers secrets management, CI/CD variable security, and pipeline integrity practices from the official GitLab CI pipeline security documentation.
 
 ## Secrets storage hierarchy
 
 From most to least secure:
 
-1. **External secrets managers** — HashiCorp Vault, Azure Key Vault, Google Cloud Secret Manager.
-   Stored outside GitLab; use GitLab native integrations to retrieve in pipelines.
+1. **External secrets managers** — HashiCorp Vault, Azure Key Vault, Google Cloud Secret Manager. Stored outside GitLab; use GitLab native integrations to retrieve in pipelines.
 
-2. **CI/CD variables (masked + hidden + protected)** — Stored in GitLab settings.
-   Less secure: visible to users with settings access, overridable, exposure-prone on misconfiguration.
+2. **CI/CD variables (masked + hidden + protected)** — Stored in GitLab settings. Less secure: visible to users with settings access, overridable, exposure-prone on misconfiguration.
 
 3. **CI/CD variables (unprotected)** — Only for non-sensitive data.
 
@@ -65,8 +62,7 @@ image: node:${VERSION}
 
 Find digest: `docker pull node:18.17.1 && docker images --digests node:18.17.1`
 
-Use protected container repositories and protected tags to restrict who can push/overwrite images.
-Avoid variables in image references — they can be overridden to point to malicious images.
+Use protected container repositories and protected tags to restrict who can push/overwrite images. Avoid variables in image references — they can be overridden to point to malicious images.
 
 ### Dependency pinning
 

@@ -9,8 +9,7 @@ updated: 2026-04-24
 
 Author: Vivek Rau
 
-> If a human operator needs to touch your system during normal operations, you have a bug.
-> — Carla Geisser, Google SRE
+> If a human operator needs to touch your system during normal operations, you have a bug. — Carla Geisser, Google SRE
 
 ## Key Takeaways
 

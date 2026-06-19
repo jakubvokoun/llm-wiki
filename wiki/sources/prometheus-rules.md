@@ -41,9 +41,7 @@ path:request_latency_seconds:mean5m
 
 ## Correctness check
 
-When aggregating, the labels removed in the `without` clause must be removed from
-the `level` component of the output metric name relative to the input. If levels
-don't match after aggregation, a mistake was made.
+When aggregating, the labels removed in the `without` clause must be removed from the `level` component of the output metric name relative to the input. If levels don't match after aggregation, a mistake was made.
 
 ## See also
 

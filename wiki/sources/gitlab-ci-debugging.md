@@ -7,8 +7,7 @@ updated: 2026-04-23
 
 # Debugging GitLab CI/CD Pipelines
 
-Official GitLab debugging guide covering syntax verification, variable inspection,
-dependency pinning, artifact-based debugging, and common pipeline issues.
+Official GitLab debugging guide covering syntax verification, variable inspection, dependency pinning, artifact-based debugging, and common pipeline issues.
 
 ## Debugging techniques
 
@@ -95,8 +94,7 @@ job1:
 
 ### 6. Run commands locally
 
-Use Rancher Desktop (or similar) to run the job's container image locally,
-then execute the job's `script` commands in that container.
+Use Rancher Desktop (or similar) to run the job's container image locally, then execute the job's `script` commands in that container.
 
 ### 7. GitLab Duo Root Cause Analysis
 
@@ -114,18 +112,15 @@ Cause: `rules` or `only/except` misconfiguration.
 
 ### `changes` keyword runs unexpectedly
 
-`changes` always evaluates to `true` in scheduled pipelines and tag pipelines.
-Only use `changes` with `if` conditions that restrict to branch or MR pipelines.
+`changes` always evaluates to `true` in scheduled pipelines and tag pipelines. Only use `changes` with `if` conditions that restrict to branch or MR pipelines.
 
 ### Two pipelines run simultaneously
 
-Caused by pushing to a branch that has an open MR. Use `workflow: rules` or restructure
-`rules` to prevent duplicate pipelines.
+Caused by pushing to a branch that has an open MR. Use `workflow: rules` or restructure `rules` to prevent duplicate pipelines.
 
 ### `.gitlab-ci.yml` with BOM causes silent failures
 
-A UTF-8 Byte Order Mark (BOM) in the YAML file causes silent config failures — jobs missing,
-variables with wrong values. The pipeline editor can't display BOM characters; use an external tool.
+A UTF-8 Byte Order Mark (BOM) in the YAML file causes silent config failures — jobs missing, variables with wrong values. The pipeline editor can't display BOM characters; use an external tool.
 
 ### Pipeline with many jobs fails to start
 
@@ -133,8 +128,7 @@ Exceeds the instance's CI/CD job limits. Split into parent-child pipelines.
 
 ### No pipeline runs (`.pre`/`.post` only)
 
-A pipeline with only `.pre` or `.post` stage jobs does not run.
-At least one job must be in a different stage.
+A pipeline with only `.pre` or `.post` stage jobs does not run. At least one job must be in a different stage.
 
 ## Pipeline errors reference
 
@@ -152,8 +146,7 @@ At least one job must be in a different stage.
 
 ## Warning: `Job may allow multiple pipelines to run`
 
-When `rules` has a `when` clause without an `if` clause, multiple pipelines can run.
-Add `if` conditions or use `workflow: rules`.
+When `rules` has a `when` clause without an `if` clause, multiple pipelines can run. Add `if` conditions or use `workflow: rules`.
 
 ## Related
 

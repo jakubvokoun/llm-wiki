@@ -11,8 +11,7 @@ Source: [docs.zarf.dev](https://docs.zarf.dev/tutorials/7-custom-init-packages/)
 
 ## Summary
 
-The default Zarf init package covers most cases, but custom builds allow swapping images for
-hardened/enterprise-vetted versions or removing unused components.
+The default Zarf init package covers most cases, but custom builds allow swapping images for hardened/enterprise-vetted versions or removing unused components.
 
 ## Building the init package
 
@@ -62,8 +61,7 @@ Source: [Iron Bank hardened images](https://repo1.dso.mil/dsop/opensource/defens
 
 ## Removing components
 
-The init package is a composed package — each component imports a sub-package from `packages/`.
-Remove an import entry from the root `zarf.yaml` to slim the package.
+The init package is a composed package — each component imports a sub-package from `packages/`. Remove an import entry from the root `zarf.yaml` to slim the package.
 
 ## Related
 

@@ -7,8 +7,7 @@ updated: 2026-04-23
 
 # Zarf Best Practice — Migrating Away from Data Injections
 
-`dataInjections` is deprecated in the v1alpha1 schema and will not exist in v1beta1. This guide
-covers the two replacement patterns.
+`dataInjections` is deprecated in the v1alpha1 schema and will not exist in v1beta1. This guide covers the two replacement patterns.
 
 ## Why Deprecated
 

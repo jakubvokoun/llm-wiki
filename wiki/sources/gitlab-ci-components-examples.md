@@ -7,13 +7,11 @@ updated: 2026-04-23
 
 # GitLab CI/CD Component Examples
 
-Practical examples for testing, implementing patterns, and migrating CI/CD templates
-to reusable components.
+Practical examples for testing, implementing patterns, and migrating CI/CD templates to reusable components.
 
 ## Testing components with source code samples
 
-Some components need actual source code to test against (e.g., a Rust build component needs Rust source).
-Include sample files directly in the component project.
+Some components need actual source code to test against (e.g., a Rust build component needs Rust source). Include sample files directly in the component project.
 
 ### Rust component example
 

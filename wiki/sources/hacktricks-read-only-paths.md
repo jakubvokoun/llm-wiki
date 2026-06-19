@@ -11,10 +11,7 @@ Source: [HackTricks](../entities/hacktricks.md)
 
 ## Key Takeaways
 
-Read-only system paths differ from [masked paths](hacktricks-masked-paths.md): instead of hiding a
-path, the runtime exposes it read-only. This allows necessary inspection while preventing writes to
-dangerous kernel interfaces. The key targets are `/proc/sys` kernel tunables and kernel helper paths
-— when writable, these transition from information disclosure to **host code execution**.
+Read-only system paths differ from [masked paths](hacktricks-masked-paths.md): instead of hiding a path, the runtime exposes it read-only. This allows necessary inspection while preventing writes to dangerous kernel interfaces. The key targets are `/proc/sys` kernel tunables and kernel helper paths — when writable, these transition from information disclosure to **host code execution**.
 
 ## Default Read-Only Paths (Docker)
 

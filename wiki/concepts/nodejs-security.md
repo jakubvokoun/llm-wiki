@@ -73,13 +73,7 @@ Key headers set by helmet:
 
 ## Dangerous Functions
 
-Avoid with user input:
-| Function | Risk |
-|----------|------|
-| `eval()` | Remote code execution |
-| `child_process.exec` | Arbitrary command execution |
-| `fs` module (unsanitized input) | File inclusion, path traversal |
-| `vm` module (unsandboxed) | Dangerous code execution |
+Avoid with user input: | Function | Risk | |----------|------| | `eval()` | Remote code execution | | `child_process.exec` | Arbitrary command execution | | `fs` module (unsanitized input) | File inclusion, path traversal | | `vm` module (unsandboxed) | Dangerous code execution |
 
 ## ReDoS
 

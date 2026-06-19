@@ -7,9 +7,7 @@ updated: 2026-04-17
 
 # OSTree Buildsystem and Repository Management
 
-OSTree is a **content transport layer**, not a package manager. Build tools commit completed
-directory trees (or tarballs) into OSTree; OSTree handles signing, dedup, delta generation, and
-bootloader updates.
+OSTree is a **content transport layer**, not a package manager. Build tools commit completed directory trees (or tarballs) into OSTree; OSTree handles signing, dedup, delta generation, and bootloader updates.
 
 ## Build vs buy
 
@@ -61,9 +59,7 @@ ostree --repo=repo static-delta generate exampleos/x86_64/standard
 
 ### Why rofiles-fuse?
 
-`--link-checkout-speedup` tells OSTree the checkout is hardlinked so it can skip re-checksumming.
-`rofiles-fuse` ensures any modified files during post-processing (e.g. ldconfig) get new inodes
-(new checksums), keeping the hardlink→checksum mapping accurate.
+`--link-checkout-speedup` tells OSTree the checkout is hardlinked so it can skip re-checksumming. `rofiles-fuse` ensures any modified files during post-processing (e.g. ldconfig) get new inodes (new checksums), keeping the hardlink→checksum mapping accurate.
 
 ## Repository initialization
 

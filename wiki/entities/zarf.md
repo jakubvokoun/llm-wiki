@@ -52,8 +52,7 @@ Open-source tool by Defense Unicorns for packaging and deploying Kubernetes appl
 - `ZarfPackageConfig` — standard application package
 - `ZarfInitConfig` — cluster bootstrapping package
 
-Components support: `charts`, `manifests`, `images`, `files`, `actions`.
-`dataInjections` exists in v1alpha1 but is **deprecated** and removed in v1beta1 — migrate to OCI image volumes or init containers.
+Components support: `charts`, `manifests`, `images`, `files`, `actions`. `dataInjections` exists in v1alpha1 but is **deprecated** and removed in v1beta1 — migrate to OCI image volumes or init containers.
 
 ## Security Considerations
 
@@ -128,8 +127,7 @@ zarf tools update-creds    # update stored registry/git credentials post-init
 
 ## Offline Live Demos
 
-Build the package on a connected machine → transfer file → disable networking → deploy on stage.
-See [Best Practice — Offline Live Demos](../sources/zarf-airgap-demos.md).
+Build the package on a connected machine → transfer file → disable networking → deploy on stage. See [Best Practice — Offline Live Demos](../sources/zarf-airgap-demos.md).
 
 ## See Also
 

@@ -74,14 +74,11 @@ Trust boundary analysis identifies _where_ trust decisions must be made. Zero Tr
 
 ## Policy-as-Code + Continuous Verification Loop
 
-Tools: OPA/Gatekeeper, Kyverno, Cilium, cloud provider policy engines.
-Signals: identity telemetry, east-west traffic anomalies, syscall anomalies (Falco/Tetragon), image signature mismatches.
-Loop: code → verify at admission → telemetry → refine policies.
+Tools: OPA/Gatekeeper, Kyverno, Cilium, cloud provider policy engines. Signals: identity telemetry, east-west traffic anomalies, syscall anomalies (Falco/Tetragon), image signature mismatches. Loop: code → verify at admission → telemetry → refine policies.
 
 ## MFA Hierarchy
 
-Phishing-resistant: FIDO2 keys, WebAuthn/Passkeys, smart cards.
-Avoid: SMS MFA.
+Phishing-resistant: FIDO2 keys, WebAuthn/Passkeys, smart cards. Avoid: SMS MFA.
 
 ## Legacy System Strategies
 

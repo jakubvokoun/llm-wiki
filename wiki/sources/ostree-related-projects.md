@@ -7,8 +7,7 @@ updated: 2026-04-17
 
 # OSTree Related Projects
 
-Source: `raw/ostree-related-projects.md` — OSTree official comparison of approaches to
-atomic/image-based OS updates.
+Source: `raw/ostree-related-projects.md` — OSTree official comparison of approaches to atomic/image-based OS updates.
 
 ## Key Takeaways
 

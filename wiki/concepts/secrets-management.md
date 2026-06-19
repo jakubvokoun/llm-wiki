@@ -82,8 +82,7 @@ For cryptographic keys specifically, see [Key Management](key-management.md). Ke
 
 ## Build-Time Secrets (Container Images)
 
-Image layers are **durable**. A secret set via `ARG`/`ENV` or copied into a build context is
-permanently visible in layer history even if deleted in a later `RUN` step:
+Image layers are **durable**. A secret set via `ARG`/`ENV` or copied into a build context is permanently visible in layer history even if deleted in a later `RUN` step:
 
 ```bash
 docker history --no-trunc <image>  # reveals build-time secrets in earlier layers

@@ -11,20 +11,14 @@ How OSTree guarantees fully atomic OS upgrades — no partial states, power-cut 
 
 ## Key Takeaways
 
-1. **Power-cut safe.** If power is cut mid-upgrade, the system boots either the old or new
-   deployment — never a partial state. OSTree never touches the running system until reboot.
-2. **Delta HTTP pull.** `ostree admin upgrade` fetches only missing objects (zlib-compressed)
-   from the remote; each object has its SHA256 checksum validated before storing.
-3. **Boot config atomicity via symlink swap.** `/boot` is a symlink to `/ostree/boot.0` or
-   `/ostree/boot.1`. Atomically swapping the symlink = zero-downtime bootloader update.
-4. **Kernel deduplication.** Kernels stored in `/boot/ostree/<stateroot>-<sha256>`; hardlinked
-   (not copied) when `/boot` is on the same partition as `/`.
+1. **Power-cut safe.** If power is cut mid-upgrade, the system boots either the old or new deployment — never a partial state. OSTree never touches the running system until reboot.
+2. **Delta HTTP pull.** `ostree admin upgrade` fetches only missing objects (zlib-compressed) from the remote; each object has its SHA256 checksum validated before storing.
+3. **Boot config atomicity via symlink swap.** `/boot` is a symlink to `/ostree/boot.0` or `/ostree/boot.1`. Atomically swapping the symlink = zero-downtime bootloader update.
+4. **Kernel deduplication.** Kernels stored in `/boot/ostree/<stateroot>-<sha256>`; hardlinked (not copied) when `/boot` is on the same partition as `/`.
 5. **`/etc` 3-way merge semantics:**
    - Files you modified from defaults → **retained as-is**
    - Files you left at defaults → **upgraded to new defaults**
-6. **Atomic deployment set transitions.** OSTree can atomically switch to an arbitrary set of
-   deployments (e.g. 100 deployments for automated kernel bisection) in one operation, with
-   the constraint that the currently booted deployment is always in the new set.
+6. **Atomic deployment set transitions.** OSTree can atomically switch to an arbitrary set of deployments (e.g. 100 deployments for automated kernel bisection) in one operation, with the constraint that the currently booted deployment is always in the new set.
 
 ## Upgrade Flow
 
@@ -52,8 +46,7 @@ upgrade:
   gc /ostree/boot.0/ later
 ```
 
-`/boot` can be a separate flash partition. OSTree remounts it read-write only during the
-short window needed to update bootloader config, then back to read-only.
+`/boot` can be a separate flash partition. OSTree remounts it read-write only during the short window needed to update bootloader config, then back to read-only.
 
 ## Diagnosing `/etc` Drift
 

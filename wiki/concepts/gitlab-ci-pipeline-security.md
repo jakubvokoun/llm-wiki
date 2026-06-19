@@ -7,8 +7,7 @@ updated: 2026-04-23
 
 # GitLab CI Pipeline Security
 
-Security practices specific to GitLab CI/CD pipelines, covering secrets storage,
-parameter passing, and supply chain integrity for pipeline assets.
+Security practices specific to GitLab CI/CD pipelines, covering secrets storage, parameter passing, and supply chain integrity for pipeline assets.
 
 ## Secrets storage hierarchy
 

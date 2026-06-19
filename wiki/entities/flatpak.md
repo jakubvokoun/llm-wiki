@@ -7,9 +7,7 @@ updated: 2026-04-17
 
 # Flatpak
 
-**Flatpak** is a Linux application packaging and distribution system that runs apps in an
-**OCI-like sandbox**, isolated from the host OS. It is the canonical application delivery
-mechanism for [Atomic Linux](../concepts/atomic-linux.md) distributions.
+**Flatpak** is a Linux application packaging and distribution system that runs apps in an **OCI-like sandbox**, isolated from the host OS. It is the canonical application delivery mechanism for [Atomic Linux](../concepts/atomic-linux.md) distributions.
 
 - **Type:** Application packaging system
 - **Primary registry:** Flathub (`flathub.org`)
@@ -17,9 +15,7 @@ mechanism for [Atomic Linux](../concepts/atomic-linux.md) distributions.
 
 ## Why Atomic OSes Use Flatpak
 
-Atomic distros have read-only root filesystems — traditional package managers that install
-into `/usr` cannot work directly. Flatpak installs into `~/.local/share/flatpak` or
-`/var/lib/flatpak`, bypassing this constraint while providing sandboxing.
+Atomic distros have read-only root filesystems — traditional package managers that install into `/usr` cannot work directly. Flatpak installs into `~/.local/share/flatpak` or `/var/lib/flatpak`, bypassing this constraint while providing sandboxing.
 
 ## Security Properties
 

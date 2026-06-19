@@ -11,25 +11,15 @@ How OSTree integrates with GRUB, Android aboot, bootupd, and Anaconda.
 
 ## Key Takeaways
 
-1. **Happy path — BLS only.** OSTree writes Boot Loader Specification (BLS) entries to
-   `/boot/loader/entries`. On start, GRUB reads those files via the `blscfg` verb. No extra
-   scripting needed.
-2. **Legacy GRUB fallback.** If GRUB doesn't support `blscfg`, the `ostree-grub2` script (shipped
-   on Fedora) runs `grub2-mkconfig`. OSTree detects GRUB files and falls back automatically.
-3. **Android aboot.** For Android bootloaders, OSTree still writes BLS metadata but the
-   bootloader does not read it. Instead:
+1. **Happy path — BLS only.** OSTree writes Boot Loader Specification (BLS) entries to `/boot/loader/entries`. On start, GRUB reads those files via the `blscfg` verb. No extra scripting needed.
+2. **Legacy GRUB fallback.** If GRUB doesn't support `blscfg`, the `ostree-grub2` script (shipped on Fedora) runs `grub2-mkconfig`. OSTree detects GRUB files and falls back automatically.
+3. **Android aboot.** For Android bootloaders, OSTree still writes BLS metadata but the bootloader does not read it. Instead:
    - `aboot-update` generates Android Boot Images (signed binary blobs with kernel+initramfs+cmdline+dtb)
-   - `aboot-deploy` reads the current slot (`androidboot.slot_suffix=` karg), writes to the
-     alternate `boot_a` / `boot_b` partition, and sets `/ostree/root.a` or `/ostree/root.b`
-     symlinks
+   - `aboot-deploy` reads the current slot (`androidboot.slot_suffix=` karg), writes to the alternate `boot_a` / `boot_b` partition, and sets `/ostree/root.a` or `/ostree/root.b` symlinks
    - Caution: firmware must not inject `ro` or `root=` kargs — these are incompatible with OSTree
-4. **os-prober hazard.** GRUB's `os-prober` component scans all block devices; can impede
-   reliable OS updates. Disable it if dual-booting is not needed.
-5. **bootupd.** Ships static GRUB configs. When using bootupd, set `sysroot.bootloader = none`
-   in OSTree config (except on s390x). Relies on `blscfg` support in GRUB (available on Fedora
-   derivatives).
-6. **Anaconda.** Now supports bootupd (via PR #5298); previously required `grub2-mkconfig`
-   directly.
+4. **os-prober hazard.** GRUB's `os-prober` component scans all block devices; can impede reliable OS updates. Disable it if dual-booting is not needed.
+5. **bootupd.** Ships static GRUB configs. When using bootupd, set `sysroot.bootloader = none` in OSTree config (except on s390x). Relies on `blscfg` support in GRUB (available on Fedora derivatives).
+6. **Anaconda.** Now supports bootupd (via PR #5298); previously required `grub2-mkconfig` directly.
 
 ## Android A/B Slot Diagram
 

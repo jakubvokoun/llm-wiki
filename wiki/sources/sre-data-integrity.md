@@ -60,8 +60,7 @@ Design interfaces to prevent developers from accidentally bypassing soft deletio
 - Gmail uses daily validators; one validator runs in 10–14 daily shards due to scale
 - **Organizational structure:** Central infrastructure team owns the framework; product teams own the business logic
 
-**Overarching Layer: Replication**
-Not for recoverability, but stagger backups across sites and use redundancy coding (RAID, Reed-Solomon, GFS-style replication) to protect the backups themselves.
+**Overarching Layer: Replication** Not for recoverability, but stagger backups across sites and use redundancy coding (RAID, Reed-Solomon, GFS-style replication) to protect the backups themselves.
 
 ### Knowing Recovery Works
 

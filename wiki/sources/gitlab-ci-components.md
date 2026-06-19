@@ -7,18 +7,14 @@ updated: 2026-04-23
 
 # GitLab CI/CD Components
 
-CI/CD components are reusable single pipeline configuration units in GitLab (GA in GitLab 17.0).
-They can be composed into larger pipelines, parameterized with inputs, versioned, and published
-to the CI/CD Catalog.
+CI/CD components are reusable single pipeline configuration units in GitLab (GA in GitLab 17.0). They can be composed into larger pipelines, parameterized with inputs, versioned, and published to the CI/CD Catalog.
 
 ## Component projects
 
-A **component project** is a GitLab project hosting one or more components (max 100 per project).
-All components in a project are versioned together. Each component is defined as either:
+A **component project** is a GitLab project hosting one or more components (max 100 per project). All components in a project are versioned together. Each component is defined as either:
 
 - A single YAML file: `templates/<name>.yml`
-- A directory: `templates/<name>/template.yml` (only `template.yml` is used by consumers;
-  other files like Dockerfiles or test scripts stay private)
+- A directory: `templates/<name>/template.yml` (only `template.yml` is used by consumers; other files like Dockerfiles or test scripts stay private)
 
 Required structure:
 
@@ -81,15 +77,13 @@ my-job:
     - echo "Running $[[ component.version ]] (ref: $[[ component.reference ]])"
 ```
 
-`spec:component` fields: `name`, `sha`, `version`, `reference`. Used for versioned resource
-references (e.g., Docker image built at same version as component).
+`spec:component` fields: `name`, `sha`, `version`, `reference`. Used for versioned resource references (e.g., Docker image built at same version as component).
 
 ## Writing components: best practices
 
 ### Avoid global keywords
 
-Never use `default:` or `stages:` in a component — they affect all jobs in the consumer's pipeline.
-Instead, add config to each job directly or use `extends` with unique names:
+Never use `default:` or `stages:` in a component — they affect all jobs in the consumer's pipeline. Instead, add config to each job directly or use `extends` with unique names:
 
 ```yaml
 .my-comp:image-ruby:
@@ -151,8 +145,7 @@ my-job:
 
 ## CI/CD Catalog
 
-Published components appear in the CI/CD Catalog (`Explore > CI/CD Catalog`).
-Catalog visibility follows the source project visibility.
+Published components appear in the CI/CD Catalog (`Explore > CI/CD Catalog`). Catalog visibility follows the source project visibility.
 
 ### Publishing to catalog
 

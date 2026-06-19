@@ -7,28 +7,20 @@ updated: 2026-04-17
 
 # Using composefs with OSTree
 
-Source: `raw/ostree-composefs.md` — OSTree documentation on integrating composefs for
-filesystem integrity.
+Source: `raw/ostree-composefs.md` — OSTree documentation on integrating composefs for filesystem integrity.
 
-> **Status: Experimental.** Do not deploy to production systems yet. Tracked at
-> [ostreedev/ostree#2867](https://github.com/ostreedev/ostree/issues/2867).
+> **Status: Experimental.** Do not deploy to production systems yet. Tracked at [ostreedev/ostree#2867](https://github.com/ostreedev/ostree/issues/2867).
 
 ## Key Takeaways
 
-1. **composefs** is a hybrid Linux stacking filesystem (EROFS + overlayfs loop device) providing
-   per-file fs-verity integrity for entire filesystem trees.
+1. **composefs** is a hybrid Linux stacking filesystem (EROFS + overlayfs loop device) providing per-file fs-verity integrity for entire filesystem trees.
 2. Three **integrity modes** configurable via `ostree/prepare-root.conf`:
    - `enabled = yes` — unsigned; resilient to accidental mutation, no kernel fsverity required
    - `enabled = verity` — validates backing OSTree objects via digest in `.ostree.cfs`
    - `enabled = signed` — full chain: Ed25519 signature covers the composefs fsverity digest
-3. **Transient key pattern** — generate a new keypair per build, embed public key in initrd,
-   sign OSTree commit, discard private key; ties each initrd to its exact userspace (prevents
-   booting a new initrd with an old vulnerable userspace).
-4. **composefs vs IMA** — composefs validates the entire filesystem tree (not just individual
-   files), makes files actually read-only, and uses on-demand fs-verity (vs IMA's full readahead
-   by default).
-5. **Compatibility caveat** — the `chattr -i / && mkdir /somedir` trick for adding top-level
-   directories no longer works; use `root.transient` in `prepare-root.conf` instead.
+3. **Transient key pattern** — generate a new keypair per build, embed public key in initrd, sign OSTree commit, discard private key; ties each initrd to its exact userspace (prevents booting a new initrd with an old vulnerable userspace).
+4. **composefs vs IMA** — composefs validates the entire filesystem tree (not just individual files), makes files actually read-only, and uses on-demand fs-verity (vs IMA's full readahead by default).
+5. **Compatibility caveat** — the `chattr -i / && mkdir /somedir` trick for adding top-level directories no longer works; use `root.transient` in `prepare-root.conf` instead.
 
 ## Configuration
 
@@ -79,8 +71,7 @@ No additional userspace runtime requirements at this time.
 5. Discard private key
 ```
 
-Result: each initrd authenticates only the exact userspace it was built with. Compromise of
-one build's private key does not affect past or future builds.
+Result: each initrd authenticates only the exact userspace it was built with. Compromise of one build's private key does not affect past or future builds.
 
 ## Comparison: composefs vs IMA
 

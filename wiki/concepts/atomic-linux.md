@@ -7,8 +7,7 @@ updated: 2026-04-17
 
 # Atomic Linux
 
-A class of Linux distributions where the **root filesystem is read-only** and OS updates are
-applied **atomically** — either fully committed or fully rolled back, with no partial states.
+A class of Linux distributions where the **root filesystem is read-only** and OS updates are applied **atomically** — either fully committed or fully rolled back, with no partial states.
 
 ## Core Properties
 
@@ -31,8 +30,7 @@ staged alongside current
 reboot → new tree becomes active; old tree retained for rollback
 ```
 
-The root is a **read-only bind mount** of the current tree. `/var` (user data, databases) and
-`/etc` (host config) remain mutable across reboots.
+The root is a **read-only bind mount** of the current tree. `/var` (user data, databases) and `/etc` (host config) remain mutable across reboots.
 
 ## Application Layer
 
@@ -62,9 +60,7 @@ Atomic OSes separate **OS image** from **applications**:
 
 ## Relation to Immutable Infrastructure
 
-[Immutable Infrastructure](../concepts/immutable-infrastructure.md) applied to the OS layer.
-The same "replace don't patch" principle from infrastructure-as-code extends to the operating
-system itself.
+[Immutable Infrastructure](../concepts/immutable-infrastructure.md) applied to the OS layer. The same "replace don't patch" principle from infrastructure-as-code extends to the operating system itself.
 
 ## Key Projects
 

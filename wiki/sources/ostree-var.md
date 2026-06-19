@@ -7,14 +7,11 @@ updated: 2026-04-17
 
 # OSTree /var Handling
 
-OSTree treats `/var` as shared mutable state across all deployments — equivalent to Docker's
-`VOLUME /var`. Understanding the semantics prevents silent configuration drift.
+OSTree treats `/var` as shared mutable state across all deployments — equivalent to Docker's `VOLUME /var`. Understanding the semantics prevents silent configuration drift.
 
 ## Initial population (OSTree ≥ 2024.3)
 
-When a commit is first deployed and the stateroot `/var` is **empty**, OSTree copies the
-commit's `/var` content into the stateroot. On subsequent upgrades this copy does **not**
-repeat — existing files are never overwritten or deleted.
+When a commit is first deployed and the stateroot `/var` is **empty**, OSTree copies the commit's `/var` content into the stateroot. On subsequent upgrades this copy does **not** repeat — existing files are never overwritten or deleted.
 
 Recommended approach in order of preference:
 
@@ -34,8 +31,7 @@ Recommended approach in order of preference:
 
 ## /opt drift and solutions
 
-OSTree's "strict" layout maps `/opt → /var/opt`. Packages that write to `/opt` will drift as
-the package updates. Fixes:
+OSTree's "strict" layout maps `/opt → /var/opt`. Packages that write to `/opt` will drift as the package updates. Fixes:
 
 - **`composefs.enabled = true`** — `/opt` becomes immutable (content in commit, not var)
 - **`root.transient = true`** — `/opt` writable but transient (wiped each boot)
@@ -44,9 +40,7 @@ Configure via `ostree-prepare-root.conf`.
 
 ## Historical: factory/var mechanism (2023.8 – 2024.3)
 
-Versions 2023.8–2024.3 used `tmpfiles.d` with `C+! /var - - - - -` to copy new files from
-`/usr/share/factory/var` on each upgrade boot. This was reverted in 2024.3 in favour of the
-simpler one-time-copy semantic described above.
+Versions 2023.8–2024.3 used `tmpfiles.d` with `C+! /var - - - - -` to copy new files from `/usr/share/factory/var` on each upgrade boot. This was reverted in 2024.3 in favour of the simpler one-time-copy semantic described above.
 
 ## Related pages
 

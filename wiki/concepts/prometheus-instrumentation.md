@@ -34,8 +34,7 @@ Use **heartbeat items** with insertion timestamps rather than simple "last proce
 
 ### Batch Jobs
 
-Non-continuous; push to PushGateway **only for service-level batch jobs** (not
-machine-bound). Key metrics:
+Non-continuous; push to PushGateway **only for service-level batch jobs** (not machine-bound). Key metrics:
 
 - `<job>_last_success_timestamp_seconds` — gauge (most important)
 - Duration per major stage
@@ -43,9 +42,7 @@ machine-bound). Key metrics:
 
 If runtime > 15 min, also enable pull scraping for resource tracking.
 
-Pushgateway pitfalls: SPOF, no `up` metric, stale series never auto-expire.
-For machine-bound jobs, use Node Exporter textfile collector instead.
-See [Prometheus Pushgateway](prometheus-pushgateway.md).
+Pushgateway pitfalls: SPOF, no `up` metric, stale series never auto-expire. For machine-bound jobs, use Node Exporter textfile collector instead. See [Prometheus Pushgateway](prometheus-pushgateway.md).
 
 ## Subsystem Guidelines
 

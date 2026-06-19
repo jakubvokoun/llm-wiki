@@ -7,14 +7,11 @@ updated: 2026-04-23
 
 # GitLab CI/CD Variables
 
-GitLab CI/CD variables are key-value pairs used to configure pipeline behavior
-and pass data between jobs. Two categories exist: predefined (built-in) and
-user-defined.
+GitLab CI/CD variables are key-value pairs used to configure pipeline behavior and pass data between jobs. Two categories exist: predefined (built-in) and user-defined.
 
 ## Predefined variables
 
-100+ built-in variables available in every pipeline. See
-[Predefined CI/CD Variables Reference](../sources/gitlab-ci-predefined-variables.md) for the full table.
+100+ built-in variables available in every pipeline. See [Predefined CI/CD Variables Reference](../sources/gitlab-ci-predefined-variables.md) for the full table.
 
 ### Availability phases
 
@@ -26,8 +23,7 @@ Variables become available at different pipeline phases, determining where they 
 | Pipeline     | `CI_JOB_NAME`, `CI_PIPELINE_IID`, `GITLAB_USER_EMAIL`    | `rules`, scripts                              |
 | Job-only     | `CI_JOB_TOKEN`, `CI_PROJECT_DIR`, `CI_REGISTRY_PASSWORD` | scripts only                                  |
 
-**Critical rule**: Job-only variables cannot be used in `workflow`, `include`, or `rules`.
-Pre-pipeline variables are the only ones usable in `include:rules`.
+**Critical rule**: Job-only variables cannot be used in `workflow`, `include`, or `rules`. Pre-pipeline variables are the only ones usable in `include:rules`.
 
 ## User-defined variables
 
@@ -39,12 +35,9 @@ Can be defined at project, group, or instance level. Security levels:
 
 ### Security considerations
 
-Variables are stored in GitLab settings and users with access to settings can read them.
-They can be overridden via pipeline variables, making auditability harder.
+Variables are stored in GitLab settings and users with access to settings can read them. They can be overridden via pipeline variables, making auditability harder.
 
-**Guidance**: Store non-sensitive configuration in variables. Store secrets in a secrets manager
-(HashiCorp Vault, Azure Key Vault, Google Cloud Secret Manager). If using variables for secrets,
-always mask + hide + protect.
+**Guidance**: Store non-sensitive configuration in variables. Store secrets in a secrets manager (HashiCorp Vault, Azure Key Vault, Google Cloud Secret Manager). If using variables for secrets, always mask + hide + protect.
 
 ## CI/CD inputs vs variables
 
@@ -57,8 +50,7 @@ Prefer [`inputs`](./gitlab-ci-components.md) over CI/CD variables for parameteri
 | Explicit contract    | Yes (`spec:inputs`)  | No                          |
 | Scope                | Component/pipeline   | Project/group/instance      |
 
-Consider disabling pipeline variables (`restrict pipeline variables` setting) when using inputs
-to prevent variable-based overrides that bypass type safety.
+Consider disabling pipeline variables (`restrict pipeline variables` setting) when using inputs to prevent variable-based overrides that bypass type safety.
 
 ## Common patterns
 

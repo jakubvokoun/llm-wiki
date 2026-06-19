@@ -11,10 +11,7 @@ Source: [HackTricks](../entities/hacktricks.md)
 
 ## Key Takeaways
 
-Masked paths hide sensitive kernel-facing filesystem locations from the container by bind-mounting
-over them. The purpose is to prevent interaction with kernel control interfaces that ordinary
-applications never need, especially under `/proc` and `/sys`. Masking is **not** the main isolation
-boundary — it removes high-value post-exploitation reconnaissance and modification targets.
+Masked paths hide sensitive kernel-facing filesystem locations from the container by bind-mounting over them. The purpose is to prevent interaction with kernel control interfaces that ordinary applications never need, especially under `/proc` and `/sys`. Masking is **not** the main isolation boundary — it removes high-value post-exploitation reconnaissance and modification targets.
 
 ## Default Masked Paths (Docker)
 

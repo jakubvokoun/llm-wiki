@@ -13,8 +13,7 @@ Data integrity is a measure of the accessibility and accuracy of datastores need
 
 ## Key Insight: Stricter Than Uptime
 
-99.99% uptime = ~1 hour downtime/year (high but understood).
-99.99% good bytes in a 2 GB artifact = ~200 KB garbled = catastrophic for executables, databases, and documents.
+99.99% uptime = ~1 hour downtime/year (high but understood). 99.99% good bytes in a 2 GB artifact = ~200 KB garbled = catastrophic for executables, databases, and documents.
 
 **The secret:** Proactive detection + rapid repair. Detecting and fixing corruption within 30 minutes before users are affected yields effective 99.99% availability _and_ 100% data integrity.
 
@@ -53,12 +52,7 @@ Design APIs to make soft deletion the default and hard to bypass. Apply soft del
 - Archives: long-term retention for compliance; slow recovery is acceptable
 - Real backups: must restore within service uptime SLO; daily/hourly/continuous
 
-**Tiered strategy:**
-| Tier | Storage | Retention | Restore time | Protects against |
-|------|---------|-----------|-------------|-----------------|
-| 1 | Same/similar tech as live data | Hours–days | Minutes | Software bugs, developer error |
-| 2 | Distributed filesystem, local site | Days–2 weeks | Hours | Bugs detected too late for Tier 1; specific storage tech failures |
-| 3+ | Nearline/offline (tape, offsite) | Weeks–months | Hours–days | Site-level failures |
+**Tiered strategy:** | Tier | Storage | Retention | Restore time | Protects against | |------|---------|-----------|-------------|-----------------| | 1 | Same/similar tech as live data | Hours–days | Minutes | Software bugs, developer error | | 2 | Distributed filesystem, local site | Days–2 weeks | Hours | Bugs detected too late for Tier 1; specific storage tech failures | | 3+ | Nearline/offline (tape, offsite) | Weeks–months | Hours–days | Site-level failures |
 
 **Critical principle: Replication ≠ recoverability.** Corrupt database rows are immediately synced to all replicas. Need diversity at every stack layer. Media isolation: a disk device driver bug is unlikely to affect tape drives.
 

@@ -11,8 +11,7 @@ Source: [docs.zarf.dev](https://docs.zarf.dev/tutorials/8-resource-adoption/)
 
 ## Summary
 
-Zarf can take over management of Kubernetes workloads that were deployed _before_ Zarf was
-initialized in the cluster, enabling lifecycle management of pre-existing resources.
+Zarf can take over management of Kubernetes workloads that were deployed _before_ Zarf was initialized in the cluster, enabling lifecycle management of pre-existing resources.
 
 ## Workflow
 
@@ -35,9 +34,7 @@ zarf package deploy <pkg>.tar.zst --adopt-existing-resources
 
 ## Caution
 
-Adoption works best when resources are in a **dedicated namespace**. Using
-`--adopt-existing-resources` on a shared namespace risks breaking non-Zarf workloads that
-happen to share the same manifests/service names.
+Adoption works best when resources are in a **dedicated namespace**. Using `--adopt-existing-resources` on a shared namespace risks breaking non-Zarf workloads that happen to share the same manifests/service names.
 
 ## Related
 

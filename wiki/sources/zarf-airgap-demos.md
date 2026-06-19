@@ -11,9 +11,7 @@ How to run fully offline Kubernetes demos using Zarf — no Wi-Fi required on st
 
 ## Key Idea
 
-Build a self-contained `.tar.zst` package on a connected machine before the event. On stage,
-disable networking and deploy using only the local file. Zarf's internal in-cluster registry
-serves images; Helm charts are vendored into the package.
+Build a self-contained `.tar.zst` package on a connected machine before the event. On stage, disable networking and deploy using only the local file. Zarf's internal in-cluster registry serves images; Helm charts are vendored into the package.
 
 ## Three-Phase Workflow
 
@@ -23,14 +21,12 @@ serves images; Helm charts are vendored into the package.
 zarf package create .   # downloads charts + images; produces .tar.zst
 ```
 
-- Explicitly list every image in the `images:` block — Zarf does not auto-discover from OCI
-  charts.
+- Explicitly list every image in the `images:` block — Zarf does not auto-discover from OCI charts.
 - Pin `version:` fields to exact tested values for reproducibility.
 - Pass `-a/--architecture` if building on a different arch than the demo machine.
 - Inspect contents: `zarf package inspect definition <pkg>.tar.zst`
 
-Add a `zarf.dev/connect-name` label to a Service to enable `zarf connect <name>`
-port-forwarding later:
+Add a `zarf.dev/connect-name` label to a Service to enable `zarf connect <name>` port-forwarding later:
 
 ```yaml
 metadata:

@@ -11,9 +11,7 @@ Source: [docs.zarf.dev](https://docs.zarf.dev/tutorials/9-package-create-differe
 
 ## Summary
 
-Differential packages bundle only what changed between two versions of a Zarf package — omitting
-images, git repos, and OCI skeleton components already present in the reference package. Useful
-for bandwidth-constrained or air-gapped update pipelines.
+Differential packages bundle only what changed between two versions of a Zarf package — omitting images, git repos, and OCI skeleton components already present in the reference package. Useful for bandwidth-constrained or air-gapped update pipelines.
 
 ## Command
 
@@ -21,13 +19,11 @@ for bandwidth-constrained or air-gapped update pipelines.
 zarf package create . --differential <reference-package>.tar.zst
 ```
 
-The resulting tarball is smaller because resources pinned to the same version/shasum in the
-reference package are excluded.
+The resulting tarball is smaller because resources pinned to the same version/shasum in the reference package are excluded.
 
 ## Requirements
 
-- `metadata.version` in `zarf.yaml` **must be updated** before building a differential package
-  (same-version differential builds fail with an error)
+- `metadata.version` in `zarf.yaml` **must be updated** before building a differential package (same-version differential builds fail with an error)
 - No running cluster needed — differential creation is build-time only
 
 ## Workflow

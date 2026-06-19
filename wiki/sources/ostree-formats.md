@@ -7,8 +7,7 @@ updated: 2026-04-17
 
 # OSTree Data Formats
 
-OSTree is designed around **static webservers** (S3, CDN, nginx) — no "smart server" like
-git's dynamic pack computation. This shapes all its wire formats.
+OSTree is designed around **static webservers** (S3, CDN, nginx) — no "smart server" like git's dynamic pack computation. This shapes all its wire formats.
 
 ## Repository formats
 
@@ -26,8 +25,7 @@ git's dynamic pack computation. This shapes all its wire formats.
 
 ## Static deltas
 
-Pre-computed binary diffs between two specific commits. Trade server storage for client
-bandwidth — useful for infrequent (monthly) OS update schedules.
+Pre-computed binary diffs between two specific commits. Trade server storage for client bandwidth — useful for infrequent (monthly) OS update schedules.
 
 ```
 server computes delta(old_commit, new_commit)
@@ -45,26 +43,19 @@ delta/
   ...
 ```
 
-Delta parts contain a raw data blob plus a **restricted bytecode** ("updates as code") inspired
-by ChromiumOS autoupdate. Bytecode instructions reference sections of the blob to reconstruct
-objects, enabling shared-section deduplication.
+Delta parts contain a raw data blob plus a **restricted bytecode** ("updates as code") inspired by ChromiumOS autoupdate. Bytecode instructions reference sections of the blob to reconstruct objects, enabling shared-section deduplication.
 
 ### bsdiff per-file deltas
 
-For changed executable files with matching basenames and similar sizes, OSTree applies
-[bsdiff](https://github.com/mendsley/bsdiff) (works well on binary/executable content).
-The bsdiff payload is embedded in the delta part, applied by a bytecode instruction.
+For changed executable files with matching basenames and similar sizes, OSTree applies [bsdiff](https://github.com/mendsley/bsdiff) (works well on binary/executable content). The bsdiff payload is embedded in the delta part, applied by a bytecode instruction.
 
 ### Fallback objects
 
-Files with internal compression (e.g. initramfs, compressed archives) resist bsdiff. These are
-listed in the superblock as "fallback objects" and fetched directly as `.filez` objects from
-the underlying archive repo.
+Files with internal compression (e.g. initramfs, compressed archives) resist bsdiff. These are listed in the superblock as "fallback objects" and fetched directly as `.filez` objects from the underlying archive repo.
 
 ### from-NULL deltas
 
-Deltas with no source commit enable efficient initial population — mainly useful for
-container use cases rather than OS image deployment (which typically starts from an ISO/qcow2).
+Deltas with no source commit enable efficient initial population — mainly useful for container use cases rather than OS image deployment (which typically starts from an ISO/qcow2).
 
 ## Related pages
 
