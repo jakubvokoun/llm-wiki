@@ -1,6 +1,7 @@
 ---
 title: "in-toto"
 tags: [in-toto, supply-chain-security, provenance, attestation]
+sources: [slsa-v1.2-attestation-model.md, slsa-v1.2-build-provenance.md]
 type: project
 updated: 2026-05-07
 ---

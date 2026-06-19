@@ -1,6 +1,7 @@
 ---
 title: "HackTricks"
 tags: [security, pentest, reference, linux, container]
+sources: [hacktricks-container-security.md, hacktricks-privilege-escalation.md]
 updated: 2026-05-01
 ---
 

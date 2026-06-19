@@ -1,6 +1,17 @@
 ---
 title: "OpenSCAP"
 tags: [openscap, scap, security-compliance, vulnerability-assessment, oscap]
+sources:
+  [
+    openscap-base-tool.md,
+    openscap-customization.md,
+    openscap-getting-started.md,
+    openscap-choosing-policy.md,
+    openscap-scap-security-guide.md,
+    openscap-security-compliance.md,
+    openscap-user-manual.md,
+    openscap-vulnerability-assessment.md,
+  ]
 updated: 2026-05-22
 ---
 
@@ -11,7 +22,7 @@ Open-source implementation of the SCAP standard for automated security complianc
 ## Components
 
 | Tool | Description |
-| ---- | ----------- |
+| --- | --- |
 | **oscap** | Core CLI scanner — evaluate XCCDF/OVAL, generate reports and fix scripts |
 | **SCAP Workbench** | GUI frontend for scanning and policy tailoring |
 | **OpenSCAP Daemon** | Continuous scheduled scanning service |

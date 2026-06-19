@@ -1,6 +1,7 @@
 ---
 title: "FIRST"
 tags: [org, incident-response, psirt, csirt, cvss, standards]
+sources: [first-psirt-services-framework.md]
 updated: 2026-06-05
 ---
 

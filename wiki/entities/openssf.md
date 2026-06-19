@@ -1,6 +1,7 @@
 ---
 title: "OpenSSF (Open Source Security Foundation)"
 tags: [openssf, supply-chain-security, open-source-security, linux-foundation]
+sources: [openssf-baseline-2026-02-19.md]
 type: org
 updated: 2026-05-07
 ---

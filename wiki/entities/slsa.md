@@ -1,6 +1,8 @@
 ---
 title: "SLSA (Project)"
 tags: [slsa, supply-chain-security, linux-foundation]
+sources:
+  [slsa-v1.2-about.md, slsa-v1.2-principles.md, slsa-v1.2-build-track-basics.md]
 type: project
 updated: 2026-05-07
 ---

@@ -1,6 +1,15 @@
 ---
 title: "Greg Kroah-Hartman"
 tags: [person, linux-kernel, stable-kernel, cve, maintainer]
+sources:
+  [
+    kroah-linux-cve-assignment-process.md,
+    kroah-linux-cves-overview.md,
+    kroah-linux-is-a-cna.md,
+    kroah-linux-kernel-security-work.md,
+    kroah-linux-kernel-version-numbers.md,
+    kroah-tracking-kernel-commits.md,
+  ]
 updated: 2026-06-05
 ---
 

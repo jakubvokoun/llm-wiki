@@ -66,14 +66,20 @@ The server runs over stdio. If it is not yet connected, restart Claude Code in t
 
 When told to ingest a source:
 
-1. If the source is a URL or non-markdown file, use `convert_to_markdown(uri)` to fetch/convert it. Before saving, strip web boilerplate: navigation menus, headers/footers, cookie banners, sidebar widgets, social share buttons, comment sections, subscription prompts, and repeated link lists. Keep only the article/document body. Save the cleaned result to `raw/<slug>.md`.
+1. If the source is a URL or non-markdown file, use `convert_to_markdown(uri)` to fetch/convert it. Before saving, strip web boilerplate: navigation menus, headers/footers, cookie banners, sidebar widgets, social share buttons, comment sections, subscription prompts, and repeated link lists. Keep only the article/document body. Save the cleaned result to `raw/<slug>.md`, prepending provenance frontmatter so the source can be re-fetched and freshness-checked later:
+   ```yaml
+   ---
+   source_url: <original URL, or "local:<original filename>" if not from the web>
+   fetched: YYYY-MM-DD
+   ---
+   ```
 2. Read the source file from `raw/`
 3. Discuss key takeaways with the user
 4. Write a summary page in `wiki/sources/<slug>.md`
 5. Update or create entity pages in `wiki/entities/` for notable people, orgs, products
 6. Update or create concept pages in `wiki/concepts/` for key ideas
 7. Run `nix-shell --run "prettier --prose-wrap never --write <file>"` on every wiki page created or updated in steps 4–6
-8. Update `wiki/index.md` — add the new source and any new pages
+8. Update `wiki/index.md` — run `bash scripts/build-index.sh --fix` to append stub rows for the new pages, then fill in the `TODO summary`/`TODO type` placeholders (the script can't write curated summaries). Re-run `prettier` on `index.md` afterward.
 9. Append to the `## [YYYY-MM-DD]` block in `wiki/log.md` (create it if needed):
    ```
    - **ingest (1):** <slug>
@@ -103,11 +109,10 @@ When answering a question:
 
 When asked to health-check the wiki:
 
-1. Read `wiki/index.md` for a full inventory
-2. Scan for:
+1. Run `bash scripts/lint.sh` first — it deterministically reports broken relative links, orphan pages, index drift, incomplete frontmatter, and raw/ provenance coverage. Exit code 1 means hard issues (broken links / index drift).
+2. Read `wiki/index.md` for a full inventory, then scan for the judgement-based issues the script can't catch:
    - Contradictions between pages
    - Stale claims superseded by newer sources
-   - Orphan pages (no inbound links)
    - Concepts mentioned but lacking their own page
    - Missing cross-references between related pages
    - Data gaps worth filling with a web search
@@ -190,6 +195,12 @@ When told to process the queue:
    - **entities:** entities created
    - **updated:** pages updated
    ```
+
+## Scripts
+
+- `scripts/build-index.sh [--fix]` — additive, non-destructive `index.md` sync. Reports pages missing from the index and dead rows; `--fix` appends stub rows (with `TODO` summary/type to fill in). Never rewrites existing rows.
+- `scripts/lint.sh` — deterministic health checks: broken relative links, orphan pages, index drift, incomplete frontmatter, raw/ provenance coverage. Exit 1 on hard issues. Run before the judgement-based `/lint` pass.
+- `scripts/reformat-today.sh [YYYY-MM-DD]` — bulk `prettier --prose-wrap never` on pages updated on a date (default: today).
 
 ## Tips
 

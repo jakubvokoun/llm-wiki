@@ -1,6 +1,7 @@
 ---
 title: "Shared Library Hijacking"
 tags: [privilege-escalation, linux-hardening, ld-so, library-injection]
+sources: [hacktricks-ld-so-conf-example.md, hacktricks-write-to-root.md]
 updated: 2026-05-01
 ---
 

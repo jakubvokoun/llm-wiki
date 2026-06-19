@@ -1,6 +1,7 @@
 ---
 title: "GCVE"
 tags: [project, vulnerability, cve, circl, disclosure, gna]
+sources: [gcve-vulnerability-handling-disclosure.md]
 updated: 2026-06-05
 ---
 

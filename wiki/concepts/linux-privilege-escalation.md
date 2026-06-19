@@ -1,6 +1,18 @@
 ---
 title: "Linux Privilege Escalation"
 tags: [linux, security, privilege-escalation, pentest, hardening]
+sources:
+  [
+    hacktricks-electron-cef-chromium-debugger-abuse.md,
+    hacktricks-escaping-limited-bash.md,
+    hacktricks-euid-ruid-suid.md,
+    hacktricks-interesting-groups-linux-pe.md,
+    hacktricks-linux-basics.md,
+    hacktricks-nfs-no-root-squash.md,
+    hacktricks-privilege-escalation.md,
+    hacktricks-socket-command-injection.md,
+    hacktricks-ssh-forward-agent.md,
+  ]
 updated: 2026-05-01
 ---
 

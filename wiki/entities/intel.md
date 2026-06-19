@@ -1,6 +1,7 @@
 ---
 title: "Intel"
 tags: [org, product, psirt, cna, hardware, cvss]
+sources: [intel-psirt-vulnerability-handling.md]
 updated: 2026-06-05
 ---
 

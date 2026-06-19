@@ -1,6 +1,7 @@
 ---
 title: "Wildcard Injection"
 tags: [privilege-escalation, argument-injection, linux-hardening]
+sources: [hacktricks-wildcards-spare-tricks.md]
 updated: 2026-05-01
 ---
 
@@ -21,15 +22,15 @@ The attacker creates files named `--checkpoint=1` and `--checkpoint-action=exec=
 
 ## High-Value Primitives
 
-| Binary          | Injected flag                                   | Effect                             |
-| --------------- | ----------------------------------------------- | ---------------------------------- |
-| `tar` (GNU)     | `--checkpoint=1` + `--checkpoint-action=exec=X` | Arbitrary command execution        |
-| `tar` (bsdtar)  | `--use-compress-program=/bin/sh`                | Arbitrary command execution        |
-| `rsync`         | `-e sh shell.sh`                                | Remote-shell override → RCE        |
-| `chown`/`chmod` | `--reference=/root/secret`                      | Copy ownership/permissions         |
-| `7z`/`7za`      | `@listfile` (symlink to sensitive file)         | File content disclosure via stderr |
-| `zip`           | `-T` + `-TT <cmd>` (separate tokens)            | Arbitrary command execution        |
-| `tcpdump`       | `-G 1 -W 1 -z /path/script.sh`                  | Post-rotation command execution    |
+| Binary | Injected flag | Effect |
+| --- | --- | --- |
+| `tar` (GNU) | `--checkpoint=1` + `--checkpoint-action=exec=X` | Arbitrary command execution |
+| `tar` (bsdtar) | `--use-compress-program=/bin/sh` | Arbitrary command execution |
+| `rsync` | `-e sh shell.sh` | Remote-shell override → RCE |
+| `chown`/`chmod` | `--reference=/root/secret` | Copy ownership/permissions |
+| `7z`/`7za` | `@listfile` (symlink to sensitive file) | File content disclosure via stderr |
+| `zip` | `-T` + `-TT <cmd>` (separate tokens) | Arbitrary command execution |
+| `tcpdump` | `-G 1 -W 1 -z /path/script.sh` | Post-rotation command execution |
 
 ## Key Distinction: `-- *` is Not Universal
 

@@ -1,6 +1,7 @@
 ---
 title: "ORCWG (Open Regulatory Compliance Working Group)"
 tags: [org, open-source, cra, compliance, eclipse]
+sources: [orcwg-cra.md]
 updated: 2026-06-05
 ---
 
