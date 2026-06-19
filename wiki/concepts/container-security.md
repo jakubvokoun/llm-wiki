@@ -118,11 +118,11 @@ Additional practices when running Node.js in Docker — see [Node.js Security](n
 
 Three independent kernel enforcement layers — all should be active ([defense-in-depth](defense-in-depth.md)):
 
-| Layer | Mechanism | Granularity |
-| --- | --- | --- |
-| [Linux Capabilities](linux-capabilities.md) | Drop CAP\_\* units | Coarse privilege units |
-| [Seccomp](seccomp.md) | Syscall allowlisting via BPF | Per-syscall |
-| [AppArmor](../entities/apparmor.md) / SELinux | MAC path/label policy | File/network/capability access |
+| Layer                                         | Mechanism                    | Granularity                    |
+| --------------------------------------------- | ---------------------------- | ------------------------------ |
+| [Linux Capabilities](linux-capabilities.md)   | Drop CAP\_\* units           | Coarse privilege units         |
+| [Seccomp](seccomp.md)                         | Syscall allowlisting via BPF | Per-syscall                    |
+| [AppArmor](../entities/apparmor.md) / SELinux | MAC path/label policy        | File/network/capability access |
 
 Docker applies `docker-default` seccomp and AppArmor profiles automatically. Override with `--security-opt seccomp=...` and `--security-opt apparmor=...`.
 
@@ -163,14 +163,14 @@ See [HackTricks — Runtime Authorization Plugins](../sources/hacktricks-authori
 
 Dangerous mounts beyond `/`:
 
-| Mount | Risk |
-| --- | --- |
-| `/proc/sys/kernel/core_pattern` | Host code execution on crash |
-| `/proc/sys/kernel/modprobe` | Redirect kernel module-loader helper |
-| `/proc/sysrq-trigger` | Host DoS (immediate reboot) |
-| `/sys/kernel/uevent_helper` | Host code execution on uevent |
-| `/sys/kernel/debug` | Wide kernel debug surface |
-| `/var` | Service-account tokens, container snapshots, runtime sockets |
+| Mount                           | Risk                                                         |
+| ------------------------------- | ------------------------------------------------------------ |
+| `/proc/sys/kernel/core_pattern` | Host code execution on crash                                 |
+| `/proc/sys/kernel/modprobe`     | Redirect kernel module-loader helper                         |
+| `/proc/sysrq-trigger`           | Host DoS (immediate reboot)                                  |
+| `/sys/kernel/uevent_helper`     | Host code execution on uevent                                |
+| `/sys/kernel/debug`             | Wide kernel debug surface                                    |
+| `/var`                          | Service-account tokens, container snapshots, runtime sockets |
 
 Mounted `/var` on a Kubernetes node often gives access to other pods' projected service-account tokens, which can escalate to cluster-wide compromise.
 

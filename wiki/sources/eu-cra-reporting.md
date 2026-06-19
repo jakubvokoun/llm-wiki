@@ -11,11 +11,11 @@ The European Commission page specifying the [Cyber Resilience Act](../concepts/c
 
 ## The timeline (per notifiable event)
 
-| Stage | Deadline |
-| --- | --- |
-| Early warning | within **24 hours** of becoming aware |
-| Full notification | within **72 hours** |
-| Final report | **14 days** after a corrective measure is available (exploited vulnerabilities); within **1 month** (severe incidents) |
+| Stage             | Deadline                                                                                                               |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Early warning     | within **24 hours** of becoming aware                                                                                  |
+| Full notification | within **72 hours**                                                                                                    |
+| Final report      | **14 days** after a corrective measure is available (exploited vulnerabilities); within **1 month** (severe incidents) |
 
 ## How and to whom
 

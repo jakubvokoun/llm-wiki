@@ -8,15 +8,11 @@ updated: 2026-04-16
 
 # AppArmor Profiles
 
-An [AppArmor](../entities/apparmor.md) profile is a per-application security
-policy that defines a whitelist of allowed system resources. The kernel enforces
-the profile whenever the confined binary runs.
+An [AppArmor](../entities/apparmor.md) profile is a per-application security policy that defines a whitelist of allowed system resources. The kernel enforces the profile whenever the confined binary runs.
 
 ## Profile location and format
 
-Profiles are human-readable text files in `/etc/apparmor.d/`. Convention:
-filename mirrors the binary path with `/` replaced by `.` (e.g.,
-`usr.bin.nginx`).
+Profiles are human-readable text files in `/etc/apparmor.d/`. Convention: filename mirrors the binary path with `/` replaced by `.` (e.g., `usr.bin.nginx`).
 
 Minimal structure:
 
@@ -67,8 +63,7 @@ Execute qualifiers:
 | **enforce**  | Blocked + logged                           |
 | **complain** | Logged only (but `deny` rules still block) |
 
-Load in enforce mode: `apparmor_parser -a /etc/apparmor.d/<profile>`
-Load in complain mode: `apparmor_parser -C /etc/apparmor.d/<profile>`
+Load in enforce mode: `apparmor_parser -a /etc/apparmor.d/<profile>` Load in complain mode: `apparmor_parser -C /etc/apparmor.d/<profile>`
 
 ## deny rules
 
@@ -85,8 +80,7 @@ Load in complain mode: `apparmor_parser -C /etc/apparmor.d/<profile>`
 @{MULTIARCH}    → *-linux-gnu*/
 ```
 
-`#include <abstractions/base>` — minimal rules for shared libraries, locales,
-NSS.
+`#include <abstractions/base>` — minimal rules for shared libraries, locales, NSS.
 
 ## Globbing
 
@@ -113,8 +107,7 @@ Docker auto-generates `docker-default` for all containers unless overridden:
 docker run --security-opt apparmor=my-profile myimage
 ```
 
-See [Docker AppArmor Profiles](../sources/docker-apparmor.md) for a full Nginx
-example and debugging guidance.
+See [Docker AppArmor Profiles](../sources/docker-apparmor.md) for a full Nginx example and debugging guidance.
 
 ## Profile development workflow
 

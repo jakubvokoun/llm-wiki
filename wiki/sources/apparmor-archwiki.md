@@ -7,21 +7,15 @@ updated: 2026-04-16
 
 # Linux AppArmor — Arch Wiki
 
-Comprehensive guide to AppArmor on Arch Linux: installation, profile management,
-profile authoring, and troubleshooting.
+Comprehensive guide to AppArmor on Arch Linux: installation, profile management, profile authoring, and troubleshooting.
 
 ## What is AppArmor
 
-[AppArmor](../entities/apparmor.md) is a
-[Mandatory Access Control](../concepts/mandatory-access-control.md) (MAC) system
-built on the Linux Security Modules (LSM) framework. It supplements — never
-replaces — standard DAC (discretionary access control). An application can never
-gain _more_ privilege than DAC already grants.
+[AppArmor](../entities/apparmor.md) is a [Mandatory Access Control](../concepts/mandatory-access-control.md) (MAC) system built on the Linux Security Modules (LSM) framework. It supplements — never replaces — standard DAC (discretionary access control). An application can never gain _more_ privilege than DAC already grants.
 
 Key characteristics:
 
-- Path-based (vs SELinux's label-based) — easier to configure, works with any
-  filesystem
+- Path-based (vs SELinux's label-based) — easier to configure, works with any filesystem
 - Default-deny: anything not explicitly allowed is blocked
 - Per-application rule sets enforced at the kernel level
 - Every policy violation emits an audit message
@@ -63,8 +57,7 @@ Custom kernel requires `CONFIG_SECURITY_APPARMOR=y` and `CONFIG_AUDIT=y`.
 | `aa-complain <profile>`        | Switch to complain mode                      |
 | `aa-teardown`                  | Unload all profiles (session only)           |
 
-Profile generation workflow: `aa-genprof` → run app → `aa-logprof` (add rules) →
-`aa-enforce`.
+Profile generation workflow: `aa-genprof` → run app → `aa-logprof` (add rules) → `aa-enforce`.
 
 ## Profile anatomy
 
@@ -90,8 +83,7 @@ Key syntax:
 - Access modes: `r` (read), `w` (write), `m` (mmap exec), `x` (execute, needs qualifier)
 - `deny` rules take precedence over `allow` and are enforced even in complain mode
 
-See [AppArmor Profiles](../concepts/apparmor-profiles.md) for full profile language
-reference.
+See [AppArmor Profiles](../concepts/apparmor-profiles.md) for full profile language reference.
 
 ## deny rules semantics
 
@@ -120,10 +112,8 @@ Cache lives at `/var/cache/apparmor/`. Reduces AppArmor startup time significant
 
 ## Troubleshooting
 
-- **Login broken after AppArmor v4 upgrade**: may be `unix-chkpwd` profile denying
-  `CAP_DAC_READ_SEARCH` on `/etc/shadow` — fix file permissions, then re-enable
-- **Ubuntu info ≠ Arch**: Ubuntu ships many AppArmor kernel patches; Arch uses
-  close-to-mainline. ABI supported by running kernel: `aa-features-abi --extract`
+- **Login broken after AppArmor v4 upgrade**: may be `unix-chkpwd` profile denying `CAP_DAC_READ_SEARCH` on `/etc/shadow` — fix file permissions, then re-enable
+- **Ubuntu info ≠ Arch**: Ubuntu ships many AppArmor kernel patches; Arch uses close-to-mainline. ABI supported by running kernel: `aa-features-abi --extract`
 
 ## See also
 

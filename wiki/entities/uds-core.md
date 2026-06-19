@@ -38,15 +38,15 @@ Answers the question _"what secure platform layer does a team need before deploy
 
 ## Key components
 
-| Layer | Technology |
-| --- | --- |
-| `core-base` (required) | Istio, UDS Operator, Pepr |
-| `core-identity-authorization` | Keycloak, Authservice |
-| `core-metrics-server` | Kubernetes Metrics Server |
-| `core-runtime-security` | Falco, Falcosidekick |
-| `core-logging` | Vector, Loki |
-| `core-monitoring` | Prometheus, Grafana, Alertmanager, Blackbox Exporter |
-| `core-backup-restore` | Velero |
+| Layer                         | Technology                                           |
+| ----------------------------- | ---------------------------------------------------- |
+| `core-base` (required)        | Istio, UDS Operator, Pepr                            |
+| `core-identity-authorization` | Keycloak, Authservice                                |
+| `core-metrics-server`         | Kubernetes Metrics Server                            |
+| `core-runtime-security`       | Falco, Falcosidekick                                 |
+| `core-logging`                | Vector, Loki                                         |
+| `core-monitoring`             | Prometheus, Grafana, Alertmanager, Blackbox Exporter |
+| `core-backup-restore`         | Velero                                               |
 
 ## UDS Operator
 

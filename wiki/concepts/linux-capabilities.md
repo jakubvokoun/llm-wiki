@@ -22,20 +22,14 @@ updated: 2026-04-16
 
 # Linux Capabilities
 
-Linux capabilities (POSIX 1003.1e subset, since Linux 2.2) split the
-all-or-nothing superuser model into ~40 discrete privilege units that can be
-independently granted, dropped, and audited. They replace `setuid`-root
-binaries as the mechanism for granting limited elevated privileges.
+Linux capabilities (POSIX 1003.1e subset, since Linux 2.2) split the all-or-nothing superuser model into ~40 discrete privilege units that can be independently granted, dropped, and audited. They replace `setuid`-root binaries as the mechanism for granting limited elevated privileges.
 
 ## Why capabilities matter for security
 
-- `setuid` root grants _all_ root privileges; capabilities grant _only what's
-  needed_ (principle of least privilege)
-- If a capable binary is compromised, blast radius is bounded by its capability
-  set
+- `setuid` root grants _all_ root privileges; capabilities grant _only what's needed_ (principle of least privilege)
+- If a capable binary is compromised, blast radius is bounded by its capability set
 - Misconfigured capabilities on binaries are a real privilege escalation vector
-- Container runtimes (Docker, containerd) drop capabilities by default;
-  understanding caps is essential for hardening containers
+- Container runtimes (Docker, containerd) drop capabilities by default; understanding caps is essential for hardening containers
 
 ## Capability sets (per-thread)
 
@@ -51,8 +45,7 @@ View with: `cat /proc/<PID>/status | grep Cap` and decode with `capsh --decode=<
 
 ## File capabilities
 
-Stored in `security.capability` xattr (requires `CAP_SETFCAP` to write).
-Capability string format: `cap_name[+|-][eip]` where:
+Stored in `security.capability` xattr (requires `CAP_SETFCAP` to write). Capability string format: `cap_name[+|-][eip]` where:
 
 - `e` = effective
 - `i` = inheritable
@@ -93,14 +86,11 @@ setcap -r /usr/bin/mybinary
 | `CAP_NET_BIND_SERVICE` | Bind ports < 1024                                   | Low      |
 | `CAP_BPF`              | Privileged BPF operations (Linux 5.8+)              | Medium   |
 
-> Kernel developer guidance: avoid `CAP_SYS_ADMIN` — it is already massively
-> overloaded. The only features that should add to it are those closely matching
-> existing uses.
+> Kernel developer guidance: avoid `CAP_SYS_ADMIN` — it is already massively overloaded. The only features that should add to it are those closely matching existing uses.
 
 ## Privilege escalation via misconfigured capabilities
 
-Binaries — especially scripting languages and text editors — with dangerous
-capabilities are a privilege escalation path. Attack pattern:
+Binaries — especially scripting languages and text editors — with dangerous capabilities are a privilege escalation path. Attack pattern:
 
 1. Enumerate: `getcap -r / 2>/dev/null` or LinPEAS
 2. Identify the capability and what it allows
@@ -151,9 +141,7 @@ Per-thread flags that disable special UID-0 semantics:
 
 ## Namespaced file capabilities (Linux 4.14+)
 
-Version 3 xattrs embed the namespace root UID. Capabilities are only granted
-when executed from within the matching namespace — enables container-scoped
-file capabilities without host-level privilege.
+Version 3 xattrs embed the namespace root UID. Capabilities are only granted when executed from within the matching namespace — enables container-scoped file capabilities without host-level privilege.
 
 ## Container security relevance
 

@@ -29,11 +29,7 @@ setcap [-q] [-n <rootuid>] [-v] {capabilities|-|-r} filename [...]
 
 ## Important note: remove vs empty
 
-`-r` removes the xattr entirely. Setting an **empty** capability set (`=`) is
-different — an empty set prevents a binary from executing with privilege even
-when the process has ambient+inheritable capabilities. Note: this root
-suppression was reverted for the root user identity itself; for full
-suppression use `capsh --mode`.
+`-r` removes the xattr entirely. Setting an **empty** capability set (`=`) is different — an empty set prevents a binary from executing with privilege even when the process has ambient+inheritable capabilities. Note: this root suppression was reverted for the root user identity itself; for full suppression use `capsh --mode`.
 
 ## Exit code
 

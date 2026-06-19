@@ -26,11 +26,11 @@ updated: 2026-06-05
 
 ## Timeline
 
-| Date | Milestone |
-| --- | --- |
-| 10 Dec 2024 | In force |
+| Date        | Milestone                                                       |
+| ----------- | --------------------------------------------------------------- |
+| 10 Dec 2024 | In force                                                        |
 | 11 Sep 2026 | **Reporting obligations** apply; Single Reporting Platform live |
-| 11 Dec 2027 | All main obligations apply |
+| 11 Dec 2027 | All main obligations apply                                      |
 
 ## Core obligations
 

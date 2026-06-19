@@ -42,12 +42,12 @@ Common untrusted data sources:
 
 **Safe sinks:**
 
-| Sink | Why safe |
-| --- | --- |
-| `element.textContent` | Text only, no parsing |
-| `element.innerText` | Text only (except in `<script>`) |
-| `element.setAttribute(safe_attr, val)` | Safe for non-event, non-URL attrs |
-| `document.createElement()` + `appendChild()` | Structural DOM, no parsing |
+| Sink                                         | Why safe                          |
+| -------------------------------------------- | --------------------------------- |
+| `element.textContent`                        | Text only, no parsing             |
+| `element.innerText`                          | Text only (except in `<script>`)  |
+| `element.setAttribute(safe_attr, val)`       | Safe for non-event, non-URL attrs |
+| `document.createElement()` + `appendChild()` | Structural DOM, no parsing        |
 
 ## Encoding Rules by Subcontext
 

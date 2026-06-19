@@ -7,8 +7,7 @@ updated: 2026-04-17
 
 # Fedora / Fedora Atomic
 
-**Fedora** is a community Linux distribution sponsored by Red Hat. The **Fedora Atomic**
-family refers to its immutable, OSTree-based editions.
+**Fedora** is a community Linux distribution sponsored by Red Hat. The **Fedora Atomic** family refers to its immutable, OSTree-based editions.
 
 - **Type:** Linux distribution family
 - **Sponsor:** Red Hat / IBM
@@ -27,8 +26,7 @@ family refers to its immutable, OSTree-based editions.
 
 ## Universal Blue (Community Layer)
 
-**Universal Blue** is an independent community organization that builds and distributes
-customized OCI images on top of Fedora Atomic:
+**Universal Blue** is an independent community organization that builds and distributes customized OCI images on top of Fedora Atomic:
 
 - **Bazzite** — gaming-focused (based on Kinoite)
 - **Bluefin** — developer-focused (based on Silverblue)

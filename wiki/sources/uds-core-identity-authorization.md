@@ -40,20 +40,20 @@ For applications with no native OIDC support, the operator can configure [Authse
 
 ## Platform groups
 
-| Group | Purpose | What it protects |
-| --- | --- | --- |
-| `/UDS Core/Admin` | Platform admins | Grafana admin, Keycloak admin console, Alertmanager |
-| `/UDS Core/Auditor` | Read-only access | Grafana viewer, log browsing |
+| Group               | Purpose          | What it protects                                    |
+| ------------------- | ---------------- | --------------------------------------------------- |
+| `/UDS Core/Admin`   | Platform admins  | Grafana admin, Keycloak admin console, Alertmanager |
+| `/UDS Core/Auditor` | Read-only access | Grafana viewer, log browsing                        |
 
 Application teams can define their own group restrictions in `Package` CR using `groups.anyOf`.
 
 ## Keycloak configuration layers
 
-| Approach | Use for | Requires image rebuild? |
-| --- | --- | --- |
-| Helm chart values | Session policies, auth flow toggles | No |
-| UDS Identity Config image | Custom themes, plugins, CA truststore | Yes |
-| OpenTofu / IaC | Groups, clients, IdPs post-deploy | No |
+| Approach                  | Use for                               | Requires image rebuild? |
+| ------------------------- | ------------------------------------- | ----------------------- |
+| Helm chart values         | Session policies, auth flow toggles   | No                      |
+| UDS Identity Config image | Custom themes, plugins, CA truststore | Yes                     |
+| OpenTofu / IaC            | Groups, clients, IdPs post-deploy     | No                      |
 
 ## Related pages
 

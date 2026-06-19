@@ -18,15 +18,15 @@ updated: 2026-05-07
 
 UDS Core's capabilities are organized into seven functional areas that together form an integrated security and observability stack.
 
-| Feature area | Technology | What it addresses |
-| --- | --- | --- |
-| Networking & Service Mesh | Istio | mTLS, traffic management, ingress/egress control |
-| Identity & Authorization | Keycloak + Authservice | SSO, OIDC, group-based authorization |
-| Logging | Vector + Loki | Centralized log aggregation, durable storage, alerting |
-| Monitoring & Observability | Prometheus + Grafana + Alertmanager | Metrics, dashboards, alerting |
-| Runtime Security | Falco + Falcosidekick | Runtime threat detection inside running containers |
-| Backup & Restore | Velero | Scheduled backup and recovery of K8s + PV data |
-| Policy & Compliance | Pepr | Admission control, pod security enforcement |
+| Feature area               | Technology                          | What it addresses                                      |
+| -------------------------- | ----------------------------------- | ------------------------------------------------------ |
+| Networking & Service Mesh  | Istio                               | mTLS, traffic management, ingress/egress control       |
+| Identity & Authorization   | Keycloak + Authservice              | SSO, OIDC, group-based authorization                   |
+| Logging                    | Vector + Loki                       | Centralized log aggregation, durable storage, alerting |
+| Monitoring & Observability | Prometheus + Grafana + Alertmanager | Metrics, dashboards, alerting                          |
+| Runtime Security           | Falco + Falcosidekick               | Runtime threat detection inside running containers     |
+| Backup & Restore           | Velero                              | Scheduled backup and recovery of K8s + PV data         |
+| Policy & Compliance        | Pepr                                | Admission control, pod security enforcement            |
 
 ## Detailed pages
 

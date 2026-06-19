@@ -7,8 +7,7 @@ updated: 2026-04-23
 
 # Predefined CI/CD Variables Reference (GitLab)
 
-GitLab provides 100+ predefined CI/CD variables available in every pipeline.
-Avoid overriding them as it causes unpredictable behavior.
+GitLab provides 100+ predefined CI/CD variables available in every pipeline. Avoid overriding them as it causes unpredictable behavior.
 
 ## Variable availability phases
 
@@ -20,8 +19,7 @@ Variables are available at one of three phases:
 | **Pipeline**     | While GitLab creates the pipeline | `rules`, job config                       |
 | **Job-only**     | When runner picks up the job      | `script`, `before_script`, `after_script` |
 
-Job-only variables **cannot** be used in `workflow`, `include`, or `rules`.
-Pre-pipeline variables are the **only** ones usable in `include:rules`.
+Job-only variables **cannot** be used in `workflow`, `include`, or `rules`. Pre-pipeline variables are the **only** ones usable in `include:rules`.
 
 ## Key variable groups
 

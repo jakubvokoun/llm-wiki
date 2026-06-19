@@ -32,11 +32,11 @@ For applications with no native OIDC support, Authservice (an Istio ecosystem pr
 
 ## Configuration layers (in UDS Core)
 
-| Layer | Use for | Image rebuild needed? |
-| --- | --- | --- |
-| Helm chart values | Session policies, auth flow toggles | No |
-| UDS Identity Config | Themes, plugins, CA truststore | Yes |
-| OpenTofu / IaC | Groups, clients, IdPs post-deploy | No |
+| Layer               | Use for                             | Image rebuild needed? |
+| ------------------- | ----------------------------------- | --------------------- |
+| Helm chart values   | Session policies, auth flow toggles | No                    |
+| UDS Identity Config | Themes, plugins, CA truststore      | Yes                   |
+| OpenTofu / IaC      | Groups, clients, IdPs post-deploy   | No                    |
 
 ## Related pages
 

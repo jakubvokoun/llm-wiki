@@ -13,10 +13,10 @@ A practitioner roundup of 10 CI/CD best practices, with branching model guidance
 
 ### 1. Version Control & Branching Model
 
-| Model                       | Best for                                                                            |
-| --------------------------- | ----------------------------------------------------------------------------------- |
-| **Git Flow**                | Scheduled releases, enterprise; long-lived `develop` + `main` + feature/hotfix      |
-| **GitHub Flow**             | Frequent releases; single `main` + short-lived feature branches + PR merge          |
+| Model                       | Best for                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| **Git Flow**                | Scheduled releases, enterprise; long-lived `develop` + `main` + feature/hotfix       |
+| **GitHub Flow**             | Frequent releases; single `main` + short-lived feature branches + PR merge           |
 | **Trunk-Based Development** | High-maturity teams (Google/Facebook); very short-lived branches; requires strong CI |
 
 **Recommendation:** start with GitHub Flow; move toward TBD as test culture matures.
@@ -48,6 +48,7 @@ Combine **Terraform** (provision) + **Ansible** (configure) for a layered, versi
 Target: build + core tests in under 10 minutes.
 
 Strategies:
+
 - Run fastest tests first; parallelize slow suites across agents
 - Cache dependencies aggressively (npm, Maven, Docker layers)
 - Use powerful build agents; right-size compute for bottleneck stages
@@ -57,21 +58,21 @@ Strategies:
 
 **Three pillars:**
 
-| Pillar     | What it captures                                     | Example tools  |
-| ---------- | ---------------------------------------------------- | -------------- |
-| **Metrics** | Numerical time-series: error rate, latency, CPU      | Prometheus     |
-| **Logs**   | Discrete events with context; structured JSON + IDs  | ELK, Loki      |
-| **Traces** | Per-request path through distributed services        | Jaeger, Tempo  |
+| Pillar      | What it captures                                    | Example tools |
+| ----------- | --------------------------------------------------- | ------------- |
+| **Metrics** | Numerical time-series: error rate, latency, CPU     | Prometheus    |
+| **Logs**    | Discrete events with context; structured JSON + IDs | ELK, Loki     |
+| **Traces**  | Per-request path through distributed services       | Jaeger, Tempo |
 
 Track business KPIs (sign-ups, completions) alongside technical metrics. Attach runbooks to alerts.
 
 ### 8. Progressive Deployment Strategies
 
-| Strategy         | Mechanism                                          | Rollback             |
-| ---------------- | -------------------------------------------------- | -------------------- |
-| **Canary**       | Small % of traffic to new version; expand if clean | Reroute traffic      |
-| **Blue-Green**   | Parallel envs; switch router on validation          | Router flip          |
-| **Feature Flags**| Deploy hidden; expose via toggle per user segment  | Toggle off           |
+| Strategy          | Mechanism                                          | Rollback        |
+| ----------------- | -------------------------------------------------- | --------------- |
+| **Canary**        | Small % of traffic to new version; expand if clean | Reroute traffic |
+| **Blue-Green**    | Parallel envs; switch router on validation         | Router flip     |
+| **Feature Flags** | Deploy hidden; expose via toggle per user segment  | Toggle off      |
 
 See [Progressive Delivery](../concepts/progressive-delivery.md).
 
@@ -93,18 +94,18 @@ See [Secrets Management](../concepts/secrets-management.md).
 
 ## Summary Comparison Table
 
-| Practice                  | Complexity  | Key outcome                            |
-| ------------------------- | ----------- | -------------------------------------- |
-| Version control / branches | Low–Medium  | Traceability, parallel development     |
-| Automated testing         | High        | Early defect detection, fast feedback  |
-| SAST + dependency scanning | Medium–High | Fewer vulnerabilities, enforced policy |
-| Build once deploy everywhere | Medium   | Consistent deployments, no env drift   |
-| IaC                       | Medium–High | Repeatable provisioning, audit trail   |
-| Fast feedback loops        | High        | Higher throughput, less context switch |
-| Monitoring & observability | Medium–High | Lower MTTR, data-driven operations     |
-| Progressive deployment     | High        | Reduced blast radius, safe rollouts    |
-| Documentation              | Low–Medium  | Onboarding speed, fewer knowledge silos|
-| Secrets management         | Medium      | Credential hygiene, compliance         |
+| Practice                     | Complexity  | Key outcome                             |
+| ---------------------------- | ----------- | --------------------------------------- |
+| Version control / branches   | Low–Medium  | Traceability, parallel development      |
+| Automated testing            | High        | Early defect detection, fast feedback   |
+| SAST + dependency scanning   | Medium–High | Fewer vulnerabilities, enforced policy  |
+| Build once deploy everywhere | Medium      | Consistent deployments, no env drift    |
+| IaC                          | Medium–High | Repeatable provisioning, audit trail    |
+| Fast feedback loops          | High        | Higher throughput, less context switch  |
+| Monitoring & observability   | Medium–High | Lower MTTR, data-driven operations      |
+| Progressive deployment       | High        | Reduced blast radius, safe rollouts     |
+| Documentation                | Low–Medium  | Onboarding speed, fewer knowledge silos |
+| Secrets management           | Medium      | Credential hygiene, compliance          |
 
 ## Related Concepts
 

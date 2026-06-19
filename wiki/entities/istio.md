@@ -18,10 +18,10 @@ Istio is an open-source service mesh for Kubernetes, maintained by Google, IBM, 
 
 ## Data plane modes
 
-| Mode | Proxy location | Overhead |
-| --- | --- | --- |
+| Mode                              | Proxy location                          | Overhead                |
+| --------------------------------- | --------------------------------------- | ----------------------- |
 | **Ambient** (default in UDS Core) | Node-level ztunnel + optional waypoints | Lower (shared per node) |
-| **Sidecar** | Per-pod Envoy sidecar | Higher (per pod) |
+| **Sidecar**                       | Per-pod Envoy sidecar                   | Higher (per pod)        |
 
 Ambient mode is Istio's long-term investment direction — no pod restarts needed for upgrades, lower resource footprint.
 

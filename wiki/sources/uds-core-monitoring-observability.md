@@ -20,12 +20,12 @@ UDS Core ships a complete metrics-based monitoring stack. From the moment it is 
 
 ## Observability stack
 
-| Component | Role |
-| --- | --- |
-| **Prometheus** | Scrapes metrics endpoints, stores time-series, evaluates alert rules |
-| **Grafana** | Dashboards and log exploration; access gated by UDS Core groups |
-| **Alertmanager** | Routes alerts with grouping, silencing, and deduplication |
-| **Blackbox Exporter** | Probes HTTPS endpoints for availability independent of pod health |
+| Component             | Role                                                                 |
+| --------------------- | -------------------------------------------------------------------- |
+| **Prometheus**        | Scrapes metrics endpoints, stores time-series, evaluates alert rules |
+| **Grafana**           | Dashboards and log exploration; access gated by UDS Core groups      |
+| **Alertmanager**      | Routes alerts with grouping, silencing, and deduplication            |
+| **Blackbox Exporter** | Probes HTTPS endpoints for availability independent of pod health    |
 
 ## Uptime monitoring
 

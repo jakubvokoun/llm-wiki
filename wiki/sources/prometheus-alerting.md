@@ -7,28 +7,23 @@ updated: 2026-04-24
 
 # Prometheus Alerting Best Practices
 
-Official Prometheus guidance on writing effective alerts. Based on Rob Ewaschuk's
-_My Philosophy on Alerting_ from his time at Google.
+Official Prometheus guidance on writing effective alerts. Based on Rob Ewaschuk's _My Philosophy on Alerting_ from his time at Google.
 
 ## Core philosophy
 
-Alert on **symptoms** (end-user pain), not causes. Keep alerting simple. Provide
-good consoles to allow pinpointing causes. Avoid pages where there is nothing to do.
+Alert on **symptoms** (end-user pain), not causes. Keep alerting simple. Provide good consoles to allow pinpointing causes. Avoid pages where there is nothing to do.
 
 ## Naming
 
-Community convention: **CamelCase** for alert names (e.g. `HighErrorRate`,
-`BatchJobFailed`). No strict restriction; any Unicode is valid.
+Community convention: **CamelCase** for alert names (e.g. `HighErrorRate`, `BatchJobFailed`). No strict restriction; any Unicode is valid.
 
 ## What to alert on
 
 ### Online serving systems
 
 - Alert on **high latency and error rates** as high up the stack as possible
-- Only page on latency at **one level** of the stack — if user-facing latency is
-  fine, no need to page on a slow lower-level component
-- Page on **user-visible errors**; add separate pages only for severe non-visible
-  failures (e.g. significant revenue loss)
+- Only page on latency at **one level** of the stack — if user-facing latency is fine, no need to page on a slow lower-level component
+- Page on **user-visible errors**; add separate pages only for severe non-visible failures (e.g. significant revenue loss)
 - Use separate alerts for request types with very different characteristics
 
 ### Offline processing
@@ -40,8 +35,7 @@ Community convention: **CamelCase** for alert names (e.g. `HighErrorRate`,
 
 - Page if the job has not succeeded recently enough to cause user-visible problems
 - Threshold: at least **2× the full run duration** (e.g. 4h job running every 4h → 10h threshold)
-- If a single failure is unacceptable, run the job more frequently; a single failure
-  should not require human intervention
+- If a single failure is unacceptable, run the job more frequently; a single failure should not require human intervention
 
 ### Capacity
 
@@ -50,15 +44,12 @@ Community convention: **CamelCase** for alert names (e.g. `HighErrorRate`,
 ### Metamonitoring
 
 - Alert on the monitoring infrastructure itself: Prometheus, Alertmanager, Pushgateway
-- Prefer **symptom-based blackbox end-to-end tests** over individual component checks
-  (e.g. "alert flows from Pushgateway → Prometheus → Alertmanager → email" beats three
-  separate component alerts)
+- Prefer **symptom-based blackbox end-to-end tests** over individual component checks (e.g. "alert flows from Pushgateway → Prometheus → Alertmanager → email" beats three separate component alerts)
 - Supplement internal monitoring with external blackbox monitoring as a fallback
 
 ## Key takeaway
 
-> Alert on symptoms, not causes. Have as few alerts as possible. Link alerts to consoles
-> so the cause can be pinpointed quickly.
+> Alert on symptoms, not causes. Have as few alerts as possible. Link alerts to consoles so the cause can be pinpointed quickly.
 
 ## See also
 

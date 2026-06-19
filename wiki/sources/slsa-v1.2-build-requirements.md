@@ -53,13 +53,13 @@ The build platform must generate provenance. Three properties determine the leve
 
 ## Key provenance fields by level
 
-| Field | Required at | Notes |
-| --- | --- | --- |
-| `buildType` | L1 | Identifies the build template |
-| `externalParameters` | L1 | All untrusted external inputs — MUST be complete at L3 |
-| `builder.id` | L1 | Trust anchor URI |
-| Signature | L2 | From trusted control plane |
-| Isolation | L3 | Environment isolation hardened |
+| Field                | Required at | Notes                                                  |
+| -------------------- | ----------- | ------------------------------------------------------ |
+| `buildType`          | L1          | Identifies the build template                          |
+| `externalParameters` | L1          | All untrusted external inputs — MUST be complete at L3 |
+| `builder.id`         | L1          | Trust anchor URI                                       |
+| Signature            | L2          | From trusted control plane                             |
+| Isolation            | L3          | Environment isolation hardened                         |
 
 ## Related pages
 

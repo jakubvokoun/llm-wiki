@@ -13,30 +13,30 @@ Default to the full `core` package. Individual layers are the exception; removin
 
 ## Available layers
 
-| Layer | What it provides | Dependencies |
-| --- | --- | --- |
-| `core-crds` | Standalone UDS CRDs (Package, Exemption, ClusterConfig) | None |
-| `core-base` | Istio, UDS Operator, Pepr Policy Engine | None (foundation) |
-| `core-identity-authorization` | Keycloak + Authservice (SSO) | Base |
-| `core-metrics-server` | Kubernetes Metrics Server | Base |
-| `core-runtime-security` | Falco + Falcosidekick | Base |
-| `core-logging` | Vector + Loki | Base; optionally Monitoring for UI |
-| `core-monitoring` | Prometheus + Grafana + Alertmanager + Blackbox | Base + Identity & Authorization |
-| `core-backup-restore` | Velero | Base |
-| `core` (standard) | All of the above combined | None (self-contained) |
+| Layer                         | What it provides                                        | Dependencies                       |
+| ----------------------------- | ------------------------------------------------------- | ---------------------------------- |
+| `core-crds`                   | Standalone UDS CRDs (Package, Exemption, ClusterConfig) | None                               |
+| `core-base`                   | Istio, UDS Operator, Pepr Policy Engine                 | None (foundation)                  |
+| `core-identity-authorization` | Keycloak + Authservice (SSO)                            | Base                               |
+| `core-metrics-server`         | Kubernetes Metrics Server                               | Base                               |
+| `core-runtime-security`       | Falco + Falcosidekick                                   | Base                               |
+| `core-logging`                | Vector + Loki                                           | Base; optionally Monitoring for UI |
+| `core-monitoring`             | Prometheus + Grafana + Alertmanager + Blackbox          | Base + Identity & Authorization    |
+| `core-backup-restore`         | Velero                                                  | Base                               |
+| `core` (standard)             | All of the above combined                               | None (self-contained)              |
 
 ## Layer selection criteria
 
-| Layer | When to include |
-| --- | --- |
-| CRDs | Pre-existing components need UDS exemptions before base starts |
-| Base | Required for all UDS deployments |
-| Identity & Authorization | Deployment requires user authentication / SSO |
-| Metrics Server | Cluster does not already provide one (skip on EKS/AKS/GKE) |
-| Runtime Security | Runtime threat detection via Falco needed |
-| Logging | Centralized log aggregation needed |
-| Monitoring | Metrics dashboards, alerting, uptime monitoring needed |
-| Backup & Restore | Critical data must survive cluster failures |
+| Layer                    | When to include                                                |
+| ------------------------ | -------------------------------------------------------------- |
+| CRDs                     | Pre-existing components need UDS exemptions before base starts |
+| Base                     | Required for all UDS deployments                               |
+| Identity & Authorization | Deployment requires user authentication / SSO                  |
+| Metrics Server           | Cluster does not already provide one (skip on EKS/AKS/GKE)     |
+| Runtime Security         | Runtime threat detection via Falco needed                      |
+| Logging                  | Centralized log aggregation needed                             |
+| Monitoring               | Metrics dashboards, alerting, uptime monitoring needed         |
+| Backup & Restore         | Critical data must survive cluster failures                    |
 
 **Note:** The Monitoring layer requires the Identity & Authorization layer (Grafana login). Do not deploy `core-metrics-server` if the cluster already has a metrics server.
 
@@ -56,11 +56,11 @@ On-prem and edge environments often need load balancer controllers (MetalLB) or 
 
 ## UDS add-ons
 
-| Add-On | What it provides |
-| --- | --- |
-| UDS UI | Common operating picture for K8s clusters and UDS deployments |
-| UDS Registry | Artifact storage for UDS components and mission applications |
-| UDS Remote Agent | Remote cluster management and deployment beyond UDS CLI |
+| Add-On           | What it provides                                              |
+| ---------------- | ------------------------------------------------------------- |
+| UDS UI           | Common operating picture for K8s clusters and UDS deployments |
+| UDS Registry     | Artifact storage for UDS components and mission applications  |
+| UDS Remote Agent | Remote cluster management and deployment beyond UDS CLI       |
 
 ## Related pages
 

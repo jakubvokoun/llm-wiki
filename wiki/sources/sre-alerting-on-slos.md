@@ -11,12 +11,12 @@ By Steven Thurgood et al. Presents six progressively more sophisticated strategi
 
 ## Four Alerting Criteria
 
-| Criterion | Definition |
-| --- | --- |
-| **Precision** | Proportion of alerts that corresponded to a significant event |
-| **Recall** | Proportion of significant events that triggered an alert |
-| **Detection time** | Time from problem start to notification |
-| **Reset time** | Time alert continues firing after the problem resolves |
+| Criterion          | Definition                                                    |
+| ------------------ | ------------------------------------------------------------- |
+| **Precision**      | Proportion of alerts that corresponded to a significant event |
+| **Recall**         | Proportion of significant events that triggered an alert      |
+| **Detection time** | Time from problem start to notification                       |
+| **Reset time**     | Time alert continues firing after the problem resolves        |
 
 ## Six Approaches (Summary)
 

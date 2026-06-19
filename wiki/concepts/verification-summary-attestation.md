@@ -35,14 +35,14 @@ A VSA is a signed statement that a trusted **verifier** has evaluated a software
 
 ## Key fields
 
-| Field | Role |
-| --- | --- |
-| `verifier.id` | Who issued the VSA — the trust anchor for consumers |
-| `resourceUri` | Identifies the artifact (must match what consumer requested) |
-| `policy.uri` | The policy evaluated against |
-| `verificationResult` | `PASSED` or `FAILED` |
-| `verifiedLevels` | Which SLSA levels were achieved; max one per track |
-| `dependencyLevels` | SLSA level distribution across dependencies |
+| Field                | Role                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| `verifier.id`        | Who issued the VSA — the trust anchor for consumers          |
+| `resourceUri`        | Identifies the artifact (must match what consumer requested) |
+| `policy.uri`         | The policy evaluated against                                 |
+| `verificationResult` | `PASSED` or `FAILED`                                         |
+| `verifiedLevels`     | Which SLSA levels were achieved; max one per track           |
+| `dependencyLevels`   | SLSA level distribution across dependencies                  |
 
 ## `verifiedLevels` values
 
@@ -66,12 +66,12 @@ Extended properties:
 
 ## Use cases
 
-| Use case | Description |
-| --- | --- |
-| **Package registry** | Registry evaluates provenance at upload; issues VSA; consumers verify VSA |
-| **Closed-source vendor** | Vendor proves compliance without exposing build details |
-| **Internal policy enforcement** | Internal verifier issues VSAs for all internal artifacts |
-| **Third-party audit** | Auditor issues VSAs for certified vendors |
+| Use case                        | Description                                                               |
+| ------------------------------- | ------------------------------------------------------------------------- |
+| **Package registry**            | Registry evaluates provenance at upload; issues VSA; consumers verify VSA |
+| **Closed-source vendor**        | Vendor proves compliance without exposing build details                   |
+| **Internal policy enforcement** | Internal verifier issues VSAs for all internal artifacts                  |
+| **Third-party audit**           | Auditor issues VSAs for certified vendors                                 |
 
 ## Security caveat
 

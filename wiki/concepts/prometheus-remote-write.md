@@ -16,8 +16,7 @@ updated: 2026-04-24
 
 # Prometheus Remote Write
 
-Prometheus can forward scraped metrics to remote storage backends (Thanos,
-VictoriaMetrics, Grafana Mimir, Cortex, etc.) via the remote write protocol.
+Prometheus can forward scraped metrics to remote storage backends (Thanos, VictoriaMetrics, Grafana Mimir, Cortex, etc.) via the remote write protocol.
 
 ## How it works
 

@@ -11,27 +11,27 @@ SLSA categorizes supply chain threats into 9 groups labeled (A) through (I), cov
 
 ## Threat categories
 
-| ID | Category | Description |
-| --- | --- | --- |
-| A | Producer | Intentionally malicious code from the software producer |
-| B | Modifying the source | Unauthorized changes to source before build |
-| C | Source code management (SCM) | Infrastructure-level compromise of the SCM platform |
-| D | External build parameters | Build from wrong source, branch, or with injected parameters |
-| E | Build process | Tampering during build execution, or forged provenance |
-| F | Artifact publication | Upload artifact not matching intended source |
-| G | Distribution channel | Registry compromise or MITM during distribution |
-| H | Package selection | Consumer requests wrong package (typosquatting, dependency confusion) |
-| I | Usage | Consumer uses package insecurely |
+| ID  | Category                     | Description                                                           |
+| --- | ---------------------------- | --------------------------------------------------------------------- |
+| A   | Producer                     | Intentionally malicious code from the software producer               |
+| B   | Modifying the source         | Unauthorized changes to source before build                           |
+| C   | Source code management (SCM) | Infrastructure-level compromise of the SCM platform                   |
+| D   | External build parameters    | Build from wrong source, branch, or with injected parameters          |
+| E   | Build process                | Tampering during build execution, or forged provenance                |
+| F   | Artifact publication         | Upload artifact not matching intended source                          |
+| G   | Distribution channel         | Registry compromise or MITM during distribution                       |
+| H   | Package selection            | Consumer requests wrong package (typosquatting, dependency confusion) |
+| I   | Usage                        | Consumer uses package insecurely                                      |
 
 ## Real-world examples
 
-| Attack | Threat | Description |
-| --- | --- | --- |
-| SolarWinds | E | Build process compromise injected backdoor into Orion build output |
-| Codecov | D/E | CI script modification exfiltrated credentials to alter subsequent builds |
-| event-stream (npm) | A | Malicious maintainer published version targeting bitcoin wallets |
-| PHP | C | Server compromise pushed backdoor commit directly to `php-src` |
-| SushiSwap | B | Supply chain attack through malicious dependency |
+| Attack             | Threat | Description                                                               |
+| ------------------ | ------ | ------------------------------------------------------------------------- |
+| SolarWinds         | E      | Build process compromise injected backdoor into Orion build output        |
+| Codecov            | D/E    | CI script modification exfiltrated credentials to alter subsequent builds |
+| event-stream (npm) | A      | Malicious maintainer published version targeting bitcoin wallets          |
+| PHP                | C      | Server compromise pushed backdoor commit directly to `php-src`            |
+| SushiSwap          | B      | Supply chain attack through malicious dependency                          |
 
 ## What SLSA mitigates
 

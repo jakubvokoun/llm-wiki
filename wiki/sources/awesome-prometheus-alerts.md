@@ -31,8 +31,7 @@ A community-curated collection of 954 copy-pasteable Prometheus alerting rules a
     severity: warning
   annotations:
     summary: Host out of memory (instance {{ $labels.instance }})
-    description:
-      "Node memory is filling up (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Node memory is filling up (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### predict_linear — disk fill prediction
@@ -46,8 +45,7 @@ A community-curated collection of 954 copy-pasteable Prometheus alerting rules a
     severity: warning
   annotations:
     summary: Host disk may fill in 24 hours (instance {{ $labels.instance }})
-    description:
-      "Filesystem will likely run out of space within the next 24 hours.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Filesystem will likely run out of space within the next 24 hours.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 Same pattern for Kubernetes PVCs with a subquery:
@@ -59,8 +57,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: critical
   annotations:
     summary: Kubernetes Volume full in four days (instance {{ $labels.instance }})
-    description:
-      "Volume under {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is expected to fill up within four days. Currently {{ $value | humanize }}% is available.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Volume under {{ $labels.namespace }}/{{ $labels.persistentvolumeclaim }} is expected to fill up within four days. Currently {{ $value | humanize }}% is available.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### increase/delta on a counter
@@ -73,8 +70,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: warning
   annotations:
     summary: Host OOM kill detected (instance {{ $labels.instance }})
-    description:
-      "OOM kill detected\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "OOM kill detected\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ```yaml
@@ -85,8 +81,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: warning
   annotations:
     summary: Kubernetes pod crash looping (instance {{ $labels.instance }})
-    description:
-      "Pod {{ $labels.namespace }}/{{ $labels.pod }} is crash looping\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is crash looping\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### deriv — compound direction + magnitude (clock skew)
@@ -99,8 +94,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: warning
   annotations:
     summary: Host clock skew (instance {{ $labels.instance }})
-    description:
-      "Clock skew detected. Clock is out of sync. Ensure NTP is configured correctly on this host.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Clock skew detected. Clock is out of sync. Ensure NTP is configured correctly on this host.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### deriv — trend alert (pipeline failure rate rising)
@@ -114,8 +108,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: warning
   annotations:
     summary: GitLab CI pipeline failures increasing (instance {{ $labels.instance }})
-    description:
-      "GitLab CI pipeline failures are increasing on {{ $labels.instance }} ({{ $value }}/s).\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "GitLab CI pipeline failures are increasing on {{ $labels.instance }} ({{ $value }}/s).\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### Simple equality / status label
@@ -127,8 +120,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: critical
   annotations:
     summary: Elasticsearch Cluster Red (instance {{ $labels.instance }})
-    description:
-      "Elastic Cluster Red status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Elastic Cluster Red status\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### probe_success (blackbox / uptime)
@@ -141,8 +133,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: critical
   annotations:
     summary: Blackbox probe failed (instance {{ $labels.instance }})
-    description:
-      "Probe failed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Probe failed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### avg by with label selectors (cert-manager expiry)
@@ -156,8 +147,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: warning
   annotations:
     summary: Cert-Manager certificate expiring soon (instance {{ $labels.instance }})
-    description:
-      "The certificate {{ $labels.name }} is expiring in less than 21 days.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "The certificate {{ $labels.name }} is expiring in less than 21 days.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ### Dead man switch (always-firing alert)
@@ -169,8 +159,7 @@ Same pattern for Kubernetes PVCs with a subquery:
     severity: critical
   annotations:
     summary: Prometheus AlertManager E2E dead man switch (instance {{ $labels.instance }})
-    description:
-      "Prometheus DeadManSwitch is an always-firing alert. It's used as an end-to-end test of Prometheus through the Alertmanager.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+    description: "Prometheus DeadManSwitch is an always-firing alert. It's used as an end-to-end test of Prometheus through the Alertmanager.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 ```
 
 ## Coverage by Category

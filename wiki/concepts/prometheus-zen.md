@@ -15,8 +15,7 @@ updated: 2026-04-24
 
 # Zen of Prometheus
 
-Core values and guidelines from the Prometheus community for instrumentation
-and alerting. Inspired by the Zen of Python and Go Proverbs.
+Core values and guidelines from the Prometheus community for instrumentation and alerting. Inspired by the Zen of Python and Go Proverbs.
 
 ## Instrumentation
 
@@ -33,9 +32,7 @@ and alerting. Inspired by the Zen of Python and Go Proverbs.
 
 ## Histograms
 
-Prefer **native histograms** — no predefined buckets, dynamic resolution, sparse.
-Classic histograms require upfront knowledge of latency ranges; let SLOs guide
-bucket boundaries when classic histograms are required.
+Prefer **native histograms** — no predefined buckets, dynamic resolution, sparse. Classic histograms require upfront knowledge of latency ranges; let SLOs guide bucket boundaries when classic histograms are required.
 
 ## Alerting
 

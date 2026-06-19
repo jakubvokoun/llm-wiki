@@ -46,17 +46,17 @@ docker run --security-opt seccomp=unconfined myimage
 
 ## Key blocked syscall categories
 
-| Category | Examples | Why blocked |
-| --- | --- | --- |
-| Kernel module ops | `init_module`, `delete_module`, `finit_module` | Container escape / host persistence |
-| Namespace creation | `clone`, `unshare`, `setns` | Namespace escapes; also gated by `CAP_SYS_ADMIN` |
-| Time modification | `clock_settime`, `settimeofday`, `stime` | Time not namespaced |
-| Kernel keyring | `add_key`, `keyctl`, `request_key` | Keyring not namespaced |
-| BPF | `bpf` | Persistent kernel-level code; `CAP_SYS_ADMIN` gate |
-| io_uring | `io_uring_enter`, `io_uring_setup`, `io_uring_register` | CVE-class container breakout vulnerabilities |
-| Tracing / profiling | `ptrace`, `perf_event_open`, `lookup_dcookie` | Host info leak; seccomp bypass pre-4.8 |
-| Boot / kexec | `kexec_load`, `kexec_file_load`, `reboot` | Would affect entire host |
-| Obsolete syscalls | `sysfs`, `_sysctl`, `ustat`, `nfsservctl` | Attack surface reduction |
+| Category            | Examples                                                | Why blocked                                        |
+| ------------------- | ------------------------------------------------------- | -------------------------------------------------- |
+| Kernel module ops   | `init_module`, `delete_module`, `finit_module`          | Container escape / host persistence                |
+| Namespace creation  | `clone`, `unshare`, `setns`                             | Namespace escapes; also gated by `CAP_SYS_ADMIN`   |
+| Time modification   | `clock_settime`, `settimeofday`, `stime`                | Time not namespaced                                |
+| Kernel keyring      | `add_key`, `keyctl`, `request_key`                      | Keyring not namespaced                             |
+| BPF                 | `bpf`                                                   | Persistent kernel-level code; `CAP_SYS_ADMIN` gate |
+| io_uring            | `io_uring_enter`, `io_uring_setup`, `io_uring_register` | CVE-class container breakout vulnerabilities       |
+| Tracing / profiling | `ptrace`, `perf_event_open`, `lookup_dcookie`           | Host info leak; seccomp bypass pre-4.8             |
+| Boot / kexec        | `kexec_load`, `kexec_file_load`, `reboot`               | Would affect entire host                           |
+| Obsolete syscalls   | `sysfs`, `_sysctl`, `ustat`, `nfsservctl`               | Attack surface reduction                           |
 
 ## Defense-in-depth layering
 

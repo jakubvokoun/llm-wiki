@@ -40,14 +40,14 @@ Parameter entity chains can exfiltrate file contents to attacker-controlled HTTP
 
 ## Defenses
 
-| Threat | Defense |
-| --- | --- |
-| Billion Laughs / XXE | Disable DTD entirely |
-| Schema injection | Use XSD with strict types; avoid inline DTDs |
-| Remote schema MitM | Fetch over HTTPS; verify integrity; use local copy |
-| Unbounded elements | Set explicit `maxOccurs` |
-| Numeric edge cases | `positiveInteger` for IDs/quantities; `decimal` for prices |
-| Parser malformed handling | Use strict W3C-conformant parsers; disable recovery mode |
+| Threat                    | Defense                                                    |
+| ------------------------- | ---------------------------------------------------------- |
+| Billion Laughs / XXE      | Disable DTD entirely                                       |
+| Schema injection          | Use XSD with strict types; avoid inline DTDs               |
+| Remote schema MitM        | Fetch over HTTPS; verify integrity; use local copy         |
+| Unbounded elements        | Set explicit `maxOccurs`                                   |
+| Numeric edge cases        | `positiveInteger` for IDs/quantities; `decimal` for prices |
+| Parser malformed handling | Use strict W3C-conformant parsers; disable recovery mode   |
 
 ## See Also
 

@@ -17,10 +17,10 @@ Admission control and network policy prevent known bad configurations. They cann
 
 Falco monitors the Linux kernel via eBPF probes — observing syscalls made by all processes on a node, including those inside containers, without modifying containers or requiring application changes.
 
-| Component | Role |
-| --- | --- |
-| eBPF probe | Observes all syscalls at the kernel level; no container changes |
-| Falco engine | Evaluates event stream against rules; generates alerts on match |
+| Component      | Role                                                              |
+| -------------- | ----------------------------------------------------------------- |
+| eBPF probe     | Observes all syscalls at the kernel level; no container changes   |
+| Falco engine   | Evaluates event stream against rules; generates alerts on match   |
 | Falco Sidekick | Fans out alerts to Alertmanager, SIEM, Slack, Elasticsearch, etc. |
 
 ## Default detections
@@ -39,11 +39,11 @@ By default, runtime alerts are sent as events to Loki, making them queryable alo
 
 ## Defense-in-depth position
 
-| Layer | Role |
-| --- | --- |
-| Policy engine (Pepr) | Blocks misconfigured workloads at admission |
-| Service mesh (Istio) | Blocks unauthorized lateral movement between services |
-| Network policy | Blocks unauthorized traffic at the IP level |
+| Layer                    | Role                                                  |
+| ------------------------ | ----------------------------------------------------- |
+| Policy engine (Pepr)     | Blocks misconfigured workloads at admission           |
+| Service mesh (Istio)     | Blocks unauthorized lateral movement between services |
+| Network policy           | Blocks unauthorized traffic at the IP level           |
 | Runtime security (Falco) | Detects malicious behavior inside permitted workloads |
 
 Runtime security specifically catches compromise that the other layers cannot prevent: a legitimate container that has been exploited, or a supply chain attack that introduced a malicious binary into an otherwise-permitted image.

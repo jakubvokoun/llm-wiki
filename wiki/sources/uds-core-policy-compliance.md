@@ -12,10 +12,10 @@ UDS Core enforces secure and compliant workload behavior through [Pepr](../entit
 
 ## How policies work
 
-| Policy type | What it does | Example |
-| --- | --- | --- |
-| **Mutation** | Automatically corrects setting to a safe default | Drop all capabilities, set `runAsNonRoot: true` |
-| **Validation** | Blocks resource if it does not meet the policy | Disallow privileged containers, reject NodePort services |
+| Policy type    | What it does                                     | Example                                                  |
+| -------------- | ------------------------------------------------ | -------------------------------------------------------- |
+| **Mutation**   | Automatically corrects setting to a safe default | Drop all capabilities, set `runAsNonRoot: true`          |
+| **Validation** | Blocks resource if it does not meet the policy   | Disallow privileged containers, reject NodePort services |
 
 Mutations run first and silently fix common misconfigurations. Validations run after mutations and reject resources that cannot be automatically corrected, returning a clear error.
 

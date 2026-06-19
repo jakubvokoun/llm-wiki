@@ -17,12 +17,12 @@ A **release** = artifact(s) + associated attestation bundle. Provenance must be 
 
 Producers can publish provenance in multiple places:
 
-| Venue | Description | Use case |
-| --- | --- | --- |
-| **Source repository** | Attestation stored alongside source in VCS | Internal use, traceability |
-| **Registry sidecars** | Attestation attached to the package in the registry | Package ecosystems (npm, PyPI, OCI registries) |
-| **Transparency logs** | Append-only public log (e.g., Rekor/Sigstore) | Public accountability, audit trail |
-| **Dedicated attestation store** | Separate storage keyed by artifact digest | Large-scale deployments |
+| Venue                           | Description                                         | Use case                                       |
+| ------------------------------- | --------------------------------------------------- | ---------------------------------------------- |
+| **Source repository**           | Attestation stored alongside source in VCS          | Internal use, traceability                     |
+| **Registry sidecars**           | Attestation attached to the package in the registry | Package ecosystems (npm, PyPI, OCI registries) |
+| **Transparency logs**           | Append-only public log (e.g., Rekor/Sigstore)       | Public accountability, audit trail             |
+| **Dedicated attestation store** | Separate storage keyed by artifact digest           | Large-scale deployments                        |
 
 ## Format requirements
 

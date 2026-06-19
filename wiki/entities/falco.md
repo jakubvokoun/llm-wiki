@@ -13,11 +13,11 @@ Falco is an open-source runtime security tool, a CNCF graduated project. It moni
 
 Falco attaches eBPF probes to the Linux kernel to observe all syscalls made by processes on a node — including processes inside containers — without modifying the containers or requiring application changes.
 
-| Component | Role |
-| --- | --- |
-| eBPF probe | Observes syscalls at the kernel level |
-| Falco engine | Evaluates event stream against rules; generates alerts on match |
-| Falco Sidekick | Fan-out alert forwarder to Alertmanager, SIEM, Slack, etc. |
+| Component      | Role                                                            |
+| -------------- | --------------------------------------------------------------- |
+| eBPF probe     | Observes syscalls at the kernel level                           |
+| Falco engine   | Evaluates event stream against rules; generates alerts on match |
+| Falco Sidekick | Fan-out alert forwarder to Alertmanager, SIEM, Slack, etc.      |
 
 ## Default detections
 

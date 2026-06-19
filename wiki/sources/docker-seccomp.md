@@ -7,9 +7,7 @@ updated: 2026-04-16
 
 # Seccomp Security Profiles for Docker
 
-[Seccomp](../concepts/seccomp.md) (Secure Computing Mode) is a Linux kernel
-feature that restricts the set of system calls a process can make. Docker uses
-it to confine containers at the syscall level.
+[Seccomp](../concepts/seccomp.md) (Secure Computing Mode) is a Linux kernel feature that restricts the set of system calls a process can make. Docker uses it to confine containers at the syscall level.
 
 ## Requirements
 
@@ -66,8 +64,7 @@ Selected syscalls blocked by the default profile and why:
 | `setns`                                                            | Associate thread with namespace; also gated by `CAP_SYS_ADMIN`          |
 | `unshare`                                                          | Clone namespaces for process; also gated by `CAP_SYS_ADMIN`             |
 
-Many blocked syscalls are _also_ gated by Linux capabilities — seccomp provides
-defense-in-depth when capabilities are misconfigured.
+Many blocked syscalls are _also_ gated by Linux capabilities — seccomp provides defense-in-depth when capabilities are misconfigured.
 
 ## Relationship to AppArmor and capabilities
 

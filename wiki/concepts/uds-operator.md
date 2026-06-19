@@ -26,12 +26,12 @@ The UDS Operator is the control plane for [UDS Core](../entities/uds-core.md). I
 
 ## What it generates from a Package CR
 
-| Intent in Package CR | Resources generated |
-| --- | --- |
-| `expose` block | Istio `VirtualService`, `AuthorizationPolicy`, ingress routing |
-| `allow` block | Kubernetes `NetworkPolicy` for egress/ingress |
-| `sso` block | Keycloak client registration + Authservice SSO flow |
-| `monitor` block | `ServiceMonitor`, `PodMonitor`, or blackbox `Probe` |
+| Intent in Package CR | Resources generated                                            |
+| -------------------- | -------------------------------------------------------------- |
+| `expose` block       | Istio `VirtualService`, `AuthorizationPolicy`, ingress routing |
+| `allow` block        | Kubernetes `NetworkPolicy` for egress/ingress                  |
+| `sso` block          | Keycloak client registration + Authservice SSO flow            |
+| `monitor` block      | `ServiceMonitor`, `PodMonitor`, or blackbox `Probe`            |
 
 ## Why it matters
 

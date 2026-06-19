@@ -21,16 +21,16 @@ UDS Core enforces security controls at every stage from software supply chain th
 
 ## Defense-in-depth layers
 
-| Layer | What UDS Core does |
-| --- | --- |
-| **Supply chain** | Per-release CVE scanning + SBOMs; deterministic Zarf packaging |
-| **Airgap delivery** | No external runtime dependencies; Zarf carries all images + manifests |
-| **Identity & SSO** | Keycloak + Authservice; consistent auth regardless of app capability |
+| Layer                     | What UDS Core does                                                                                                          |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Supply chain**          | Per-release CVE scanning + SBOMs; deterministic Zarf packaging                                                              |
+| **Airgap delivery**       | No external runtime dependencies; Zarf carries all images + manifests                                                       |
+| **Identity & SSO**        | Keycloak + Authservice; consistent auth regardless of app capability                                                        |
 | **Zero-trust networking** | Default-deny NetworkPolicy; Istio STRICT mTLS; ALLOW-based AuthorizationPolicy; explicit egress; Admin/Tenant gateway split |
-| **Admission control** | Pepr blocks root, privileged, excess capabilities, host access; mutations apply safe defaults; controlled exemptions |
-| **Runtime security** | Falco behavioral detection; alerts route to existing logging/metrics stack |
-| **Observability & audit** | Vector → Loki (logs); Prometheus → Grafana (metrics); unified troubleshooting |
-| **Compliance** | Controls address NIST 800-53, DISA STIG, FedRAMP baselines; ATO support artifacts available |
+| **Admission control**     | Pepr blocks root, privileged, excess capabilities, host access; mutations apply safe defaults; controlled exemptions        |
+| **Runtime security**      | Falco behavioral detection; alerts route to existing logging/metrics stack                                                  |
+| **Observability & audit** | Vector → Loki (logs); Prometheus → Grafana (metrics); unified troubleshooting                                               |
+| **Compliance**            | Controls address NIST 800-53, DISA STIG, FedRAMP baselines; ATO support artifacts available                                 |
 
 ## Key principles
 

@@ -16,10 +16,10 @@ SLSA provenance is a signed, machine-readable attestation describing how a softw
 
 ## Types
 
-| Type | predicateType | Trust anchor |
-| --- | --- | --- |
-| Build provenance | `https://slsa.dev/provenance/v1` | Build platform (`builder.id`) |
-| Source provenance | (SCS-specific) | Source Control System |
+| Type              | predicateType                    | Trust anchor                  |
+| ----------------- | -------------------------------- | ----------------------------- |
+| Build provenance  | `https://slsa.dev/provenance/v1` | Build platform (`builder.id`) |
+| Source provenance | (SCS-specific)                   | Source Control System         |
 
 ## Build provenance structure
 

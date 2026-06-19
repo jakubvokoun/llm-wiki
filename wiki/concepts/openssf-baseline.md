@@ -11,11 +11,11 @@ The OSPS Baseline is a structured set of security controls for open source proje
 
 ## Three maturity levels
 
-| Level | Target | Key theme |
-| --- | --- | --- |
-| **Level 1** | Any project | Basic hygiene: MFA, access control, public history, security contacts |
+| Level       | Target                         | Key theme                                                                |
+| ----------- | ------------------------------ | ------------------------------------------------------------------------ |
+| **Level 1** | Any project                    | Basic hygiene: MFA, access control, public history, security contacts    |
 | **Level 2** | 2+ maintainers, small userbase | Process: CI tests, signed releases, changelogs, vulnerability disclosure |
-| **Level 3** | Large userbase | Policy depth: SBOMs, threat modeling, VEX, SCA policy, code review |
+| **Level 3** | Large userbase                 | Policy depth: SBOMs, threat modeling, VEX, SCA policy, code review       |
 
 ## Eight control categories
 

@@ -9,9 +9,9 @@ updated: 2026-05-07
 
 Two separate concerns when working with UDS: **delivery** (Zarf) and **platform integration** (UDS Operator). Knowing the distinction helps locate where to change behavior.
 
-| Concern | Tool | Artifact | Solves |
-| --- | --- | --- | --- |
-| **Delivery** | Zarf | Zarf package (OCI artifact) | Getting software into disconnected environments |
+| Concern         | Tool         | Artifact                       | Solves                                             |
+| --------------- | ------------ | ------------------------------ | -------------------------------------------------- |
+| **Delivery**    | Zarf         | Zarf package (OCI artifact)    | Getting software into disconnected environments    |
 | **Integration** | UDS Operator | Custom resources (K8s objects) | Declaring what applications need from the platform |
 
 In practice, an application's Zarf package typically includes a `Package` CR in one of its Helm charts. When deployed, the CR lands in the cluster and the UDS Operator reconciles it, generating networking, SSO, and monitoring resources automatically. The two systems work together but are independent concerns.

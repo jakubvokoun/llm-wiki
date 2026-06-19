@@ -43,11 +43,11 @@ This step is optional in SLSA v1.2 but is expected to become required in future 
 
 ## Architecture options
 
-| Architecture | Who verifies | Notes |
-| --- | --- | --- |
-| **Package ecosystem** | Registry/package manager enforces at upload or download | Most scalable; shifts burden to ecosystem infrastructure |
-| **Consumer** | Consumer's pipeline verifies before use | Gives consumer full control; requires tooling |
-| **Monitor** | Third-party continuously audits published artifacts | Retrospective; can alert on policy violations after the fact |
+| Architecture          | Who verifies                                            | Notes                                                        |
+| --------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| **Package ecosystem** | Registry/package manager enforces at upload or download | Most scalable; shifts burden to ecosystem infrastructure     |
+| **Consumer**          | Consumer's pipeline verifies before use                 | Gives consumer full control; requires tooling                |
+| **Monitor**           | Third-party continuously audits published artifacts     | Retrospective; can alert on policy violations after the fact |
 
 ## Tools
 

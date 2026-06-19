@@ -7,17 +7,13 @@ updated: 2026-04-16
 
 # AppArmor Security Profiles for Docker
 
-Docker integrates with [AppArmor](../entities/apparmor.md) to confine container
-processes using kernel-enforced
-[MAC profiles](../concepts/mandatory-access-control.md).
+Docker integrates with [AppArmor](../entities/apparmor.md) to confine container processes using kernel-enforced [MAC profiles](../concepts/mandatory-access-control.md).
 
 ## docker-default profile
 
-Docker automatically generates and loads a profile named `docker-default` for
-every container (unless overridden). It is:
+Docker automatically generates and loads a profile named `docker-default` for every container (unless overridden). It is:
 
-- Generated from a Go template at container start, written to `tmpfs`, loaded
-  into the kernel
+- Generated from a Go template at container start, written to `tmpfs`, loaded into the kernel
 - Applied to the **container process**, not the Docker daemon
 - "Moderately protective while providing wide application compatibility"
 
@@ -105,13 +101,11 @@ apparmor="DENIED" operation="ptrace" profile="docker-default" pid=17651
   comm="docker" requested_mask="receive" denied_mask="receive"
 ```
 
-**aa-status** — lists loaded profiles and whether each container process is
-confined. The `docker-default` profile typically shows in enforce mode.
+**aa-status** — lists loaded profiles and whether each container process is confined. The `docker-default` profile typically shows in enforce mode.
 
 ## Writing profiles
 
-AppArmor globbing syntax differs from bash — see
-[AppArmor Core Policy Reference](apparmor-core-policy-reference.md).
+AppArmor globbing syntax differs from bash — see [AppArmor Core Policy Reference](apparmor-core-policy-reference.md).
 
 Key resources:
 

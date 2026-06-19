@@ -45,12 +45,12 @@ Verify the source provenance attestation from the SCS:
 
 ## Architecture options
 
-| Architecture | Description |
-| --- | --- |
+| Architecture          | Description                                                                      |
+| --------------------- | -------------------------------------------------------------------------------- |
 | **Package ecosystem** | Registry verifies source provenance at upload time; consumers trust the registry |
-| **Consumer** | Consumer's pipeline verifies source provenance before building from source |
-| **Build platform** | Build platform verifies source provenance before pulling source for a build |
-| **Monitor** | Retrospective monitoring for policy violations |
+| **Consumer**          | Consumer's pipeline verifies source provenance before building from source       |
+| **Build platform**    | Build platform verifies source provenance before pulling source for a build      |
+| **Monitor**           | Retrospective monitoring for policy violations                                   |
 
 ## Relationship to Build Track
 

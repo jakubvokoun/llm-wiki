@@ -7,13 +7,11 @@ updated: 2026-04-24
 
 # Prometheus Pushgateway
 
-An intermediary service allowing metric **push** from jobs that cannot be
-scraped by Prometheus's pull model.
+An intermediary service allowing metric **push** from jobs that cannot be scraped by Prometheus's pull model.
 
 ## When to use
 
-**Only for service-level batch jobs** — jobs not tied to a specific machine or
-instance. The job's metrics should carry no machine or instance labels.
+**Only for service-level batch jobs** — jobs not tied to a specific machine or instance. The job's metrics should carry no machine or instance labels.
 
 Example: a nightly cleanup job deleting stale users across the whole service.
 
@@ -28,10 +26,7 @@ Example: a nightly cleanup job deleting stale users across the whole service.
 
 ## Key pitfall: stale series
 
-The Pushgateway never automatically discards pushed series. If an instance is
-renamed or removed, its metrics remain until manually deleted via the API. This
-is fundamentally different from pull scraping where departed targets disappear
-automatically.
+The Pushgateway never automatically discards pushed series. If an instance is renamed or removed, its metrics remain until manually deleted via the API. This is fundamentally different from pull scraping where departed targets disappear automatically.
 
 ## Alternatives
 

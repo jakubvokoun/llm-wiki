@@ -11,11 +11,11 @@ Mandatory Access Control (MAC) is a security model in which the operating system
 
 ## DAC vs MAC
 
-| Property | DAC | MAC |
-| --- | --- | --- |
-| Policy set by | Resource owner (user/group) | System/admin (centrally enforced) |
-| User can bypass | Yes (owner can chmod 777) | No (kernel enforces regardless of owner) |
-| Default | Linux default (`chmod`/`chown` model) | Supplemental layer (LSM) |
+| Property              | DAC                                          | MAC                                          |
+| --------------------- | -------------------------------------------- | -------------------------------------------- |
+| Policy set by         | Resource owner (user/group)                  | System/admin (centrally enforced)            |
+| User can bypass       | Yes (owner can chmod 777)                    | No (kernel enforces regardless of owner)     |
+| Default               | Linux default (`chmod`/`chown` model)        | Supplemental layer (LSM)                     |
 | Compromise escalation | Privileged process can read anything it owns | Confined even if process has root/DAC access |
 
 MAC supplements DAC — it cannot grant _more_ privilege than DAC permits, but it can restrict _less_ than DAC would allow.
@@ -35,14 +35,14 @@ Common LSMs:
 
 ## AppArmor vs SELinux
 
-| Feature | AppArmor | SELinux |
-| --- | --- | --- |
-| Policy basis | Filesystem paths | File/process labels (xattr) |
-| Filesystem req. | None (path-based) | Must support xattr |
-| Configuration | Human-readable profiles | Complex type enforcement rules |
-| Profile tooling | `aa-genprof`, `aa-logprof` | `audit2allow`, `semanage` |
-| Flexibility | Lower (path-based leaks) | Higher (labels survive renames) |
-| Learning curve | Moderate | High |
+| Feature         | AppArmor                   | SELinux                         |
+| --------------- | -------------------------- | ------------------------------- |
+| Policy basis    | Filesystem paths           | File/process labels (xattr)     |
+| Filesystem req. | None (path-based)          | Must support xattr              |
+| Configuration   | Human-readable profiles    | Complex type enforcement rules  |
+| Profile tooling | `aa-genprof`, `aa-logprof` | `audit2allow`, `semanage`       |
+| Flexibility     | Lower (path-based leaks)   | Higher (labels survive renames) |
+| Learning curve  | Moderate                   | High                            |
 
 ## MAC in container security
 

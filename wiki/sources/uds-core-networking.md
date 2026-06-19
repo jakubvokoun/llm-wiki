@@ -20,20 +20,20 @@ Traditional K8s network security relies on IP-based `NetworkPolicy` rules, which
 
 ## Ambient vs. sidecar mode
 
-| Mode | Proxy location | Resource overhead | L7 policy |
-| --- | --- | --- | --- |
-| Ambient (default) | Node-level ztunnel + optional waypoints | Lower (shared) | Requires waypoint proxy |
-| Sidecar | Per-pod Envoy sidecar | Higher (per pod) | Always available |
+| Mode              | Proxy location                          | Resource overhead | L7 policy               |
+| ----------------- | --------------------------------------- | ----------------- | ----------------------- |
+| Ambient (default) | Node-level ztunnel + optional waypoints | Lower (shared)    | Requires waypoint proxy |
+| Sidecar           | Per-pod Envoy sidecar                   | Higher (per pod)  | Always available        |
 
 **Ambient mode** is the default. It reduces overhead, allows upgrading the data plane without restarting application pods, and is Istio's long-term investment direction. When Authservice is enabled, the operator automatically provisions a waypoint proxy for L7 policy enforcement.
 
 ## Ingress gateways
 
-| Gateway | Required | Purpose |
-| --- | --- | --- |
-| **Tenant** | Yes | End-user application traffic; TLS termination |
-| **Admin** | Yes | Admin interfaces (Grafana, Keycloak admin console); separate controls |
-| **Passthrough** | No | TLS passed to application for its own termination; must be explicitly enabled |
+| Gateway         | Required | Purpose                                                                       |
+| --------------- | -------- | ----------------------------------------------------------------------------- |
+| **Tenant**      | Yes      | End-user application traffic; TLS termination                                 |
+| **Admin**       | Yes      | Admin interfaces (Grafana, Keycloak admin console); separate controls         |
+| **Passthrough** | No       | TLS passed to application for its own termination; must be explicitly enabled |
 
 The Tenant/Admin gateway split exists because each has a different threat model: Admin should be restricted to trusted networks; Tenant is the public ingress.
 

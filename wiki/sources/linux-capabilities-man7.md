@@ -11,10 +11,7 @@ The definitive kernel reference for Linux capabilities (POSIX 1003.1e subset).
 
 ## Core concept
 
-Traditional UNIX: two categories — root (UID 0, bypasses all checks) and
-unprivileged (full permission checking). Since Linux 2.2, root's power is
-split into ~40 **capabilities** that can be independently granted/revoked.
-Capabilities are a **per-thread** attribute.
+Traditional UNIX: two categories — root (UID 0, bypasses all checks) and unprivileged (full permission checking). Since Linux 2.2, root's power is split into ~40 **capabilities** that can be independently granted/revoked. Capabilities are a **per-thread** attribute.
 
 ## The five thread capability sets
 
@@ -28,10 +25,7 @@ Capabilities are a **per-thread** attribute.
 
 ## File capability sets
 
-Stored in `security.capability` xattr (requires `CAP_SETFCAP` to write).
-Three file sets — **Permitted** (auto-added), **Inheritable** (ANDed with
-thread inheritable), **Effective** (single bit: if set, all new permitted →
-effective).
+Stored in `security.capability` xattr (requires `CAP_SETFCAP` to write). Three file sets — **Permitted** (auto-added), **Inheritable** (ANDed with thread inheritable), **Effective** (single bit: if set, all new permitted → effective).
 
 ### execve transformation formula
 
@@ -64,8 +58,7 @@ P'(bounding)  = P(bounding)
 | `CAP_SETFCAP`          | Set capabilities on files                                | Critical |
 | `CAP_SETPCAP`          | Modify bounding set; add caps to inheritable set         | High     |
 
-> Kernel guidance: avoid `CAP_SYS_ADMIN` — it is already massively overloaded.
-> New features should use or create a narrower silo.
+> Kernel guidance: avoid `CAP_SYS_ADMIN` — it is already massively overloaded. New features should use or create a narrower silo.
 
 ## Securebits flags
 
@@ -80,10 +73,7 @@ Each has a `_LOCKED` companion that makes the flag irreversible.
 
 ## Namespaced file capabilities
 
-Since Linux 4.14, version 3 (`VFS_CAP_REVISION_3`) xattrs embed the namespace
-root UID. Capabilities only granted when executed from a process whose UID 0
-maps to that saved root — enables container-scoped capabilities without
-granting host-level privilege.
+Since Linux 4.14, version 3 (`VFS_CAP_REVISION_3`) xattrs embed the namespace root UID. Capabilities only granted when executed from a process whose UID 0 maps to that saved root — enables container-scoped capabilities without granting host-level privilege.
 
 ## See also
 

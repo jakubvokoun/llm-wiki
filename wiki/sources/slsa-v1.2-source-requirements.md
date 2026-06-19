@@ -11,12 +11,12 @@ Requirements for software producers and Source Control Systems (SCS) to achieve 
 
 ## Source Track levels overview
 
-| Level | Key property |
-| --- | --- |
-| L1 | Source is available in a version control system |
-| L2 | Source history is retained and unalterable |
-| L3 | Source changes follow a documented process with machine enforcement |
-| L4 | Two-party review required for all changes; strong identity for reviewers |
+| Level | Key property                                                             |
+| ----- | ------------------------------------------------------------------------ |
+| L1    | Source is available in a version control system                          |
+| L2    | Source history is retained and unalterable                               |
+| L3    | Source changes follow a documented process with machine enforcement      |
+| L4    | Two-party review required for all changes; strong identity for reviewers |
 
 ## Key roles
 
@@ -54,12 +54,12 @@ Requirements for software producers and Source Control Systems (SCS) to achieve 
 
 ## SCS requirements per level
 
-| Level | SCS must provide |
-| --- | --- |
-| L1 | VCS with retained history, publicly accessible revision IDs |
-| L2 | Protected branch history (no rewrite); signed source provenance |
-| L3 | Technical enforcement of documented process; API for querying controls |
-| L4 | Two-party review enforcement; identity verification; approval invalidation on change |
+| Level | SCS must provide                                                                     |
+| ----- | ------------------------------------------------------------------------------------ |
+| L1    | VCS with retained history, publicly accessible revision IDs                          |
+| L2    | Protected branch history (no rewrite); signed source provenance                      |
+| L3    | Technical enforcement of documented process; API for querying controls               |
+| L4    | Two-party review enforcement; identity verification; approval invalidation on change |
 
 ## Source VSA format
 

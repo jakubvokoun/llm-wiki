@@ -8,18 +8,13 @@ updated: 2026-04-16
 
 # AppArmor
 
-**AppArmor** (Application Armor) is a Linux kernel security module implementing
-[Mandatory Access Control](../concepts/mandatory-access-control.md) (MAC) via
-the Linux Security Modules (LSM) framework. It confines programs to a limited
-set of resources using per-application security profiles.
+**AppArmor** (Application Armor) is a Linux kernel security module implementing [Mandatory Access Control](../concepts/mandatory-access-control.md) (MAC) via the Linux Security Modules (LSM) framework. It confines programs to a limited set of resources using per-application security profiles.
 
 ## Overview
 
-- **Path-based** policy: rules reference filesystem paths, not labels — simpler
-  to configure than SELinux but less flexible
+- **Path-based** policy: rules reference filesystem paths, not labels — simpler to configure than SELinux but less flexible
 - **Default-deny**: anything not explicitly allowed is blocked
-- **Supplements DAC**: cannot grant a process more privilege than DAC already
-  permits
+- **Supplements DAC**: cannot grant a process more privilege than DAC already permits
 - **Audit integration**: every policy violation generates a kernel audit message
 
 ## Distribution support
@@ -33,20 +28,15 @@ set of resources using per-application security profiles.
 
 ## Core concepts
 
-- **Profile** — per-application rule set (whitelist); lives in
-  `/etc/apparmor.d/`
+- **Profile** — per-application rule set (whitelist); lives in `/etc/apparmor.d/`
 - **Enforce mode** — violations blocked and logged
-- **Complain mode** — violations logged only (for profile development); `deny`
-  rules still enforced
+- **Complain mode** — violations logged only (for profile development); `deny` rules still enforced
 - **Abstractions** — shared include files in `/etc/apparmor.d/abstractions/`
-- **Tunables** — global variables (e.g., `@{HOME}`, `@{PROC}`) in
-  `/etc/apparmor.d/tunables/`
+- **Tunables** — global variables (e.g., `@{HOME}`, `@{PROC}`) in `/etc/apparmor.d/tunables/`
 
 ## Docker integration
 
-Docker generates and loads a `docker-default` AppArmor profile for every
-container. Custom profiles can be specified with `--security-opt apparmor=<name>`.
-See [Docker AppArmor Profiles](../sources/docker-apparmor.md).
+Docker generates and loads a `docker-default` AppArmor profile for every container. Custom profiles can be specified with `--security-opt apparmor=<name>`. See [Docker AppArmor Profiles](../sources/docker-apparmor.md).
 
 ## Key tools
 

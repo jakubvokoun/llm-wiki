@@ -31,13 +31,13 @@ A good security policy should:
 
 ## Common Security Specifications
 
-| Standard | Authority | Scope |
-| --- | --- | --- |
-| **DISA STIG** | US Department of Defense | Government computer configuration |
-| **USGCB** | NIST | Federal agency IT product baselines |
-| **PCI DSS** | PCI Security Standards Council | Organizations handling credit card data |
-| **CIS Benchmarks** | Center for Internet Security | Best-practice baselines per OS/software |
-| **NIST SP 800-53** | NIST | Federal information systems controls |
+| Standard           | Authority                      | Scope                                   |
+| ------------------ | ------------------------------ | --------------------------------------- |
+| **DISA STIG**      | US Department of Defense       | Government computer configuration       |
+| **USGCB**          | NIST                           | Federal agency IT product baselines     |
+| **PCI DSS**        | PCI Security Standards Council | Organizations handling credit card data |
+| **CIS Benchmarks** | Center for Internet Security   | Best-practice baselines per OS/software |
+| **NIST SP 800-53** | NIST                           | Federal information systems controls    |
 
 ## SCAP Content Sources
 

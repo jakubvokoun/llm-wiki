@@ -13,16 +13,16 @@ UDS Core is a curated collection of Kubernetes platform capabilities packaged as
 
 UDS Core is organized into discrete Zarf packages grouped by capability. Only `core-base` is required; all others are optional.
 
-| Layer | What it provides |
-| --- | --- |
-| `core-crds` | Standalone UDS CRDs (Package, Exemption, ClusterConfig); deploy before base when pre-core components need policy exemptions |
-| `core-base` | **Required.** Istio service mesh, UDS Operator, Pepr Policy Engine |
-| `core-identity-authorization` | Keycloak + Authservice (SSO) |
-| `core-metrics-server` | Kubernetes Metrics Server |
-| `core-runtime-security` | Falco + Falcosidekick |
-| `core-logging` | Vector + Loki |
-| `core-monitoring` | Prometheus + Grafana + Alertmanager + Blackbox Exporter |
-| `core-backup-restore` | Velero |
+| Layer                         | What it provides                                                                                                            |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `core-crds`                   | Standalone UDS CRDs (Package, Exemption, ClusterConfig); deploy before base when pre-core components need policy exemptions |
+| `core-base`                   | **Required.** Istio service mesh, UDS Operator, Pepr Policy Engine                                                          |
+| `core-identity-authorization` | Keycloak + Authservice (SSO)                                                                                                |
+| `core-metrics-server`         | Kubernetes Metrics Server                                                                                                   |
+| `core-runtime-security`       | Falco + Falcosidekick                                                                                                       |
+| `core-logging`                | Vector + Loki                                                                                                               |
+| `core-monitoring`             | Prometheus + Grafana + Alertmanager + Blackbox Exporter                                                                     |
+| `core-backup-restore`         | Velero                                                                                                                      |
 
 ## The UDS Operator
 

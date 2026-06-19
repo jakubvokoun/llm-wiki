@@ -20,11 +20,11 @@ Pod logs are ephemeral — when a pod restarts, its logs disappear. Centralized 
 
 ## Logging pipeline
 
-| Component | Role |
-| --- | --- |
-| **Vector** | DaemonSet log collector; enriches with K8s metadata; ships to Loki |
-| **Loki** | Indexes log metadata (not content); stores chunks in object storage; queried via LogQL |
-| **Grafana** | Query interface; same instance as metrics dashboards for log/metric correlation |
+| Component   | Role                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------- |
+| **Vector**  | DaemonSet log collector; enriches with K8s metadata; ships to Loki                     |
+| **Loki**    | Indexes log metadata (not content); stores chunks in object storage; queried via LogQL |
+| **Grafana** | Query interface; same instance as metrics dashboards for log/metric correlation        |
 
 ## What gets collected
 

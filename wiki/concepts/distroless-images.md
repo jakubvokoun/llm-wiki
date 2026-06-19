@@ -26,12 +26,12 @@ Using a `:debug`/`-dev` variant in production reintroduces the attack surface yo
 
 ## Two implementation approaches
 
-|  | Google [distroless](../entities/distroless.md) | [Chainguard](../entities/chainguard.md) / [Wolfi](../entities/wolfi.md) |
-| --- | --- | --- |
-| Base | Stripped-down Debian | Wolfi — a container-native distro built _for_ this use case |
-| Updates | Track upstream Debian via automated PRs | Continuous nightly rebuilds |
-| Build tooling | [Bazel](../entities/bazel.md) + [rules_distroless](../sources/rules-distroless.md) | apko + melange |
-| Signing / provenance | [cosign](software-attestation.md) keyless | cosign + per-image SBOM + [SLSA](slsa.md) |
+|                      | Google [distroless](../entities/distroless.md)                                     | [Chainguard](../entities/chainguard.md) / [Wolfi](../entities/wolfi.md) |
+| -------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Base                 | Stripped-down Debian                                                               | Wolfi — a container-native distro built _for_ this use case             |
+| Updates              | Track upstream Debian via automated PRs                                            | Continuous nightly rebuilds                                             |
+| Build tooling        | [Bazel](../entities/bazel.md) + [rules_distroless](../sources/rules-distroless.md) | apko + melange                                                          |
+| Signing / provenance | [cosign](software-attestation.md) keyless                                          | cosign + per-image SBOM + [SLSA](slsa.md)                               |
 
 ## Security caveat
 

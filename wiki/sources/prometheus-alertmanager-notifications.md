@@ -13,15 +13,15 @@ Alertmanager sends notifications to receivers (Slack, PagerDuty, email, webhook)
 
 ### Data (top-level template object)
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `Receiver` | string | Name of the receiver being notified |
-| `Status` | string | `firing` if any alert is firing, otherwise `resolved` |
-| `Alerts` | []Alert | All alerts in the notification group |
-| `GroupLabels` | KV | Labels used to group these alerts |
-| `CommonLabels` | KV | Labels common across all alerts |
-| `CommonAnnotations` | KV | Annotations common across all alerts |
-| `ExternalURL` | string | Backlink to the Alertmanager instance |
+| Field               | Type    | Description                                           |
+| ------------------- | ------- | ----------------------------------------------------- |
+| `Receiver`          | string  | Name of the receiver being notified                   |
+| `Status`            | string  | `firing` if any alert is firing, otherwise `resolved` |
+| `Alerts`            | []Alert | All alerts in the notification group                  |
+| `GroupLabels`       | KV      | Labels used to group these alerts                     |
+| `CommonLabels`      | KV      | Labels common across all alerts                       |
+| `CommonAnnotations` | KV      | Annotations common across all alerts                  |
+| `ExternalURL`       | string  | Backlink to the Alertmanager instance                 |
 
 `Alerts` has two filter methods: `.Firing` and `.Resolved`.
 
@@ -50,24 +50,24 @@ Alertmanager sends notifications to receivers (Slack, PagerDuty, email, webhook)
 
 Key functions available beyond Go's built-in template functions:
 
-| Function | Description |
-| --- | --- |
-| `humanizeDuration` | Human-readable duration string |
-| `date` | Format time: `date "2006-01-02" .StartsAt` |
-| `since` | Duration since a time.Time |
-| `tz` | Time in timezone: `tz "Europe/Paris" .StartsAt` |
-| `match` | Regex match |
-| `reReplaceAll` | Regex replace |
-| `join` | `join sep []string` (arg order inverted for pipelining) |
-| `toJson` | JSON encode any value |
-| `toLower`/`toUpper`/`title` | String case conversion |
-| `trimSpace` | Trim leading/trailing whitespace |
-| `safeHtml` | Mark string as HTML (skip escaping) |
-| `safeUrl` | Mark string as URL (skip escaping) |
-| `dict` | Create `map[string]any` from variadic key-value pairs |
-| `list` | Return arguments as `[]interface{}` |
-| `append` | Append to a slice |
-| `urlUnescape` | Unescape URL percent encoding |
+| Function                    | Description                                             |
+| --------------------------- | ------------------------------------------------------- |
+| `humanizeDuration`          | Human-readable duration string                          |
+| `date`                      | Format time: `date "2006-01-02" .StartsAt`              |
+| `since`                     | Duration since a time.Time                              |
+| `tz`                        | Time in timezone: `tz "Europe/Paris" .StartsAt`         |
+| `match`                     | Regex match                                             |
+| `reReplaceAll`              | Regex replace                                           |
+| `join`                      | `join sep []string` (arg order inverted for pipelining) |
+| `toJson`                    | JSON encode any value                                   |
+| `toLower`/`toUpper`/`title` | String case conversion                                  |
+| `trimSpace`                 | Trim leading/trailing whitespace                        |
+| `safeHtml`                  | Mark string as HTML (skip escaping)                     |
+| `safeUrl`                   | Mark string as URL (skip escaping)                      |
+| `dict`                      | Create `map[string]any` from variadic key-value pairs   |
+| `list`                      | Return arguments as `[]interface{}`                     |
+| `append`                    | Append to a slice                                       |
+| `urlUnescape`               | Unescape URL percent encoding                           |
 
 ## Related
 

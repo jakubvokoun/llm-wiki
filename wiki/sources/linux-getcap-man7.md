@@ -37,10 +37,7 @@ getcap -r / 2>/dev/null
 
 ## Note on empty capabilities
 
-An empty `=` capability value is **not** the same as no capability. A file
-with `=` causes a process with ambient capabilities to lose them on exec (but
-this ambient-suppression applies only to non-root processes — the kernel
-reverted root suppression). See setcap(8) for details.
+An empty `=` capability value is **not** the same as no capability. A file with `=` causes a process with ambient capabilities to lose them on exec (but this ambient-suppression applies only to non-root processes — the kernel reverted root suppression). See setcap(8) for details.
 
 ## See also
 

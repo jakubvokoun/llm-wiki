@@ -7,28 +7,22 @@ updated: 2026-04-16
 
 # AppArmor Core Policy Reference (Draft)
 
-Official (draft) reference for the AppArmor policy language — profile structure,
-rule types, globbing syntax, and language versions.
+Official (draft) reference for the AppArmor policy language — profile structure, rule types, globbing syntax, and language versions.
 
-> **Status:** Marked DRAFT by AppArmor project. Content is substantive but may
-> be incomplete.
+> **Status:** Marked DRAFT by AppArmor project. Content is substantive but may be incomplete.
 
 ## Policy structure
 
-AppArmor policy is declarative — rule ordering within a block does not matter.
-Policy is split into:
+AppArmor policy is declarative — rule ordering within a block does not matter. Policy is split into:
 
-1. **Preamble** — global declarations, variables, includes; must appear before
-   any profile definitions
+1. **Preamble** — global declarations, variables, includes; must appear before any profile definitions
 2. **Profile definitions** — one or more named profiles containing rule sets
 
-Policy is compiled to an architecture-independent binary format loaded into the
-kernel.
+Policy is compiled to an architecture-independent binary format loaded into the kernel.
 
 ## Profile (base unit)
 
-The **profile** is the base confinement unit. It defines a whitelist of allowed
-permissions for a confined program. Everything not explicitly allowed is denied.
+The **profile** is the base confinement unit. It defines a whitelist of allowed permissions for a confined program. Everything not explicitly allowed is denied.
 
 ```
 profile <name> [<attachment>] [flags=(<flag_list>)] {
@@ -43,8 +37,7 @@ profile <name> [<attachment>] [flags=(<flag_list>)] {
 | **v2.x** | Implicit permissions: e.g., `capability sys_admin` alone mediates `mount`                             |
 | **v3.x** | Explicit permissions required: `capability sys_admin` + `mount` rules both needed for mount mediation |
 
-v2 can be compiled to v3-compatible binary (implicit generic rules added). v3
-can target v2-compatible binary (newer mediation types excluded).
+v2 can be compiled to v3-compatible binary (implicit generic rules added). v3 can target v2-compatible binary (newer mediation types excluded).
 
 ## AppArmor globbing syntax
 
@@ -92,11 +85,9 @@ Special characters can be escaped with `\`.
 
 ## Variables and abstractions
 
-`@{VAR}` syntax — variables defined in `/etc/apparmor.d/tunables/` (e.g.,
-`@{HOME}`, `@{PROC}`).
+`@{VAR}` syntax — variables defined in `/etc/apparmor.d/tunables/` (e.g., `@{HOME}`, `@{PROC}`).
 
-`#include <abstractions/base>` — pulls in shared rule sets from
-`/etc/apparmor.d/abstractions/`.
+`#include <abstractions/base>` — pulls in shared rule sets from `/etc/apparmor.d/abstractions/`.
 
 ## See also
 

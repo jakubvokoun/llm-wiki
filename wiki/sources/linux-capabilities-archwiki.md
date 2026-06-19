@@ -11,14 +11,11 @@ Practical administration guide for Linux capabilities on Arch Linux.
 
 ## What capabilities solve
 
-`setuid` root programs give a process _all_ root privileges. Capabilities let
-you grant only the specific privilege a program needs (e.g., `CAP_NET_RAW` for
-`fping`), limiting blast radius of a vulnerability.
+`setuid` root programs give a process _all_ root privileges. Capabilities let you grant only the specific privilege a program needs (e.g., `CAP_NET_RAW` for `fping`), limiting blast radius of a vulnerability.
 
 ## Implementation
 
-Capabilities are stored in the `security` namespace of extended attributes
-(`xattr`), supported by all major Linux filesystems (ext4, btrfs, xfs, jfs).
+Capabilities are stored in the `security` namespace of extended attributes (`xattr`), supported by all major Linux filesystems (ext4, btrfs, xfs, jfs).
 
 ```bash
 # View capabilities
@@ -30,8 +27,7 @@ getfattr --dump --match="^security\." /usr/bin/fping
 # → security.capability=0sAQAAAgAgAAAAAAAAAAAAAAAAAAA=
 ```
 
-On Arch, package install scripts (`.install` files) set capabilities via
-`setcap` — e.g., `fping.install`.
+On Arch, package install scripts (`.install` files) set capabilities via `setcap` — e.g., `fping.install`.
 
 ## Common programs and their required capabilities
 
@@ -79,8 +75,7 @@ sudo -E capsh \
 
 ## systemd integration
 
-Safer than file capabilities — capabilities are scoped to the unit, not the
-binary:
+Safer than file capabilities — capabilities are scoped to the unit, not the binary:
 
 ```ini
 [Service]
@@ -92,9 +87,7 @@ See `systemd.exec(5)`.
 
 ## Administration note
 
-Overly permissive capabilities = bug → report it. `CAP_SYS_ADMIN` and
-`CAP_DAC_OVERRIDE` are essentially equivalent to root and do not count as bugs
-only on systems without MAC/RBAC (e.g., standard Arch).
+Overly permissive capabilities = bug → report it. `CAP_SYS_ADMIN` and `CAP_DAC_OVERRIDE` are essentially equivalent to root and do not count as bugs only on systems without MAC/RBAC (e.g., standard Arch).
 
 ## See also
 
