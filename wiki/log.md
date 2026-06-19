@@ -15,18 +15,12 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **entities created (20):** owasp, docker, podman, kubernetes, anthropic, apparmor, ostree, fedora, flatpak, distrobox, nix, zarf, gitlab, prometheus, suse, datadog, grafana, victoriametrics, hacktricks
 - **updated:** container-security, secrets-management
 
-## [2026-05-07]
+## [2026-05]
 
-- **queue (36):** slsa-v1.2-about, slsa-v1.2-threats-overview, slsa-v1.2-use-cases, slsa-v1.2-principles, slsa-v1.2-tracks, slsa-v1.2-terminology, slsa-v1.2-build-track-basics, slsa-v1.2-build-requirements, slsa-v1.2-distributing-provenance, slsa-v1.2-verifying-artifacts, slsa-v1.2-assessing-build-platforms, slsa-v1.2-source-requirements, slsa-v1.2-verifying-source, slsa-v1.2-threats, slsa-v1.2-verified-properties, slsa-v1.2-attestation-model, slsa-v1.2-provenance, slsa-v1.2-build-provenance, slsa-v1.2-verification-summary, openssf-baseline-2026-02-19, uds-core-concepts-overview, uds-core-features-overview, uds-core-networking, uds-core-identity-authorization, uds-core-monitoring-observability, uds-core-logging, uds-core-runtime-security, uds-core-policy-compliance, uds-core-platform-overview, uds-core-platform-functional-layers, uds-core-platform-security, uds-core-configuration-packaging-overview, uds-core-crd-overviews, uds-core-package-requirements, uds-core-policy-engine, uds-core-security-policy
+- **queue (55):** slsa-v1.2-about, slsa-v1.2-threats-overview, slsa-v1.2-use-cases, slsa-v1.2-principles, slsa-v1.2-tracks, slsa-v1.2-terminology, slsa-v1.2-build-track-basics, slsa-v1.2-build-requirements, slsa-v1.2-distributing-provenance, slsa-v1.2-verifying-artifacts, slsa-v1.2-assessing-build-platforms, slsa-v1.2-source-requirements, slsa-v1.2-verifying-source, slsa-v1.2-threats, slsa-v1.2-verified-properties, slsa-v1.2-attestation-model, slsa-v1.2-provenance, slsa-v1.2-build-provenance, slsa-v1.2-verification-summary, openssf-baseline-2026-02-19, uds-core-concepts-overview, uds-core-features-overview, uds-core-networking, uds-core-identity-authorization, uds-core-monitoring-observability, uds-core-logging, uds-core-runtime-security, uds-core-policy-compliance, uds-core-platform-overview, uds-core-platform-functional-layers, uds-core-platform-security, uds-core-configuration-packaging-overview, uds-core-crd-overviews, uds-core-package-requirements, uds-core-policy-engine, uds-core-security-policy, prometheus-recording-rules, prometheus-alerting-rules, prometheus-alertmanager-config, prometheus-alertmanager-notifications, victoriametrics-metricsql, victoriametrics-vmalert, victoriametrics-vmalert-tool, victorialogs-vmalert, awesome-prometheus-alerts, sre-alerting-on-slos, vmanomaly-vmalert-guide, openscap-getting-started, openscap-security-compliance, openscap-vulnerability-assessment, openscap-choosing-policy, openscap-scap-security-guide, openscap-customization, openscap-base-tool, openscap-user-manual
 - **concepts:** slsa, slsa-build-track, slsa-source-track, slsa-provenance, verification-summary-attestation, software-attestation, openssf-baseline, uds-operator, uds-package-cr
-- **entities:** slsa, openssf, in-toto, defense-unicorns, uds-core, pepr, istio, keycloak, falco
-- **updated:** supply-chain-security
-
-## [2026-05-22]
-
-- **queue (19):** prometheus-recording-rules, prometheus-alerting-rules, prometheus-alertmanager-config, prometheus-alertmanager-notifications, victoriametrics-metricsql, victoriametrics-vmalert, victoriametrics-vmalert-tool, victorialogs-vmalert, awesome-prometheus-alerts, sre-alerting-on-slos, vmanomaly-vmalert-guide, openscap-getting-started, openscap-security-compliance, openscap-vulnerability-assessment, openscap-choosing-policy, openscap-scap-security-guide, openscap-customization, openscap-base-tool, openscap-user-manual
-- **entities:** openscap
-- **updated:** awesome-prometheus-alerts (full alert names per service, 8 PromQL pattern examples, rules YAML saved to raw/assets/awesome-prometheus-alerts-rules.yml)
+- **entities:** slsa, openssf, in-toto, defense-unicorns, uds-core, pepr, istio, keycloak, falco, openscap
+- **updated:** supply-chain-security, awesome-prometheus-alerts (full alert names per service, 8 PromQL pattern examples, rules YAML saved to raw/assets/awesome-prometheus-alerts-rules.yml)
 
 ## [2026-06-05]
 
