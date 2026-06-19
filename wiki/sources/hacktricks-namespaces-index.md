@@ -32,11 +32,11 @@ The critical misconception to avoid: **"has namespaces" ≠ "is safely isolated"
 
 The most common attack enabler is not a kernel exploit — it's deliberate namespace sharing:
 
-| Runtime | Sharing flags |
-| --- | --- |
-| Docker / Podman | `--pid=host`, `--network=host`, `--ipc=host`, `--uts=host`, `--userns=host`, `--cgroupns=host` |
-| Kubernetes | `hostPID: true`, `hostNetwork: true`, `hostIPC: true` |
-| containerd / CRI-O | OCI spec fields; follows Kubernetes pod config |
+| Runtime            | Sharing flags                                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------- |
+| Docker / Podman    | `--pid=host`, `--network=host`, `--ipc=host`, `--uts=host`, `--userns=host`, `--cgroupns=host` |
+| Kubernetes         | `hostPID: true`, `hostNetwork: true`, `hostIPC: true`                                          |
+| containerd / CRI-O | OCI spec fields; follows Kubernetes pod config                                                 |
 
 The important question is never just "is the process in a namespace?" but **whether the namespace is private, shared with siblings, or joined directly to the host**.
 
@@ -73,11 +73,11 @@ nsenter -t TARGET_PID -T /bin/bash   # time
 
 ## Runtime Defaults
 
-| Runtime | Default posture | Common weakening |
-| --- | --- | --- |
-| Docker | New mount, PID, net, IPC, UTS; user ns available but off by default | `--pid=host`, `--network=host`, `--privileged` |
-| Podman | New namespaces; rootless auto-uses user ns | same flags |
-| Kubernetes | No host PID/net/IPC by default; user ns opt-in | `hostPID/hostNetwork/hostIPC: true` |
+| Runtime    | Default posture                                                     | Common weakening                               |
+| ---------- | ------------------------------------------------------------------- | ---------------------------------------------- |
+| Docker     | New mount, PID, net, IPC, UTS; user ns available but off by default | `--pid=host`, `--network=host`, `--privileged` |
+| Podman     | New namespaces; rootless auto-uses user ns                          | same flags                                     |
+| Kubernetes | No host PID/net/IPC by default; user ns opt-in                      | `hostPID/hostNetwork/hostIPC: true`            |
 
 ## Related
 

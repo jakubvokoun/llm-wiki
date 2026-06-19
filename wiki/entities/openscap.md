@@ -21,11 +21,11 @@ Open-source implementation of the SCAP standard for automated security complianc
 
 ## Components
 
-| Tool | Description |
-| --- | --- |
-| **oscap** | Core CLI scanner — evaluate XCCDF/OVAL, generate reports and fix scripts |
-| **SCAP Workbench** | GUI frontend for scanning and policy tailoring |
-| **OpenSCAP Daemon** | Continuous scheduled scanning service |
+| Tool                          | Description                                                                                   |
+| ----------------------------- | --------------------------------------------------------------------------------------------- |
+| **oscap**                     | Core CLI scanner — evaluate XCCDF/OVAL, generate reports and fix scripts                      |
+| **SCAP Workbench**            | GUI frontend for scanning and policy tailoring                                                |
+| **OpenSCAP Daemon**           | Continuous scheduled scanning service                                                         |
 | **SCAP Security Guide (SSG)** | Primary content library: machine-readable policies for PCI DSS, STIG, USGCB, CIS, HIPAA, OSPP |
 
 ## Key Standards Implemented

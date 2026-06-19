@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Reformat wiki pages matching a date pattern with prose-wrap never.
+# Reformat wiki pages matching a date pattern with prose-wrap preserve.
 # Usage: ./scripts/reformat-today.sh [date]  (default: today)
 set -euo pipefail
 
@@ -13,6 +13,6 @@ if [[ ${#files[@]} -eq 0 ]]; then
 	exit 0
 fi
 
-echo "Reformatting ${#files[@]} pages (prose-wrap never)..."
-nix-shell "$(dirname "$0")/../shell.nix" --run "prettier --prose-wrap never --write $(printf '"%s" ' "${files[@]}")"
+echo "Reformatting ${#files[@]} pages (prose-wrap preserve)..."
+nix-shell "$(dirname "$0")/../shell.nix" --run "prettier --prose-wrap preserve --write $(printf '"%s" ' "${files[@]}")"
 echo "Done."

@@ -19,13 +19,13 @@ SREs quantify confidence in systems by adapting software testing to systems at s
 
 ### Traditional (Offline)
 
-| Type | Scope | Key Use |
-| --- | --- | --- |
-| Unit | Function/class | TDD, specification |
-| Integration | Assembled components | Dependency injection, mock replacement |
-| System (smoke) | End-to-end, simple | Sanity gate before expensive tests |
-| System (performance) | End-to-end, load | Prevent latency/memory regression |
-| System (regression) | Historical bugs as tests | Prevent re-introduction |
+| Type                 | Scope                    | Key Use                                |
+| -------------------- | ------------------------ | -------------------------------------- |
+| Unit                 | Function/class           | TDD, specification                     |
+| Integration          | Assembled components     | Dependency injection, mock replacement |
+| System (smoke)       | End-to-end, simple       | Sanity gate before expensive tests     |
+| System (performance) | End-to-end, load         | Prevent latency/memory regression      |
+| System (regression)  | Historical bugs as tests | Prevent re-introduction                |
 
 ### Production (Black-Box)
 

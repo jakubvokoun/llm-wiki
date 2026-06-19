@@ -78,7 +78,7 @@ When told to ingest a source:
 4. Write a summary page in `wiki/sources/<slug>.md`
 5. Update or create entity pages in `wiki/entities/` for notable people, orgs, products
 6. Update or create concept pages in `wiki/concepts/` for key ideas
-7. Run `nix-shell --run "prettier --prose-wrap never --write <file>"` on every wiki page created or updated in steps 4–6
+7. Run `nix-shell --run "prettier --prose-wrap preserve --write <file>"` on every wiki page created or updated in steps 4–6
 8. Update `wiki/index.md` — run `bash scripts/build-index.sh --fix` to append stub rows for the new pages, then fill in the `TODO summary`/`TODO type` placeholders (the script can't write curated summaries). Re-run `prettier` on `index.md` afterward.
 9. Append to the `## [YYYY-MM-DD]` block in `wiki/log.md` (create it if needed):
    ```
@@ -90,7 +90,7 @@ When told to ingest a source:
 
 A single source typically touches 5–15 wiki pages.
 
-> **Formatting rule:** After writing or updating any wiki page, always run `nix-shell --run "prettier --prose-wrap never --write <file>"` before moving on. To bulk-reformat all pages updated on a given date: `bash scripts/reformat-today.sh [YYYY-MM-DD]` (defaults to today).
+> **Formatting rule:** After writing or updating any wiki page, always run `nix-shell --run "prettier --prose-wrap preserve --write <file>"` before moving on. Use `--prose-wrap preserve` (never `never`): it keeps existing prose line breaks intact and pads tables into aligned/"pretty" form. `--prose-wrap never` unwraps paragraphs and compacts tables — both unwanted. To bulk-reformat all pages updated on a given date: `bash scripts/reformat-today.sh [YYYY-MM-DD]` (defaults to today).
 
 ### Query
 
@@ -100,7 +100,7 @@ When answering a question:
 2. Read the relevant pages
 3. Synthesize an answer with citations (link to wiki pages and/or raw sources)
 4. If the answer is valuable enough to keep, offer to file it as a new page in `wiki/analyses/`
-5. If filed, run `nix-shell --run "prettier --prose-wrap never --write <file>"` on the new page, then append to the `## [YYYY-MM-DD]` block in `wiki/log.md`:
+5. If filed, run `nix-shell --run "prettier --prose-wrap preserve --write <file>"` on the new page, then append to the `## [YYYY-MM-DD]` block in `wiki/log.md`:
    ```
    - **query:** <question summary>. Filed as: wiki/analyses/<slug>.md
    ```
@@ -200,7 +200,7 @@ When told to process the queue:
 
 - `scripts/build-index.sh [--fix]` — additive, non-destructive `index.md` sync. Reports pages missing from the index and dead rows; `--fix` appends stub rows (with `TODO` summary/type to fill in). Never rewrites existing rows.
 - `scripts/lint.sh` — deterministic health checks: broken relative links, orphan pages, index drift, incomplete frontmatter, raw/ provenance coverage. Exit 1 on hard issues. Run before the judgement-based `/lint` pass.
-- `scripts/reformat-today.sh [YYYY-MM-DD]` — bulk `prettier --prose-wrap never` on pages updated on a date (default: today).
+- `scripts/reformat-today.sh [YYYY-MM-DD]` — bulk `prettier --prose-wrap preserve` on pages updated on a date (default: today).
 
 ## Tips
 

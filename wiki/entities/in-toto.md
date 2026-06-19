@@ -28,13 +28,13 @@ SLSA builds on in-toto's attestation framework. Specifically:
 
 ## Key concepts from in-toto
 
-| Concept | Description |
-| --- | --- |
-| **Step** | A stage in the software supply chain |
-| **Link** | Metadata about a completed step (inputs, outputs, who ran it) |
-| **Layout** | Policy defining required steps and authorized functionaries |
+| Concept         | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| **Step**        | A stage in the software supply chain                          |
+| **Link**        | Metadata about a completed step (inputs, outputs, who ran it) |
+| **Layout**      | Policy defining required steps and authorized functionaries   |
 | **Attestation** | Authenticated metadata about an artifact or supply chain step |
-| **Predicate** | The payload of an attestation — what is being claimed |
+| **Predicate**   | The payload of an attestation — what is being claimed         |
 
 ## in-toto Attestation Framework (ITE-6)
 

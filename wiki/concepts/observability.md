@@ -16,13 +16,13 @@ Observability is the ability to understand the internal state of a system from i
 
 ## Monitoring vs Observability
 
-| Dimension | Monitoring | Observability |
-| --- | --- | --- |
-| Question answered | "Is it working?" | "Why isn't it working?" |
-| Scope | Known failure modes | Unknown failure modes |
-| Approach | Threshold alerts on predefined metrics | Exploratory analysis of logs/traces/metrics |
-| Root cause | Limited | Pinpoints root cause through correlation |
-| Proactive | Reactive (alert after failure) | Proactive (detect degradation before failure) |
+| Dimension         | Monitoring                             | Observability                                 |
+| ----------------- | -------------------------------------- | --------------------------------------------- |
+| Question answered | "Is it working?"                       | "Why isn't it working?"                       |
+| Scope             | Known failure modes                    | Unknown failure modes                         |
+| Approach          | Threshold alerts on predefined metrics | Exploratory analysis of logs/traces/metrics   |
+| Root cause        | Limited                                | Pinpoints root cause through correlation      |
+| Proactive         | Reactive (alert after failure)         | Proactive (detect degradation before failure) |
 
 ## Three Pillars
 
@@ -52,20 +52,20 @@ From the SUSE guide, five common strategies to build out progressively:
 
 From the SRE book: software should interpret monitoring, not humans. Three valid outputs:
 
-| Output | Urgency | Meaning |
-| --- | --- | --- |
-| **Alert** | Immediate | Human must act now |
-| **Ticket** | Within days | Human needed, system can wait |
-| **Log** | None (forensic) | Recorded for diagnosis; nobody reads unless prompted to do so |
+| Output     | Urgency         | Meaning                                                       |
+| ---------- | --------------- | ------------------------------------------------------------- |
+| **Alert**  | Immediate       | Human must act now                                            |
+| **Ticket** | Within days     | Human needed, system can wait                                 |
+| **Log**    | None (forensic) | Recorded for diagnosis; nobody reads unless prompted to do so |
 
 ## White-Box vs Black-Box Monitoring
 
 From Google's Borgmon experience:
 
-| Type | What it inspects | Catches | Misses |
-| --- | --- | --- | --- |
-| **White-box** | Internal state via exported metrics (varz) | Component-level issues; queues; causes | DNS failures; pre-server crashes |
-| **Black-box** | External behavior (Prober: protocol checks) | User-visible failures | Internal component state |
+| Type          | What it inspects                            | Catches                                | Misses                           |
+| ------------- | ------------------------------------------- | -------------------------------------- | -------------------------------- |
+| **White-box** | Internal state via exported metrics (varz)  | Component-level issues; queues; causes | DNS failures; pre-server crashes |
+| **Black-box** | External behavior (Prober: protocol checks) | User-visible failures                  | Internal component state         |
 
 Both are necessary. White-box provides granularity for root-cause analysis; black-box catches what users actually experience. Use both, pointed at frontend and backends independently, to localize failures.
 

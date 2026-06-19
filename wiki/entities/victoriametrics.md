@@ -11,12 +11,12 @@ Open-source, high-performance time series database and monitoring solution. Desi
 
 ## Core components
 
-| Component | Purpose |
-| --- | --- |
-| **VictoriaMetrics** | Time series storage and query engine; compatible with PromQL (MetricsQL superset) |
-| **vmalert** | Alerting and recording rules evaluation engine; replaces Prometheus alerting |
-| **vmagent** | Metrics collection agent; replaces Prometheus scraping |
-| **Alertmanager** | Alert routing, grouping, deduplication, inhibition (reuses Prometheus Alertmanager) |
+| Component           | Purpose                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| **VictoriaMetrics** | Time series storage and query engine; compatible with PromQL (MetricsQL superset)   |
+| **vmalert**         | Alerting and recording rules evaluation engine; replaces Prometheus alerting        |
+| **vmagent**         | Metrics collection agent; replaces Prometheus scraping                              |
+| **Alertmanager**    | Alert routing, grouping, deduplication, inhibition (reuses Prometheus Alertmanager) |
 
 ## Key differentiators from Prometheus
 
@@ -29,13 +29,13 @@ Open-source, high-performance time series database and monitoring solution. Desi
 
 ## vmalert alert rule fields
 
-| Field | Purpose |
-| --- | --- |
-| `expr` | MetricsQL expression defining the problematic state |
-| `for` | Minimum sustained duration before firing; prevents flapping |
-| `keep_firing_for` | Minimum firing duration after expr clears; prevents premature resolution |
-| `labels` | Static metadata for routing and enrichment; avoid dynamic values |
-| `annotations` | Human-readable context; supports `query()` function and `$externalURL` variable |
+| Field             | Purpose                                                                         |
+| ----------------- | ------------------------------------------------------------------------------- |
+| `expr`            | MetricsQL expression defining the problematic state                             |
+| `for`             | Minimum sustained duration before firing; prevents flapping                     |
+| `keep_firing_for` | Minimum firing duration after expr clears; prevents premature resolution        |
+| `labels`          | Static metadata for routing and enrichment; avoid dynamic values                |
+| `annotations`     | Human-readable context; supports `query()` function and `$externalURL` variable |
 
 ## Related pages
 
