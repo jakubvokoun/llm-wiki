@@ -44,4 +44,5 @@ Originated at [SUSE](suse.md)/openSUSE; used as the release-quality gate for [op
 ## Related Pages
 
 - [os-autoinst](os-autoinst.md) · [SUSE](suse.md) · [Fedora](fedora.md) · [Kubernetes](kubernetes.md)
+- Analyses: [Evaluating openQA: a POC plan and decision framework](../analyses/openqa-poc-evaluation.md)
 - Sources: [Getting Started](../sources/openqa-getting-started.md) · [Installing](../sources/openqa-installing.md) · [Writing Tests](../sources/openqa-writing-tests.md) · [Users Guide](../sources/openqa-users-guide.md) · [Helm chart](../sources/openqa-helm-readme.md) · [CLI](../sources/openqa-command-line.md) · [Dev setup](../sources/openqa-dev-getting-started.md) · [Python tests](../sources/openqa-python-tests.md)

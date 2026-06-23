@@ -49,3 +49,6 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **queue (8):** openqa-installing, openqa-getting-started, openqa-writing-tests, openqa-users-guide, openqa-helm-readme, openqa-dev-getting-started, openqa-python-tests, openqa-command-line
 - **concepts:** openqa-architecture, needle-matching, openqa-test-api, openqa-jobs, openqa-job-templates, openqa-cli
 - **entities:** openqa, os-autoinst
+- **query:** Is openQA a viable platform for OS/appliance testing, and how to run a POC to decide. Filed as: wiki/analyses/openqa-poc-evaluation.md
+- **analysis:** Why CI shell jobs run under PSS-restricted Kubernetes but container-image builds cannot (the seccomp/no_new_privs/AppArmor failure ladder), and the two-pool isolation pattern for rootless builds. Filed as: wiki/analyses/k8s-restricted-pss-ci.md
+- **analysis:** Porting a Prometheus stack to Kubernetes — kubernetes_sd_config roles + RBAC, the headless-Service DaemonSet scraping trick, honor_labels for meta-exporters, dedicated SD jobs for authenticated targets, and the instance-churn dashboard rule. Filed as: wiki/analyses/prometheus-on-kubernetes.md

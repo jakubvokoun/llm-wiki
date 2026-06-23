@@ -70,6 +70,10 @@ App requirements:
 - [Kubernetes Security](kubernetes-security.md)
 - [Service Mesh](service-mesh.md)
 
+## Analyses
+
+- [Prometheus on Kubernetes: native service discovery and appliance-port gotchas](../analyses/prometheus-on-kubernetes.md)
+
 ## Sources
 
 - [Kubernetes Best Practices 101](../sources/k8s-best-practices-readme.md)

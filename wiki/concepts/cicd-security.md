@@ -69,6 +69,10 @@ CI/CD pipelines are high-value attack targets — they use privileged identities
 - [secrets-management](secrets-management.md)
 - [iac-security](iac-security.md)
 
+## Analyses
+
+- [CI on restricted-PSS Kubernetes: shell jobs and rootless image builds](../analyses/k8s-restricted-pss-ci.md)
+
 ## Sources
 
 - [OWASP CI/CD Security Cheat Sheet](../sources/owasp-cicd-security.md)
