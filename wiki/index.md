@@ -281,6 +281,14 @@
 | [CVSS v4.0 Specification Document](sources/cvss-v4-specification-document.md)                                                                       | Normative FIRST spec: four metric groups, nomenclature, Base metrics, Vulnerable vs Subsequent System impacts                          | 2026-06-19 |
 | [CVSS v4.0 User Guide](sources/cvss-v4-user-guide.md)                                                                                               | How to score: v4.0 changes from v3.1, reasonable-worst-case assessment guidance, supplemental metrics, rubrics                         | 2026-06-19 |
 | [OSS-Fuzz (official documentation)](sources/oss-fuzz.md)                                                                                            | Google's free continuous-fuzzing service: origin (Heartbleed), engines, languages, trophies, doc map                                   | 2026-06-19 |
+| [Working with openQA via the Command Line (liv.pink)](sources/openqa-command-line.md)                                                               | Liv Dywan tutorial: driving openQA via openqa-cli and the REST API                                                                     | 2026-06-23 |
+| [Get Started with openQA Development (liv.pink)](sources/openqa-dev-getting-started.md)                                                             | Liv Dywan tutorial: local openQA/os-autoinst dev setup from git checkouts                                                              | 2026-06-23 |
+| [openQA — Getting Started](sources/openqa-getting-started.md)                                                                                       | Official overview and glossary: architecture, jobs, needles, config                                                                    | 2026-06-23 |
+| [openQA — Helm Chart README](sources/openqa-helm-readme.md)                                                                                         | Deploying openQA to Kubernetes via the official Helm chart (webui + worker)                                                            | 2026-06-23 |
+| [openQA — Installing](sources/openqa-installing.md)                                                                                                 | Official install/ops guide: containers, bootstrap, proxies, workers, advanced config                                                   | 2026-06-23 |
+| [Writing openQA Tests in Python (liv.pink)](sources/openqa-python-tests.md)                                                                         | Liv Dywan tutorial: writing a test module in Python (API maps 1:1 from Perl)                                                           | 2026-06-23 |
+| [openQA — Users Guide](sources/openqa-users-guide.md)                                                                                               | Official guide: job templates, web UI, REST API, asset/cleanup management                                                              | 2026-06-23 |
+| [openQA — Writing Tests](sources/openqa-writing-tests.md)                                                                                           | Official reference: test modules, testapi, multi-machine, CI integration                                                               | 2026-06-23 |
 
 ## Entities
 
@@ -328,6 +336,8 @@
 | [Wolfi](entities/wolfi.md)                           | product     | Container-native glibc (un)distribution; base for Chainguard images; apk packages; not Alpine-compatible                   |
 | [OSS-Fuzz](entities/oss-fuzz.md)                     | product     | Google's free continuous-fuzzing service for OSS; libFuzzer/AFL++/Honggfuzz/Centipede; 10k+ vulns across ~1k projects      |
 | [Trail of Bits](entities/trail-of-bits.md)           | org         | Security research/consulting firm; publishes the Testing Handbook (appsec.guide) covering fuzzing, static analysis, crypto |
+| [openQA](entities/openqa.md)                         | product     | Automated whole-OS testing framework (openSUSE/Fedora/Debian); VM + screen/serial driving                                  |
+| [os-autoinst](entities/os-autoinst.md)               | product     | Standalone test engine behind openQA (isotovideo); provides the testapi                                                    |
 
 ## Concepts
 
@@ -484,6 +494,12 @@
 | [Fuzzing](concepts/fuzzing.md)                                                       | Dynamic testing with malformed inputs; mutation-based evolutionary algorithm; harness/corpus/SUT; continuous fuzzing               |
 | [Sanitizers (Code Sanitizers)](concepts/sanitizers.md)                               | Compiler instrumentation (ASan/UBSan/MSan/TSan/SanCov) that turns latent bugs into reliable crashes for fuzzers                    |
 | [SSVC (Stakeholder-Specific Vulnerability Categorization)](concepts/ssvc.md)         | Decision-tree methodology (CMU SEI/CISA) yielding an action (Track/Attend/Act); consumes CVSS/EPSS as inputs                       |
+| [Needle Matching](concepts/needle-matching.md)                                       | Fuzzy screenshot image matching (needles, tags, areas, click points) that drives openQA assertions                                 |
+| [openQA Architecture](concepts/openqa-architecture.md)                               | Web UI, scheduler, websocket server, distributed workers, config files, access management                                          |
+| [openqa-cli (Command-Line Client)](concepts/openqa-cli.md)                           | CLI over openQA's REST API: inspect/trigger jobs, YAML templates, auth, plug-in subcommands                                        |
+| [openQA Jobs (Lifecycle, States, Scenarios)](concepts/openqa-jobs.md)                | Job terminology, states, results, cloning, dependencies, multi-machine, job groups                                                 |
+| [openQA Job Templates](concepts/openqa-job-templates.md)                             | YAML automation of job creation from machines, products, test suites and job groups                                                |
+| [openQA Test API & Test Modules](concepts/openqa-test-api.md)                        | The testapi DSL (Perl/Python/Lua): test module interface, flags, common functions                                                  |
 
 ## Analyses
 

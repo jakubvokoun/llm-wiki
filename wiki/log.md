@@ -43,3 +43,9 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **concepts:** fuzzing, sanitizers, epss, ssvc
 - **entities:** oss-fuzz, trail-of-bits
 - **updated:** cvss (major v4.0 rewrite: four metric groups, nomenclature, AT/UI, Vulnerable/Subsequent System, maturity model), first (CVSS v4.0 + EPSS)
+
+## [2026-06-23]
+
+- **queue (8):** openqa-installing, openqa-getting-started, openqa-writing-tests, openqa-users-guide, openqa-helm-readme, openqa-dev-getting-started, openqa-python-tests, openqa-command-line
+- **concepts:** openqa-architecture, needle-matching, openqa-test-api, openqa-jobs, openqa-job-templates, openqa-cli
+- **entities:** openqa, os-autoinst

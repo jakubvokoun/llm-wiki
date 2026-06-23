@@ -280,3 +280,11 @@ URLs to fetch and ingest into the wiki. Claude processes these on demand ("proce
 - [x] https://appsec.guide/docs/fuzzing/ <!-- ingested 2026-06-19 -->
 - [x] https://appsec.guide/docs/fuzzing/oss-fuzz/ <!-- ingested 2026-06-19 -->
 - [x] https://google.github.io/oss-fuzz/ <!-- ingested 2026-06-19 -->
+- [x] https://github.com/os-autoinst/openQA/blob/master/docs/Installing.md <!-- ingested 2026-06-23 -->
+- [x] https://github.com/os-autoinst/openQA/blob/master/docs/GettingStarted.md <!-- ingested 2026-06-23 -->
+- [x] https://github.com/os-autoinst/openQA/blob/master/docs/WritingTests.md <!-- ingested 2026-06-23 -->
+- [x] https://github.com/os-autoinst/openQA/blob/master/docs/UsersGuide.md <!-- ingested 2026-06-23 -->
+- [x] https://github.com/os-autoinst/openQA/blob/master/container/helm/README.md <!-- ingested 2026-06-23 -->
+- [x] https://liv.pink/post/2021-02-16-get-started-with-openqa-development/ <!-- ingested 2026-06-23 -->
+- [x] https://liv.pink/post/2021-07-15-writing-openqa-tests-in-python/ <!-- ingested 2026-06-23 -->
+- [x] https://liv.pink/post/2021-04-27-working-with-openqa-via-the-command-line/ <!-- ingested 2026-06-23 -->

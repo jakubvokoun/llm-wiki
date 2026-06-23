@@ -1,7 +1,15 @@
 ---
-title: "Fuzzing"
-tags: [fuzzing, testing, security, dynamic-analysis, memory-safety]
-sources: [appsec-guide-fuzzing.md, appsec-guide-oss-fuzz.md, oss-fuzz.md]
+title: Fuzzing
+tags:
+  - fuzzing
+  - testing
+  - security
+  - dynamic-analysis
+  - memory-safety
+sources:
+  - appsec-guide-fuzzing.md
+  - appsec-guide-oss-fuzz.md
+  - oss-fuzz.md
 updated: 2026-06-19
 ---
 

@@ -1,0 +1,2096 @@
+---
+source_url: https://github.com/os-autoinst/openQA/blob/master/docs/Installing.md
+fetched: 2026-06-23
+---
+<a id="installing"></a>
+# Installing
+
+## Introduction
+
+openQA is an automated test tool that makes it possible to test the whole
+installation process of an operating system. It is free software released
+under the [GPLv2 license](http://www.gnu.org/licenses/gpl-2.0.html). The source
+code and documentation are hosted in the
+[os-autoinst organization on GitHub](https://github.com/os-autoinst).
+
+This document provides the information needed to install and setup the tool,
+as well as information useful for everyday administration of the system. It is
+assumed that the reader is already familiar with the concepts of openQA and
+has already read the [Getting Started Guide](GettingStarted.md#gettingstarted), also available at the [official
+repository](https://github.com/os-autoinst/openQA).
+
+Continue with the next section [Container based setup](#container_setup) to
+setup a simple, ready-to-use container based openQA instance which is useful
+for a single user setup. For a quick bootstrapping under openSUSE go to
+[Quick bootstrapping](#bootstrapping). Else, continue with the more
+advanced section about [Custom installation](#custom_installation). For a
+setup suitable to develop openQA itself, have a look at the
+[Development setup](Contributing.md#development-setup) section.
+
+<a id="container_setup"></a>
+## Container based setup
+
+openQA is provided in containers. Multiple variants exist.
+
+<a id="single-instance-container"></a>
+### Single-instance container
+
+The easiest and quickest way to spawn a single instance of openQA with a
+single command line using the `podman` container engine is the following:
+
+``` sh
+podman run --name openqa --device /dev/kvm -p 1080:80 -p 1443:443 --rm -it \
+  registry.opensuse.org/devel/openqa/containers/openqa-single-instance
+```
+
+Once the startup has finished, the web UI is accessible via <http://localhost:1080>
+or <https://localhost:1443>.
+
+#### How to run a test with single-instance container in 5 minutes
+
+![](images/openqa-in-5-minutes.webm)
+
+#### Triggering and cloning existing jobs within single-instance container
+
+For triggering new tests or cloning existing ones you can use `openqa-cli`
+which is conveniently available inside the container. The quickest and easiest
+way would be to enter an interactive session inside the already running
+single-instance container. You can spawn a new shell via:
+
+``` sh
+podman exec -ti openqa /bin/bash
+```
+
+From there, you can trigger a new job or clone an existing one, e.g.:
+
+``` sh
+openqa-cli schedule --monitor async=1 \
+    SCENARIO_DEFINITIONS_YAML_FILE=https://raw.githubusercontent.com/os-autoinst/os-autoinst-distri-example/refs/heads/main/scenario-definitions.yaml \
+    DISTRI=example VERSION=0 FLAVOR=DVD ARCH=x86_64 \
+    TEST=simple_boot _GROUP_ID=0 BUILD=test \
+    CASEDIR=https://github.com/os-autoinst/os-autoinst-distri-example.git \
+    PRODUCTDIR=. \
+    NEEDLES_DIR=%%CASEDIR%%/needles
+
+openqa-clone-job https://openqa.opensuse.org/tests/1
+```
+
+More details on triggering tests can also be found in the
+[Users Guide](UsersGuide.md#usersguide).
+
+You can also run the container and directly clone tests, e.g.:
+
+``` sh
+podman run -e skip_suse_specifics= -e skip_suse_tests= \
+ --name openqa --device /dev/kvm -p 1080:80 -p 1443:443 --rm \
+ -it registry.opensuse.org/devel/openqa/containers/openqa-single-instance \
+ https://openqa.opensuse.org/tests/1
+```
+
+The `skip_suse_specifics=` and `skip_suse_tests=` options ensure the test files
+and needles required for openSUSE/SUSE tests are downloaded. Refer to the
+[example video above](Installing.md#how-to-run-a-test-with-single-instance-container-in-5-minutes)
+and the [get testing](GettingStarted.md#get-testing) section for more
+details.
+
+### Separate web UI and worker containers
+
+As an alternative also separate containers are provided for both the web UI
+and worker.
+
+For example the web UI container can be pulled and started using the `podman`
+container engine:
+
+``` sh
+podman run -p 1080:80 -p 1443:443 --rm -it registry.opensuse.org/devel/openqa/containers16.0/openqa_webui:latest
+```
+
+The worker container can be pulled and started with:
+
+``` sh
+podman run --rm -it registry.opensuse.org/devel/openqa/containers16.0/openqa_worker:latest
+```
+
+### Custom configuration for containers
+
+To supply a custom openQA config file, use the `-v` parameter. This also works
+for the database config file. Note that if a custom database config file is
+specified, no database is launched within the container.
+By default, the web UI container uses the self-signed certificate that comes
+with Mojolicious. To supply a different certificate, use the `-v` parameter.
+Example for running openQA with a custom config and certificate:
+
+``` sh
+podman run -p 1080:80 -p 1443:443 \
+  -v ./container/webui/test-cert.pem:/etc/apache2/ssl.crt/server.crt:z \
+  -v ./container/webui/test-key.pem:/etc/apache2/ssl.key/server.key:z \
+  -v ./container/webui/test-cert.pem:/etc/apache2/ssl.crt/ca.crt:z \
+  -v ./container/webui/conf/openqa.ini:/data/conf/openqa.ini:z \
+  --rm -it registry.opensuse.org/devel/openqa/containers16.0/openqa_webui:latest
+```
+
+The same works for the workers container where you most likely want to to
+supply `workers.ini` and `client.conf`:
+
+``` sh
+podman run \
+  -v ./container/worker/conf/workers.ini:/data/conf/workers.ini:z \
+  -v ./container/worker/conf/client.conf:/data/conf/client.conf:z \
+  --rm -it registry.opensuse.org/devel/openqa/containers16.0/openqa_worker:latest
+```
+
+This examples assume the working directory is an openQA checkout. To avoid doing
+a checkout, you can also grab the config files from the
+[webui/conf](https://github.com/os-autoinst/openQA/tree/master/container/webui/conf)
+and
+[worker/conf](https://github.com/os-autoinst/openQA/tree/master/container/worker/conf)
+directory listings on GitHub.
+
+To learn more about how to run workers check out the
+[Run openQA workers section](Installing.md#run_openqa_workers).
+
+For creating a first test job, check out the
+[Triggering tests section](UsersGuide.md#triggering_tests). Note that the
+commands mentioned there can also be invoked within a container, e.g.:
+
+``` sh
+podman run \
+   --rm -it registry.opensuse.org/devel/openqa/containers16.0/openqa_webui:latest \
+   openqa-cli --help
+```
+
+Check out the
+[containerized setup section](ContainerizedSetup.md#containerizedsetup)
+for more details.
+
+Take a look at
+[openSUSE's registry](https://registry.opensuse.org/cgi-bin/cooverview?srch_term=project%3Ddevel%3AopenQA)
+for all available container images.
+
+### Kubernetes
+
+Find a guide and the helm charts for Kubernetes deployment of openQA in
+[Helm README](https://github.com/os-autoinst/openQA/blob/master/container/helm/README.md).
+
+## Quick bootstrapping under openSUSE
+
+<a id="bootstrapping"></a>
+
+To quickly get a working openQA installation, you can use the openqa-bootstrap
+script. It essentially automates the steps mentioned in the
+[Custom installation](#custom_installation) section.
+
+### Directly on your machine
+
+On openSUSE Leap and openSUSE Tumbleweed to setup openQA on your machine
+simply download and execute the openqa-bootstrap script as root - it will do
+the rest for you:
+
+``` sh
+curl -s https://raw.githubusercontent.com/os-autoinst/openQA/master/script/openqa-bootstrap | bash -x
+```
+
+The script is also available from an openSUSE package to install from:
+
+``` sh
+zypper in openQA-bootstrap
+/usr/share/openqa/script/openqa-bootstrap
+```
+
+openQA-bootstrap supports to immediately clone an existing job simply by
+supplying `openqa-clone-job` parameters directly for a quickstart:
+
+``` sh
+/usr/share/openqa/script/openqa-bootstrap --from openqa.opensuse.org 12345 SCHEDULE=tests/boot/boot_to_desktop,tests/x11/kontact
+```
+
+The above command will bootstrap an openQA installation and immediately
+afterwards start a local test job clone from a test job from a remote instance
+with optional, overridden parameters. More information about
+`openqa-clone-job` can be found in
+[Cloning existing jobs - openqa-clone-job](UsersGuide.md#cloning-existing-jobs---openqa-clone-job).
+
+You can also run `openqa-bootstrap` repeatedly. For example when you stop a
+container and the openQA daemons and database are stopped, calling
+`openqa-bootstrap start` will start necessary daemons again.
+
+### openQA in a browser
+
+You can try out `openqa-bootstrap` in a container environment like
+[GitHub Codespaces](https://docs.github.com/en/codespaces).
+
+On [GitHub openQA](https://github.com/os-autoinst/openQA), click on the "Code"
+button and select "Codespaces". Just click on the plus sign to create a new
+Codespace. Or use [this
+link](https://codespaces.new/os-autoinst/openQA?quickstart=1) as a quickstart to resume existing instances or create new ones.
+
+It will run `openqa-bootstrap` in the background. If the codespace
+environment is ready, open a new VSCode terminal and type
+
+    tail -f /var/log/openqa-bootstrap.log
+
+The Web UI instance can be opened as soon as you get a popup that there is a
+webserver available on port 80.
+
+You can now use `openqa-clone-job` to run jobs in this instance.
+
+##### After stopping and resuming a codespace instance, run
+
+```sh
+/usr/share/openqa/script/openqa-bootstrap start
+```
+
+to start the openQA daemons again.
+
+Be sure to delete codespace instances if you don't use them anymore, as even
+stopped instances will consume storage of your monthly limit.
+
+### openQA in a container
+
+You can also setup a systemd-nspawn container with openQA with the following
+commands.
+and you need to have no application listening on port 80 yet because the container
+will share the host system's network stack.
+
+``` sh
+zypper in openQA-bootstrap
+/usr/share/openqa/script/openqa-bootstrap-container
+
+systemd-run -tM openqa1 /bin/bash # start a shell in the container
+```
+
+### openQA in a virtual machine
+
+You can also set up a ready-to-use **openQA** instance as a virtual machine
+in your computer.
+
+The images are available directly from the [o3](https://openqa.opensuse.org) site.
+Download the HDD image `opensuse-Tumbleweed-x86_64@uefi-4G-<…>.qcow2` (~3.2 GB)
+from the *Assets* in the test scenario [openqa_install+publish](https://openqa.opensuse.org/tests/latest?arch=x86_64&distri=openqa&flavor=dev&machine=uefi-4G&test=openqa_install%2Bpublish&version=Tumbleweed&result=passed#downloads).
+
+#### The VM
+
+The downloaded image can be used to launch a local VM from, running the
+*openSUSE Tumbleweed* system, a graphical user interface and a network access
+to your local machine's networks.
+
+Upon starting the VM, you can login as the root user. The login credentials
+are available on [os-autoinst-distri-opensuse](https://github.com/os-autoinst/os-autoinst-distri-opensuse/blob/master/lib/main_common.pm) by searching for `$testapi::password`.
+
+You can also access the VM via SSH from a console on your machine
+(`ssh root@<VM_IP_ADDRESS>`), after properly configuring `ssh` in the VM and
+your computer.
+
+#### The openQA instance
+
+The system features a pre-configured **openQA** instance, which includes the
+web UI at <http://localhost/>, a worker, and a PostgreSQL database. To check the
+services, run on a VM terminal: `systemctl status openqa-* openqa-worker@1 postgresql`
+
+You can access the web UI via the Firefox browser within the VM's graphical
+environment and log in as the default openQA Demo user.
+Once you have the VM's IP address, you can also access the web UI from any
+browser on your machine by navigating to http://<VM_IP>/.
+
+The drop-down menu in the UI top-left corner allows you to open an *Example test*
+page, to run a simple test and verify the setup.
+
+Other tests can be cloned via the VM console or an SSH session from your machine,
+using `openqa-clone-job`, getting the job settings from o3 and instantiating the test execution on the local VM instance (`--from openqa.opensuse.org --host localhost`;
+refer to the `openqa-clone-job` documentation).
+
+## Custom installation - repositories and procedure
+
+<a id="custom_installation"></a>
+
+Keep in mind that there can be disruptive changes between openQA versions.
+You need to be sure that the webui and the worker that you are using have the
+same version number or, at least, are compatible.
+
+For example, the packages distributed with older versions of openSUSE Leap are
+not compatible with the version on Tumbleweed. And the package distributed
+with Tumbleweed may not be compatible with the version in the development
+package.
+
+### Official repositories
+
+The easiest way to install openQA is from distribution packages.
+
+- For SUSE Linux Enterprise (SLE), openSUSE Leap and Tumbleweed packages are
+  available.
+
+- For Fedora, packages are available in the official repositories for Fedora
+  23 and later.
+
+### Development version repository
+
+You can find the development version of openQA in OBS in the
+[openQA:devel](https://build.opensuse.org/project/show/devel:openQA) repository.
+
+To add the development repository to your system, you can use these commands.
+
+``` sh
+# openSUSE Tumbleweed
+zypper ar -p 95 -f 'https://download.opensuse.org/repositories/devel:openQA/openSUSE_Tumbleweed' devel_openQA
+
+# openSUSE Leap/SLE
+zypper ar -p 95 -f 'https://download.opensuse.org/repositories/devel:openQA/$releasever' devel_openQA
+zypper ar -p 90 -f 'https://download.opensuse.org/repositories/devel:openQA:Leap:$releasever/$releasever' devel_openQA_Leap
+```
+
+If you installed openQA from the official repository first, you may need to change the vendor of the dependencies.
+
+``` sh
+# openSUSE Tumbleweed and Leap
+zypper dup --from devel_openQA --allow-vendor-change
+
+# openSUSE Leap
+zypper dup --from devel_openQA_Leap --allow-vendor-change
+```
+
+### Installation
+
+<a id="preparations_on_sle"></a>
+#### Preparations on SLE
+
+On SLE certain modules have to be enabled.
+Afterwards the instructions for openSUSE apply.
+
+``` sh
+. /etc/os-release
+SUSEConnect -p sle-module-desktop-applications/$VERSION_ID/$CPU
+SUSEConnect -p sle-module-development-tools/$VERSION_ID/$CPU
+SUSEConnect -p sle-we/$VERSION_ID/$CPU -r $sled_key
+SUSEConnect -p PackageHub/$VERSION_ID/$CPU
+```
+
+#### Installing openQA
+
+You can install the main openQA server package using these commands.
+
+``` sh
+# openSUSE
+zypper in openQA
+
+# Fedora
+dnf install openqa openqa-httpd
+```
+
+To install the openQA worker package use the following.
+
+``` sh
+# SLE/openSUSE
+zypper in openQA-worker
+```
+
+Different convenience packages exist for convenience in openSUSE, for example:
+`openQA-local-db` to install the server including the setup of a local PostgreSQL database or `openQA-single-instance` which sets up a web UI server, a web proxy as well as a local worker. Install `openQA-client` if you only
+want to interact with existing, external openQA instances.
+
+#### Installation from sources
+
+Installing is not required for development purposes and most components of
+openQA can be called directly from the repository checkout.
+
+To install openQA from sources make sure to install all dependencies as
+explained in [Dependencies](Contributing.md#dependencies). Then one can
+call
+
+``` sh
+make install
+```
+
+The directory prefix can be controlled with the optional environment variable
+`DESTDIR`.
+
+From then on continue with the [Basic configuration](#basic-configuration).
+
+## System requirements
+
+To run tests based on the default qemu backend the following hardware
+specifications are recommended per openQA worker instance:
+
+- 1x CPU core with 2x hyperthreads (or 2x CPU cores)
+
+- 8GB RAM
+
+- 40GB HDD (preferably SSD or NVMe)
+
+<a id="basic-configuration"></a>
+## Basic configuration
+
+For a local instance setup you can simply execute the script:
+
+``` sh
+/usr/share/openqa/script/configure-web-proxy
+```
+
+This will automatically setup a local Apache http proxy. The script
+also supports NGINX and a custom port to listen on. Try `--help` to
+learn about the available options. Read on for more detailed setup
+instructions with all the details.
+
+> **NOTE:**
+> The web proxy might not be allowed to connect to openQA when SELinux is enabled.
+> Therefore the `configure-web-proxy` script will automatically run `semanage boolean -m -1 httpd_can_network_connect` on SELinux systems to change that.
+
+If you wish to run openQA behind an http proxy (Apache, NGINX, …) then see the
+**openqa.conf.template** config file in **/etc/apache2/vhosts.d** (openSUSE) or
+`/etc/httpd/conf.d` (Fedora) when using apache2 or the config files in
+`/etc/nginx/vhosts.d` for NGINX.
+
+### Apache proxy
+
+To make everything work correctly on openSUSE when using Apache, you
+need to enable the 'headers', 'proxy', 'proxy_http', 'proxy_wstunnel' and 'rewrite'
+modules using the command 'a2enmod'. This is not necessary on Fedora.
+
+``` sh
+# openSUSE Only
+# You can check what modules are enabled by using 'a2enmod -l'
+a2enmod headers
+a2enmod proxy
+a2enmod proxy_http
+a2enmod proxy_wstunnel
+a2enmod rewrite
+```
+
+For a basic setup, you can copy **openqa.conf.template** to **openqa.conf**
+and modify the `ServerName` setting if required.
+This will direct all HTTP traffic to openQA.
+
+``` sh
+cp /etc/apache2/vhosts.d/openqa.conf.template /etc/apache2/vhosts.d/openqa.conf
+```
+
+### NGINX proxy
+
+For a basic setup, you can copy **openqa.conf.template** to **openqa.conf**
+and modify the `server_name` setting if required.
+This will direct all HTTP traffic to openQA.
+
+``` sh
+cp /etc/nginx/vhosts.d/openqa.conf.template /etc/nginx/vhosts.d/openqa.conf
+```
+
+Note that the default config in **openqa.conf.template** is using the keyword
+`default_server` in the `listen` statement. This will only change the behaviour
+when accessing the server via its IP address. This means that the default vhost
+for `localhost` in **nginx.conf** will take precedence when accessing the server via `localhost`. You might want to disable it.
+
+If you use the openqa-upstreams.inc which is included with the upstream
+sources and openQA packages, you may want to customize the size of the shared
+memory segment according to the formula: page_size \* 8
+
+For openQA you need to set `httpsonly = 0` as described in the TLS/SSL section
+below, if you do not setup NGINX for SSL.
+
+### TLS/SSL
+
+By default openQA expects to be run with HTTPS. The `openqa-ssl.conf.template`
+Apache config file is available as a base for creating the Apache config; you
+can copy it to `openqa-ssl.conf` and uncomment any lines you like, then
+ensure a key and certificate are installed to the appropriate location
+(depending on distribution and whether you uncommented the lines for key and
+cert location in the config file). On openSUSE, you should also add **SSL** to the
+**APACHE_SERVER_FLAGS** so it looks like this in `/etc/sysconfig/apache2`:
+
+``` sh
+APACHE_SERVER_FLAGS="SSL"
+```
+
+If you don't have a TLS/SSL certificate for your host you must turn HTTPS off.
+You can do that in
+[the web UI configuration](GettingStarted.md#configuration):
+
+``` ini
+[openid]
+httpsonly = 0
+```
+
+<a id="database"></a>
+### Database
+
+openQA requires PostgreSQL 14 or newer. By default, a database with name
+`openqa` and `geekotest` user as owner is used. An automatic setup of a freshly
+installed PostgreSQL instance can be done using [this script](https://github.com/os-autoinst/openQA/blob/master/script/setup-db).
+The database connection can be configured in
+[the database configuration file](GettingStarted.md#configuration).
+(normally the `[production]` section is relevant). More info about the `dsn`
+value format can be found in the <https://metacpan.org/pod/DBD>::Pg#DBI-Class-Methods[DBD::Pg documentation].
+
+#### Example for connecting to local PostgreSQL database
+
+``` ini
+[production]
+dsn = dbi:Pg:dbname=openqa
+```
+
+#### Example for connecting to remote PostgreSQL database
+
+``` ini
+[production]
+dsn = dbi:Pg:dbname=openqa;host=db.example.org
+user = openqa
+password = somepassword
+```
+
+### User authentication
+
+openQA supports four different authentication methods: OpenID (default),
+OAuth2, Fake (for development) and None (no authentication).
+
+Use the `auth` section in
+[the web UI configuration](GettingStarted.md#configuration) to configure
+the method:
+
+``` ini
+[auth]
+# method name is case sensitive!
+method = OpenID
+```
+
+Independently of method used, the first user that logs in (if there is no
+admin yet) will automatically get administrator rights!
+
+Note that only one authentication method and only one OpenID/OAuth2 provider
+can be configured at a time. When changing the method/provider no
+users/permissions are lost. However, a new and distinct user (with default
+permissions) will be created when logging in via a different method/provider
+because there is no automatic mapping of identities across different
+methods/providers.
+
+For authentication to work correctly the clocks on workers and the web UI
+need to be in sync. The best way to achieve that is to install a service that
+implements the time-sync target. Otherwise a "timestamp mismatch" may be
+reported when clocks are too far apart.
+
+#### OpenID
+
+By default openQA uses OpenID with opensuse.org as OpenID provider.
+OpenID method has its own `openid` section in
+[the web UI configuration](GettingStarted.md#configuration):
+
+``` ini
+[auth]
+# method name is case sensitive!
+method = OpenID
+
+[openid]
+## base url for openid provider
+provider = https://www.opensuse.org/openid/user/
+## enforce redirect back to https
+httpsonly = 1
+```
+
+This method supports OpenID version up to 2.0.
+
+#### OAuth2
+
+An additional Mojolicious plugin is required to use this feature:
+
+``` sh
+# openSUSE
+zypper in 'perl(Mojolicious::Plugin::OAuth2)'
+```
+
+Example for configuring OAuth2 with GitHub:
+
+``` ini
+[auth]
+# method name is case sensitive!
+method = OAuth2
+
+[oauth2]
+provider = github
+key = mykey
+secret = mysecret
+```
+
+In order to use GitHub for authorization, an "OAuth App" needs to be
+[registered on GitHub](https://github.com/settings/applications/new). Use `…/login`
+as callback URL. Afterwards the key and secret will be visible to the application
+owner(s).
+
+As shown in the comments of the default configuration file, it is also possible
+to use different providers.
+
+#### Fake
+
+For development purposes only! This method is a "mock" authentication provider
+designed for openQA developers to test permissions and role-based access
+control (RBAC). It requires an explicit visit to the `/login` route but allows simulating different user roles (e.g. `?user=nobody` for a non-privileged
+user).
+
+To ease worker testing, an API key and secret are created (or updated) for the
+'Demo user' with administrator privileges and a validity of one day during
+login.
+You can then use the following as `/etc/openqa/client.conf`:
+
+``` ini
+[auth]
+# method name is case sensitive!
+method = Fake
+
+[localhost]
+key = 1234567890ABCDEF
+secret = 1234567890ABCDEF
+```
+
+If you switch the authentication method from Fake to any other, review your
+API keys! You may be vulnerable for up to a day until the Fake API key
+expires.
+
+#### None
+
+This method bypasses any authentication entirely and automatically treats
+every visitor as an 'admin' user with administrator privileges. No explicit
+login is required. It is ideal for private, local, or trusted network
+instances where any form of login (even a "Fake" one) is considered
+unnecessary, for example in automated CI setups or quick local testing.
+Do not use for any exposed instances!
+
+An API key and secret are not required. You can use `openqa-cli` or other tools
+without any further configuration. Browser sessions are also automatically
+authenticated as the 'admin' user.
+
+If you still want to use API keys (e.g. for testing specific key-based
+logic), you can still create them on the `Manage API keys` page.
+
+``` ini
+[auth]
+# method name is case sensitive!
+method = None
+```
+
+### Job Priority Throttling
+
+Priority throttling of openQA test jobs can be configured based on specific
+parameter values found in the job settings. This mechanism is primarily designed
+to encourage the use of efficient resources.
+
+The throttling system allows for the dynamic adjustment of job priorities based
+on parameter values in settings, such as hardware resources or runtime limits.
+
+Throttling parameters are defined in `openqa.ini`, with the following syntax:
+
+    prio_throttling_parameters = parameter_n:scale_n[:reference_n][,…]
+
+where:
+
+- `parameter_n`: the name of a parameter
+- `reference_n`: an optional threshold or reference, that can be zero, making
+  the scale negative or positive for values lower or higher than it.
+- `scale_n`: the priority scale factor applied to the difference between the
+  parameter and its reference. This number is based on experience and custom
+  needs. When it is missing or zero, the throttling isn't applied for the
+  parameter n.
+
+`MAX_JOB_TIME`, the max duration of the job in seconds, can also have a
+throttling scale configured to encourage shorter test runtimes. When this
+parameter is missing in the settings, a `DEFAULT_MAX_JOB_TIME` value is assumed
+(refer to openQA code). A positive `TIMEOUT_SCALE`, 1 by default, may also be
+defined to multiply the job time and the scale applies to the resulting product.
+Its scale only applies to jobs having that value exceeding
+`DEFAULT_MAX_JOB_TIME`. When defining a custom `prio_throttling_parameters`
+configuration, administrators must explicitly include the `MAX_JOB_TIME` rule,
+to retain runtime-based throttling.
+
+It is also possible to define throttling patterns:
+
+    prio_throttling_patterns = parameter_n:adjustment_n:=~regex_n[,…]
+    prio_throttling_patterns = parameter_n:adjustment_n:!~regex_n[,…]
+
+where:
+
+- `parameter_n`: the name of the parameter
+- `adjustment_n`: a positive or negative number that is added to the job
+  priority
+- `=~` or `!~`: the former applies `adjustment_n` if `regex_n` matches, the
+  latter applies `adjustment_n` if `regex_n` does not match
+- `regex_n`: a regex to match the value of `parameter_n` against
+
+The final priority of a job is the sum of a base priority, defined in the job
+templates or scenario definitions, plus all adjustments calculated for the
+configured parameters that match the job settings.
+
+**Example:**
+
+    prio_throttling_parameters = MAX_JOB_TIME:0.007,QEMURAM:0.005:2048
+
+Another mechanism for priority adjustment is based on job group properties,
+such as name or description. This is configured via `prio_group_parameters`
+in `openqa.ini`:
+
+    prio_group_parameters = property:regex:priority_increment[,…]
+
+where:
+
+- `property`: the name of a job group property (e.g. `name`, `description`)
+- `regex`: a regular expression to match against the property value
+- `priority_increment`: an integer value to add to the job priority if matched
+
+By default, job groups with "Development" in the name add +50 to the priority.
+
+## Run the web UI
+
+To start openQA and enable it to run on each boot call
+
+``` sh
+systemctl enable --now postgresql
+systemctl enable --now openqa-webui
+systemctl enable --now openqa-scheduler
+# to use Apache as reverse proxy under openSUSE
+systemctl enable apache2
+systemctl restart apache2
+# to use Apache as reverse proxy under Fedora
+# for now this is necessary to allow Apache to connect to openQA
+setsebool -P httpd_can_network_connect 1
+systemctl enable httpd
+systemctl restart httpd
+```
+
+The openQA web UI should be available on <http://localhost/> now. To simply
+start openQA without enabling it permanently one can simply use `systemctl start`
+instead.
+
+### Additional considerations for zero-downtime upgrades
+
+The main openQA web UI service (the `openqa-webui-daemon` script which is usually started via the systemd unit `openqa-webui.service`) supports
+[zero-downtime upgrades](https://docs.mojolicious.org/Mojolicious/Guides/Cookbook#Zero-downtime-software-upgrades)
+with the help of
+[the `SO_REUSEPORT` socket option](https://lwn.net/Articles/542629). A zero-downtime restart is triggered by sending `SIGHUP` to the script/service (which can be done by reloading `openqa-webui.service` when using systemd which
+is also what the official rpm packaging does on upgrades).
+
+The use of `SO_REUSEPORT` can cause unintended connection failures which can be circumvented via `sysctl net.ipv4.tcp_migrate_req=1`, see
+[the according article on LWN.net](https://lwn.net/Articles/853637). Note that
+there is no corresponding setting for IPv6 but the setting for IPv4 seems to
+help with IPv6 connections as well.
+
+<a id="run_openqa_workers"></a>
+## Run openQA workers
+
+Workers are services running backends to perform the actual testing. The
+testing is commonly performed by running virtual machines but depending on the
+specific backend configuration different options exist.
+
+It is possible to run openQA workers on the same machine as the web UI as well
+as on different machines, even in different networks, for example instances in
+public cloud. The only requirement is access to the web UI host over
+HTTP/HTTPS. For running tests based on virtual machines KVM support is
+recommended.
+
+The openQA worker is distributed as a separate package which be installed on
+multiple machines while still using only one web UI.
+
+If you are using SLE make sure to [add the required repos](#preparations_on_sle) first.
+
+``` sh
+# openSUSE
+zypper in openQA-worker
+# Fedora
+dnf install openqa-worker
+```
+
+### Local LLM Server
+
+openQA workers can optionally host a local `llama.cpp` server to provide LLM
+features directly from the worker node. This feature is disabled by default.
+
+To install and automatically enable the LLM server via Podman Quadlets,
+install the dedicated sub-package:
+
+``` sh
+zypper in openQA-llm-server
+```
+
+To configure a unified API endpoint across multiple LLM-enabled workers,
+copy and configure the provided Nginx template on your web UI server:
+
+``` sh
+cp /etc/nginx/vhosts.d/openqa-llm.conf.template /etc/nginx/vhosts.d/openqa-llm.conf
+```
+
+Edit the `llm_backend` upstream block inside `openqa-llm.conf` to include your
+workers, then reload Nginx.
+
+To allow workers to access your instance, you need to log into openQA as
+operator and create a pair of API key and secret. Once you are logged in, in the
+top right corner, is the user menu, follow the link 'Manage API keys'. Click
+the 'Create' button to generate `key` and `secret`. There is also a script
+available for creating an admin user and an API key+secret pair
+non-interactively, `/usr/share/openqa/script/create_admin`, which can be useful
+for scripted deployments of openQA. Copy and paste the key and secret into
+`/etc/openqa/client.conf` on the machine(s) where the worker is installed. Make
+sure to put in a section reflecting your webserver URL. In the simplest case,
+your `client.conf` may look like this:
+
+``` ini
+[localhost]
+key = 1234567890ABCDEF
+secret = 1234567890ABCDEF
+```
+
+To start the workers you can use the provided systemd files via:
+
+``` sh
+systemctl start openqa-worker@1
+```
+
+This will start worker number one. You can start as
+many workers as you need, you just need to supply a different 'instance number'
+(the number after `@`).
+
+You can also run workers manually from command line.
+
+``` sh
+install -d -m 0755 -o _openqa-worker /var/lib/openqa/pool/X
+sudo -u _openqa-worker /usr/share/openqa/script/worker --instance X
+```
+
+This will run a worker manually showing you debug output. If you haven't
+installed 'os-autoinst' from packages make sure to pass `--isotovideo` option to point to the checkout dir where isotovideo is, not to `/usr/lib`! Otherwise
+it will have trouble finding its perl modules.
+
+If you start openQA workers on a different machine than the web UI host make
+sure to have synchronized clocks, for example using NTP, to prevent
+inconsistent test results.
+
+## Where to now?
+
+From this point on, you can refer to the [Getting Started](GettingStarted.md#get-testing) guide to
+fetch the tests cases and possibly take a look at [Test Developer Guide](WritingTests.md#writingtests)
+
+## Advanced configuration
+
+### Cleanup
+
+The automated cleanup is enabled and configured by default. Cleanup tasks are
+scheduled via systemd timer units and run via `openqa-gru.service`. The configuration
+is done in
+[the web UI configuration file](GettingStarted.md#configuration) and
+various places within the web UI. If you want to tweak the cleanup to your
+needs, have a look at the
+[Cleanup of assets, results and other data](UsersGuide.md#cleanup)
+section.
+
+### Setting up git support
+
+If your tests and needles are stored in Git, openQA can perform various operations:
+
+- Automatically commit needles created in the web UI editor back to the repository
+
+- Automatically update the repository when scheduling tests
+
+- Update the server's tests and needles from Git repos specified in a job's `CASEDIR` and  `NEEDLES_DIR` variables
+
+- Attempt to have the web UI display the correct needles each job was executed with via
+  temporary Git checkouts, based on its variables
+
+By default, cloning based on `CASEDIR` and `NEEDLES_DIR` is enabled, but the other
+features are disabled. To control these features, you can use these config settings:
+
+``` ini
+[scm git]
+git_auto_commit = yes|no
+git_auto_clone = yes|no
+git_auto_update = yes|no
+checkout_needles_sha = yes|no
+```
+
+- `git_auto_commit` controls whether needles saved in the web UI editor are automatically committed. For backwards compatibility, setting `scm` in the `[global]` section to 'git' also enables this feature, if `git_auto_commit` is not set exactly to 'no' (its default
+  value is the empty string '').
+
+- `git_auto_update` controls automatic test/needle updating when scheduling tests.
+- `git_auto_clone` controls the automatic cloning of repos referenced by `CASEDIR` and  `NEEDLES_DIR`, at job schedule time.
+  Check out the
+  [section about directories](Installing.md#terms-and-variables-for-certain-directories-used-by-openqa-and-isotovideo)
+  for where the repositories will be stored.
+- `checkout_needles_sha` controls the feature whereby, when a job viewed in the web UI has
+  variables indicating the needles came from a specific Git repository and ref, openQA will
+  attempt to clone that ref and display the needles from it.
+
+#### Configuration of automatic needle commit feature
+
+You may want to add some description to automatic commits coming from the web
+UI.
+You can do so by setting your configuration in the repository
+(`/var/lib/os-autoinst/needles/.git/config`) to some reasonable defaults such as:
+
+``` ini
+[user]
+    email = whatever@example.com
+    name = openQA web UI
+```
+
+To enable automatic pushing of the repo as well, you need to add the following
+to [the web UI configuration](GettingStarted.md#configuration):
+
+``` ini
+[scm git]
+do_push = yes
+```
+
+Depending on your setup, you might need to generate and propagate
+ssh keys for user 'geekotest' to be able to push.
+
+It might also be useful to rebase first. To enable that, add the remote to get the
+latest updates from and the branch to rebase against to your openqa.ini:
+
+``` ini
+[scm git]
+update_remote = origin
+update_branch = origin/master
+```
+
+If rebasing, it may be useful to perform a hard reset of the local repository
+to ensure that the rebase will not fail. To enable that, add the following to
+your openqa.ini (along with the previous snippet):
+
+``` ini
+[scm git]
+do_cleanup = yes
+```
+
+If you clone the needle repository via HTTP, you can still make `geekotest`
+able to push via SSH with a Git configuration. For GitHub, it would look like
+this:
+
+``` sh
+git config --global url."git@github.com:".pushInsteadOf https://github.com/
+```
+
+This way `git push` will automatically rewrite HTTP urls to SSH for every
+repository, even if it's already cloned.
+
+Or put it in the `~/.gitconfig` file manually:
+
+``` ini
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
+```
+
+You can apply the same kind of thing for any other Git hosting provider.
+
+### Referer settings to auto-mark important jobs
+
+Automatic cleanup of old results (see GRU jobs) can sometimes render important
+tests useless. For example bug report with link to openQA job which no longer
+exists. Job can be manually marked as important to prevent quick cleanup or
+referer can be set so when job is accessed from particular web page (for
+example bugzilla), this job is automatically labeled as linked and treated as
+important.
+
+List of recognized referrers is space separated list configured in
+[the web UI configuration file](GettingStarted.md#configuration):
+
+``` ini
+[global]
+recognized_referers = bugzilla.suse.com bugzilla.opensuse.org
+```
+
+### Scheduler configuration
+
+The openQA web UI scheduler supports a dynamic global job limit that scales the effective
+number of allowed running jobs up or down based on the system load of the openQA web UI host.
+This complements the static `max_running_jobs` setting: when enabled, the effective limit is adjusted conservatively within `[dynamic_job_limit_min, max_running_jobs]` based on the Linux load average from `/proc/loadavg`.
+
+System load is defined as the Linux load average (1-minute, 5-minute, and 15-minute values),
+which captures CPU contention, I/O wait, and runnable process count.
+
+The feature is disabled by default. To enable it, configure the `[scheduler]` section of
+`openqa.ini`:
+
+openqa.ini
+
+``` ini
+[scheduler]
+# Enable dynamic job limit scaling based on system load (default: 0 = disabled)
+dynamic_job_limit_enabled = 1
+
+# The max_running_jobs is the hard ceiling; the dynamic limit scales within:
+# [dynamic_job_limit_min .. max_running_jobs]
+max_running_jobs = 500
+
+# Floor for the dynamic limit (default: 50)
+#dynamic_job_limit_min = 50
+
+# Load average above which the effective limit is scaled down.
+# 0 = auto-detect from number of CPUs (nproc * 0.85)
+#dynamic_job_limit_load_threshold = 0
+
+# Load average for emergency cutback (3x step decrease).
+# 0 = auto-detect from number of CPUs (nproc * 1.5)
+#dynamic_job_limit_load_critical = 0
+
+# Number of jobs to add/remove per adjustment interval (default: 10)
+#dynamic_job_limit_step = 10
+
+# Minimum seconds between adjustments (default: 60)
+#dynamic_job_limit_interval = 60
+```
+
+The scaling algorithm:
+
+- **Increases** the limit by `step` when all load averages are well below the threshold (\< 70% of threshold)
+- **Decreases** the limit by `step` when the 1-minute load is above the threshold and rising
+- **Emergency decrease** by `3 * step` when any load average exceeds the critical value
+
+- **Holds steady** when load is near the threshold or falling
+
+The running jobs heading in the web UI reflects the current dynamic limit when it is active.
+
+### Worker settings
+
+Default behavior for all workers is to use the QEMU backend and connect to
+http://localhost. If you want to change some of those options, you can do so
+in [the worker configuration](GettingStarted.md#configuration). For
+example to point the workers to the FQDN of your host (needed if test cases need
+to access files of the host) use the following setting:
+
+``` ini
+[global]
+HOST = http://openqa.example.com
+```
+
+The load of the system can affect test execution and cause failures due to delays of command execution and [thrashing](https://en.wikipedia.org/wiki/Thrashing_(computer_science)). If the average over a period of 15 minutes exceeds the specified value the worker will not accept new jobs.
+
+workers.ini
+
+``` ini
+[global]
+# Set to 0 to disable.
+#CRITICAL_LOAD_AVG_THRESHOLD = 40
+```
+
+Once you got workers running they should show up in the admin section of openQA in
+the workers section as 'idle'. When you get so far, you have your own instance
+of openQA up and running and all that is left is to set up some tests.
+
+### Further systemd units for the worker
+
+The following information is partially openSUSE specific. The `openQA-worker`
+package provides further systemd units:
+
+- `openqa-worker-plain@.service`: standard worker service, this is the default
+  and `openqa-worker@.service` is just a symlink to this service
+- `openqa-worker-no-cleanup@.service`: see
+  [enabling snapshots](WritingTests.md#snapshots-for-each-module)
+- `openqa-worker-auto-restart@.service`: worker that restarts automatically
+  after processing assigned jobs
+- `openqa-worker-cacheservice`/`openqa-worker-cacheservice-minion`: services
+  for [the asset cache](Installing.md#asset-caching)
+- `openqa-worker.target`
+  - Starts `openqa-worker@.service` (but no other worker units) when started.
+    - The number of started worker slots depends on the pool directories present
+      under `/var/lib/openqa/pool`. This information is determined via a systemd
+      generator and can be refreshed via `systemctl daemon-reload`.
+    - Stops `openqa-worker-no-cleanup@.service` and other units conflicting with
+      `openqa-worker@.service` when started.
+  - Stops/restarts **all** worker units when stopped/restarted.
+  - Is restarted automatically when the `openQA-worker` package is updated
+    (unless `DISABLE_RESTART_ON_UPDATE="yes"` is set in
+    `/etc/sysconfig/services`).
+- `openqa-reload-worker-auto-restart@.path`: allows to restart the worker
+  service automatically on configuration changes without interrupting jobs (see
+  next section for details)
+
+#### Stopping/restarting workers without interrupting currently running jobs
+
+It is possible to stop a worker as soon as it becomes idle and immediately if it
+is already idling by sending `SIGHUP` to the worker process.
+
+When the worker is setup to be always restarted (e.g. using a systemd unit
+with `Restart=always` like `openqa-worker-auto-restart@*.service`) this leads
+to the worker being restarted without interrupting currently running jobs. This
+can be useful to apply configuration changes and updates without interfering
+ongoing testing. Example:
+
+``` sh
+systemctl reload 'openqa-worker-auto-restart@*.service' # sends SIGHUP to worker
+```
+
+There is also the systemd unit `openqa-reload-worker-auto-restart@.path` which
+invokes the command above (for the specified slot) whenever the worker configuration
+under `/etc/openqa/workers.ini` changes. This unit is not enabled by default and only affects `openqa-worker-auto-restart@.service` but not other worker services.
+
+This kind of setup makes it easy to take out worker slots temporarily without
+interrupting currently running jobs:
+
+``` sh
+# prevent worker services from restarting and being automatically reloaded
+systemctl stop openqa-reload-worker-auto-restart@{1..28}.{service,path}
+systemctl mask openqa-worker-auto-restart@{1..28}.service
+# ensure idling worker services stop now (`--kill-who=main` ensures only the
+# worker receives the signal and *not* isotovideo)
+systemctl kill --kill-who=main --signal HUP openqa-worker-auto-restart@{1..28}
+```
+
+<a id="configuring_remote_workers"></a>
+### Configuring remote workers
+
+There are some additional requirements to get remote worker running. First is to
+ensure shared storage between openQA web UI and workers.
+Directory `/var/lib/openqa/share` contains all required data and should be
+shared with read-write access across all nodes present in openQA cluster.
+This step is intentionally left on system administrator to choose proper shared
+storage for her specific needs.
+
+Example of NFS configuration:
+NFS server is where openQA web UI is running. Content of `/etc/exports`
+
+``` sh
+/var/lib/openqa/share *(fsid=0,rw,no_root_squash,sync,no_subtree_check)
+```
+
+NFS clients are where openQA workers are running. Run following command:
+
+``` sh
+mount -t nfs openQA-webUI-host:/var/lib/openqa/share /var/lib/openqa/share
+```
+
+### Configuring AMQP message emission
+
+You can configure openQA to send events (new comments, tests finished, …)
+to an AMQP message bus.
+The messages consist of a topic and a body.
+The body contains json encoded info about the event.
+See [amqp_infra](https://github.com/openSUSE/suse_msg/blob/master/amqp_infra.md)
+for more info about the server and the message topic format or take a look at
+[Consuming AMQP events from openQA](UsersGuide.md#consuming-amqp-events-from-openqa) to find
+detailed instructions how to configure the AMQP server.
+
+To let openQA send messages to an AMQP message bus,
+first make sure that the `perl-Mojo-RabbitMQ-Client` RPM is installed.
+Then you will need to configure AMQP in
+[the web UI configuration file](GettingStarted.md#configuration):
+
+``` ini
+# Enable the AMQP plugin
+[global]
+plugins = AMQP
+
+# Configuration for AMQP plugin
+[amqp]
+heartbeat_timeout = 60
+reconnect_timeout = 5
+# guest/guest is the default anonymous user/pass for RabbitMQ
+url = amqp://guest:guest@localhost:5672/
+exchange = pubsub
+topic_prefix = suse
+```
+
+For a TLS connection use `amqps://` and port `5671`.
+
+### Configuring worker to use more than one openQA server
+
+When there are multiple openQA web interfaces (openQA instances) available a worker
+can be configured to register and accept jobs from all of them.
+
+Requirements:
+
+- `/etc/openqa/client.conf` must contain API keys and secrets to all instances
+
+- Shared storage from all instances must be properly mounted
+
+In [the worker configuration](GettingStarted.md#configuration), enter
+space-separated instance hosts and optionally configure where the shared storage
+is mounted. Example:
+
+``` ini
+[global]
+HOST = openqa.opensuse.org openqa.fedora.fedoraproject.org
+
+[openqa.opensuse.org]
+SHARE_DIRECTORY = /var/lib/openqa/opensuse
+
+[openqa.fedoraproject.org]
+SHARE_DIRECTORY = /var/lib/openqa/fedora
+```
+
+Configuring `SHARE_DIRECTORY` is not a hard requirement. Workers will try following
+directories prior registering with openQA instance:
+
+1.  `SHARE_DIRECTORY`
+
+2.  `/var/lib/openqa/$instance_host`
+
+3.  `/var/lib/openqa/share`
+
+4.  `/var/lib/openqa`
+
+5.  fail if none of above is available
+
+Once a worker registers to an openQA instance, scheduled jobs (of matching
+worker class) can be assigned to it. Dependencies between jobs will be
+considered for ordering the job assignment.
+It is possible to mix local openQA instance with remote instances or use only
+remote instances.
+
+<a id="asset-caching"></a>
+### Asset and test/needle caching
+
+If your network is slow or you experience long time to load needles you might
+want to consider enabling caching on your remote workers. To enable caching,
+`CACHEDIRECTORY` must be set in
+[the worker configuration](GettingStarted.md#configuration). There are
+also further settings one can optionally configure. Example:
+
+``` ini
+[global]
+HOST = http://webui
+CACHEDIRECTORY = /var/lib/openqa/cache # desired cache location
+CACHELIMIT = 50 # max. cache size in GiB, defaults to 50
+CACHE_MIN_FREE_PERCENTAGE = 10 # min. free disk space to preserve in percent
+CACHEWORKERS = 5 # number of parallel cache minion workers, defaults to 5
+
+[http://webui]
+TESTPOOLSERVER = rsync://yourlocation/tests # also cache tests (via rsync)
+```
+
+The specified `CACHEDIRECTORY` must exist and must be writable by the cache service (which usually runs as `_openqa-worker` user). If you install
+openQA through the repositories, said directory will be created for you.
+
+The shown configuration causes workers to download the assets from the web UI
+and use them locally. The `TESTPOOLSERVER` setting causes also tests and needles to be downloaded via `rsync` from the specified location. You can find
+further examples in the comments in
+[the worker configuration](GettingStarted.md#configuration).
+
+It is suggested to have the cache and pool directories on the same filesystem
+to ensure assets used by tests are available as long as needed. This is
+achieved by using hard links, resorting to symlinks in other cases with the
+risk of assets being deleted from the cache before tests relying on these
+assets end.
+
+The caching is provided by two additional services which need to be started
+on the worker host:
+
+``` sh
+systemctl enable --now \
+    openqa-worker-cacheservice openqa-worker-cacheservice-minion
+```
+
+The rsync server daemon needs to be configured and started on the web UI host.
+
+Example `/etc/rsyncd.conf`:
+
+``` ini
+gid = users
+read only = true
+use chroot = true
+transfer logging = true
+log format = %h %o %f %l %b
+log file = /var/log/rsyncd.log
+pid file = /var/run/rsyncd.pid
+slp refresh = 300
+use slp = false
+
+[tests]
+path = /var/lib/openqa/share/tests
+comment = openQA test distributions
+```
+
+``` sh
+systemctl enable --now rsyncd
+```
+
+### Alternative caching implementations
+
+Caching described above works well for a single worker host, but in case of
+several hosts in a single site (that is remote from the main openQA webui
+instance) it results in downloading the same assets several times. In
+such case, one can setup local cache on their own (without using
+openqa-worker-cacheservice service) and share it with workers using
+some network filesystem (see [Configuring remote workers](Installing.md#configuring_remote_workers)
+section above).
+Such setups can use `SYNC_ASSETS_HOOK` in
+[the web UI configuration](GettingStarted.md#configuration) to ensure the
+cache is up to date before starting the job (or resuming test in developer
+mode). The setting takes a shell command that is executed just before
+evaluating assets. It is up to the system administrator to decide what it
+should do, but there are few suggestions:
+
+- Call rsync, possibly via ssh on the cache host
+
+- Wait for a lock file signaling that cache download is in progress to disappear
+
+If the command exits with code 32, re-downloading needles in developer mode
+will be skipped.
+
+### Enable linking files referred by job settings
+
+Specific job settings might refer to files within the test distribution.
+You can configure openQA to display links to these files within the job settings tab.
+To enable particular settings to be presented as a link within the settings tab
+one can setup the relevant keys in `/etc/openqa/openqa.ini`.
+
+``` ini
+[job_settings_ui]
+keys_to_render_as_links=FOO,AUTOYAST
+```
+
+The files referenced by the configured keys should be located either under the root
+of `CASEDIR` or the data folder within `CASEDIR`.
+
+<a id="custom_hook_scripts_job_done"></a>
+<a id="enable_custom_hook_scripts_on_job_done_based_on_result"></a>
+### Enable custom hook scripts on "job done" based on result
+
+If a job is done, especially if no label could be found for carry-over, often
+more steps are needed for the review of the test result or providing the
+information to either external systems or users. As there can be very custom
+requirements openQA offers a point for optional configuration to let the
+instance administrators define specific actions.
+
+By setting custom hooks it is possible to call external scripts defined in
+either environment variables or config settings.
+
+If an environment variable corresponding to the job result is found following
+the name pattern `OPENQA_JOB_DONE_HOOK_$RESULT`, any executable specified in the variable as absolute path or executable name in `$PATH` is called with the
+job ID as first and only parameter. For example for a job with result
+"failed", the corresponding environment variable would be
+`OPENQA_JOB_DONE_HOOK_FAILED`. As alternative to an environment variable a corresponding config variable in the section `[hooks]` in lower-case without the `OPENQA_` prefix can be used in the format `job_done_hook_$result`. The
+corresponding environment value has precedence. The exit code of the
+externally called script is not evaluated and will have no effect.
+
+It is also possible to specify one general hook script via `job_done_hook` and enable that one for specific results via e.g. `job_done_hook_enable_failed = 1`. The job setting `_TRIGGER_JOB_DONE_HOOK=0` allows to disable the hook script
+execution for a particular job. It is also possible to specify
+`_TRIGGER_JOB_DONE_HOOK=1` to execute the general hook script configured via
+`job_done_hook` regardless of the result.
+
+The execution time of the script is by default limited to five minutes. If the
+script does not terminate after receiving `SIGTERM` for 30 seconds it is terminated forcefully via `SIGKILL`. One can change that by setting the environment variables `OPENQA_JOB_DONE_HOOK_TIMEOUT` and
+`OPENQA_JOB_DONE_HOOK_KILL_TIMEOUT` to the desired timeouts. The format from the
+`timeout` command is used (see `timeout --help`).
+
+For example there is already an approach called "auto-review"
+<https://github.com/os-autoinst/os-autoinst-scripts/#auto-review---automatically-detect-known-issues-in-openqa-jobs-label-openqa-jobs-with-ticket-references-and-optionally-retrigger>
+which offers helpful, external scripts. Config settings for
+openqa.opensuse.org enabling the auto-review scripts could look like:
+
+    [hooks]
+    job_done_hook_incomplete = /opt/openqa-scripts/openqa-label-known-issues-hook
+    job_done_hook_failed = /opt/openqa-scripts/openqa-label-known-issues-hook
+
+or for a host openqa.example.com:
+
+    [hooks]
+    job_done_hook_incomplete = env host=openqa.example.com /opt/openqa-scripts/openqa-label-known-issues-hook
+    job_done_hook_failed = env host=openqa.example.com /opt/openqa-scripts/openqa-label-known-issues-hook
+
+The environment variable should be set in a systemd service override for the
+GRU service. A corresponding systemd override file
+`/etc/systemd/system/openqa-gru.service.d/override.conf` could look like this:
+
+    [Service]
+    Environment="OPENQA_JOB_DONE_HOOK_INCOMPLETE=/opt/os-autoinst-scripts/openqa-label-known-issues-hook"
+
+When using `apparmor` the called hook scripts must be covered by according
+`apparmor` rules, for example for the above in
+`/etc/apparmor.d/usr.share.openqa.script.openqa`:
+
+      /opt/os-autoinst-scripts/** rix,
+      /usr/bin/cat rix,
+      /usr/bin/curl rix,
+      /usr/bin/jq rix,
+      /usr/bin/mktemp rix,
+
+Additions should be added to `/etc/apparmor.d/local/usr.share.openqa.script.openqa`
+after which the **apparmor** service needs to be restarted for changes to take effect.
+Note that in case of symlinks the target must be specified, and the link itself is irrelevant. So
+for example `Can't exec "/bin/sh"` can occur if `/bin/sh` is a link to a path that's not allowed.
+
+Apparmor denials and stderr output of the hook scripts are visible in the system logs
+of the openQA GRU service, except for messages in "complain" mode which end up in `audit.log`.
+General status and stdout output is visible in the GRU minion job dashboard on the route
+`/minion/jobs?offset=0&task=finalize_job_results` of the openQA instance.
+
+<a id="automatic_cloning_incomplete_jobs"></a>
+### Automatic cloning of incomplete jobs
+
+By default, when a worker reports an incomplete job due to a cache service related
+problem, the job is automatically cloned. It is possible to extend the regex to cover
+other types of incompletes as well by adjusting `auto_clone_regex` in the `global`
+section of the config file. It is also possible to assign `0` to prevent the automatic
+cloning.
+
+Note that jobs marked as incomplete by the stale job detection are not affected by this
+configuration and cloned in any case.
+
+### Enable automatic database backup
+
+<a id="automatic_database_cleanup"></a>
+
+An optional systemd service, `openqa-dump-db.service`, can be enabled to
+perform daily database backups. This service is triggered by the
+`openqa-dump-db.timer`. To enable automatic database backup, run:
+
+``` sh
+systemctl enable --now openqa-dump-db.timer
+```
+
+Backups are stored at `/var/lib/openqa/backup`.
+
+## Auditing - tracking openQA changes
+
+Auditing plugin enables openQA administrators to maintain overview about what is happening with the system.
+Plugin records what event was triggered by whom, when and what the request looked like. Actions done by openQA
+workers are tracked under user whose API keys are workers using.
+
+Audit log is directly accessible from `Admin menu`.
+
+Auditing, by default enabled, can be disabled by global configuration option in
+[the web UI configuration file](GettingStarted.md#configuration):
+
+``` ini
+[global]
+audit_enabled = 0
+```
+
+The `audit` section of
+[the web UI configuration](GettingStarted.md#configuration) allows to
+exclude some events from logging using a space separated blocklist:
+
+``` ini
+[audit]
+blocklist = job_grab job_done
+```
+
+The `audit/storage_duration` section of
+[the web UI configuration](GettingStarted.md#configuration) allows to set
+the retention policy for different audit event types:
+
+``` ini
+[audit/storage_duration]
+startup = 10
+jobgroup = 365
+jobtemplate = 365
+table = 365
+iso = 60
+user = 60
+asset = 30
+needle = 30
+other = 15
+```
+
+In this example events of the type `startup` would be cleaned up after 10 days, events related to
+job groups after 365 days and so on. Events which do not fall into one of these categories would be
+cleaned after 15 days. By default, cleanup is disabled.
+
+Use `systemctl enable --now openqa-enqueue-audit-event-cleanup.timer` to schedule the cleanup
+automatically every day. It is also possible to trigger the cleanup manually by invoking
+`/usr/share/openqa/script/openqa minion job -e limit_audit_events`.
+
+### List of events tracked by the auditing plugin
+
+- Assets:
+  - asset_register asset_delete
+
+- Workers:
+  - worker_register command_enqueue
+
+- Jobs:
+  - iso_create iso_delete iso_cancel
+  - jobtemplate_create jobtemplate_delete
+  - job_create job_grab job_delete job_update_result job_done jobs_restart job_restart job_cancel job_duplicate
+  - jobgroup_create jobgroup_connect
+
+- Tables:
+  - table_create table_update table_delete
+
+- Users:
+  - user_update user_login user_deleted
+
+- Comments:
+  - comment_create comment_update comment_delete
+
+- Needles:
+  - needle_delete needle_modify
+
+Some of these events are very common and may clutter audit database. For this reason `job_grab` and `job_done`
+events are on the blocklist by default.
+
+## Automatic system upgrades and reboots of openQA hosts
+
+<a id="auto_upgrade"></a>
+
+The distribution package `openQA-auto-update` offers automatic system
+upgrades and reboots of openQA hosts. To use that feature install the package
+`openQA-auto-update` and enable the corresponding systemd timer:
+
+``` sh
+systemctl enable openqa-auto-update.timer
+```
+
+This triggers a nightly system upgrade which first looks into configured openQA
+repositories for stable packages, then conducts the upgrade and schedules
+reboots during the configured reboot maintenance windows using `rebootmgr`.
+As an alternative to the systemd timer the script
+`/usr/share/openqa/script/openqa-auto-update` can be called when desired. The
+script also supports cache cleanup preserving a certain number of versions per
+package. Check its helptext for details.
+
+The distribution package `openQA-continuous-update` can be used to continuously upgrade the system. It will frequently check whether `devel:openQA` contains
+updates and if it does it will upgrade the whole system. This approach is
+independent of `openQA-auto-update` but can be used complementary. The configuration is analogous to `openQA-auto-update`.
+
+## Migrating from older databases
+
+For older versions of openQA, you can migrate from SQLite to PostgreSQL
+according to
+[DB migration from SQLite to PostgreSQL](Pitfalls.md#db-migration).
+
+For migrating from older PostgreSQL versions read on.
+
+## Migrating PostgreSQL database on openSUSE
+
+The PostgreSQL `data`-directory needs to be migrated in order to switch to a
+newer major version of PostgreSQL. The following instructions are specific to
+openSUSE's PostgreSQL and openQA packaging but with a little adaption they can
+likely be used for other setups as well. These instructions can migrate big
+databases in seconds without requiring additional disk space. However, services
+need to be stopped during the (short) migration.
+
+1.  Locate the `data`-directory. Its path is configured in  `/etc/sysconfig/postgresql` and should be `/var/lib/pgsql/data` by default. The
+    paths in the next steps assume the default.
+
+<!-- -->
+
+2.  To ease migrations, it is recommended making the `data`-directory a symlink
+    to a versioned directory. So the file system layout would look for example like
+    this:
+
+    ``` sh
+    $ sudo -u postgres ls -l /var/lib/pgsql | grep data
+    lrwxrwxrwx  1 root     root        7  8. Sep 2019  data -> data.10
+    drwx------ 20 postgres postgres 4096 30. Aug 00:00 data.10
+    drwx------ 20 postgres postgres 4096  8. Sep 2019  data.96
+    ```
+
+    The next steps assume such a layout.
+
+<!-- -->
+
+3.  Install same set of postgresql\* packages as are installed for the old
+    version:
+
+    ``` sh
+    oldver=17 newver=18
+    sudo zypper in postgresql$newver-server postgresql$newver-contrib
+    ```
+
+<!-- -->
+
+4.  Change to a directory where the user postgres will be able to write logs to,
+    e.g.:
+
+    ``` sh
+    cd /tmp
+    ```
+
+<!-- -->
+
+5.  Prepare the migration:
+
+    ``` sh
+    sudo -u postgres /usr/lib/postgresql$newver/bin/initdb [locale-settings] -D /var/lib/pgsql/data.$newver
+    ```
+
+    > **IMPORTANT:**
+    > Be sure to use initdb from the target version (like it is done here)
+    > and also no newer version which is possibly installed on the system as well.
+
+    > **IMPORTANT:**
+    > Lookup the locale settings in
+    > `/var/lib/pgsql/data.$oldver/postgresql.conf` or via `sudo -u geekotest psql`
+    > `openqa -c 'show all;' | grep lc_` to pass locale settings listed by `initdb`
+    > `--help` as appropriate. On some machines additional settings need to be
+    > supplied, e.g. from an older database version on openqa.opensuse.org it
+    > was necessary to pass the following settings: `--encoding=UTF8`
+    > `--locale=en_US.UTF-8 --lc-collate=C --lc-ctype=en_US.UTF-8 --lc-messages=C`
+    > `--lc-monetary=C --lc-numeric=C --lc-time=C`
+
+<!-- -->
+
+6.  Take over any relevant changes from the old config to the new one, e.g.:
+
+    ``` sh
+    sudo -u postgres vimdiff \
+        /var/lib/pgsql/data.$oldver/postgresql.conf \
+        /var/lib/pgsql/data.$newver/postgresql.conf
+    ```
+
+    > **IMPORTANT:**
+    > There shouldn't be a diff in the locale settings, otherwise
+    > `pg_upgrade` will complain.
+
+<!-- -->
+
+7.  Shutdown postgres server and related services as appropriate for your setup,
+    e.g.:
+
+    ``` sh
+    sudo systemctl stop openqa-{webui,websockets,scheduler,livehandler,gru}
+    sudo systemctl stop postgresql
+    ```
+
+<!-- -->
+
+8.  Perform the migration:
+
+    ``` sh
+    sudo -u postgres /usr/lib/postgresql$newver/bin/pg_upgrade --link \
+        --old-bindir=/usr/lib/postgresql$oldver/bin \
+        --new-bindir=/usr/lib/postgresql$newver/bin \
+        --old-datadir=/var/lib/pgsql/data.$oldver \
+        --new-datadir=/var/lib/pgsql/data.$newver
+    ```
+
+    > **IMPORTANT:**
+    > Be sure to use pg_upgrade from the target version (like it is done here) and
+    > also no newer version which is possibly installed on the system as well.
+    > Check out the [PostgreSQL documentation](https://www.postgresql.org/docs/current/pgupgrade.html)
+    > for details.
+
+    > **NOTE:**
+    > This step only takes a few seconds for multiple production DBs because the `--link`
+    > option is used.
+
+<!-- -->
+
+9.  Change symlink (shown in step 2) to use the new data directory:
+
+    ``` sh
+    sudo ln --force --no-dereference --relative --symbolic /var/lib/pgsql/data.$newver /var/lib/pgsql/data
+    ```
+
+<!-- -->
+
+10. Start services again as appropriate for your setup, e.g.:
+
+    ``` sh
+    sudo systemctl start postgresql
+    sudo systemctl start openqa-{webui,websockets,scheduler,livehandler,gru}
+    ```
+
+    > **NOTE:**
+    > There is no need to take care of starting the new version of the PostgreSQL service.
+    > The start script checks the version of the data directory and starts the correct version.
+
+<!-- -->
+
+11. Check whether usual role and database are present and running on the new version:
+
+    ``` sh
+    sudo -u geekotest psql -c 'select version();' openqa
+    ```
+
+<!-- -->
+
+12. Remove old postgres packages if not needed anymore:
+
+    ``` sh
+    sudo zypper rm postgresql$oldver-server postgresql$oldver-contrib postgresql$oldver
+    ```
+
+<!-- -->
+
+13. Delete the old data directory if not needed anymore:
+
+    ``` sh
+    sudo -u postgres rm -r /var/lib/pgsql/data.$oldver
+    ```
+
+## Working on database-related performance problems
+
+Without extra setup, PostgreSQL already gathers many statistics, check out
+[the official documentation](https://www.postgresql.org/docs/current/monitoring-stats.html).
+
+### Enable further statistics
+
+These statistics help to identify the most time-consuming queries.
+
+1.  Configure the PostgreSQL extension `pg_stat_statements`, see example on
+    [the official documentation](https://www.postgresql.org/docs/current/pgstatstatements.html).
+
+2.  Ensure the extension library is installed which might be provided by a
+    separate package (e.g. `postgresql14-contrib` for PostgreSQL 14 on openSUSE).
+
+3.  Restart PostgreSQL.
+
+4.  Enable the extension via `CREATE EXTENSION pg_stat_statements`.
+
+#### Make use of these statistics
+
+Simply query the table `pg_stat_statements`. Use `x` in `psql` for extended mode or `substring()` on the `query` parameter for readable output. The columns
+are explained in the previously mentioned documentation. Here an example to show
+similar queries which are most time-consuming:
+
+    SELECT
+      substring(query from 0 for 250) as query_start, sum(calls) as calls, max(max_exec_time) as max_exec_time,
+      sum(total_exec_time) as total_exec_time, sum(rows) as rows
+      FROM pg_stat_statements group by query_start ORDER BY total_exec_time DESC LIMIT 10;
+
+After significant schema changes consider resetting query statistics (`SELECT`
+`pg_stat_statement_reset()`) and checking the query plans (`EXPLAIN (ANALYZE,`
+`BUFFERS) …`) for the slowest queries showing up afterwards to make sure they
+are using indexes (and not just sequential scans).
+
+### Further things to try
+
+1.  Try to tweak database configuration parameters. For example increasing
+    `work_mem` in `postgresql.conf` might help with some heavy queries. 2.  Run `VACUUM VERBOSE ANALYZE table_name;` for any table that shows to be impacting
+    the performance. This can take some seconds or minutes but can help to improve
+    performance in particular after bigger schema migrations for example type
+    changes.
+
+### Further resources
+
+- Check out
+  [the official documentation](https://www.postgresql.org/docs/current/sql-explain.html)
+  for more details about `EXPLAIN`. There is also
+  [service](https://explain.depesz.com) for formatting those explanations to be
+  more readable.
+
+- Check out
+  [the official documentation](https://www.postgresql.org/docs/current/sql-vacuum.html)
+  for more details about `VACUUM ANALYZE`.
+
+- Check out the following
+  [documentation pages](https://www.postgresql.org/docs/current/performance-tips.html).
+
+## Filesystem layout
+
+<a id="filesystem"></a>
+
+Tests, needles, assets, results and working directories (a.k.a. "pool directories") are located in certain
+subdirectories within `/var/lib/openqa`. This directory is configurable (see
+[Customize base directory](Contributing.md#customize-base-directory)). Here we assume the default is in place.
+
+Note that the sub directories within `/var/lib/openqa` must be accessible by the user that runs the openQA web UI
+(by default 'geekotest') or by the user that runs the worker/isotovideo (by default '\_openqa-worker').
+
+These are the most important sub directories within `/var/lib/openqa`:
+- `db` contains the web UI's database lockfile
+- `images` is where the web UI stores test screenshots and thumbnails
+- `testresults` is where the web UI stores test logs and test-generated assets
+- `webui` is where the web UI stores miscellaneous files
+- `pool` contains working directories of the workers/isotovideo
+- `share` contains directories shared between the web UI and (remote) workers, can be owned by root
+- `share/factory` contains test assets and temp directory, can be owned by root but sysadmin must create subdirs
+- `share/factory/iso` and `share/factory/iso/fixed` contain ISOs for tests
+- `share/factory/hdd` and `share/factory/hdd/fixed` contain hard disk images for tests
+- `share/factory/repo` and `share/factory/repo/fixed` contain repositories for tests
+- `share/factory/other` and `share/factory/other/fixed` contain miscellaneous test assets (e.g. kernels and initrds)
+- `share/factory/tmp` is used as a temporary directory (openQA will create it if it owns `share/factory`)
+- `share/tests` contains the tests themselves
+
+Each of the asset directories (`factory/iso`, `factory/hdd`, `factory/repo` and
+`factory/other`) may contain a `fixed/` subdirectory, and assets of the same type may be placed in that directory. Placing an asset in the `fixed/`
+subdirectory indicates that it should not be deleted to save space: the GRU
+task which removes old assets when the size of all assets for a given job
+group is above a specified size will ignore assets in the `fixed/`
+subdirectories.
+
+It also contains several symlinks which are necessary due to various things
+moving around over the course of openQA's development. All the symlinks
+can of course be owned by root:
+
+- `script` (symlink to `/usr/share/openqa/script/`)
+- `tests` (symlink to `share/tests`)
+- `factory` (symlink to `share/factory`)
+
+It is always best to use the canonical locations, not the compatibility
+symlinks - so run scripts from `/usr/share/openqa/script`, not
+`/var/lib/openqa/script`.
+
+You only need the asset directories for the asset types you will actually use,
+e.g. if none of your tests refer to openQA-stored repositories, you will need
+no `factory/repo` directory. The distribution packages may not create all
+asset directories, so make sure the ones you need are created if necessary.
+Packages will likewise usually not contain any tests; you must create your
+own tests, or use existing tests for some distribution or other piece of
+software.
+
+The worker needs to own `/var/lib/openqa/pool/$INSTANCE`, e.g.
+- `/var/lib/openqa/pool/1`
+
+- `/var/lib/openqa/pool/2`
+
+- 1.  - add more if you have more worker instances
+
+You can also give the whole pool directory to the `_openqa-worker` user and let
+the workers create their own instance directories.
+
+### Terms and variables for certain directories used by openQA and isotovideo
+
+- the "base directory"
+  - by default `/var/lib`
+  - configurable via environment variable `OPENQA_BASEDIR`
+  - referred as `$basedir` within openQA
+
+- the "project directory"
+  - defined as `$basedir/openqa`, by default `/var/lib/openqa`
+  - referred as `$prjdir` within openQA
+
+- the "archive directory"
+  - defined as `$prjdir/openqa`, by default `/var/lib/openqa/archive`
+  - referred as `$archivedir` within openQA
+
+- the "share directory": contains directories shared between web UI and (remote)
+  workers
+  - defined as `$prjdir/share`, by default `/var/lib/openqa/share`
+  - referred as `$sharedir` within openQA
+
+- the "test case directory": contains a test distribution
+  - by default `$sharedir/tests/$distri` or `$sharedir/tests/$distri-$version`
+  - configurable via the test variable `CASEDIR` (see backend variables
+    documentation) - this default is provided by openQA; when starting
+    isotovideo manually the `CASEDIR` variable **must** be initialized by hand
+  - relative paths are relative to `$sharedir/tests`; to avoid symlinking, use
+    e.g. `CASEDIR=opensuse` for `$sharedir/tests/opensuse` despite differing
+    `DISTRI`
+  - specifying a Git URL as `CASEDIR` is also possible; with `git_auto_clone`
+    enabled, openQA will create a checkout of the repository under the mentioned
+    default location if it does not already exist
+    - no de-duplication is done, e.g.
+      `CASEDIR=https://github.com/…/…-distri-opensuse.git` will lead to a
+      checkout under `$sharedir/tests/opensuse` with `DISTRI=opensuse` and a
+      separate checkout under `$sharedir/tests/microos` with `DISTRI=microos`
+      - separate checkouts can be avoided by manual symlinking, e.g. a symlink
+        for `microos` pointing to `opensuse` will prevent the duplicate
+        checkouts in this example
+  - might contain the sub directory `lib` for placing Perl modules used by the
+    tests
+
+- the "product directory": contains the test schedule (`main.pm`) for a certain
+  product within a test distribution
+  - by default identical to the "test case directory"
+  - usually a directory `products/$distri` within the "test case directory"
+  - configurable via the test variable `PRODUCTDIR` (see backend variables
+    documentation)
+
+- the "needles directory": contains reference images for a certain product
+  within a test distribution
+  - by default `$PRODUCTDIR/needles`
+  - configurable via the test variable `NEEDLES_DIR` (see backend variables
+    documentation)
+  - specifying a Git URL as `NEEDLES_DIR` is also possible; with
+    `git_auto_clone` enabled, openQA will create a checkout of the repository
+    under the mentioned default location if it does not already exist
+
+#### Further notes
+- The mentioned `git_auto_clone` setting is part of the general
+  [Git support](Installing.md#setting-up-git-support) and works best if used
+  consistently. If e.g. only specifying a Git URL for `CASEDIR` but not for
+  `NEEDLES_DIR`, only the former will be cloned and needles will be missing if
+  they are provided by a separate repository.
+
+  - As mentioned, there is no de-duplication of checkouts. So when cloning a job
+    with e.g. `CASEDIR=https://github.com/…/…-distri-opensuse.git` and
+    `DISTRI=microos` but no `NEEDLES_DIR`, needles will be missing despite being
+    present for `DISTRI=opensuse`.
+
+- Setting the test variables has only an influence on os-autoinst. The web UI on
+  the other hand always relies on the directory structure described above. For
+  the exact details how these paths are computed by the web UI have a look at
+  `lib/OpenQA/Utils.pm`.
+
+- When enabling the worker cache, parts of the usual "share directory" are
+  located in the specified cache directory on the worker host.
+
+## Automatic installation of the operating systems for openQA machines
+
+<a id="auto_installation_machines"></a>
+
+As a maintainer of an openQA infrastructure running multiple openQA worker
+machines one likely wants to use installation recipes for automatic
+installations to provide a consistent and easy setup of new machines.
+
+For this [AutoYaST](https://doc.opensuse.org/projects/autoyast/) can be used. An
+example template that provides the bare basics of installing a machine with
+SSH and salt, e.g. to be used with
+<https://github.com/os-autoinst/salt-states-openqa/>, can be found in
+<https://github.com/os-autoinst/openQA/blob/master/contrib/ay-openqa-worker.xml>
+
+## Special network conditions
+
+There might be certain situations where the openQA workers cannot reach the openQA webui directly.
+In this case a reverse connection via SSH or WireGuard might be useful allowing the openQA webui
+to connect to a worker opening a backchannel.
+
+### WireGuard
+
+For WireGuard using wg-quick is recommended.
+
+To generate a private (first line) and a public (second line) key for each peer use this command:
+
+``` sh
+wg genkey | tee /dev/stderr | wg pubkey
+```
+
+Create a config in `/etc/wireguard/openqa.conf` on the webui host:
+
+``` ini
+[Interface]
+Address = fd0a::1/128
+PrivateKey = +++ INSERT PRIVATE KEY of webui +++
+
+[Peer]
+# Name = worker1
+PublicKey = +++ INSERT PUBLIC KEY OF worker1 +++
+Endpoint = worker1:51820
+AllowedIPs = fd0a::2/128
+PersistentKeepalive = 60
+
+[Peer]
+# Name = worker2
+PublicKey = +++ INSERT PUBLIC KEY OF worker2 +++
+Endpoint = worker2:51820
+AllowedIPs = fd0a::3/128
+PersistentKeepalive = 60
+```
+
+Create a config in `/etc/wireguard/openqa.conf` on the worker1 host (and analog on other worker hosts):
+
+``` ini
+[Interface]
+Address = fd0a::2/128
+PrivateKey = +++ INSERT PRIVATE KEY HERE +++
+ListenPort = 51820
+
+[Peer]
+# Name = webui
+PublicKey = +++ INSERT PUBLIC KEY OF webui +++
+AllowedIPs = fd0a::1/128
+```
+
+On all peers run now:
+
+``` sh
+zypper -n in wireguard-tools
+systemctl enable --now wg-quick@openqa
+```
+
+Then update [the worker configuration](GettingStarted.md#configuration)
+on the workers like this:
+
+``` ini
+[global]
+HOST=[fd0a::1]
+
+[[fd0a::1]]
+TESTPOOLSERVER = rsync://[fd0a::1]/tests
+```
+
+Same for `/etc/openqa/client.conf`
+
+``` ini
+[[fd0a::1]]
+key = FOO
+secret = BAR
+```
+
+> **NOTE:**
+> The IPv6 address is written in square brackets as it is internally
+> converted to a URL which requires this notation.
+> This is also the reason why host specific section headers need to
+> have double brackets (one for the ini format, one for the IPv6 host notation).
+
+## Security
+
+This section describes available setup options administrators can consider when
+installing openQA to improve security and isolation.
+
+### Isolation
+
+You may consider enabling AppArmor. Profiles are
+[provided by openQA](https://github.com/os-autoinst/openQA/tree/master/profiles/apparmor.d)
+and part of the `openQA` and `openQA-worker` packages for openSUSE.
+
+Alternatively, you can also use the already mentioned
+[container based setup](#container_setup) or look into
+[hardening via systemd](https://en.opensuse.org/openSUSE:Security_Features#Systemd_hardening_effort).
+An example for setting up an openQA worker host so that the openQA worker slots
+run within containers isolated from each other can be found
+[in our Wiki about the openqa.opensuse.org setup](https://progress.opensuse.org/projects/openqav3/wiki/Wiki#o3-s390-and-other-eg-bare-metal-workers-running-as-podman-containers-on-o3-worker-openqaworker23).
+
+Without taking any of those additional measures the openQA services will at
+least still run as a distinct user (when using upstream-provided systemd unit
+files).
+
+<a id="authentication"></a>
+### Authentication
+
+Authentication via OpenID is enabled by default. Do **not** change the
+authentication method to `Fake` unless access is otherwise restricted.
+
+Note that read-access to most data is possible even without being logged-in.
+So you need to be careful exposing an instance to the public even if
+authentication is enabled. To protect assets, the configuration setting
+`[auth] require_for_assets = 1` can be used. To prevent setting values from
+being logged or displayed in the UI, setting keys matching `^_SECRET_` or
+`_PASSWORD` are redacted by default. A custom regex for redacting additional
+variables can be specified via the `_HIDE_SECRETS_REGEX` job setting.
+
+### Configuration settings with security implications
+
+The `download_domains` and `scenario_definitions_allowed_hosts` settings specify domains that will be trusted for downloads via `_URL` job settings and via
+`SCENARIO_DEFINITIONS_YAML_FILE=https://…` respectively. There are some defaults
+for these settings in place you might want to review by checking out the
+`openqa.ini` config template. Settings under `[scm git]` lead to openQA automatically checking out Git repositories specified via certain job settings. The setting `git_auto_clone` is
+enabled by default; you might want to disable it if you are concerned with
+arbitrary repository checkouts being stored on the host the openQA web UI is
+running. Note that these settings only control the openQA web UI. The
+os-autoinst backend will still clone repositories specified via `CASEDIR` and
+`NEEDLES_DIR` **regardless** of the `[scm git]` settings. Other relevant settings: `hsts`, `file_security_policy`
+
+## Troubleshooting
+
+### Tests fail quickly
+
+Check the log files in `/var/lib/openqa/testresults`
+
+### KVM does not work
+
+- make sure you have a machine with kvm support
+
+- make sure `kvm_intel` or `kvm_amd` modules are loaded
+
+- make sure you do have virtualization enabled in BIOS
+
+- make sure the '\_openqa-worker' user can access `/dev/kvm`
+
+- make sure you are not already running other hypervisors such as VirtualBox
+
+- when running inside a vm make sure nested virtualization is enabled (pass nested=1 to your kvm module)
+
+### OpenID login times out
+
+www.opensuse.org's OpenID provider may have trouble with IPv6. openQA shows a message like this:
+
+    no_identity_server: Could not determine ID provider from URL.
+
+To avoid that switch off IPv6 or add a special route that prevents the system
+from trying to use IPv6 with www.opensuse.org:
+
+``` sh
+ip -6 r a to unreachable 2620:113:8044:66:130:57:66:6/128
+```
+
+### Performance testing
+
+If openQA is very slow and e.g. the test setup times out because the asset
+caching downloads take too long it makes sense to cross-check the networking
+performance. This can be done via `iperf3`. Launch the server via `iperf3 -s` on one host (e.g. the openQA web UI host).
+Then run a test on another host (e.g. an openQA worker host) like this:
+
+``` sh
+iperf3 -c serverhost -i 1 -t 30  # 30 second tests, giving results every second
+```
+
+Use `-4`/`-6` to check IPv4 vs. IPv6 performance. Use `-R` to check in the other
+direction. Both can make a huge difference.
+
+More examples: <https://fasterdata.es.net/performance-testing/network-troubleshooting-tools/iperf>
+
