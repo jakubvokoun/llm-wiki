@@ -1,0 +1,78 @@
+---
+source_url: https://docs.tilt.dev/upgrade.html
+fetched: 2026-07-01
+---
+
+# Upgrade
+
+You can find a list of Tilt releases on [Tilt's GitHub Releases page](https://github.com/tilt-dev/tilt/releases).
+
+Usually it is sufficient to rerun the install script. However, if you installed Tilt using one of the [alternative installation methods](install.html) you may need to use one of the [other upgrade methods](upgrade.html#other-upgrade-methods) listed below.
+
+## macOS or Linux
+
+Rerun the install script:
+
+```
+curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
+```
+
+## Windows
+
+```
+iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.ps1'))
+```
+
+## Other Upgrade Methods
+
+## Homebrew (macOS or Linux)
+
+```
+brew update && brew upgrade tilt-dev/tap/tilt
+```
+
+## Scoop
+
+```
+scoop update tilt
+```
+
+## Conda
+
+```
+conda update -c conda-forge tilt
+```
+
+## asdf
+
+```
+asdf plugin add tilt
+asdf install tilt 0.37.4
+asdf global tilt 0.37.4
+```
+
+## Manual Install
+
+If you installed Tilt manually by downloading a release binary and moving in to your PATH you may need to do the same to upgrade.
+
+On macOS:
+
+```
+curl -fsSL https://github.com/tilt-dev/tilt/releases/download/v0.37.4/tilt.0.37.4.mac.x86_64.tar.gz | tar -xzv tilt && \
+  sudo mv tilt /usr/local/bin/tilt
+```
+
+On Linux:
+
+```
+curl -fsSL https://github.com/tilt-dev/tilt/releases/download/v0.37.4/tilt.0.37.4.linux.x86_64.tar.gz | tar -xzv tilt && \
+  sudo mv tilt /usr/local/bin/tilt
+```
+
+On Windows:
+
+```
+Invoke-WebRequest "https://github.com/tilt-dev/tilt/releases/download/v0.37.4/tilt.0.37.4.windows.x86_64.zip" -OutFile "tilt.zip"
+Expand-Archive "tilt.zip" -DestinationPath "tilt"
+Move-Item -Force -Path "tilt\tilt.exe" -Destination "$home\bin\tilt.exe"
+```

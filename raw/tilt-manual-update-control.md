@@ -1,0 +1,53 @@
+---
+source_url: https://docs.tilt.dev/manual_update_control.html
+fetched: 2026-07-01
+---
+
+# Play and Pause Resources with Manual Update Control
+
+By default, Tilt watches your filesystem for edits and, whenever it detects a change affecting Resource X, triggers an update of that resource. All your local code, synced to your cluster as you edit it! What could be better?
+
+Well, sometimes that's *not* what you want. Maybe updating Resource X takes a long time and so you only want to run updates when you're actually ready. Maybe you're about to check out a branch and don't want all the spurious file changes to launch a lot of updates. Whatever your reason, Manual Update Control is here to help.
+
+The behavior described above is `TriggerMode: Auto` (Tilt's default); that is, updates are *automatically* triggered whenever Tilt detects a change to a relevant file.
+
+There's another way of doing things: `TriggerMode: Manual`. Tilt will still monitor file changes associated with your resources, but instead of automatically rebuilding and/or deploying every time a relevant file changes, Tilt will simply indicate in the UI that files have changed, and give you a button that you can use to kick off the update.
+
+## Using TriggerMode
+
+You can change the trigger mode(s) of your resources in your Tiltfile in two different ways:
+
+1. Functions that configure resources ([`k8s_resource()`](/api.html#api.k8s_resource), [`local_resource()`](/api.html#api.local_resource), and [`dc_resource()`](/api.html#api.dc_resource)) have an optional arg, `trigger_mode`; for that specific resource, you can pass either `TRIGGER_MODE_AUTO` or `TRIGGER_MODE_MANUAL`.
+2. If you want to adjust all of your resources at once, call the top-level function [`trigger_mode()`](/api.html#api.trigger_mode) with one of those two constants. This sets the *default trigger mode for all resources*. (You can still use `k8s_resource()` to set the trigger mode for a specific resource.)
+
+Here are some examples:
+
+```
+...\n# TriggerMode = Auto by default
+k8s_resource('snack')
+```
+
+```
+...\n# TriggerMode = Manual
+k8s_resource('snack', trigger_mode=TRIGGER_MODE_MANUAL)
+```
+
+```
+trigger_mode(TRIGGER_MODE_MANUAL)
+...\n# TriggerMode = Manual (default set above)
+k8s_resource('snack')
+
+# TriggerMode = Auto (can override the above default
+# for specific resources)
+k8s_resource('bar', trigger_mode=TRIGGER_MODE_AUTO)
+```
+
+When you make changes to `snack`, instead of them being automatically applied, Tilt will simply indicate unapplied changes by the asterisk to the right of `snack` in the sidebar. It will not automatically apply those changes. Instead, it will wait until you click the apply button to the left of `snack`.
+
+## Auto Init
+
+TriggerMode can be combined with the `auto_init` argument on [`k8s_resource()`](/api.html#api.k8s_resource), [`local_resource()`](/api.html#api.local_resource), and [`dc_resource()`](/api.html#api.dc_resource) for even more fine-grained control.
+
+To configure a resource to *only* run when explicitly triggered from the UI, set `auto_init=False` and `trigger_mode=TRIGGER_MODE_MANUAL`. It will not run on start nor when files are changed.
+
+To configure a resource that does *not* run at start, but still runs whenever a file dependency is changed, set `auto_init=False` and `trigger_mode=TRIGGER_MODE_AUTO`. This can be useful for tasks like linting or executing tests automatically, for example.
