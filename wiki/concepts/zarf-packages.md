@@ -145,3 +145,4 @@ Every Zarf package automatically includes a Software Bill of Materials (SBOM) li
 - [v1alpha1 Package Schema Reference](../sources/zarf-schema-v1alpha1-package.md)
 - [Best Practice — Data Injections Migration](../sources/zarf-data-injections-migration.md)
 - [Best Practice — Offline Live Demos](../sources/zarf-airgap-demos.md)
+- [Analysis — Using Tilt with Zarf / Helm Kubernetes Deployments](../analyses/tilt-with-zarf-helm-deployments.md)

@@ -151,6 +151,7 @@ k8s_yaml(helmfile("k8s/staging/helmfile.yaml"))
 
 - Source: [tilt.dev/helm](https://docs.tilt.dev/helm.html)
 - Related: [[tilt]], [[tiltfile]], [[kubernetes]], [[tilt-templating-yaml]]
+- Analysis: [Using Tilt with Zarf / Helm Kubernetes Deployments](../analyses/tilt-with-zarf-helm-deployments.md)
 - Example repos:
   [tilt-helm-demo](https://github.com/tilt-dev/tilt-helm-demo),
   [tilt-helmfile-demo](https://github.com/tilt-dev/tilt-helmfile-demo)
