@@ -22,36 +22,16 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - **entities:** slsa, openssf, in-toto, defense-unicorns, uds-core, pepr, istio, keycloak, falco, openscap
 - **updated:** supply-chain-security, awesome-prometheus-alerts (full alert names per service, 8 PromQL pattern examples, rules YAML saved to raw/assets/awesome-prometheus-alerts-rules.yml)
 
-## [2026-06-05]
+## [2026-06]
 
-- **queue (14):** kroah-linux-is-a-cna, kroah-linux-kernel-security-work, kroah-linux-cve-assignment-process, kroah-linux-cves-overview, kroah-tracking-kernel-commits, kroah-linux-kernel-version-numbers, eu-cra-overview, eu-cra-reporting, orcwg-cra, cra-vulnerability-management, first-psirt-services-framework, gcve-vulnerability-handling-disclosure, intel-psirt-vulnerability-handling, cisa-coordinated-vulnerability-disclosure
-- **concepts:** cve, cve-numbering-authority, cvss, psirt, vulnerability-handling, cyber-resilience-act, linux-kernel-release-model
-- **entities:** greg-kroah-hartman, enisa, cisa, first, gcve, orcwg, intel
-- **updated:** vulnerability-disclosure (CVD standards/coordinators, handling vs disclosure split, CRA overlay)
-
-## [2026-06-14]
-
-- **queue (14):** distroless, bazel-intro, bazel-build-system-basics, bazel-build-ref, bazel-dependencies, bazel-starlark-language, bazel-modules-bzlmod, bazel-hermeticity, bazel-remote-caching, bazel-query-guide, rules-distroless, rules-oci, wolfi, chainguard-images
-- **concepts:** distroless-images, starlark, bazel-modules, hermetic-builds, remote-build-caching, build-graph, oci-images, ssrf, clickjacking, denial-of-service
-- **entities:** bazel, distroless, chainguard, wolfi
-- **updated:** container-security (distroless-images backlink), supply-chain-security (hermetic-builds/reproducibility backlink), linux-privilege-escalation, seccomp, mandatory-access-control, authentication, rest-api-security, xml-security, dom-xss, slsa, cicd-security, nix-language, prometheus-alerting, continuous-integration, cve, uds-core (orphan-source backlinks)
-- **lint:** Issues found: 35 (7 broken links → 3 missing concepts ssrf/clickjacking/denial-of-service; 28 orphan pages). Fixed: 35. Created the 3 concepts; wired all 28 orphans (4 concepts + openscap entity + 23 source pages) into related pages. Result: 0 broken links, 0 orphans, 100% index coverage across 456 pages.
-
-## [2026-06-19]
-
-- **queue (8):** cvss-v4-specification-document, cvss-v4-user-guide, cvss-v4-implementation-guide, cvss-v4-examples, cvss-v4-faq, appsec-guide-fuzzing, appsec-guide-oss-fuzz, oss-fuzz
-- **concepts:** fuzzing, sanitizers, epss, ssvc
-- **entities:** oss-fuzz, trail-of-bits
-- **updated:** cvss (major v4.0 rewrite: four metric groups, nomenclature, AT/UI, Vulnerable/Subsequent System, maturity model), first (CVSS v4.0 + EPSS)
-
-## [2026-06-23]
-
-- **queue (8):** openqa-installing, openqa-getting-started, openqa-writing-tests, openqa-users-guide, openqa-helm-readme, openqa-dev-getting-started, openqa-python-tests, openqa-command-line
-- **concepts:** openqa-architecture, needle-matching, openqa-test-api, openqa-jobs, openqa-job-templates, openqa-cli
-- **entities:** openqa, os-autoinst
+- **queue (44):** kroah-linux-is-a-cna, kroah-linux-kernel-security-work, kroah-linux-cve-assignment-process, kroah-linux-cves-overview, kroah-tracking-kernel-commits, kroah-linux-kernel-version-numbers, eu-cra-overview, eu-cra-reporting, orcwg-cra, cra-vulnerability-management, first-psirt-services-framework, gcve-vulnerability-handling-disclosure, intel-psirt-vulnerability-handling, cisa-coordinated-vulnerability-disclosure, distroless, bazel-intro, bazel-build-system-basics, bazel-build-ref, bazel-dependencies, bazel-starlark-language, bazel-modules-bzlmod, bazel-hermeticity, bazel-remote-caching, bazel-query-guide, rules-distroless, rules-oci, wolfi, chainguard-images, cvss-v4-specification-document, cvss-v4-user-guide, cvss-v4-implementation-guide, cvss-v4-examples, cvss-v4-faq, appsec-guide-fuzzing, appsec-guide-oss-fuzz, oss-fuzz, openqa-installing, openqa-getting-started, openqa-writing-tests, openqa-users-guide, openqa-helm-readme, openqa-dev-getting-started, openqa-python-tests, openqa-command-line
+- **concepts:** cve, cve-numbering-authority, cvss, psirt, vulnerability-handling, cyber-resilience-act, linux-kernel-release-model, distroless-images, starlark, bazel-modules, hermetic-builds, remote-build-caching, build-graph, oci-images, ssrf, clickjacking, denial-of-service, fuzzing, sanitizers, epss, ssvc, openqa-architecture, needle-matching, openqa-test-api, openqa-jobs, openqa-job-templates, openqa-cli
+- **entities:** greg-kroah-hartman, enisa, cisa, first, gcve, orcwg, intel, bazel, distroless, chainguard, wolfi, oss-fuzz, trail-of-bits, openqa, os-autoinst
+- **updated:** vulnerability-disclosure (CVD standards/coordinators, handling vs disclosure split, CRA overlay); cvss (major v4.0 rewrite: four metric groups, nomenclature, AT/UI, Vulnerable/Subsequent System, maturity model); first (CVSS v4.0 + EPSS); container-security (distroless-images backlink); supply-chain-security (hermetic-builds/reproducibility backlink); linux-privilege-escalation, seccomp, mandatory-access-control, authentication, rest-api-security, xml-security, dom-xss, slsa, cicd-security, nix-language, prometheus-alerting, continuous-integration, cve, uds-core (orphan-source backlinks)
 - **query:** Is openQA a viable platform for OS/appliance testing, and how to run a POC to decide. Filed as: wiki/analyses/openqa-poc-evaluation.md
 - **analysis:** Why CI shell jobs run under PSS-restricted Kubernetes but container-image builds cannot (the seccomp/no_new_privs/AppArmor failure ladder), and the two-pool isolation pattern for rootless builds. Filed as: wiki/analyses/k8s-restricted-pss-ci.md
 - **analysis:** Porting a Prometheus stack to Kubernetes — kubernetes_sd_config roles + RBAC, the headless-Service DaemonSet scraping trick, honor_labels for meta-exporters, dedicated SD jobs for authenticated targets, and the instance-churn dashboard rule. Filed as: wiki/analyses/prometheus-on-kubernetes.md
+- **lint:** Issues found: 35 (7 broken links → 3 missing concepts ssrf/clickjacking/denial-of-service; 28 orphan pages). Fixed: 35. Created the 3 concepts; wired all 28 orphans (4 concepts + openscap entity + 23 source pages) into related pages. Result: 0 broken links, 0 orphans, 100% index coverage across 456 pages.
 
 ## [2026-07-01]
 
