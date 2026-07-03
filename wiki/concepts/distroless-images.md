@@ -39,9 +39,13 @@ Distroless is an **image-design strategy, not a runtime isolation primitive**. A
 
 ## Related
 
-- [Container Security](container-security.md) · [Supply Chain Security](supply-chain-security.md) · [Immutable Infrastructure](immutable-infrastructure.md)
+- [Container Security](container-security.md)
+- [Supply Chain Security](supply-chain-security.md)
+- [Immutable Infrastructure](immutable-infrastructure.md)
 - [OCI Images](oci-images.md)
 
 ## Sources
 
-- [Distroless README](../sources/distroless.md) · [Chainguard Containers overview](../sources/chainguard-images.md) · [Wolfi README](../sources/wolfi.md)
+- [Distroless README](../sources/distroless.md)
+- [Chainguard Containers overview](../sources/chainguard-images.md)
+- [Wolfi README](../sources/wolfi.md)

@@ -47,5 +47,9 @@ Authentication via **OpenID** (default: the openSUSE provider; configurable). Ea
 
 ## Related Pages
 
-- [openQA](../entities/openqa.md) · [os-autoinst](../entities/os-autoinst.md) · [Jobs](openqa-jobs.md) · [openqa-cli](openqa-cli.md)
-- [Installing (source)](../sources/openqa-installing.md) · [Helm chart (source)](../sources/openqa-helm-readme.md)
+- [openQA](../entities/openqa.md)
+- [os-autoinst](../entities/os-autoinst.md)
+- [Jobs](openqa-jobs.md)
+- [openqa-cli](openqa-cli.md)
+- [Installing (source)](../sources/openqa-installing.md)
+- [Helm chart (source)](../sources/openqa-helm-readme.md)

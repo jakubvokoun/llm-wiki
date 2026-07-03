@@ -31,5 +31,7 @@ Each branch is an **independent tree**. It is **not** safe to assume a higher ve
 
 ## Related
 
-- [CVE](cve.md) · [CVE Numbering Authority](cve-numbering-authority.md)
-- Sources: [Linux kernel version numbers](../sources/kroah-linux-kernel-version-numbers.md) · [Tracking kernel commits](../sources/kroah-tracking-kernel-commits.md)
+- [CVE](cve.md)
+- [CVE Numbering Authority](cve-numbering-authority.md)
+- Sources: [Linux kernel version numbers](../sources/kroah-linux-kernel-version-numbers.md)
+- [Tracking kernel commits](../sources/kroah-tracking-kernel-commits.md)

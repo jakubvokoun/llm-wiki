@@ -30,4 +30,6 @@ Cached work is reused; only changed work is redone. Correctness can be tightened
 
 ## Related
 
-- [Bazel](../entities/bazel.md) · [Build system basics](bazel-build-system-basics.md) · [Build Graph & Query](../concepts/build-graph.md)
+- [Bazel](../entities/bazel.md)
+- [Build system basics](bazel-build-system-basics.md)
+- [Build Graph & Query](../concepts/build-graph.md)

@@ -20,4 +20,8 @@ Blog tutorial by **Liv Dywan** (2021-02-16) on setting up a local [openQA](../en
 
 ## Related Pages
 
-- [openQA](../entities/openqa.md) · [os-autoinst](../entities/os-autoinst.md) · [Architecture](../concepts/openqa-architecture.md) · [Jobs](../concepts/openqa-jobs.md) · [Installing](openqa-installing.md)
+- [openQA](../entities/openqa.md)
+- [os-autoinst](../entities/os-autoinst.md)
+- [Architecture](../concepts/openqa-architecture.md)
+- [Jobs](../concepts/openqa-jobs.md)
+- [Installing](openqa-installing.md)

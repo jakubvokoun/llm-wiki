@@ -19,4 +19,6 @@ Reference for [Bzlmod](../concepts/bazel-modules.md), [Bazel](../entities/bazel.
 
 ## Related
 
-- [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md) · [rules_distroless](rules-distroless.md) · [rules_oci](rules-oci.md)
+- [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md)
+- [rules_distroless](rules-distroless.md)
+- [rules_oci](rules-oci.md)

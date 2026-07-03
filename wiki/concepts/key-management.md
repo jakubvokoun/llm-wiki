@@ -100,7 +100,7 @@ Use [ephemeral keys](perfect-forward-secrecy.md) so that compromise of long-term
 ## Tools
 
 - **HSM** (Hardware Security Module) — gold standard for key protection.
-- **AWS KMS, Azure Key Vault, HashiCorp Vault** — managed cryptographic vaults.
+- **AWS KMS, Azure Key Vault, HashiCorp Vault / [OpenBao](../entities/openbao.md)** — managed cryptographic vaults.
 - FIPS-validated software libraries for environments where HSM is unavailable.
 
 ## Related Pages

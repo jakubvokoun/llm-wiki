@@ -22,6 +22,8 @@ Fuzzing shines on **parsers and input processors**; complex application logic wi
 
 ## See also
 
-- [Fuzzing](../concepts/fuzzing.md) (concept) · [Sanitizers](../concepts/sanitizers.md)
-- [OSS-Fuzz (Testing Handbook)](appsec-guide-oss-fuzz.md) · [OSS-Fuzz docs](oss-fuzz.md)
+- [Fuzzing](../concepts/fuzzing.md) (concept)
+- [Sanitizers](../concepts/sanitizers.md)
+- [OSS-Fuzz (Testing Handbook)](appsec-guide-oss-fuzz.md)
+- [OSS-Fuzz docs](oss-fuzz.md)
 - [Trail of Bits](../entities/trail-of-bits.md)

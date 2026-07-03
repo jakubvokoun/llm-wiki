@@ -12,8 +12,7 @@ minimal Flask "hello world" app from a naive Kubernetes deployment to a
 sub-2-second live-update workflow. The repo is
 [tilt-dev/tilt-example-python](https://github.com/tilt-dev/tilt-example-python).
 
-Related: [[tilt]] · [[tiltfile]] · [[tilt-live-update]] · [[docker]] ·
-[[kubernetes]]
+Related: [[tilt]], [[tiltfile]], [[tilt-live-update]], [[docker]], [[kubernetes]]
 
 ---
 

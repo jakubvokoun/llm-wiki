@@ -55,5 +55,9 @@ def run(self):
 
 ## Related Pages
 
-- [Needle matching](needle-matching.md) · [Jobs](openqa-jobs.md) · [os-autoinst](../entities/os-autoinst.md) · [openQA](../entities/openqa.md)
-- [Writing Tests (source)](../sources/openqa-writing-tests.md) · [Python tests (source)](../sources/openqa-python-tests.md)
+- [Needle matching](needle-matching.md)
+- [Jobs](openqa-jobs.md)
+- [os-autoinst](../entities/os-autoinst.md)
+- [openQA](../entities/openqa.md)
+- [Writing Tests (source)](../sources/openqa-writing-tests.md)
+- [Python tests (source)](../sources/openqa-python-tests.md)

@@ -134,7 +134,19 @@ The common outcome for teams that already have a solid in-system suite is **adop
 
 ## Related Pages
 
-- [openQA](../entities/openqa.md) · [os-autoinst](../entities/os-autoinst.md) · [Architecture](../concepts/openqa-architecture.md)
-- [Jobs](../concepts/openqa-jobs.md) · [Test API](../concepts/openqa-test-api.md) · [Needle matching](../concepts/needle-matching.md) · [Job templates](../concepts/openqa-job-templates.md) · [openqa-cli](../concepts/openqa-cli.md)
-- [Continuous integration](../concepts/continuous-integration.md) · [SRE testing](../concepts/sre-testing.md)
-- Sources: [Getting Started](../sources/openqa-getting-started.md) · [Installing](../sources/openqa-installing.md) · [Writing Tests](../sources/openqa-writing-tests.md) · [Helm chart](../sources/openqa-helm-readme.md) · [Python tests](../sources/openqa-python-tests.md) · [CLI](../sources/openqa-command-line.md)
+- [openQA](../entities/openqa.md)
+- [os-autoinst](../entities/os-autoinst.md)
+- [Architecture](../concepts/openqa-architecture.md)
+- [Jobs](../concepts/openqa-jobs.md)
+- [Test API](../concepts/openqa-test-api.md)
+- [Needle matching](../concepts/needle-matching.md)
+- [Job templates](../concepts/openqa-job-templates.md)
+- [openqa-cli](../concepts/openqa-cli.md)
+- [Continuous integration](../concepts/continuous-integration.md)
+- [SRE testing](../concepts/sre-testing.md)
+- Sources: [Getting Started](../sources/openqa-getting-started.md)
+- [Installing](../sources/openqa-installing.md)
+- [Writing Tests](../sources/openqa-writing-tests.md)
+- [Helm chart](../sources/openqa-helm-readme.md)
+- [Python tests](../sources/openqa-python-tests.md)
+- [CLI](../sources/openqa-command-line.md)

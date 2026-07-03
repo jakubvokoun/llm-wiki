@@ -26,5 +26,10 @@ The class-by-class section is the practical lookup: it shows the canonical vecto
 
 ## See also
 
-- [CVSS](../concepts/cvss.md) · [Specification](cvss-v4-specification-document.md) · [User Guide](cvss-v4-user-guide.md) · [Implementation Guide](cvss-v4-implementation-guide.md) · [FAQ](cvss-v4-faq.md)
-- [CVE](../concepts/cve.md) · [FIRST](../entities/first.md)
+- [CVSS](../concepts/cvss.md)
+- [Specification](cvss-v4-specification-document.md)
+- [User Guide](cvss-v4-user-guide.md)
+- [Implementation Guide](cvss-v4-implementation-guide.md)
+- [FAQ](cvss-v4-faq.md)
+- [CVE](../concepts/cve.md)
+- [FIRST](../entities/first.md)

@@ -17,5 +17,8 @@ The fuzzing chapter is the basis for this wiki's [Fuzzing](../concepts/fuzzing.m
 
 ## Related
 
-- [Fuzzing](../concepts/fuzzing.md) · [Sanitizers](../concepts/sanitizers.md) · [OSS-Fuzz](oss-fuzz.md)
-- Sources: [Fuzzing (Testing Handbook)](../sources/appsec-guide-fuzzing.md) · [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)
+- [Fuzzing](../concepts/fuzzing.md)
+- [Sanitizers](../concepts/sanitizers.md)
+- [OSS-Fuzz](oss-fuzz.md)
+- Sources: [Fuzzing (Testing Handbook)](../sources/appsec-guide-fuzzing.md)
+- [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)

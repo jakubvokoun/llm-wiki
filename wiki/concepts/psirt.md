@@ -37,6 +37,10 @@ In small/open-source projects the "PSIRT" may just be the core maintainers. [Int
 
 ## Related
 
-- [Vulnerability Handling](vulnerability-handling.md) · [Vulnerability Disclosure](vulnerability-disclosure.md)
-- [FIRST](../entities/first.md) · [CVSS](cvss.md)
-- Sources: [FIRST PSIRT Framework](../sources/first-psirt-services-framework.md) · [Intel PSIRT](../sources/intel-psirt-vulnerability-handling.md) · [GCVE Guide](../sources/gcve-vulnerability-handling-disclosure.md)
+- [Vulnerability Handling](vulnerability-handling.md)
+- [Vulnerability Disclosure](vulnerability-disclosure.md)
+- [FIRST](../entities/first.md)
+- [CVSS](cvss.md)
+- Sources: [FIRST PSIRT Framework](../sources/first-psirt-services-framework.md)
+- [Intel PSIRT](../sources/intel-psirt-vulnerability-handling.md)
+- [GCVE Guide](../sources/gcve-vulnerability-handling-disclosure.md)

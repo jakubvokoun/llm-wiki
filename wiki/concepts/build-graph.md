@@ -40,4 +40,6 @@ Output as a flattened list or `--output graph | dot -Tsvg` to visualize; `--outp
 
 ## Sources
 
-- [Repositories, workspaces, packages, targets](../sources/bazel-build-ref.md) · [Dependencies](../sources/bazel-dependencies.md) · [Query guide](../sources/bazel-query-guide.md)
+- [Repositories, workspaces, packages, targets](../sources/bazel-build-ref.md)
+- [Dependencies](../sources/bazel-dependencies.md)
+- [Query guide](../sources/bazel-query-guide.md)

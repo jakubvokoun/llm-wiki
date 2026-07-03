@@ -19,4 +19,6 @@ updated: 2026-06-14
 
 ## Related
 
-- [Hermetic Builds](../concepts/hermetic-builds.md) · [Remote Build Caching](../concepts/remote-build-caching.md) · [SLSA](../concepts/slsa.md)
+- [Hermetic Builds](../concepts/hermetic-builds.md)
+- [Remote Build Caching](../concepts/remote-build-caching.md)
+- [SLSA](../concepts/slsa.md)

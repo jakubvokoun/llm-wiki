@@ -32,8 +32,12 @@ An attack where the server is tricked into making HTTP (or other protocol) reque
 
 ## Related
 
-- [XXE](xxe.md) · [XML Security](xml-security.md) · [Input Validation](input-validation.md) · [Cloud Architecture Security](cloud-architecture-security.md)
+- [XXE](xxe.md)
+- [XML Security](xml-security.md)
+- [Input Validation](input-validation.md)
+- [Cloud Architecture Security](cloud-architecture-security.md)
 
 ## Sources
 
-- [OWASP XML External Entity Prevention](../sources/owasp-xxe-prevention.md) · [OWASP XML Security](../sources/owasp-xml-security.md)
+- [OWASP XML External Entity Prevention](../sources/owasp-xxe-prevention.md)
+- [OWASP XML Security](../sources/owasp-xml-security.md)

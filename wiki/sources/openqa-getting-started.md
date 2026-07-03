@@ -22,4 +22,9 @@ Official overview doc for [openQA](../entities/openqa.md) — the canonical intr
 
 ## Related Pages
 
-- [openQA](../entities/openqa.md) · [os-autoinst](../entities/os-autoinst.md) · [Architecture](../concepts/openqa-architecture.md) · [Jobs](../concepts/openqa-jobs.md) · [Needle matching](../concepts/needle-matching.md) · [Test API](../concepts/openqa-test-api.md)
+- [openQA](../entities/openqa.md)
+- [os-autoinst](../entities/os-autoinst.md)
+- [Architecture](../concepts/openqa-architecture.md)
+- [Jobs](../concepts/openqa-jobs.md)
+- [Needle matching](../concepts/needle-matching.md)
+- [Test API](../concepts/openqa-test-api.md)

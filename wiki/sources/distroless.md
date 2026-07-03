@@ -37,4 +37,6 @@ Bazel image generation via [rules_oci](rules-oci.md); custom distroless images v
 
 ## Related
 
-- [Distroless](../entities/distroless.md) · [Distroless Images](../concepts/distroless-images.md) · [HackTricks — Distroless Containers](hacktricks-distroless.md) (post-exploitation view)
+- [Distroless](../entities/distroless.md)
+- [Distroless Images](../concepts/distroless-images.md)
+- [HackTricks — Distroless Containers](hacktricks-distroless.md) (post-exploitation view)

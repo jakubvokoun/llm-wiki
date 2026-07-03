@@ -27,4 +27,8 @@ Sets standard [OCI](../concepts/oci-images.md) `org.opencontainers.image.*` anno
 
 ## Related
 
-- [Chainguard](../entities/chainguard.md) · [Wolfi](../entities/wolfi.md) · [Distroless Images](../concepts/distroless-images.md) · [Supply Chain Security](../concepts/supply-chain-security.md) · [SLSA](../concepts/slsa.md)
+- [Chainguard](../entities/chainguard.md)
+- [Wolfi](../entities/wolfi.md)
+- [Distroless Images](../concepts/distroless-images.md)
+- [Supply Chain Security](../concepts/supply-chain-security.md)
+- [SLSA](../concepts/slsa.md)

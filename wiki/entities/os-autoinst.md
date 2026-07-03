@@ -26,5 +26,10 @@ It can be run entirely on its own (no web UI). [openQA](openqa.md) wraps it to p
 
 ## Related Pages
 
-- [openQA](openqa.md) · [Test API](../concepts/openqa-test-api.md) · [Needle matching](../concepts/needle-matching.md) · [openQA Architecture](../concepts/openqa-architecture.md)
-- Sources: [Getting Started](../sources/openqa-getting-started.md) · [Writing Tests](../sources/openqa-writing-tests.md) · [Dev setup](../sources/openqa-dev-getting-started.md)
+- [openQA](openqa.md)
+- [Test API](../concepts/openqa-test-api.md)
+- [Needle matching](../concepts/needle-matching.md)
+- [openQA Architecture](../concepts/openqa-architecture.md)
+- Sources: [Getting Started](../sources/openqa-getting-started.md)
+- [Writing Tests](../sources/openqa-writing-tests.md)
+- [Dev setup](../sources/openqa-dev-getting-started.md)

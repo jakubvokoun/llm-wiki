@@ -25,7 +25,11 @@ An attack on **availability** — making a system unresponsive or unavailable to
 
 ## Related
 
-- [Overload Protection](overload-protection.md) · [Cascading Failures](cascading-failures.md) · [ReDoS](redos.md) · [XXE](xxe.md) · [Denial of Wallet](denial-of-wallet.md)
+- [Overload Protection](overload-protection.md)
+- [Cascading Failures](cascading-failures.md)
+- [ReDoS](redos.md)
+- [XXE](xxe.md)
+- [Denial of Wallet](denial-of-wallet.md)
 
 ## Sources
 

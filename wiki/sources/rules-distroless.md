@@ -25,4 +25,7 @@ Used with [rules_oci](rules-oci.md) (which recommends rules_distroless for `.deb
 
 ## Related
 
-- [Distroless](../entities/distroless.md) · [OCI Images](../concepts/oci-images.md) · [rules_oci](rules-oci.md) · [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md)
+- [Distroless](../entities/distroless.md)
+- [OCI Images](../concepts/oci-images.md)
+- [rules_oci](rules-oci.md)
+- [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md)

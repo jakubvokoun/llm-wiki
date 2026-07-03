@@ -37,4 +37,5 @@ Hierarchy of **Service Areas → Services → Functions → Sub-functions**. The
 - [PSIRT](../concepts/psirt.md) (concept)
 - [FIRST](../entities/first.md)
 - [Vulnerability Handling](../concepts/vulnerability-handling.md)
-- [GCVE Practical Guide](gcve-vulnerability-handling-disclosure.md) · [Intel PSIRT Process](intel-psirt-vulnerability-handling.md)
+- [GCVE Practical Guide](gcve-vulnerability-handling-disclosure.md)
+- [Intel PSIRT Process](intel-psirt-vulnerability-handling.md)

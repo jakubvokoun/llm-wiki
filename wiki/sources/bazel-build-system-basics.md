@@ -21,4 +21,7 @@ The page indexes deeper chapters: why build systems matter, task-based vs artifa
 
 ## Related
 
-- [Bazel](../entities/bazel.md) · [Intro to Bazel](bazel-intro.md) · [Hermetic Builds](../concepts/hermetic-builds.md) · [Build Graph & Query](../concepts/build-graph.md)
+- [Bazel](../entities/bazel.md)
+- [Intro to Bazel](bazel-intro.md)
+- [Hermetic Builds](../concepts/hermetic-builds.md)
+- [Build Graph & Query](../concepts/build-graph.md)

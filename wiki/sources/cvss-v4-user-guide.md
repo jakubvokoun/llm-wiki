@@ -30,5 +30,9 @@ Safety, Automatable, Provider Urgency, Recovery, Value Density, Vulnerability Re
 
 ## See also
 
-- [CVSS](../concepts/cvss.md) · [Specification](cvss-v4-specification-document.md) · [Implementation Guide](cvss-v4-implementation-guide.md) · [Examples](cvss-v4-examples.md) · [FAQ](cvss-v4-faq.md)
+- [CVSS](../concepts/cvss.md)
+- [Specification](cvss-v4-specification-document.md)
+- [Implementation Guide](cvss-v4-implementation-guide.md)
+- [Examples](cvss-v4-examples.md)
+- [FAQ](cvss-v4-faq.md)
 - [FIRST](../entities/first.md)

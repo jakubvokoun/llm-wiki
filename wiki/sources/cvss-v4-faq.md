@@ -30,5 +30,11 @@ updated: 2026-06-19
 
 ## See also
 
-- [CVSS](../concepts/cvss.md) · [Specification](cvss-v4-specification-document.md) · [User Guide](cvss-v4-user-guide.md) · [Implementation Guide](cvss-v4-implementation-guide.md) · [Examples](cvss-v4-examples.md)
-- [EPSS](../concepts/epss.md) · [SSVC](../concepts/ssvc.md) · [CVE](../concepts/cve.md)
+- [CVSS](../concepts/cvss.md)
+- [Specification](cvss-v4-specification-document.md)
+- [User Guide](cvss-v4-user-guide.md)
+- [Implementation Guide](cvss-v4-implementation-guide.md)
+- [Examples](cvss-v4-examples.md)
+- [EPSS](../concepts/epss.md)
+- [SSVC](../concepts/ssvc.md)
+- [CVE](../concepts/cve.md)

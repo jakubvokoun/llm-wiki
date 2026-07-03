@@ -30,6 +30,7 @@ Under **Article 16**, ENISA is tasked with establishing the SRP; it procured a c
 
 ## Related
 
-- [Cyber Resilience Act](../concepts/cyber-resilience-act.md) · [CRA Overview](eu-cra-overview.md)
+- [Cyber Resilience Act](../concepts/cyber-resilience-act.md)
+- [CRA Overview](eu-cra-overview.md)
 - [ENISA](../entities/enisa.md)
 - [Vulnerability Handling](../concepts/vulnerability-handling.md)

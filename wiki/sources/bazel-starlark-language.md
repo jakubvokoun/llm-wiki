@@ -21,4 +21,6 @@ These restrictions make build definitions deterministic and safely parallel — 
 
 ## Related
 
-- [Starlark](../concepts/starlark.md) · [Bazel](../entities/bazel.md) · [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md)
+- [Starlark](../concepts/starlark.md)
+- [Bazel](../entities/bazel.md)
+- [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md)

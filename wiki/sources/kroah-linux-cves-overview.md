@@ -26,4 +26,5 @@ The December 2025 series-opener in which Greg Kroah-Hartman sets out to document
 ## Related
 
 - [Greg Kroah-Hartman](../entities/greg-kroah-hartman.md)
-- [CVE](../concepts/cve.md) · [CVE Numbering Authority](../concepts/cve-numbering-authority.md)
+- [CVE](../concepts/cve.md)
+- [CVE Numbering Authority](../concepts/cve-numbering-authority.md)

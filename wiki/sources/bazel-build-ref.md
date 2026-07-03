@@ -18,4 +18,6 @@ The core organizational units of a [Bazel](../entities/bazel.md) build.
 
 ## Related
 
-- [Build Graph & Query](../concepts/build-graph.md) · [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md) · [Dependencies](bazel-dependencies.md)
+- [Build Graph & Query](../concepts/build-graph.md)
+- [Bazel Modules (Bzlmod)](../concepts/bazel-modules.md)
+- [Dependencies](bazel-dependencies.md)

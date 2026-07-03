@@ -19,4 +19,7 @@ Official guide for using an existing [openQA](../entities/openqa.md) instance: a
 
 ## Related Pages
 
-- [Job templates](../concepts/openqa-job-templates.md) · [Jobs](../concepts/openqa-jobs.md) · [openqa-cli](../concepts/openqa-cli.md) · [openQA](../entities/openqa.md)
+- [Job templates](../concepts/openqa-job-templates.md)
+- [Jobs](../concepts/openqa-jobs.md)
+- [openqa-cli](../concepts/openqa-cli.md)
+- [openQA](../entities/openqa.md)

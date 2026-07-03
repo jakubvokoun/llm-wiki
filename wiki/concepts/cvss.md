@@ -69,6 +69,14 @@ The Linux kernel [CNA](cve-numbering-authority.md) **refuses to assign severity 
 
 ## Related
 
-- [CVE](cve.md) · [PSIRT](psirt.md) · [Vulnerability Handling](vulnerability-handling.md) · [EPSS](epss.md) · [SSVC](ssvc.md)
+- [CVE](cve.md)
+- [PSIRT](psirt.md)
+- [Vulnerability Handling](vulnerability-handling.md)
+- [EPSS](epss.md)
+- [SSVC](ssvc.md)
 - [FIRST](../entities/first.md)
-- Sources: [Specification](../sources/cvss-v4-specification-document.md) · [User Guide](../sources/cvss-v4-user-guide.md) · [Implementation Guide](../sources/cvss-v4-implementation-guide.md) · [Examples](../sources/cvss-v4-examples.md) · [FAQ](../sources/cvss-v4-faq.md)
+- Sources: [Specification](../sources/cvss-v4-specification-document.md)
+- [User Guide](../sources/cvss-v4-user-guide.md)
+- [Implementation Guide](../sources/cvss-v4-implementation-guide.md)
+- [Examples](../sources/cvss-v4-examples.md)
+- [FAQ](../sources/cvss-v4-faq.md)

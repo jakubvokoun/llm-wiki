@@ -25,4 +25,7 @@ updated: 2026-06-14
 
 ## Related
 
-- [OCI Images](../concepts/oci-images.md) · [Distroless](../entities/distroless.md) · [rules_distroless](rules-distroless.md) · [Bazel](../entities/bazel.md)
+- [OCI Images](../concepts/oci-images.md)
+- [Distroless](../entities/distroless.md)
+- [rules_distroless](rules-distroless.md)
+- [Bazel](../entities/bazel.md)

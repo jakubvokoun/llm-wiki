@@ -20,4 +20,7 @@ README for the official [Helm](https://helm.sh/) chart that deploys [openQA](../
 
 ## Related Pages
 
-- [openQA](../entities/openqa.md) · [Architecture](../concepts/openqa-architecture.md) · [Kubernetes](../entities/kubernetes.md) · [Installing](openqa-installing.md)
+- [openQA](../entities/openqa.md)
+- [Architecture](../concepts/openqa-architecture.md)
+- [Kubernetes](../entities/kubernetes.md)
+- [Installing](openqa-installing.md)

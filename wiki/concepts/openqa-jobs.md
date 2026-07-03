@@ -51,5 +51,10 @@ Via the [REST API / openqa-cli](openqa-cli.md), e.g. `openqa-cli api -X POST iso
 
 ## Related Pages
 
-- [Test API](openqa-test-api.md) · [Job templates](openqa-job-templates.md) · [openqa-cli](openqa-cli.md) · [Architecture](openqa-architecture.md) · [Needle matching](needle-matching.md)
-- [Getting Started (source)](../sources/openqa-getting-started.md) · [Users Guide (source)](../sources/openqa-users-guide.md)
+- [Test API](openqa-test-api.md)
+- [Job templates](openqa-job-templates.md)
+- [openqa-cli](openqa-cli.md)
+- [Architecture](openqa-architecture.md)
+- [Needle matching](needle-matching.md)
+- [Getting Started (source)](../sources/openqa-getting-started.md)
+- [Users Guide (source)](../sources/openqa-users-guide.md)

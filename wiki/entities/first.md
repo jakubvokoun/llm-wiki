@@ -19,5 +19,11 @@ The **Forum of Incident Response and Security Teams** — the global association
 ## Related
 
 - [FIRST PSIRT Services Framework](../sources/first-psirt-services-framework.md)
-- [PSIRT](../concepts/psirt.md) · [CVSS](../concepts/cvss.md) · [EPSS](../concepts/epss.md)
-- Sources: [CVSS v4.0 Specification](../sources/cvss-v4-specification-document.md) · [User Guide](../sources/cvss-v4-user-guide.md) · [Implementation Guide](../sources/cvss-v4-implementation-guide.md) · [Examples](../sources/cvss-v4-examples.md) · [FAQ](../sources/cvss-v4-faq.md)
+- [PSIRT](../concepts/psirt.md)
+- [CVSS](../concepts/cvss.md)
+- [EPSS](../concepts/epss.md)
+- Sources: [CVSS v4.0 Specification](../sources/cvss-v4-specification-document.md)
+- [User Guide](../sources/cvss-v4-user-guide.md)
+- [Implementation Guide](../sources/cvss-v4-implementation-guide.md)
+- [Examples](../sources/cvss-v4-examples.md)
+- [FAQ](../sources/cvss-v4-faq.md)

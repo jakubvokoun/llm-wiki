@@ -30,8 +30,11 @@ The spec defines standard `org.opencontainers.image.*` annotations (authors, bas
 
 ## Related
 
-- [Distroless Images](distroless-images.md) · [Container Security](container-security.md) · [Supply Chain Security](supply-chain-security.md)
+- [Distroless Images](distroless-images.md)
+- [Container Security](container-security.md)
+- [Supply Chain Security](supply-chain-security.md)
 
 ## Sources
 
-- [rules_oci README](../sources/rules-oci.md) · [Chainguard Containers overview](../sources/chainguard-images.md)
+- [rules_oci README](../sources/rules-oci.md)
+- [Chainguard Containers overview](../sources/chainguard-images.md)

@@ -18,4 +18,5 @@ The **Global CVE Allocation System** — an initiative (driven by CIRCL, Luxembo
 ## Related
 
 - [GCVE Practical Guide](../sources/gcve-vulnerability-handling-disclosure.md)
-- [Vulnerability Handling](../concepts/vulnerability-handling.md) · [CVE](../concepts/cve.md)
+- [Vulnerability Handling](../concepts/vulnerability-handling.md)
+- [CVE](../concepts/cve.md)

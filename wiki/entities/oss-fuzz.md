@@ -27,6 +27,9 @@ Closed-source or unaccepted projects can self-host **ClusterFuzz** / **ClusterFu
 
 ## Related
 
-- [Fuzzing](../concepts/fuzzing.md) · [Sanitizers](../concepts/sanitizers.md)
-- [OpenSSF](openssf.md) · [Trail of Bits](trail-of-bits.md) (Testing Handbook guide)
-- Sources: [OSS-Fuzz docs](../sources/oss-fuzz.md) · [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)
+- [Fuzzing](../concepts/fuzzing.md)
+- [Sanitizers](../concepts/sanitizers.md)
+- [OpenSSF](openssf.md)
+- [Trail of Bits](trail-of-bits.md) (Testing Handbook guide)
+- Sources: [OSS-Fuzz docs](../sources/oss-fuzz.md)
+- [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)

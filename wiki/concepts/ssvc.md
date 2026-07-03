@@ -18,5 +18,8 @@ Per the [CVSS v4.0 FAQ](../sources/cvss-v4-faq.md), SSVC is **not a replacement*
 
 ## Related
 
-- [CVSS](cvss.md) · [EPSS](epss.md) · [Vulnerability Handling](vulnerability-handling.md) · [Vulnerability Disclosure](vulnerability-disclosure.md)
+- [CVSS](cvss.md)
+- [EPSS](epss.md)
+- [Vulnerability Handling](vulnerability-handling.md)
+- [Vulnerability Disclosure](vulnerability-disclosure.md)
 - [CISA](../entities/cisa.md)

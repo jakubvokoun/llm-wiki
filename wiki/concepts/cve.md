@@ -29,8 +29,11 @@ The industry-standard identifier system for publicly disclosed software/hardware
 
 ## Related
 
-- [CVE Numbering Authority](cve-numbering-authority.md) · [CVSS](cvss.md)
-- [Vulnerability Disclosure](vulnerability-disclosure.md) · [Vulnerability Handling](vulnerability-handling.md)
+- [CVE Numbering Authority](cve-numbering-authority.md)
+- [CVSS](cvss.md)
+- [Vulnerability Disclosure](vulnerability-disclosure.md)
+- [Vulnerability Handling](vulnerability-handling.md)
 - [Linux Kernel Release Model](linux-kernel-release-model.md) — why naive CVE-fix cherry-picking breaks
 - [OpenSCAP](../entities/openscap.md) — OVAL/CVE-based vulnerability assessment scanner
-- Sources: [Linux CVE assignment process](../sources/kroah-linux-cve-assignment-process.md) · [CISA CVD](../sources/cisa-coordinated-vulnerability-disclosure.md)
+- Sources: [Linux CVE assignment process](../sources/kroah-linux-cve-assignment-process.md)
+- [CISA CVD](../sources/cisa-coordinated-vulnerability-disclosure.md)

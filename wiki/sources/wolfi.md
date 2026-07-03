@@ -19,4 +19,6 @@ Package-repository README for [Wolfi](../entities/wolfi.md), the container-nativ
 
 ## Related
 
-- [Wolfi](../entities/wolfi.md) · [Chainguard](../entities/chainguard.md) · [Distroless Images](../concepts/distroless-images.md)
+- [Wolfi](../entities/wolfi.md)
+- [Chainguard](../entities/chainguard.md)
+- [Distroless Images](../concepts/distroless-images.md)

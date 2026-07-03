@@ -128,7 +128,17 @@ The deeper generalization: on Kubernetes, monitoring is **discovered, not config
 
 ## Related Pages
 
-- [Prometheus](../entities/prometheus.md) · [Grafana](../entities/grafana.md) · [Kubernetes](../entities/kubernetes.md)
-- [Kubernetes observability](../concepts/kubernetes-observability.md) · [Observability](../concepts/observability.md) · [Prometheus instrumentation](../concepts/prometheus-instrumentation.md) · [Prometheus recording rules](../concepts/prometheus-recording-rules.md) · [Prometheus alerting](../concepts/prometheus-alerting.md)
-- [Four golden signals](../concepts/four-golden-signals.md) · [Service level objectives](../concepts/service-level-objectives.md)
-- [RBAC](../concepts/rbac.md) · [Network policy](../concepts/network-policy.md) · [Kubernetes security](../concepts/kubernetes-security.md) · [Container security](../concepts/container-security.md)
+- [Prometheus](../entities/prometheus.md)
+- [Grafana](../entities/grafana.md)
+- [Kubernetes](../entities/kubernetes.md)
+- [Kubernetes observability](../concepts/kubernetes-observability.md)
+- [Observability](../concepts/observability.md)
+- [Prometheus instrumentation](../concepts/prometheus-instrumentation.md)
+- [Prometheus recording rules](../concepts/prometheus-recording-rules.md)
+- [Prometheus alerting](../concepts/prometheus-alerting.md)
+- [Four golden signals](../concepts/four-golden-signals.md)
+- [Service level objectives](../concepts/service-level-objectives.md)
+- [RBAC](../concepts/rbac.md)
+- [Network policy](../concepts/network-policy.md)
+- [Kubernetes security](../concepts/kubernetes-security.md)
+- [Container security](../concepts/container-security.md)

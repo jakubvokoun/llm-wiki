@@ -20,4 +20,5 @@ Practical guide to `bazel query` for tracing [dependencies](../concepts/build-gr
 
 ## Related
 
-- [Build Graph & Query](../concepts/build-graph.md) · [Dependencies](bazel-dependencies.md)
+- [Build Graph & Query](../concepts/build-graph.md)
+- [Dependencies](bazel-dependencies.md)

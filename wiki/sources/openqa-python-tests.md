@@ -19,4 +19,7 @@ Blog tutorial by **Liv Dywan** (2021-07-15) on writing an [openQA](../entities/o
 
 ## Related Pages
 
-- [Test API & Test Modules](../concepts/openqa-test-api.md) · [Needle matching](../concepts/needle-matching.md) · [Writing Tests (official)](openqa-writing-tests.md) · [openQA](../entities/openqa.md)
+- [Test API & Test Modules](../concepts/openqa-test-api.md)
+- [Needle matching](../concepts/needle-matching.md)
+- [Writing Tests (official)](openqa-writing-tests.md)
+- [openQA](../entities/openqa.md)

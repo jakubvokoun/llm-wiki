@@ -23,6 +23,9 @@ If a project isn't eligible for Google's infra, use **CIFuzz** (with **ClusterFu
 
 ## See also
 
-- [OSS-Fuzz](../entities/oss-fuzz.md) (entity) · [Fuzzing](../concepts/fuzzing.md) · [Sanitizers](../concepts/sanitizers.md)
-- [Fuzzing (Testing Handbook)](appsec-guide-fuzzing.md) · [OSS-Fuzz docs](oss-fuzz.md)
+- [OSS-Fuzz](../entities/oss-fuzz.md) (entity)
+- [Fuzzing](../concepts/fuzzing.md)
+- [Sanitizers](../concepts/sanitizers.md)
+- [Fuzzing (Testing Handbook)](appsec-guide-fuzzing.md)
+- [OSS-Fuzz docs](oss-fuzz.md)
 - [Trail of Bits](../entities/trail-of-bits.md)

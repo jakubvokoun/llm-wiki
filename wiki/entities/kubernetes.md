@@ -53,6 +53,7 @@ Kubernetes manages containerized workloads across clusters of nodes. It provides
 ## Related Tools
 
 - [Tilt](tilt.md) — local development tool that builds images and applies K8s manifests in a watch/build/deploy control loop
+- [OpenBao](openbao.md) — secrets management deployable on K8s via Helm; delivers secrets to pods via Agent Injector or [CSI provider](../sources/openbao-k8s-csi.md)
 
 ## Related Concepts
 

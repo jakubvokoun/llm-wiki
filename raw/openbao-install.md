@@ -1,0 +1,290 @@
+---
+source_url: https://openbao.org/docs/install/
+fetched: 2026-07-03
+---
+
+# Installing OpenBao
+
+There are several options to install OpenBao:
+
+1. Install from a [package manager](#package-manager).
+2. Deploy using a [container registry](#container-registries).
+3. Use a [precompiled binary](#precompiled-binaries).
+4. Install [from source](#compiling-from-source).
+5. [Helm for Kubernetes](/docs/platform/k8s/helm/)
+
+## Package manager
+
+### Homebrew - MacOS
+
+```
+$ brew info openbao
+
+$ brew install openbao
+```
+
+### FreeBSD
+
+```
+$ pkg install openbao
+```
+
+### Linux
+
+OpenBao manages packages for Amazon Linux, Debian, Fedora, RHEL, Ubuntu and
+other distributions. The packages are available for both direct download
+and native package managers on the [downloads](/downloads/) page.
+
+In addition, OpenBao packages are available more directly in Arch Linux, Fedora and RHEL.
+
+For Arch Linux they can be installed by
+
+```
+$ pacman -Sy openbao
+```
+
+Plugins are available as well and can be listed by
+
+```
+$ pacman -Ss ^openbao-plugin
+```
+
+For RHEL (and derivatives) they are in EPEL which can be enabled by
+
+```
+$ dnf install -y epel-release
+```
+
+and then installed on Fedora or RHEL by
+
+```
+$ dnf install -y openbao
+```
+
+## Container registries
+
+OpenBao deploys pre-built container images based on [Alpine Linux](https://alpinelinux.org/)
+to the following registries:
+
+1. [`ghcr.io/openbao/openbao`](https://github.com/openbao/openbao/pkgs/container/openbao)
+2. [`quay.io/openbao/openbao`](https://quay.io/repository/openbao/openbao)
+3. [`docker.io/openbao/openbao`](https://hub.docker.com/r/openbao/openbao)
+
+For container images based on [RHEL UBI](https://www.redhat.com/en/blog/introducing-red-hat-universal-base-image),
+we push to the following registries:
+
+1. [`ghcr.io/openbao/openbao-ubi`](https://github.com/openbao/openbao/pkgs/container/openbao-ubi)
+2. [`quay.io/openbao/openbao-ubi`](https://quay.io/repository/openbao/openbao-ubi)
+3. [`docker.io/openbao/openbao-ubi`](https://hub.docker.com/r/openbao/openbao-ubi)
+
+## Precompiled binaries
+
+To install the precompiled binary, [download](/downloads/) the applicable
+package for your system. OpenBao is packaged as a zip file.
+
+Once the zip is downloaded, unzip the file into your designated directory. The `bao` binary
+inside is all that is necessary to run OpenBao (or `bao.exe` for Windows). No
+additional files are required to run OpenBao.
+
+Copy the binary to your system. If you intend to access it from the
+command-line, ensure that you place the binary somewhere on your `PATH`.
+
+## Compiling from source
+
+These instructions are for a **development** build; do not rely on them for
+release binaries.
+
+Instead, [refer to our packaging guide](/community/contributing/packaging/).
+
+To compile from source, you will need [Go](https://golang.org) installed and
+properly configured (including a `GOPATH` environment variable set), as well as
+a copy of [`git`](https://www.git-scm.com/) in your `PATH`.
+
+Clone the OpenBao repository from GitHub into your `GOPATH`:
+
+```
+$ mkdir -p $GOPATH/src/github.com/openbao && cd $_
+
+$ git clone https://github.com/openbao/openbao.git
+
+$ cd openbao
+```
+
+Bootstrap the project. This will download and compile libraries and tools needed
+to compile OpenBao:
+
+```
+$ make bootstrap
+```
+
+Build OpenBao for your current system and put the binary in `./bin/` (relative to
+the git checkout). The `make dev` target is just a shortcut that builds `bao`
+for only your local build environment (no cross-compiled targets).
+
+```
+$ make dev
+```
+
+## Verifying the installation
+
+To verify OpenBao is installed, run `bao -h` on your system. You should
+see the help output. If you are executing it from the command line, ensure it is
+on your `PATH` to avoid receiving an error that OpenBao is not found.
+
+```
+$ bao -h
+```
+
+## Post-installation hardening
+
+After installing OpenBao, you may want to take additional steps to secure it
+against leaking your secrets. OpenBao normally does this very well, but there
+is an operating system feature that undermines OpenBao's protection. This is
+[memory paging (aka swap)](https://en.wikipedia.org/wiki/Memory_paging). To
+provide extra security, you will want to make sure that your OS has swap
+disabled or that its swap space is encrypted.
+
+### Linux
+
+The example systemd service file provided with the OpenBao source code comes
+configured to disable swap for the OpenBao process. To verify that swap is
+disabled, run `systemctl cat openbao` and check for the line `MemorySwapMax=0`.
+Alternatively, to allow the openbao process to swap out, make sure that line is
+deleted.
+
+If you are not using systemd, you can achieve the same effect by setting the
+cgroupv2 value `memory.swap.max` to `0` using your tool of choice. You can
+disable swap for the entire OS by running `swapoff` (this is not recommended).
+Encrypting swap space in Linux is possible, but as usual, there are many
+options, and a guide is outside the scope of these docs. Consult your distro's
+documentation.
+
+### BSDs and other Unix-like
+
+It is recommended to confirm that swap is encrypted. This can be done on all the
+major BSDs.
+
+* [FreeBSD guide to encrypted swap](https://docs.freebsd.org/en/books/handbook/disks/#swap-encrypting)
+* [NetBSD guide to encrypted swap](https://netbsd.org/docs/guide/en/netbsd.html#chap-cgd-swap-encryption)
+* [OpenBSD info on encrypted swap (enabled by default)](https://man.openbsd.org/sysctl.2#VM_SWAPENCRYPT~2)
+
+### Windows
+
+You can check if your swap space is encrypted by opening Powershell and running:
+
+```
+> fsutil behavior query encryptpagingfile
+```
+
+If the value is 0 (that is, `DISABLED`), you are recommended to enable swap
+encryption by running:
+
+```
+> fsutil behavior set encryptpagingfile 1
+```
+
+Then reboot.
+
+### Docker
+
+When running the Docker image, include the flag `--memory-swappiness=0`.
+
+### macOS
+
+[The swap space on macOS is always encrypted](https://support.apple.com/guide/mac-help/what-is-secure-virtual-memory-on-mac-mh11852/mac).
+
+## Checksum Verification
+
+### SHA-256
+
+Download the release and checksum files:
+
+```
+$ OS="freebsd"
+
+$ ARCH="x86_64"
+
+$ PLATFORM="$OS_$ARCH"
+
+$ VERSION=$(curl -s https://api.github.com/repos/openbao/openbao/releases | jq -r '.[0] .tag_name' | cut -d'v' -f2-)
+
+$ RELEASE="bao_$VERSION_$PLATFORM.tar.gz"
+
+$ wget https://github.com/openbao/openbao/releases/download/v$VERSION/bao_$VERSION_$PLATFORM.tar.gz
+
+$ wget https://github.com/openbao/openbao/releases/download/v$VERSION/checksums-$OS.txt
+
+$ wget https://github.com/openbao/openbao/releases/download/v$VERSION/checksums-$OS.txt.gpgsig
+```
+
+Verify the checksum using `sha256sum`:
+
+```
+$ sha256sum --check checksums-$OS.txt 2>/dev/null
+```
+
+## Signature Verification
+
+### GPG
+
+First, download our [GPG key](/assets/openbao-gpg-pub-20240618.asc) and import it:
+
+```
+$ wget https://openbao.org/assets/openbao-gpg-pub-20240618.asc
+
+$ gpg2 --import openbao-gpg-pub-20240618.asc
+
+gpg: key D200CD702853E6D0: public key "OpenBao <openbao@lists.lfedge.org>" imported
+
+gpg: Total number processed: 1
+
+gpg:               imported: 1
+```
+
+To verify GPG signed artifacts, use `gpg2` from the command line. For example, to verify `checksums-freebsd.txt` with the `checksums-freebsd.txt.gpgsig` stored locally:
+
+```
+$ gpg2 --verify checksums-freebsd.txt.gpgsig checksums-freebsd.txt
+
+gpg: Signature made Wed 17 Jul 2024 06:12:03 PM EDT
+
+gpg:                using RSA key E617DCD4065C2AFC0B2CF7A7BA8BC08C0F691F94
+
+gpg: Good signature from "OpenBao <openbao@lists.lfedge.org>" [unknown]
+
+gpg: WARNING: This key is not certified with a trusted signature!
+
+gpg:          There is no indication that the signature belongs to the owner.
+
+Primary key fingerprint: 66D1 5FDD 8728 7219 C8E1  5478 D200 CD70 2853 E6D0
+
+Subkey fingerprint: E617 DCD4 065C 2AFC 0B2C  F7A7 BA8B C08C 0F69 1F94
+```
+
+### Cosign and Rekor
+
+To verify Cosign signed artifacts, use `rekor-cli` or `curl` to [pull the entry from Rekor](https://edu.chainguard.dev/open-source/sigstore/rekor/how-to-verify-file-signatures-with-rekor-or-curl/).
+
+For example, to verify `checksums.txt` with the `checksums.txt.sig` stored locally:
+
+```
+$ SHASUM="$(openssl sha256 -r checksums.txt | awk '{print $1}')"
+
+bc53476e7e69c98650bf69690caf1aa32dc08c19735375819ae3b29bb9c2b733
+
+$ curl -X POST -H "Content-type: application/json" 'https://rekor.sigstore.dev/api/v1/index/retrieve' --data-raw "{\"hash\":\"sha256:$SHASUM\"}"
+
+24296fb24b8ad77aedcc1a0cea8b33a04926d6f3b8db35107a1e864c007bb4aa84416a5153cc0bca
+
+$ UUID=24296fb24b8ad77aedcc1a0cea8b33a04926d6f3b8db35107a1e864c007bb4aa84416a5153cc0bca
+
+$ curl -X GET "https://rekor.sigstore.dev/api/v1/log/entries/${UUID}" > response.json
+
+$ jq -r ".[$UUID].body" < response.json | base64 -d | jq -r '.spec.signature.publicKey.content' | base64 -d > certificate.pem
+
+$ base64 -d < checksums-freebsd.txt.sig > checksums-freebsd.txt.rawsig
+
+$ openssl pkeyutl -verify -certin -inkey certificate.pem -sigfile checksums-freebsd.txt.rawsig -in checksums-freebsd.txt -rawin
+
+Signature Verified Successfully
+```

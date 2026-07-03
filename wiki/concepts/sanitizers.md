@@ -25,5 +25,7 @@ Compiler-inserted **instrumentation runtimes** that detect classes of bugs at ru
 
 ## Related
 
-- [Fuzzing](fuzzing.md) · [OSS-Fuzz](../entities/oss-fuzz.md)
-- Sources: [Fuzzing (Testing Handbook)](../sources/appsec-guide-fuzzing.md) · [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)
+- [Fuzzing](fuzzing.md)
+- [OSS-Fuzz](../entities/oss-fuzz.md)
+- Sources: [Fuzzing (Testing Handbook)](../sources/appsec-guide-fuzzing.md)
+- [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)

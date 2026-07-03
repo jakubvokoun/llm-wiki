@@ -47,5 +47,8 @@ Each subcommand is a Perl plug-in: drop a `lib/OpenQA/CLI/foo.pm` (`package Open
 
 ## Related Pages
 
-- [Jobs](openqa-jobs.md) · [Job templates](openqa-job-templates.md) · [Architecture](openqa-architecture.md) · [openQA](../entities/openqa.md)
+- [Jobs](openqa-jobs.md)
+- [Job templates](openqa-job-templates.md)
+- [Architecture](openqa-architecture.md)
+- [openQA](../entities/openqa.md)
 - [Command line (source)](../sources/openqa-command-line.md)

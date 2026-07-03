@@ -45,6 +45,11 @@ updated: 2026-06-05
 
 ## Related
 
-- [Vulnerability Handling](vulnerability-handling.md) · [Vulnerability Disclosure](vulnerability-disclosure.md)
-- [ENISA](../entities/enisa.md) · [ORCWG](../entities/orcwg.md)
-- Sources: [CRA Overview](../sources/eu-cra-overview.md) · [CRA Reporting](../sources/eu-cra-reporting.md) · [ORCWG CRA](../sources/orcwg-cra.md) · [Vulnerability Management Under the CRA](../sources/cra-vulnerability-management.md)
+- [Vulnerability Handling](vulnerability-handling.md)
+- [Vulnerability Disclosure](vulnerability-disclosure.md)
+- [ENISA](../entities/enisa.md)
+- [ORCWG](../entities/orcwg.md)
+- Sources: [CRA Overview](../sources/eu-cra-overview.md)
+- [CRA Reporting](../sources/eu-cra-reporting.md)
+- [ORCWG CRA](../sources/orcwg-cra.md)
+- [Vulnerability Management Under the CRA](../sources/cra-vulnerability-management.md)

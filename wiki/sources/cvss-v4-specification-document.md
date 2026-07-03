@@ -31,5 +31,10 @@ Threat centers on Exploit Maturity (PoC vs active exploitation) and only lowers 
 
 ## See also
 
-- [CVSS](../concepts/cvss.md) (concept) · [User Guide](cvss-v4-user-guide.md) · [Implementation Guide](cvss-v4-implementation-guide.md) · [Examples](cvss-v4-examples.md) · [FAQ](cvss-v4-faq.md)
-- [FIRST](../entities/first.md) · [CVE](../concepts/cve.md)
+- [CVSS](../concepts/cvss.md) (concept)
+- [User Guide](cvss-v4-user-guide.md)
+- [Implementation Guide](cvss-v4-implementation-guide.md)
+- [Examples](cvss-v4-examples.md)
+- [FAQ](cvss-v4-faq.md)
+- [FIRST](../entities/first.md)
+- [CVE](../concepts/cve.md)

@@ -37,6 +37,8 @@ Page types and their location in `wiki/`:
 
 Internal links use standard markdown: `[[page-name]]` (Obsidian style) or `[label](../concepts/page.md)` (standard relative).
 
+**External references:** Don't ingest every page of a large doc set. Ingest the core (basics, key concepts, essential configuration, deployment) and, for niche or repetitive topics, cite the upstream URL directly (`[label](https://…)`) from the relevant wiki page instead of creating an internal page. Prefer an external link over an internal `[[page]]` link whenever the target topic is out of scope for ingestion. When several pages follow the same pattern (e.g. one per cloud-KMS provider), ingest one representative and link the rest externally.
+
 ## MCP tools
 
 ### markitdown

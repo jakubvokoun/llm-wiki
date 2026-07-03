@@ -21,4 +21,6 @@ How [Bazel](../entities/bazel.md) models dependencies between targets.
 
 ## Related
 
-- [Build Graph & Query](../concepts/build-graph.md) · [Repositories, Workspaces, Packages, Targets](bazel-build-ref.md) · [Query guide](bazel-query-guide.md)
+- [Build Graph & Query](../concepts/build-graph.md)
+- [Repositories, Workspaces, Packages, Targets](bazel-build-ref.md)
+- [Query guide](bazel-query-guide.md)

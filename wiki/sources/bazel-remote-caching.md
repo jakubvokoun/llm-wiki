@@ -27,4 +27,5 @@ updated: 2026-06-14
 
 ## Related
 
-- [Remote Build Caching](../concepts/remote-build-caching.md) · [Hermetic Builds](../concepts/hermetic-builds.md)
+- [Remote Build Caching](../concepts/remote-build-caching.md)
+- [Hermetic Builds](../concepts/hermetic-builds.md)

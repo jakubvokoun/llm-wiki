@@ -55,5 +55,9 @@ Needles live alongside tests in a `NEEDLES_DIR` (often a git repo); openQA ships
 
 ## Related Pages
 
-- [Test API](openqa-test-api.md) · [openQA](../entities/openqa.md) · [os-autoinst](../entities/os-autoinst.md) · [Jobs](openqa-jobs.md)
-- [Getting Started (source)](../sources/openqa-getting-started.md) · [Writing Tests (source)](../sources/openqa-writing-tests.md)
+- [Test API](openqa-test-api.md)
+- [openQA](../entities/openqa.md)
+- [os-autoinst](../entities/os-autoinst.md)
+- [Jobs](openqa-jobs.md)
+- [Getting Started (source)](../sources/openqa-getting-started.md)
+- [Writing Tests (source)](../sources/openqa-writing-tests.md)

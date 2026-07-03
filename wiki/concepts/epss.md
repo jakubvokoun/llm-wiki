@@ -20,5 +20,7 @@ Per the [CVSS v4.0 FAQ](../sources/cvss-v4-faq.md), EPSS is **not a replacement*
 
 ## Related
 
-- [CVSS](cvss.md) · [SSVC](ssvc.md) · [Vulnerability Handling](vulnerability-handling.md)
+- [CVSS](cvss.md)
+- [SSVC](ssvc.md)
+- [Vulnerability Handling](vulnerability-handling.md)
 - [FIRST](../entities/first.md)

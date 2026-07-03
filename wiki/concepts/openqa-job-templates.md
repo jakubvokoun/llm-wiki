@@ -39,5 +39,8 @@ Job groups are defined as **YAML documents** (editable in the web UI or via API 
 
 ## Related Pages
 
-- [Jobs](openqa-jobs.md) · [openqa-cli](openqa-cli.md) · [Test API](openqa-test-api.md) · [openQA](../entities/openqa.md)
+- [Jobs](openqa-jobs.md)
+- [openqa-cli](openqa-cli.md)
+- [Test API](openqa-test-api.md)
+- [openQA](../entities/openqa.md)
 - [Users Guide (source)](../sources/openqa-users-guide.md)

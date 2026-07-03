@@ -23,6 +23,8 @@ Architecture; Getting started (accepting/setting up projects, per-language integ
 
 ## See also
 
-- [OSS-Fuzz](../entities/oss-fuzz.md) (entity) · [Fuzzing](../concepts/fuzzing.md) · [Sanitizers](../concepts/sanitizers.md)
+- [OSS-Fuzz](../entities/oss-fuzz.md) (entity)
+- [Fuzzing](../concepts/fuzzing.md)
+- [Sanitizers](../concepts/sanitizers.md)
 - [OSS-Fuzz (Testing Handbook)](appsec-guide-oss-fuzz.md) — practical how-to
 - [OpenSSF](../entities/openssf.md)

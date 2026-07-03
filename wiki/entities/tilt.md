@@ -96,4 +96,9 @@ All Tilt source pages ingested from docs.tilt.dev (2026-07-01):
 - [Tilt Tutorial: First Look Overview](../sources/tilt-tutorial-overview.md)
 - [Tilt: Upgrade Guide](../sources/tilt-upgrade.md)
 
-Concept pages: [Tiltfile](../concepts/tiltfile.md) · [Control Loop](../concepts/tilt-control-loop.md) · [Live Update](../concepts/tilt-live-update.md) · [Extensions](../concepts/tilt-extensions.md).
+**Concept pages:**
+
+- [Tiltfile](../concepts/tiltfile.md)
+- [Control Loop](../concepts/tilt-control-loop.md)
+- [Live Update](../concepts/tilt-live-update.md)
+- [Extensions](../concepts/tilt-extensions.md)

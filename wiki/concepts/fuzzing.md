@@ -58,6 +58,11 @@ Running once finds today's bugs; **continuous** fuzzing catches regressions. [OS
 ## Related
 
 - [Sanitizers](sanitizers.md) — runtime bug detectors paired with fuzzers
-- [OSS-Fuzz](../entities/oss-fuzz.md) · [Trail of Bits](../entities/trail-of-bits.md) (Testing Handbook)
-- [Secure Code Review](secure-code-review.md) · [Vulnerability Handling](vulnerability-handling.md) · [Supply Chain Security](supply-chain-security.md)
-- Sources: [Fuzzing (Testing Handbook)](../sources/appsec-guide-fuzzing.md) · [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md) · [OSS-Fuzz docs](../sources/oss-fuzz.md)
+- [OSS-Fuzz](../entities/oss-fuzz.md)
+- [Trail of Bits](../entities/trail-of-bits.md) (Testing Handbook)
+- [Secure Code Review](secure-code-review.md)
+- [Vulnerability Handling](vulnerability-handling.md)
+- [Supply Chain Security](supply-chain-security.md)
+- Sources: [Fuzzing (Testing Handbook)](../sources/appsec-guide-fuzzing.md)
+- [OSS-Fuzz (Testing Handbook)](../sources/appsec-guide-oss-fuzz.md)
+- [OSS-Fuzz docs](../sources/oss-fuzz.md)

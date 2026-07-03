@@ -22,4 +22,7 @@ Blog tutorial by **Liv Dywan** (2021-04-27) on driving [openQA](../entities/open
 
 ## Related Pages
 
-- [openqa-cli](../concepts/openqa-cli.md) · [Jobs](../concepts/openqa-jobs.md) · [Job templates](../concepts/openqa-job-templates.md) · [openQA](../entities/openqa.md)
+- [openqa-cli](../concepts/openqa-cli.md)
+- [Jobs](../concepts/openqa-jobs.md)
+- [Job templates](../concepts/openqa-job-templates.md)
+- [openQA](../entities/openqa.md)

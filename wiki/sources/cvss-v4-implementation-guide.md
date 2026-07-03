@@ -35,5 +35,11 @@ Principles weigh **automatability at scale**, **difficulty/cost of obtaining dat
 
 ## See also
 
-- [CVSS](../concepts/cvss.md) · [Specification](cvss-v4-specification-document.md) · [User Guide](cvss-v4-user-guide.md) · [Examples](cvss-v4-examples.md) · [FAQ](cvss-v4-faq.md)
-- [Vulnerability Handling](../concepts/vulnerability-handling.md) · [EPSS](../concepts/epss.md) · [SSVC](../concepts/ssvc.md)
+- [CVSS](../concepts/cvss.md)
+- [Specification](cvss-v4-specification-document.md)
+- [User Guide](cvss-v4-user-guide.md)
+- [Examples](cvss-v4-examples.md)
+- [FAQ](cvss-v4-faq.md)
+- [Vulnerability Handling](../concepts/vulnerability-handling.md)
+- [EPSS](../concepts/epss.md)
+- [SSVC](../concepts/ssvc.md)

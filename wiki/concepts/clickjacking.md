@@ -24,7 +24,10 @@ A UI-redress attack where a victim is tricked into clicking something different 
 
 ## Related
 
-- [Content Security Policy](content-security-policy.md) · [HTTP Security Headers](http-security-headers.md) · [CSS Security](css-security.md) · [Tabnabbing](tabnabbing.md)
+- [Content Security Policy](content-security-policy.md)
+- [HTTP Security Headers](http-security-headers.md)
+- [CSS Security](css-security.md)
+- [Tabnabbing](tabnabbing.md)
 
 ## Sources
 

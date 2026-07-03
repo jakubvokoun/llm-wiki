@@ -20,4 +20,8 @@ Official installation/operations guide for an [openQA](../entities/openqa.md) in
 
 ## Related Pages
 
-- [openQA](../entities/openqa.md) · [Architecture](../concepts/openqa-architecture.md) · [Helm chart](openqa-helm-readme.md) · [Kubernetes](../entities/kubernetes.md) · [Dev setup](openqa-dev-getting-started.md)
+- [openQA](../entities/openqa.md)
+- [Architecture](../concepts/openqa-architecture.md)
+- [Helm chart](openqa-helm-readme.md)
+- [Kubernetes](../entities/kubernetes.md)
+- [Dev setup](openqa-dev-getting-started.md)

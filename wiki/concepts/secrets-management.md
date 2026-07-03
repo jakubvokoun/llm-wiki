@@ -62,7 +62,7 @@ K8s Secrets are base64-encoded (not encrypted) by default. Options in order of s
 | K8s Secrets + encryption at rest                                 | Enable etcd encryption; RBAC to limit access                      | Minimum viable        |
 | [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) | Encrypt secrets before committing to Git; decrypt in cluster      | Good for GitOps       |
 | External Secrets Operator                                        | Syncs secrets from AWS Secrets Manager, GCP Secret Manager, Vault | Best for cloud-native |
-| HashiCorp Vault                                                  | Full-featured: dynamic secrets, lease rotation, audit             | Most powerful         |
+| HashiCorp Vault / [OpenBao](../entities/openbao.md)              | Full-featured: dynamic secrets, lease rotation, audit             | Most powerful         |
 
 Best practices:
 

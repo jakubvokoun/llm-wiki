@@ -22,4 +22,8 @@ Official reference for authoring [openQA](../entities/openqa.md) tests against t
 
 ## Related Pages
 
-- [Test API & Test Modules](../concepts/openqa-test-api.md) · [Python tests](openqa-python-tests.md) · [Needle matching](../concepts/needle-matching.md) · [Jobs](../concepts/openqa-jobs.md) · [os-autoinst](../entities/os-autoinst.md)
+- [Test API & Test Modules](../concepts/openqa-test-api.md)
+- [Python tests](openqa-python-tests.md)
+- [Needle matching](../concepts/needle-matching.md)
+- [Jobs](../concepts/openqa-jobs.md)
+- [os-autoinst](../entities/os-autoinst.md)
