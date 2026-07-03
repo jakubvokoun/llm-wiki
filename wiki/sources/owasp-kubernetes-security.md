@@ -69,7 +69,7 @@ Enforce via `pod-security.kubernetes.io/enforce` namespace label.
 
 - Prefer volume mounts over env vars (env vars visible in `kubectl describe`)
 - Enable encryption at rest for `Secret` resources in etcd
-- Use external secret stores: Vault, AWS Secrets Manager, Azure Key Vault
+- Use external secret stores: Vault / [OpenBao](../entities/openbao.md), AWS Secrets Manager, Azure Key Vault
 - Detect exposed secrets with git-secrets, truffleHog
 
 ## Admission Controllers / OPA

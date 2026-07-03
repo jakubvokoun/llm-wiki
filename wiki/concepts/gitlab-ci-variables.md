@@ -37,7 +37,7 @@ Can be defined at project, group, or instance level. Security levels:
 
 Variables are stored in GitLab settings and users with access to settings can read them. They can be overridden via pipeline variables, making auditability harder.
 
-**Guidance**: Store non-sensitive configuration in variables. Store secrets in a secrets manager (HashiCorp Vault, Azure Key Vault, Google Cloud Secret Manager). If using variables for secrets, always mask + hide + protect.
+**Guidance**: Store non-sensitive configuration in variables. Store secrets in a secrets manager (HashiCorp Vault / [OpenBao](../entities/openbao.md), Azure Key Vault, Google Cloud Secret Manager). If using variables for secrets, always mask + hide + protect.
 
 ## CI/CD inputs vs variables
 

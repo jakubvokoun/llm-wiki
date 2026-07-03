@@ -62,7 +62,7 @@ Requires CNI plugin support (Calico, Cilium, Weave). See [network-policy](networ
 
 - Volume mounts preferred over env vars
 - Encryption at rest enabled in etcd
-- External secret stores: Vault, AWS Secrets Manager, Azure Key Vault
+- External secret stores: Vault / [OpenBao](../entities/openbao.md), AWS Secrets Manager, Azure Key Vault
 - Detect exposed secrets: git-secrets, truffleHog
 
 ## Admission Controllers / OPA

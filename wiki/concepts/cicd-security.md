@@ -46,7 +46,7 @@ CI/CD pipelines are high-value attack targets — they use privileged identities
 ### Secrets Management
 
 - Never hardcode secrets in code or config
-- Use dedicated secrets managers (Vault, AWS Secrets Manager)
+- Use dedicated secrets managers (Vault / [OpenBao](../entities/openbao.md), AWS Secrets Manager)
 - Detect secrets with git-leaks, git-secrets
 - Never log secrets; prefer temporary credentials
 
